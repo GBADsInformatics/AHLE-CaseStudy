@@ -894,7 +894,8 @@ gbadsDash.layout = html.Div([
         #### LANDING PAGE
         dcc.Tab(label="Case Study Overview", children =[
             html.H3("Country Case Study: Animal Health Loss Envelope (AHLE)"),
-            html.Label(["This interactive takes publicly available data along and consults with experts to create models that provide a country specific estimate of the animal health loss envelope."]),
+            html.Label(["This interactive dashboard takes publicly available data and consults with experts to create models that provide a country-specific estimate of the animal health loss envelope."]),
+            html.Label(["This tool will guide you through this calculation, the output, and the many scenarios that allow us to use that information to aid decisionmakers with regard to animal health and production."]),
         ### END OF LANDING PAGE TAB
         ], style=ecs_tab_style, selected_style=ecs_tab_selected_style),
 
