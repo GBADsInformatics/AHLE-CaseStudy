@@ -872,11 +872,12 @@ gbadsDash.layout = html.Div([
         dbc.Col(
             html.Div([
                 html.A(href="https://animalhealthmetrics.org/",
+                       target='_blank',
                        children=[
                        html.Img(title="Link to GBADS site", src=(os.environ.get("DASH_BASE_URL") if os.environ.get("DASH_BASE_URL") else "") + '/assets/GBADs-LOGO-Black-sm.png')
                        ]
                        ),
-                html.H3("Inclusiveness Challenge Delivery Rigour Transparency",
+                html.H5("Inclusiveness Challenge Delivery Rigour Transparency",
                         style={"font-style": "italic",
                                "margin": "0",
                                "padding": "0"}),
@@ -888,20 +889,17 @@ gbadsDash.layout = html.Div([
         ], justify='between'),
 
     #### TABS
-    dcc.Tabs([
-
-        #### USER GUIDE TAB
-        dcc.Tab(label="User Guide & References", children =[
-            html.Iframe(src="assets/GBADs_Documentation/_build/html/index.html", # this is for the jupyter books
-                        style={"width":"100%",
-                                "height":"3600px",   # Set large enough for your largest page and guide will use browser scroll bar. Otherwise, longer pages will get their own scroll bars.
-                                },)
-        ### END OF USER GUIDE TAB
-            ], style=user_guide_tab_style, selected_style=user_guide_tab_selected_style),
+    dcc.Tabs([ 
         
+        #### LANDING PAGE
+        dcc.Tab(label="Case Study Overview", children =[
+            html.H3("Country Case Study: Animal Health Loss Envelope (AHLE)"),
+            html.Label(["This interactive takes publicly available data along and consults with experts to create models that provide a country specific estimate of the animal health loss envelope."]),
+        ### END OF LANDING PAGE TAB
+        ], style=ecs_tab_style, selected_style=ecs_tab_selected_style),
 
-        #### ETHIOPIA TAB
-        dcc.Tab(label="Ethiopia Case Study", children =[
+        #### AHLE & ATTRIBUTION
+        dcc.Tab(label="AHLE & Attribution", children =[
 
             html.H3("Ethiopia Animal Health Loss Envelope and Disease Attribution"),
             html.Label(["Displaying production values, expenditures, and gross margin under the current and ideal scenario estimated by a compartmental herd dynamics model. Attribution of AHLE to infectious, non-infectious, and external causes is based on the results of expert elicitation."]),
@@ -937,7 +935,9 @@ gbadsDash.layout = html.Div([
                                 clearable = False,
                                 ),
                     ]),
-                ],style={"margin-bottom":"30px"}),  # END OF FIRST CONTROL ROW
+                
+                # END OF FIRST CONTROL ROW
+                ],style={"margin-bottom":"30px"}),  
 
             # SECOND CONTROL ROW
             dbc.Row([
@@ -986,7 +986,9 @@ gbadsDash.layout = html.Div([
                                  clearable = False,
                                  ),
                     ]),
-                ],justify='evenly'),  # END OF SECOND CONTROL ROW
+                
+                # END OF SECOND CONTROL ROW
+                ],justify='evenly'),  
 
             html.Hr(style={'margin-right':'10px'}),
 
@@ -1081,7 +1083,8 @@ gbadsDash.layout = html.Div([
                             html.H5("AHLE Attribution",
                                     className="card-title",
                                     style={"font-weight": "bold"}),
-                            html.Label(["Showing how each component contributes to the total animal health loss envelope, including attribution to infectious, non-infectious, and external causes. NOTE: this is shown for species groups (cattle, all small ruminants, or all poultry) rather than for individual species."]),
+                            html.Label(["Showing how each component contributes to the total animal health loss envelope, including attribution to infectious, non-infectious, and external causes."]),
+                            html.Label(["NOTE: this is shown for species groups (cattle, all small ruminants, or all poultry) rather than for individual species."] ,style={"font-style":"italic"}),
                             html.H5("Segment by..."),
                             dbc.Row([
                                 # Top Level
@@ -1234,72 +1237,6 @@ gbadsDash.layout = html.Div([
 
             html.Hr(style={'margin-right':'10px',}),
 
-            #### -- WIDER ECONOMIC IMPACT
-            dbc.Row([
-                html.H3("Wider Economic Impact"),
-                html.Label(["Estimating the total economic impact of each scenario for cattle and small ruminants using the ",
-                            html.A('GTAP model.', href='https://www.gtap.agecon.purdue.edu/' ,target='_blank')  # target='_blank' to open in a new tab
-                            ]),
-                dbc.Col([
-                    dbc.Spinner(children=[
-                    dcc.Graph(id='ecs-wei-chart-1',
-                              style = {"height":"650px"},
-                              config = {
-                                  "displayModeBar" : True,
-                                  "displaylogo": False,
-                                  'toImageButtonOptions': {
-                                      'format': 'png', # one of png, svg, jpeg, webp
-                                      'filename': 'GBADs_Ethiopia_Attribution_Treemap'
-                                      },
-                                  'modeBarButtonsToRemove': ['zoom',
-                                                             'zoomIn',
-                                                             'zoomOut',
-                                                             'autoScale',
-                                                             #'resetScale',  # Removes home button
-                                                             'pan',
-                                                             'select2d',
-                                                             'lasso2d']
-                                  }
-                              ),
-                        ],size="md", color="#393375", fullscreen=False),    # End of Spinner
-                    ]),
-                dbc.Col([
-                    dbc.Spinner(children=[
-                    dcc.Graph(id='ecs-wei-chart-2',
-                              style = {"height":"650px"},
-                              config = {
-                                  "displayModeBar" : True,
-                                  "displaylogo": False,
-                                  'toImageButtonOptions': {
-                                      'format': 'png', # one of png, svg, jpeg, webp
-                                      'filename': 'GBADs_Ethiopia_Attribution_Treemap'
-                                      },
-                                  'modeBarButtonsToRemove': ['zoom',
-                                                             'zoomIn',
-                                                             'zoomOut',
-                                                             'autoScale',
-                                                             #'resetScale',  # Removes home button
-                                                             'pan',
-                                                             'select2d',
-                                                             'lasso2d']
-                                  }
-                              ),
-                        ],size="md", color="#393375", fullscreen=False),    # End of Spinner
-                    ]),
-                ]),
-
-            #### -- WEI FOOTNOTES
-            dbc.Row([
-                dbc.Col([   # Chart 1 footnote
-                    html.P("% Change in Production is the % change in live animal production."),
-                ]),
-                dbc.Col([   # Chart 2 footnote
-                    html.P("Economic surplus refers to the monetary gains that a consumer or producer or both accrues from an economic activity."),
-                ]),
-            ], style={'font-style': 'italic'}
-            ),
-            ### END OF FOOTNOTES
-
             #### -- MAP
             dbc.Card([
                 dbc.CardBody([
@@ -1415,9 +1352,89 @@ gbadsDash.layout = html.Div([
             #     ),
 
             html.Hr(style={'margin-right':'10px',}),
+            
+            ### END OF AHLE & ATTRIBUTION TAB
+            ], style=ecs_tab_style, selected_style=ecs_tab_selected_style),     
 
-            #### -- DATATABLES
+                                        
+        #### WEI
+        dcc.Tab(label="Wider Economic Impact", children =[     
+            dbc.Row([
+                html.H3("Wider Economic Impact"),
+                html.Label(["Estimating the total economic impact of each scenario for cattle and small ruminants using the ",
+                            html.A('GTAP model.', href='https://www.gtap.agecon.purdue.edu/' ,target='_blank')  # target='_blank' to open in a new tab
+                            ]),
+            #### -- GRAPHICS
+                dbc.Col([
+                    dbc.Spinner(children=[
+                    dcc.Graph(id='ecs-wei-chart-1',
+                              style = {"height":"650px"},
+                              config = {
+                                  "displayModeBar" : True,
+                                  "displaylogo": False,
+                                  'toImageButtonOptions': {
+                                      'format': 'png', # one of png, svg, jpeg, webp
+                                      'filename': 'GBADs_Ethiopia_Attribution_Treemap'
+                                      },
+                                  'modeBarButtonsToRemove': ['zoom',
+                                                             'zoomIn',
+                                                             'zoomOut',
+                                                             'autoScale',
+                                                             #'resetScale',  # Removes home button
+                                                             'pan',
+                                                             'select2d',
+                                                             'lasso2d']
+                                  }
+                              ),
+                        ],size="md", color="#393375", fullscreen=False),    # End of Spinner
+                    ]),
+                dbc.Col([
+                    dbc.Spinner(children=[
+                    dcc.Graph(id='ecs-wei-chart-2',
+                              style = {"height":"650px"},
+                              config = {
+                                  "displayModeBar" : True,
+                                  "displaylogo": False,
+                                  'toImageButtonOptions': {
+                                      'format': 'png', # one of png, svg, jpeg, webp
+                                      'filename': 'GBADs_Ethiopia_Attribution_Treemap'
+                                      },
+                                  'modeBarButtonsToRemove': ['zoom',
+                                                             'zoomIn',
+                                                             'zoomOut',
+                                                             'autoScale',
+                                                             #'resetScale',  # Removes home button
+                                                             'pan',
+                                                             'select2d',
+                                                             'lasso2d']
+                                  }
+                              ),
+                        ],size="md", color="#393375", fullscreen=False),    # End of Spinner
+                    ]),
+            
+            ### END OF GRAPHICS
+                ]),
+
+            #### -- FOOTNOTES
+            dbc.Row([
+                dbc.Col([   # Chart 1 footnote
+                    html.P("% Change in Production is the % change in live animal production."),
+                ]),
+                dbc.Col([   # Chart 2 footnote
+                    html.P("Economic surplus refers to the monetary gains that a consumer or producer or both accrues from an economic activity."),
+                ]),
+            ], style={'font-style': 'italic'}
+            ),
+            ### END OF FOOTNOTES
+
+        ### END OF WEI TAB
+        ], style=ecs_tab_style, selected_style=ecs_tab_selected_style),  
+
+
+        #### DATATABLES 
+        dcc.Tab(label="Data Viewer", children =[ 
             html.H3("Data Viewer", id="ETH-data-export"),
+            #### -- DATATABLES
             dbc.Row([
                 dbc.Col([
                     html.Div([  # Core data for AHLE
@@ -1436,10 +1453,21 @@ gbadsDash.layout = html.Div([
                     html.Br(), # Spacer for bottom of page
                     ]),  # END OF COL
                 ]),     # END OF ROW
-            html.Br(),
-            ### END OF DATATABLE
-            ], style=ecs_tab_style, selected_style=ecs_tab_selected_style),     ### END OF ETHIOPIA TAB
-
+        html.Br(),
+        
+        ### END OF DATATABLES
+        ], style=ecs_tab_style, selected_style=ecs_tab_selected_style),  
+                                        
+        #### USER GUIDE TAB
+        dcc.Tab(label="User Guide & References", children =[
+            html.Iframe(src="assets/GBADs_Documentation/_build/html/index.html", # this is for the jupyter books
+                        style={"width":"100%",
+                                "height":"3600px",   # Set large enough for your largest page and guide will use browser scroll bar. Otherwise, longer pages will get their own scroll bars.
+                                },)
+        ### END OF USER GUIDE TAB
+            ], style=user_guide_tab_style, selected_style=user_guide_tab_selected_style),
+                                        
+                                        
         ### END OF TABS ###
         ],style={'margin-right':'10px',
                  'margin-left': '10px'}, )
