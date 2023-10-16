@@ -1,0 +1,1321 @@
+species,region,production_system,group,age_group,sex,year,ahle_component,cause,mean,sd,lower95,upper95
+All Poultry,National,Small holder,Adult,Adult,Overall,2017,Mortality,External,8183051.55828426,1190414.54401659,8109270.2562078,8256832.86036072
+All Poultry,National,Small holder,Adult,Adult,Overall,2017,Mortality,Infectious,21873466.8965274,1622798.57757183,21772886.6468464,21974047.1462084
+All Poultry,National,Small holder,Adult,Adult,Overall,2017,Mortality,Non-infectious,7916508.66035816,1353261.80853188,7832634.16572461,8000383.15499172
+All Poultry,National,Small holder,Adult,Adult,Overall,2017,Production loss,External,18517395.0001834,20460069.2141368,17249290.0742305,19785499.9261364
+All Poultry,National,Small holder,Adult,Adult,Overall,2017,Production loss,Infectious,54173881.0225428,58478979.0399765,50549382.9522208,57798379.0928648
+All Poultry,National,Small holder,Adult,Adult,Overall,2017,Production loss,Non-infectious,43707963.811142,47185587.3702834,40783424.5462945,46632503.0759894
+All Poultry,National,Small holder,Adult,Adult,Overall,2018,Mortality,External,8592204.1361236,1249935.27120789,8514733.76894391,8669674.50330329
+All Poultry,National,Small holder,Adult,Adult,Overall,2018,Mortality,Infectious,22967140.2411486,1703938.50657792,22861530.9789756,23072749.5033215
+All Poultry,National,Small holder,Adult,Adult,Overall,2018,Mortality,Non-infectious,8312334.09327455,1420924.89881168,8224265.87391841,8400402.31263068
+All Poultry,National,Small holder,Adult,Adult,Overall,2018,Production loss,External,19443264.7501926,21483072.6748434,18111754.577942,20774774.9224432
+All Poultry,National,Small holder,Adult,Adult,Overall,2018,Production loss,Infectious,56882575.07367,61402927.9919746,53076852.0998319,60688298.047508
+All Poultry,National,Small holder,Adult,Adult,Overall,2018,Production loss,Non-infectious,45893362.0016991,49544866.7387969,42822595.7736093,48964128.2297889
+All Poultry,National,Small holder,Adult,Adult,Overall,2019,Mortality,External,9021814.34285846,1312432.0347592,8940470.45732035,9103158.22839658
+All Poultry,National,Small holder,Adult,Adult,Overall,2019,Mortality,Infectious,24115497.2530106,1789135.43202824,24004607.5277214,24226386.9782997
+All Poultry,National,Small holder,Adult,Adult,Overall,2019,Mortality,Non-infectious,8727950.79784158,1491971.14361247,8635479.1675263,8820422.42815686
+All Poultry,National,Small holder,Adult,Adult,Overall,2019,Production loss,External,20415427.9877022,22557226.3085853,19017342.3068391,21813513.6685653
+All Poultry,National,Small holder,Adult,Adult,Overall,2019,Production loss,Infectious,59726703.8273534,64473074.3915726,55730694.7048235,63722712.9498833
+All Poultry,National,Small holder,Adult,Adult,Overall,2019,Production loss,Non-infectious,48188030.101784,52022110.0757362,44963725.5622898,51412334.6412783
+All Poultry,National,Small holder,Adult,Adult,Overall,2020,Mortality,External,9472905.05993347,1378053.6364885,9387493.98011899,9558316.13974795
+All Poultry,National,Small holder,Adult,Adult,Overall,2020,Mortality,Infectious,25321272.115475,1878592.20374529,25204837.9039142,25437706.3270357
+All Poultry,National,Small holder,Adult,Adult,Overall,2020,Mortality,Non-infectious,9164348.33764157,1566569.70065995,9067253.12581878,9261443.54946436
+All Poultry,National,Small holder,Adult,Adult,Overall,2020,Production loss,External,21436199.3870873,23685087.6240144,19968209.4221811,22904189.3519935
+All Poultry,National,Small holder,Adult,Adult,Overall,2020,Production loss,Infectious,62713039.0187211,67696728.1111506,58517229.4400647,66908848.5973775
+All Poultry,National,Small holder,Adult,Adult,Overall,2020,Production loss,Non-infectious,50597431.6068732,54623215.5795225,47211911.8404043,53982951.3733421
+All Poultry,National,Small holder,Adult,Adult,Overall,2021,Mortality,External,9946550.31286546,1446956.31830469,9856868.67906077,10036231.9466702
+All Poultry,National,Small holder,Adult,Adult,Overall,2021,Mortality,Infectious,26587335.7210715,1972521.81404269,26465079.7989259,26709591.6432171
+All Poultry,National,Small holder,Adult,Adult,Overall,2021,Mortality,Non-infectious,9622565.75443595,1644898.18556615,9520615.78202988,9724515.72684202
+All Poultry,National,Small holder,Adult,Adult,Overall,2021,Production loss,External,22508009.3564417,24869342.0052149,20966619.8932901,24049398.8195932
+All Poultry,National,Small holder,Adult,Adult,Overall,2021,Production loss,Infectious,65848690.9696572,71081564.5167075,61443090.912068,70254291.0272463
+All Poultry,National,Small holder,Adult,Adult,Overall,2021,Production loss,Non-infectious,53127303.1872169,57354376.3584981,49572507.4324246,56682098.9420092
+All Poultry,National,Small holder,Chick,Chick,Overall,2017,Mortality,External,936755.342662072,142390.446882104,927930.053499557,945580.631824588
+All Poultry,National,Small holder,Chick,Chick,Overall,2017,Mortality,Infectious,2044536.44461796,158387.686612414,2034719.6544839,2054353.23475202
+All Poultry,National,Small holder,Chick,Chick,Overall,2017,Mortality,Non-infectious,813183.604707136,130041.676398155,805123.686204722,821243.523209549
+All Poultry,National,Small holder,Chick,Chick,Overall,2017,Production loss,External,-4845288.90071645,2142128.59612745,-4978056.96696018,-4712520.83447271
+All Poultry,National,Small holder,Chick,Chick,Overall,2017,Production loss,Infectious,-8460155.60668483,3543019.08997922,-8679750.16981776,-8240561.04355189
+All Poultry,National,Small holder,Chick,Chick,Overall,2017,Production loss,Non-infectious,-7468668.19245527,3195895.96535664,-7666748.2367643,-7270588.14814625
+All Poultry,National,Small holder,Chick,Chick,Overall,2018,Mortality,External,983593.113302787,149509.966267171,974326.559865545,992859.666740028
+All Poultry,National,Small holder,Chick,Chick,Overall,2018,Mortality,Infectious,2146763.27625439,166307.07700971,2136455.64623762,2157070.90627116
+All Poultry,National,Small holder,Chick,Chick,Overall,2018,Mortality,Non-infectious,853842.788935433,136543.762956271,845379.874338187,862305.70353268
+All Poultry,National,Small holder,Chick,Chick,Overall,2018,Production loss,External,-5087553.34575228,2249235.02593345,-5226959.81530818,-4948146.87619638
+All Poultry,National,Small holder,Chick,Chick,Overall,2018,Production loss,Infectious,-8883163.38701909,3720170.04447752,-9113737.67830863,-8652589.09572955
+All Poultry,National,Small holder,Chick,Chick,Overall,2018,Production loss,Non-infectious,-7842101.60207805,3355690.7636239,-8050085.64860249,-7634117.55555361
+All Poultry,National,Small holder,Chick,Chick,Overall,2019,Mortality,External,1032772.77247554,156985.461621768,1023042.89154982,1042502.65340126
+All Poultry,National,Small holder,Chick,Chick,Overall,2019,Mortality,Infectious,2254101.44947265,174622.436928027,2243278.43757896,2264924.46136634
+All Poultry,National,Small holder,Chick,Chick,Overall,2019,Mortality,Non-infectious,896534.932375146,143370.95384252,887648.87187831,905420.992871982
+All Poultry,National,Small holder,Chick,Chick,Overall,2019,Production loss,External,-5341931.0130399,2361696.77722978,-5488307.80607357,-5195554.22000622
+All Poultry,National,Small holder,Chick,Chick,Overall,2019,Production loss,Infectious,-9327321.55637006,3906178.54670078,-9569424.56222404,-9085218.55051609
+All Poultry,National,Small holder,Chick,Chick,Overall,2019,Production loss,Non-infectious,-8234206.68218196,3523475.30180455,-8452589.93103259,-8015823.43333134
+All Poultry,National,Small holder,Chick,Chick,Overall,2020,Mortality,External,1084411.41460692,164834.731744358,1074195.03981828,1094627.78939557
+All Poultry,National,Small holder,Chick,Chick,Overall,2020,Mortality,Infectious,2366806.53135182,183353.564843361,2355442.36848729,2378170.69421634
+All Poultry,National,Small holder,Chick,Chick,Overall,2020,Mortality,Non-infectious,941361.682986844,150539.5042733,932031.319295426,950692.046678263
+All Poultry,National,Small holder,Chick,Chick,Overall,2020,Production loss,External,-5609027.5636919,2479781.61609094,-5762723.19637723,-5455331.93100656
+All Poultry,National,Small holder,Chick,Chick,Overall,2020,Production loss,Infectious,-9793687.63418859,4101487.47403522,-10047895.7903352,-9539479.47804195
+All Poultry,National,Small holder,Chick,Chick,Overall,2020,Production loss,Non-infectious,-8645917.01629108,3699649.06689425,-8875219.4275842,-8416614.60499795
+All Poultry,National,Small holder,Chick,Chick,Overall,2021,Mortality,External,1138631.98884488,173076.465373328,1127904.79550016,1149359.1821896
+All Poultry,National,Small holder,Chick,Chick,Overall,2021,Mortality,Infectious,2485146.86732495,192521.249155511,2473214.49594098,2497079.23870891
+All Poultry,National,Small holder,Chick,Chick,Overall,2021,Mortality,Non-infectious,988429.771129128,158066.482225827,978632.889083385,998226.65317487
+All Poultry,National,Small holder,Chick,Chick,Overall,2021,Production loss,External,-5889478.9418765,2603770.69689517,-6050859.35619608,-5728098.52755692
+All Poultry,National,Small holder,Chick,Chick,Overall,2021,Production loss,Infectious,-10283372.015898,4306561.84773641,-10550290.579852,-10016453.4519441
+All Poultry,National,Small holder,Chick,Chick,Overall,2021,Production loss,Non-infectious,-9078212.86710564,3884631.52023847,-9318980.3989634,-8837445.33524789
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2017,Mortality,External,927179.532206308,145548.492708785,918158.508932276,936200.55548034
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2017,Mortality,Infectious,2519632.83547775,187114.364883899,2508035.58009497,2531230.09086054
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2017,Mortality,Non-infectious,1289669.64786534,162507.301972812,1279597.52601774,1299741.76971294
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2017,Production loss,External,-9995439.01931518,6019326.26183033,-10368513.8708055,-9622364.16782489
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2017,Production loss,Infectious,-20975019.8572069,12098020.1931189,-21724849.1388485,-20225190.5755654
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2017,Production loss,Non-infectious,-19681678.6017635,11343973.2962501,-20384772.4313247,-18978584.7722024
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2018,Mortality,External,973538.508729827,152825.917255021,964066.434297622,983010.583162031
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2018,Mortality,Infectious,2645614.47705862,196470.083236577,2633437.35889997,2657791.59521727
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2018,Mortality,Non-infectious,1354153.13013974,170632.666918011,1343577.40220928,1364728.85807021
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2018,Production loss,External,-10495210.9702809,6320292.57492124,-10886939.5643457,-10103482.3762161
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2018,Production loss,Infectious,-22023770.8500672,12702921.2027735,-22811091.5957907,-21236450.1043437
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2018,Production loss,Non-infectious,-20665762.5318516,11911171.9610614,-21404011.0528908,-19927514.0108125
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2019,Mortality,External,1022215.43408365,160467.213032817,1012269.7559351,1032161.1122322
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2019,Mortality,Infectious,2777895.20072773,206293.587501723,2765109.22665474,2790681.17480071
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2019,Mortality,Non-infectious,1421860.78653352,179164.300117776,1410756.27221559,1432965.30085146
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2019,Production loss,External,-11019971.5187949,6636307.20366672,-11431286.5425629,-10608656.495027
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2019,Production loss,Infectious,-23124959.3925705,13338067.262911,-23951646.1755801,-22298272.6095609
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2019,Production loss,Non-infectious,-21699050.6584442,12506730.5591133,-22474211.6055352,-20923889.7113531
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2020,Mortality,External,1073326.20570911,168490.573603548,1062883.24365815,1083769.16776007
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2020,Mortality,Infectious,2916789.96058904,216608.266975206,2903364.68780631,2930215.23337178
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2020,Mortality,Non-infectious,1492953.82575239,188122.514984489,1481294.08572718,1504613.56577759
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2020,Production loss,External,-11570970.0947346,6968122.5638495,-12002850.869691,-11139089.3197783
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2020,Production loss,Infectious,-24281207.362199,14004970.6260553,-25149228.484359,-23413186.2400389
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2020,Production loss,Non-infectious,-22784003.1913663,13132067.0870678,-23597922.1858118,-21970084.1969208
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2021,Mortality,External,1126992.51591959,176915.102206668,1116027.40577085,1137957.62606832
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,3062629.45845176,227438.680417678,3048532.92202408,3076725.99487944
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,1567601.51693733,197528.640601165,1555358.78991908,1579844.24395557
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2021,Production loss,External,-12149518.5994713,7316528.69204145,-12602993.4131754,-11696043.7857672
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,-25495267.7303089,14705219.157357,-26406689.9085768,-24583845.5520409
+All Poultry,National,Small holder,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,-23923203.3509346,13788670.4414202,-24777818.2951023,-23068588.4067669
+All Poultry,National,Village,Adult,Adult,Overall,2017,Mortality,External,922013214.377257,146184941.848641,912952744.301705,931073684.452809
+All Poultry,National,Village,Adult,Adult,Overall,2017,Mortality,Infectious,2727608788.12029,197415176.418216,2715373093.55574,2739844482.68485
+All Poultry,National,Village,Adult,Adult,Overall,2017,Mortality,Non-infectious,1062545807.69741,160876431.326981,1052574766.40228,1072516848.99255
+All Poultry,National,Village,Adult,Adult,Overall,2017,Production loss,External,4884015058.59887,1712220042.31991,4777892510.95465,4990137606.24309
+All Poultry,National,Village,Adult,Adult,Overall,2017,Production loss,Infectious,16626165795.1558,4971671773.09816,16318024048.4343,16934307541.8773
+All Poultry,National,Village,Adult,Adult,Overall,2017,Production loss,Non-infectious,12996556365.5406,3944099838.1116,12752103016.8831,13241009714.1981
+All Poultry,National,Village,Adult,Adult,Overall,2018,Mortality,External,968113875.09612,153494188.941077,958600381.516791,977627368.67545
+All Poultry,National,Village,Adult,Adult,Overall,2018,Mortality,Infectious,2863989227.52631,207285935.239148,2851141748.23353,2876836706.81909
+All Poultry,National,Village,Adult,Adult,Overall,2018,Mortality,Non-infectious,1115673098.08228,168920252.893319,1105203504.72239,1126142691.44217
+All Poultry,National,Village,Adult,Adult,Overall,2018,Production loss,External,5128215811.52881,1797831044.43591,5016787136.50238,5239644486.55524
+All Poultry,National,Village,Adult,Adult,Overall,2018,Production loss,Infectious,17457474084.9136,5220255361.75307,17133925250.856,17781022918.9712
+All Poultry,National,Village,Adult,Adult,Overall,2018,Production loss,Non-infectious,13646384183.8176,4141304830.01718,13389708167.7273,13903060199.908
+All Poultry,National,Village,Adult,Adult,Overall,2019,Mortality,External,1016519568.85093,161168898.388134,1006530400.59263,1026508737.10923
+All Poultry,National,Village,Adult,Adult,Overall,2019,Mortality,Infectious,3007188688.90263,217650232.001126,2993698835.64521,3020678542.16006
+All Poultry,National,Village,Adult,Adult,Overall,2019,Mortality,Non-infectious,1171456752.98639,177366265.537975,1160463679.95851,1182449826.01428
+All Poultry,National,Village,Adult,Adult,Overall,2019,Production loss,External,5384626602.10525,1887722596.6577,5267626493.3275,5501626710.88301
+All Poultry,National,Village,Adult,Adult,Overall,2019,Production loss,Infectious,18330347789.1593,5481268129.84073,17990621513.3988,18670074064.9197
+All Poultry,National,Village,Adult,Adult,Overall,2019,Production loss,Non-infectious,14328703393.0085,4348370071.51804,14059193576.1136,14598213209.9034
+All Poultry,National,Village,Adult,Adult,Overall,2020,Mortality,External,1067345547.29348,169227343.307545,1056856920.62227,1077834173.96469
+All Poultry,National,Village,Adult,Adult,Overall,2020,Mortality,Infectious,3157548123.34777,228532743.601203,3143383777.42748,3171712469.26807
+All Poultry,National,Village,Adult,Adult,Overall,2020,Mortality,Non-infectious,1230029590.63571,186234578.814865,1218486863.95644,1241572317.31499
+All Poultry,National,Village,Adult,Adult,Overall,2020,Production loss,External,5653857932.21052,1982108726.49059,5531007817.99388,5776708046.42716
+All Poultry,National,Village,Adult,Adult,Overall,2020,Production loss,Infectious,19246865178.6172,5755331536.33276,18890152589.0687,19603577768.1657
+All Poultry,National,Village,Adult,Adult,Overall,2020,Production loss,Non-infectious,15045138562.6589,4565788575.09394,14762153254.9193,15328123870.3986
+All Poultry,National,Village,Adult,Adult,Overall,2021,Mortality,External,1120712824.65815,177688710.472925,1109699766.65338,1131725882.66293
+All Poultry,National,Village,Adult,Adult,Overall,2021,Mortality,Infectious,3315425529.51516,239959380.781282,3300552966.29885,3330298092.73148
+All Poultry,National,Village,Adult,Adult,Overall,2021,Mortality,Non-infectious,1291531070.1675,195546307.755599,1279411207.15426,1303650933.18074
+All Poultry,National,Village,Adult,Adult,Overall,2021,Production loss,External,5936550828.82104,2081214162.81512,5807558208.89357,6065543448.74851
+All Poultry,National,Village,Adult,Adult,Overall,2021,Production loss,Infectious,20209208437.5481,6043098113.1494,19834660218.5222,20583756656.574
+All Poultry,National,Village,Adult,Adult,Overall,2021,Production loss,Non-infectious,15797395490.7919,4794078003.84864,15500260917.6653,16094530063.9185
+All Poultry,National,Village,Chick,Chick,Overall,2017,Mortality,External,586990866.178037,81237018.1688199,581955836.14801,592025896.208064
+All Poultry,National,Village,Chick,Chick,Overall,2017,Mortality,Infectious,976127528.868547,87694833.3102865,970692246.664098,981562811.072996
+All Poultry,National,Village,Chick,Chick,Overall,2017,Mortality,Non-infectious,274269838.341544,53258122.0513697,270968926.393813,277570750.289275
+All Poultry,National,Village,Chick,Chick,Overall,2017,Production loss,External,3525779851.18371,1685100062.33217,3421338186.42675,3630221515.94067
+All Poultry,National,Village,Chick,Chick,Overall,2017,Production loss,Infectious,5902813928.68617,2791874384.62588,5729774941.24523,6075852916.12712
+All Poultry,National,Village,Chick,Chick,Overall,2017,Production loss,Non-infectious,5073632270.61249,2351191013.87004,4927906619.57292,5219357921.65207
+All Poultry,National,Village,Chick,Chick,Overall,2018,Mortality,External,616340409.486939,85298869.0772609,611053627.95541,621627191.018467
+All Poultry,National,Village,Chick,Chick,Overall,2018,Mortality,Infectious,1024933905.31197,92079574.9758008,1019226858.9973,1030640951.62665
+All Poultry,National,Village,Chick,Chick,Overall,2018,Mortality,Non-infectious,287983330.258621,55921028.1539382,284517372.713504,291449287.803739
+All Poultry,National,Village,Chick,Chick,Overall,2018,Production loss,External,3702068843.74289,1769355065.44878,3592405095.74809,3811732591.7377
+All Poultry,National,Village,Chick,Chick,Overall,2018,Production loss,Infectious,6197954625.12048,2931468103.85718,6016263688.30749,6379645561.93348
+All Poultry,National,Village,Chick,Chick,Overall,2018,Production loss,Non-infectious,5327313884.14312,2468750564.56354,5174301950.55156,5480325817.73468
+All Poultry,National,Village,Chick,Chick,Overall,2019,Mortality,External,647157429.961286,89563812.5311239,641606309.353181,652708550.569391
+All Poultry,National,Village,Chick,Chick,Overall,2019,Mortality,Infectious,1076180600.57757,96683553.7245907,1070188201.94717,1082172999.20798
+All Poultry,National,Village,Chick,Chick,Overall,2019,Mortality,Non-infectious,302382496.771552,58717079.5616351,298743241.349179,306021752.193926
+All Poultry,National,Village,Chick,Chick,Overall,2019,Production loss,External,3887172285.93004,1857822818.72122,3772025350.53549,4002319221.32459
+All Poultry,National,Village,Chick,Chick,Overall,2019,Production loss,Infectious,6507852356.37651,3078041509.05004,6317076872.72286,6698627840.03015
+All Poultry,National,Village,Chick,Chick,Overall,2019,Production loss,Non-infectious,5593679578.35028,2592188092.79172,5433017048.07914,5754342108.62141
+All Poultry,National,Village,Chick,Chick,Overall,2020,Mortality,External,679515301.45935,94042003.15768,673686624.82084,685343978.09786
+All Poultry,National,Village,Chick,Chick,Overall,2020,Mortality,Infectious,1129989630.60645,101517731.41082,1123697612.04453,1136281649.16838
+All Poultry,National,Village,Chick,Chick,Overall,2020,Mortality,Non-infectious,317501621.61013,61652933.5397168,313680403.416638,321322839.803622
+All Poultry,National,Village,Chick,Chick,Overall,2020,Production loss,External,4081530900.22654,1950713959.65728,3960626618.06227,4202435182.39082
+All Poultry,National,Village,Chick,Chick,Overall,2020,Production loss,Infectious,6833244974.19533,3231943584.50254,6632930716.35901,7033559232.03166
+All Poultry,National,Village,Chick,Chick,Overall,2020,Production loss,Non-infectious,5873363557.26779,2721797497.4313,5704667900.4831,6042059214.05248
+All Poultry,National,Village,Chick,Chick,Overall,2021,Mortality,External,713491066.532317,98744103.3155641,707370956.061882,719611177.002753
+All Poultry,National,Village,Chick,Chick,Overall,2021,Mortality,Infectious,1186489112.13677,106593617.981361,1179882492.64675,1193095731.6268
+All Poultry,National,Village,Chick,Chick,Overall,2021,Mortality,Non-infectious,333376702.690636,64735580.2167027,329364423.58747,337388981.793803
+All Poultry,National,Village,Chick,Chick,Overall,2021,Production loss,External,4285607445.23787,2048249657.64015,4158657948.96538,4412556941.51036
+All Poultry,National,Village,Chick,Chick,Overall,2021,Production loss,Infectious,7174907222.9051,3393540763.72767,6964577252.17696,7385237193.63324
+All Poultry,National,Village,Chick,Chick,Overall,2021,Production loss,Non-infectious,6167031735.13118,2857887372.30287,5989901295.50725,6344162174.7551
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2017,Mortality,External,160105694.068562,25375487.710715,158532933.946021,161678454.191103
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2017,Mortality,Infectious,434707348.018383,31424425.4404034,432759677.740284,436655018.296481
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2017,Mortality,Non-infectious,220646053.637857,24591969.5574603,219121855.581227,222170251.694487
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2017,Production loss,External,7261486585.66944,3178458759.69572,7064487290.705,7458485880.63387
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2017,Production loss,Infectious,14359960094.5606,5928522073.05867,13992513241.5817,14727406947.5396
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2017,Production loss,Non-infectious,13760909431.4698,5736135032.10147,13405386631.7173,14116432231.2223
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2018,Mortality,External,168110978.771991,26644262.0962507,166459580.643323,169762376.900658
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2018,Mortality,Infectious,456442715.419303,32995646.712424,454397661.6273,458487769.211307
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2018,Mortality,Non-infectious,231678356.31975,25821568.0353321,230077948.360289,233278764.279212
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2018,Production loss,External,7624560914.95291,3337381697.68051,7417711655.24025,7831410174.66556
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2018,Production loss,Infectious,15077958099.2887,6224948176.71161,14692138903.6608,15463777294.9166
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2018,Production loss,Non-infectious,14448954903.0433,6022941783.70654,14075655963.3032,14822253842.7834
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2019,Mortality,External,176516527.710591,27976475.2010632,174782559.675489,178250495.745692
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2019,Mortality,Infectious,479264851.19027,34645429.0480457,477117544.708666,481412157.671874
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2019,Mortality,Non-infectious,243262274.135738,27112646.4370976,241581845.778304,244942702.493173
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2019,Production loss,External,8005788960.70056,3504250782.56453,7788597238.00227,8222980683.39884
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2019,Production loss,Infectious,15831856004.2531,6536195585.54719,15426745848.8438,16236966159.6624
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2019,Production loss,Non-infectious,15171402648.1954,6324088872.89187,14779438761.4684,15563366534.9225
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2020,Mortality,External,185342354.096121,29375298.9611163,183521687.659264,187163020.532977
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2020,Mortality,Infectious,503228093.749785,36377700.5004484,500973421.944101,505482765.555469
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2020,Mortality,Non-infectious,255425387.842526,28468278.7589515,253660938.06722,257189837.617832
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2020,Production loss,External,8406078408.73558,3679463321.69276,8178027099.90238,8634129717.56878
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2020,Production loss,Infectious,16623448804.4658,6863005364.82455,16198083141.286,17048814467.6455
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2020,Production loss,Non-infectious,15929972780.6052,6640293316.53647,15518410699.5418,16341534861.6687
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2021,Mortality,External,194609471.800927,30844063.9091721,192697772.042228,196521171.559626
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,528389498.437275,38196585.5254712,526022093.041307,530756903.833244
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,268196657.234653,29891692.696898,266343984.970581,270049329.498724
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2021,Production loss,External,8826382329.17236,3863436487.7774,8586928454.8975,9065836203.44722
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,17454621244.6891,7206155633.06577,17007987298.3503,17901255191.0278
+All Poultry,National,Village,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,16726471419.6355,6972307982.36329,16294331234.5189,17158611604.7521
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2017,Mortality,External,1113040916.10888,159628478.333818,1103147222.32032,1122934609.89745
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2017,Mortality,Infectious,2252203993.00474,212938364.119449,2239006178.97791,2265401807.03157
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2017,Mortality,Non-infectious,1468055193.7091,197456539.398614,1455816935.48757,1480293451.93063
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2017,Production loss,External,2161722148.63911,886866086.833395,2106754629.14524,2216689668.13299
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2017,Production loss,Infectious,4824094479.57399,1890288419.30902,4706935342.38293,4941253616.76505
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2017,Production loss,Non-infectious,3385467783.97628,1348011265.37708,3301918715.39915,3469016852.55341
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2018,Mortality,External,1168692961.8842,167609902.179051,1158304583.41064,1179081340.35776
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2018,Mortality,Infectious,2364814192.61975,223585282.370116,2350956487.88881,2378671897.35069
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2018,Mortality,Non-infectious,1541457953.37349,207329366.397812,1528607782.23907,1554308124.50791
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2018,Production loss,External,2269808256.07107,931209391.17502,2212092360.60251,2327524151.53963
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2018,Production loss,Infectious,5065299203.55269,1984802840.27437,4942282109.50209,5188316297.6033
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2018,Production loss,Non-infectious,3554741173.17509,1415411828.64586,3467014651.16911,3642467695.18107
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2019,Mortality,External,1227127609.94971,175990397.219946,1216219812.55669,1238035407.34274
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2019,Mortality,Infectious,2483054902.21719,234764546.531189,2468504312.24706,2497605492.18732
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2019,Mortality,Non-infectious,1618530851.0221,217695834.745576,1605038171.32923,1632023530.71497
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2019,Production loss,External,2383298668.87462,977769860.733727,2322696978.63263,2443900359.11661
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2019,Production loss,Infectious,5318564163.73032,2084042982.28799,5189396214.9772,5447732112.48345
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2019,Production loss,Non-infectious,3732478231.83385,1486182420.07809,3640365383.72757,3824591079.94012
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2020,Mortality,External,1288483990.41987,184789917.016127,1277030803.16121,1299937177.67853
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2020,Mortality,Infectious,2607207647.2961,246502773.898288,2591929527.82495,2622485766.76724
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2020,Mortality,Non-infectious,1699457393.5541,228580626.509401,1685290079.87494,1713624707.23326
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2020,Production loss,External,2502463602.31835,1026658353.77037,2438831827.56427,2566095377.07244
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2020,Production loss,Infectious,5584492371.91684,2188245131.40229,5448866025.72606,5720118718.10762
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2020,Production loss,Non-infectious,3919102143.42554,1560491541.08193,3822383652.91395,4015820633.93712
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2021,Mortality,External,1352908189.91483,194029412.805202,1340882343.29707,1364934036.5326
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2021,Mortality,Infectious,2737568029.63047,258827912.631813,2721526004.18338,2753610055.07757
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2021,Mortality,Non-infectious,1784430263.21361,240009657.860155,1769554583.84892,1799305942.57829
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2021,Production loss,External,2627586782.43427,1077991271.45885,2560773418.94248,2694400145.92606
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2021,Production loss,Infectious,5863716990.51268,2297657387.97232,5721309327.01237,6006124654.01299
+All Small Ruminants,National,Crop livestock mixed,Adult female,Adult,Female,2021,Production loss,Non-infectious,4115057250.59681,1638516118.13596,4013502835.55965,4216611665.63397
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2017,Mortality,External,541088236.139752,78497112.6044742,536223024.095502,545953448.184003
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2017,Mortality,Infectious,1030607609.5802,84781480.3757996,1025352895.54337,1035862323.61704
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2017,Mortality,Non-infectious,611435062.093584,70345453.2472315,607075085.8468,615795038.340369
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2017,Production loss,External,3671428894.894,1525497166.53313,3576879338.33281,3765978451.45519
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2017,Production loss,Infectious,7756695692.02817,3112618493.3411,7563777144.06496,7949614239.99138
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2017,Production loss,Non-infectious,5358916102.29984,2191781485.36436,5223070574.64724,5494761629.95243
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2018,Mortality,External,568142647.918928,82421968.1746175,563034175.276189,573251120.561668
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2018,Mortality,Infectious,1082137990.02023,89020554.4468734,1076620540.27831,1087655439.76215
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2018,Mortality,Non-infectious,642006815.184952,73862725.9780584,637428840.121585,646584790.24832
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2018,Production loss,External,3855000339.6387,1601772024.85973,3755723305.24945,3954277374.02795
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2018,Production loss,Infectious,8144530476.62958,3268249418.00803,7941966001.26822,8347094951.99095
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2018,Production loss,Non-infectious,5626861907.41483,2301370559.63249,5484224103.37961,5769499711.45005
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2019,Mortality,External,596549780.28836,86543066.5261154,591185884.017031,601913676.559689
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2019,Mortality,Infectious,1136244889.48407,93471582.2190285,1130451567.25197,1142038211.71617
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2019,Mortality,Non-infectious,674107155.931495,77555862.3421773,669300282.110917,678914029.752072
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2019,Production loss,External,4047750356.62063,1681860626.10266,3943509470.51193,4151991242.72934
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2019,Production loss,Infectious,8551757000.46106,3431661888.9083,8339064301.33163,8764449699.59048
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2019,Production loss,Non-infectious,5908205002.78557,2416439087.61403,5758435308.54859,6057974697.02254
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2020,Mortality,External,626377269.277501,90870219.7979019,620745178.195985,632009360.359017
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2020,Mortality,Infectious,1193057133.92282,98145161.3774342,1186974145.57617,1199140122.26947
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2020,Mortality,Non-infectious,707812513.715945,81433655.5214059,702765296.200488,712859731.231401
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2020,Production loss,External,4250137874.45166,1765953657.40774,4140684944.03752,4359590804.8658
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2020,Production loss,Infectious,8979344850.48411,3603244983.3536,8756017516.39822,9202672184.57
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2020,Production loss,Non-infectious,6203615252.92484,2537261041.99465,6046357073.97603,6360873431.87366
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2021,Mortality,External,657696132.717282,95413730.7358638,651782437.084908,663609828.349655
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2021,Mortality,Infectious,1252709990.58516,103052419.491513,1246322852.81838,1259097128.35194
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2021,Mortality,Non-infectious,743203139.390173,85505338.356646,737903560.995276,748502717.78507
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2021,Production loss,External,4462644768.17425,1854251340.27808,4347719191.2394,4577570345.10909
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2021,Production loss,Infectious,9428312093.00832,3783407232.52117,9193818392.21814,9662805793.79849
+All Small Ruminants,National,Crop livestock mixed,Adult male,Adult,Male,2021,Production loss,Non-infectious,6513796015.57109,2664124094.0943,6348674927.67483,6678917103.46734
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2017,Mortality,External,792194605.398842,110305236.752932,785357941.621177,799031269.176507
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2017,Mortality,Infectious,1679609934.11147,136150612.314566,1671171386.79569,1688048481.42725
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2017,Mortality,Non-infectious,963368181.106895,118771174.181286,956006802.73304,970729559.480749
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2017,Production loss,External,3426727815.91275,1282163278.48121,3347259972.85216,3506195658.97335
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2017,Production loss,Infectious,7903847499.15604,2780626977.3183,7731505620.43264,8076189377.87943
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2017,Production loss,Non-infectious,4900736633.88249,1750789822.10431,4792223550.44753,5009249717.31746
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2018,Mortality,External,831804335.740063,115820498.631849,824625838.770957,838982832.709168
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2018,Mortality,Infectious,1763590430.94136,142958142.819024,1754729956.26669,1772450905.61603
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2018,Mortality,Non-infectious,1011536590.23777,124709732.897592,1003807142.94478,1019266037.53077
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2018,Production loss,External,3598064206.70839,1346271442.40525,3514622971.49477,3681505441.92202
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2018,Production loss,Infectious,8299039874.11384,2919658326.18416,8118080901.45428,8479998846.7734
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2018,Production loss,Non-infectious,5145773465.57662,1838329313.20949,5031834727.96991,5259712203.18333
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2019,Mortality,External,873394552.595021,121611523.602779,865857130.775022,880931974.415021
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2019,Mortality,Infectious,1851769952.60694,150106049.853873,1842466454.20511,1861073451.00877
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2019,Mortality,Non-infectious,1062113419.82168,130945219.549412,1053997500.16361,1070229339.47976
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2019,Production loss,External,3777967417.04381,1413585014.52549,3690354120.06951,3865580714.01812
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2019,Production loss,Infectious,8713991867.81953,3065641242.49331,8523984946.527,8903998789.11206
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2019,Production loss,Non-infectious,5403062138.85545,1930245778.86994,5283426464.36841,5522697813.34249
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2020,Mortality,External,917064280.289554,127692099.820413,909149987.376231,924978573.202878
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2020,Mortality,Infectious,1944358450.35028,157611352.245405,1934589777.03463,1954127123.66593
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2020,Mortality,Non-infectious,1115219090.88143,137492480.533531,1106697375.24004,1123740806.52282
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2020,Production loss,External,3966865787.896,1484264265.25174,3874871826.07298,4058859749.71902
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2020,Production loss,Infectious,9149691461.2105,3218923304.61792,8950184193.85335,9349198728.56766
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2020,Production loss,Non-infectious,5673215245.79822,2026758067.8134,5547597787.58683,5798832704.00961
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,External,962917494.365783,134076704.847167,954607486.804579,971227501.926987
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,2041576372.97549,165491919.761233,2031319266.00004,2051833479.95095
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,1170980045.49095,144367104.566573,1162032244.0671,1179927846.91481
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,External,4165209077.2908,1558477478.51431,4068615417.37663,4261802737.20497
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,9607176034.27103,3379869469.84877,9397693403.54602,9816658664.99604
+All Small Ruminants,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,5956876008.08813,2128095971.20404,5824977676.96617,6088774339.21009
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2017,Mortality,External,885456184.94213,146535758.122433,876373971.448203,894538398.436056
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2017,Mortality,Infectious,2338036317.70035,191008873.11656,2326197682.63197,2349874952.76872
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2017,Mortality,Non-infectious,1148714407.21797,165974923.183438,1138427363.93035,1159001450.50559
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2017,Production loss,External,1685703264.02808,774312472.596348,1637711761.63141,1733694766.42475
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2017,Production loss,Infectious,3741059648.81757,1634720681.79416,3639740473.03942,3842378824.59573
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2017,Production loss,Non-infectious,2152384083.31881,966161312.58025,2092501885.1246,2212266281.51302
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2018,Mortality,External,929728994.1881,153862546.025921,920192670.01964,939265318.35656
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2018,Mortality,Infectious,2454938133.58395,200559316.779228,2442507566.76173,2467368700.40617
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2018,Mortality,Non-infectious,1206150127.57775,174273669.341557,1195348732.12581,1216951523.02969
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2018,Production loss,External,1769988427.22948,813028096.226156,1719597349.71298,1820379504.74598
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2018,Production loss,Infectious,3928112631.25845,1716456715.88385,3821727496.69139,4034497765.82551
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2018,Production loss,Non-infectious,2260003287.48475,1014469378.20925,2197126979.38083,2322879595.58867
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2019,Mortality,External,976215443.896423,161555673.324709,966202303.519696,986228584.27315
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2019,Mortality,Infectious,2577685040.2618,210587282.624703,2564632945.09807,2590737135.42553
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2019,Mortality,Non-infectious,1266457633.95557,182987352.807632,1255116168.7311,1277799099.18004
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2019,Production loss,External,1858487848.59096,853679501.037455,1805577217.19863,1911398479.98328
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2019,Production loss,Infectious,4124518262.82137,1802279551.67802,4012813871.52596,4236222654.11679
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2019,Production loss,Non-infectious,2373003451.85899,1065192847.1197,2306983328.34987,2439023575.3681
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2020,Mortality,External,1025026216.09021,169633456.988556,1014512418.6948,1035540013.48563
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2020,Mortality,Infectious,2706569292.27361,221116646.762142,2692864592.35131,2720273992.19591
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2020,Mortality,Non-infectious,1329780515.65233,192136720.447058,1317871977.1667,1341689054.13797
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2020,Production loss,External,1951412241.02051,896363476.08932,1895856078.05856,2006968403.98245
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2020,Production loss,Infectious,4330744175.96244,1892393529.2619,4213454565.10226,4448033786.82263
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2020,Production loss,Non-infectious,2491653624.45194,1118452489.47568,2422332494.76737,2560974754.13651
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2021,Mortality,External,1076277526.89374,178115129.835709,1065238039.6287,1087317014.15879
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2021,Mortality,Infectious,2841897756.88607,232172479.106158,2827507821.96728,2856287691.80485
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2021,Mortality,Non-infectious,1396269541.43399,201743556.468501,1383765576.02412,1408773506.84385
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2021,Production loss,External,2048982853.07153,941181649.893778,1990648881.96149,2107316824.18157
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2021,Production loss,Infectious,4547281384.76057,1987013205.72498,4424127293.35738,4670435476.16376
+All Small Ruminants,National,Crop livestock mixed,Neonate,Neonatal,Overall,2021,Production loss,Non-infectious,2616236305.67453,1174375113.94945,2543449119.50574,2689023491.84333
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2017,Mortality,External,1131282802.58014,137466221.123522,1122762714.48393,1139802890.67634
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2017,Mortality,Infectious,1843088015.78179,164508857.001234,1832891838.54784,1853284193.01574
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2017,Mortality,Non-infectious,1213068239.15417,158538349.762609,1203242110.9929,1222894367.31543
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2017,Production loss,External,2848548526.7495,829976311.252799,2797107007.28501,2899990046.214
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2017,Production loss,Infectious,4632592309.69371,1284822932.71422,4552959622.58498,4712224996.80243
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2017,Production loss,Non-infectious,2955059376.56486,854652419.475524,2902088444.17106,3008030308.95866
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2018,Mortality,External,1187846942.74257,144339532.171378,1178900850.24208,1196793035.24307
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2018,Mortality,Infectious,1935242416.62736,172734299.85023,1924536430.53179,1945948402.72294
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2018,Mortality,Non-infectious,1273721651.15172,166465267.271928,1263404216.58109,1284039085.72236
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2018,Production loss,External,2990975953.08698,871475126.81539,2936962357.64926,3044989548.52469
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2018,Production loss,Infectious,4864221925.1784,1349064079.34984,4780607603.71424,4947836246.64255
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2018,Production loss,Non-infectious,3102812345.39311,897385040.449249,3047192866.37962,3158431824.4066
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2019,Mortality,External,1247239289.91154,151556508.772022,1237845892.78651,1256632687.03657
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2019,Mortality,Infectious,2032004537.51253,181371014.841727,2020763252.11223,2043245822.91282
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2019,Mortality,Non-infectious,1337407733.74726,174788530.655704,1326574427.44684,1348241040.04768
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2019,Production loss,External,3140524750.74133,915048883.156112,3083810475.53173,3197239025.95093
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2019,Production loss,Infectious,5107433021.43732,1416517283.31726,5019637983.89996,5195228058.97468
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2019,Production loss,Non-infectious,3257952962.66276,942254292.471663,3199552509.69861,3316353415.62692
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2020,Mortality,External,1309601254.43744,159134334.203077,1299738187.45663,1319464321.41826
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2020,Mortality,Infectious,2133604764.43938,190439565.582847,2121801414.76914,2145408114.10963
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2020,Mortality,Non-infectious,1404278120.47077,183527957.207708,1392903148.85414,1415653092.0874
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2020,Production loss,External,3297550988.2784,960801327.313873,3238000999.30832,3357100977.24847
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2020,Production loss,Infectious,5362804672.50918,1487343147.48304,5270619883.09496,5454989461.92341
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2020,Production loss,Non-infectious,3420850610.7959,989367007.095199,3359530135.18354,3482171086.40827
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2021,Mortality,External,1375081317.18819,167091050.906043,1364725096.85878,1385437537.5176
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2021,Mortality,Infectious,2240285002.71015,199961543.861069,2227891485.55644,2252678519.86385
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2021,Mortality,Non-infectious,1474492026.52873,192704355.086396,1462548306.33013,1486435746.72733
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2021,Production loss,External,3462428537.69232,1008841393.67952,3399901049.27374,3524956026.1109
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2021,Production loss,Infectious,5630944906.13465,1561710304.85712,5534150877.24972,5727738935.01958
+All Small Ruminants,National,Pastoral,Adult female,Adult,Female,2021,Production loss,Non-infectious,3591893141.3357,1038835357.44991,3527506641.94272,3656279640.72868
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2017,Mortality,External,783469757.871477,96719945.8823582,777475103.673212,789464412.069743
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2017,Mortality,Infectious,1081395741.64042,111835573.250584,1074464228.36685,1088327254.91398
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2017,Mortality,Non-infectious,712611951.130157,93747456.0094674,706801530.377572,718422371.882743
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2017,Production loss,External,3473487798.45529,1143511835.17549,3402613502.97297,3544362093.93762
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2017,Production loss,Infectious,4905760918.8555,1555024167.11191,4809381293.46655,5002140544.24445
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2017,Production loss,Non-infectious,3357509876.7359,1092141634.12918,3289819480.79527,3425200272.67652
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2018,Mortality,External,822643245.603605,101555943.036364,816348858.704111,828937632.503099
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2018,Mortality,Infectious,1135465528.54442,117427352.130703,1128187439.59369,1142743617.49514
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2018,Mortality,Non-infectious,748242548.543513,98434828.7235374,742141606.758654,754343490.328373
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2018,Production loss,External,3647162188.37806,1200687426.93418,3572744178.12162,3721580198.63449
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2018,Production loss,Infectious,5151048964.79828,1632775375.46737,5049850358.13989,5252247571.45667
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2018,Production loss,Non-infectious,3525385370.5727,1146748715.83555,3454310454.83505,3596460286.31035
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2019,Mortality,External,863775407.730013,106633740.054728,857166301.493815,870384513.966211
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2019,Mortality,Infectious,1192238804.80208,123298719.944489,1184596811.39097,1199880798.21319
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2019,Mortality,Non-infectious,785654675.834342,103356570.077417,779248686.96534,792060664.703344
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2019,Production loss,External,3829520297.79696,1260721798.2808,3751381387.02771,3907659208.56621
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2019,Production loss,Infectious,5408601413.0382,1714414144.24061,5302342876.0469,5514859950.0295
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2019,Production loss,Non-infectious,3701654639.10133,1204086151.62724,3627025977.57681,3776283300.62586
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2020,Mortality,External,906964177.970052,111965426.930352,900024616.429923,913903739.510181
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2020,Mortality,Infectious,1251850744.88069,129463656.139116,1243826651.78679,1259874837.97459
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2020,Mortality,Non-infectious,824937409.496194,108524398.502901,818211121.1886,831663697.803788
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2020,Production loss,External,4020996312.68681,1323757888.19475,3938950456.3791,4103042168.99452
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2020,Production loss,Infectious,5679031483.69011,1800134851.45252,5567460019.84925,5790602947.53097
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2020,Production loss,Non-infectious,3886737371.0564,1264290459.20852,3808377276.45565,3965097465.65715
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2021,Mortality,External,952312386.729058,117563698.155799,945025847.119426,959598926.33869
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2021,Mortality,Infectious,1314443281.9709,135936839.134092,1306017984.21066,1322868579.73115
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2021,Mortality,Non-infectious,866184279.847314,113950618.353386,859121677.128968,873246882.56566
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2021,Production loss,External,4222046128.32116,1389945782.60441,4135897979.19807,4308194277.44425
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2021,Production loss,Infectious,5962983057.87462,1890141594.02503,5845833020.84173,6080133094.90752
+All Small Ruminants,National,Pastoral,Adult male,Adult,Male,2021,Production loss,Non-infectious,4081074239.60923,1327504982.16887,3998796140.27844,4163352338.94001
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2017,Mortality,External,772950621.896426,96957165.3472375,766941264.953571,778959978.839281
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2017,Mortality,Infectious,1505479602.18936,112727647.393684,1498492798.60356,1512466405.77516
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2017,Mortality,Non-infectious,734824630.901961,87143226.9122055,729423536.988044,740225724.815879
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2017,Production loss,External,2422778081.25354,680924840.877131,2380574697.87869,2464981464.62838
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2017,Production loss,Infectious,4337187016.84619,1107223142.07329,4268561876.53522,4405812157.15716
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2017,Production loss,Non-infectious,2536253325.54622,680195925.859874,2494095119.96204,2578411531.13039
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2018,Mortality,External,811598153.051541,101805023.593774,805288328.262834,817907977.840248
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2018,Mortality,Infectious,1580753582.43323,118364029.912706,1573417438.65889,1588089726.20758
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2018,Mortality,Non-infectious,771565862.500656,91500388.1849499,765894713.895559,777237011.105753
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2018,Production loss,External,2543916985.31621,714971082.920947,2499603432.77263,2588230537.85979
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2018,Production loss,Infectious,4554046367.68849,1162584299.17688,4481989970.36198,4626102765.015
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2018,Production loss,Non-infectious,2663065991.82352,714205722.152824,2618799875.96014,2707332107.68691
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2019,Mortality,External,852178060.761558,106895274.753628,845552744.734645,858803376.788471
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2019,Mortality,Infectious,1659791261.68294,124282231.550599,1652088310.71106,1667494212.65482
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2019,Mortality,Non-infectious,810144155.676749,96075407.5247825,804189449.645699,816098861.707798
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2019,Production loss,External,2671112834.58201,750719637.066956,2624583604.41126,2717642064.75277
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2019,Production loss,Infectious,4781748686.07291,1220713514.13565,4706089468.88008,4857407903.26574
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2019,Production loss,Non-infectious,2796219291.4147,749916008.260423,2749739869.75815,2842698713.07124
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2020,Mortality,External,894786963.854357,112240038.472417,887830382.027269,901743545.681444
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2020,Mortality,Infectious,1742780824.88907,130496343.26364,1734692726.36019,1750868923.41794
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2020,Mortality,Non-infectious,850651363.509228,100879177.834896,844398922.180725,856903804.837732
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2020,Production loss,External,2804668476.31111,788255618.920267,2755812784.63182,2853524167.99041
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2020,Production loss,Infectious,5020836120.37655,1281749189.84236,4941393942.32408,5100278298.42902
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2020,Production loss,Non-infectious,2936030255.98543,787411808.673405,2887226863.24606,2984833648.7248
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,External,939526312.099203,117852040.378043,932221901.181876,946830723.01653
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,1829919866.24972,137021160.555903,1821427362.7864,1838412369.71303
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,893183931.731027,105923136.66365,886618868.340003,899748995.122052
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,External,2944901900.12666,827668399.866246,2893603423.86341,2996200376.38992
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,5271877926.39537,1345836649.33441,5188463639.44028,5355292213.35046
+All Small Ruminants,National,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,3082831768.78469,826782399.107037,3031588206.40836,3134075331.16103
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2017,Mortality,External,1089330580.81651,149014071.549,1080094762.68756,1098566398.94547
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2017,Mortality,Infectious,2000842022.53831,163198115.662021,1990727084.40143,2010956960.67519
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2017,Mortality,Non-infectious,955159363.363449,139306377.515708,946525223.288191,963793503.438707
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2017,Production loss,External,1801919296.86806,595590961.363499,1765004864.9542,1838833728.78192
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2017,Production loss,Infectious,3632597372.86323,1115599947.76988,3563453042.29653,3701741703.42993
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2017,Production loss,Non-infectious,1852826952.51496,598167487.086739,1815752828.81671,1889901076.2132
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2018,Mortality,External,1143797109.85657,156464775.125408,1134099500.82123,1153494718.89191
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2018,Mortality,Infectious,2100884123.66344,171358021.437543,2090263438.62018,2111504808.70669
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2018,Mortality,Non-infectious,1002917331.53182,146271696.395863,993851484.452529,1011983178.61111
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2018,Production loss,External,1892015261.71146,625370509.43166,1853255108.20191,1930775415.22101
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2018,Production loss,Infectious,3814227241.50639,1171379945.15834,3741625694.41136,3886828788.60142
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2018,Production loss,Non-infectious,1945468300.1407,628075861.441062,1906540470.25755,1984396130.02386
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2019,Mortality,External,1200986965.34867,164288013.880686,1190804475.86163,1211169454.83571
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2019,Mortality,Infectious,2205928329.8449,179925922.502203,2194776610.54994,2217080049.13987
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2019,Mortality,Non-infectious,1053063198.1086,153585281.219817,1043544058.67509,1062582337.54212
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2019,Production loss,External,1986616024.79703,656639034.903229,1945917863.61201,2027314185.98206
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2019,Production loss,Infectious,4004938603.58171,1229948942.41623,3928706979.13193,4081170228.03149
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2019,Production loss,Non-infectious,2042741715.14774,659479654.513102,2001867493.77042,2083615936.52505
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2020,Mortality,External,1261036313.61541,172502414.573775,1250344699.65407,1271727927.57675
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2020,Mortality,Infectious,2316224746.33553,188922218.620439,2304515441.07624,2327934051.59482
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2020,Mortality,Non-infectious,1105716358.01421,161264545.284771,1095721261.60878,1115711454.41965
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2020,Production loss,External,2085946826.03689,689470986.648378,2043213756.79261,2128679895.28116
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2020,Production loss,Infectious,4205185533.76079,1291446389.53702,4125142328.08852,4285228739.43306
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2020,Production loss,Non-infectious,2144878800.90513,692453637.238744,2101960868.45895,2187796733.35131
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2021,Mortality,External,1324088129.29552,181127535.301564,1312861934.63617,1335314323.95487
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2021,Mortality,Infectious,2432035983.65076,198368329.544914,2419741213.12891,2444330754.17261
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2021,Mortality,Non-infectious,1161002175.9151,169327772.552784,1150507324.68915,1171497027.14104
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2021,Production loss,External,2190244167.33873,723944535.980785,2145374444.63224,2235113890.04522
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2021,Production loss,Infectious,4415444810.44883,1356018709.01384,4331399444.49295,4499490176.40471
+All Small Ruminants,National,Pastoral,Neonate,Neonatal,Overall,2021,Production loss,Non-infectious,2252122740.95038,727076319.100669,2207058911.88189,2297186570.01887
+Cattle,Afar,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,External,,,,
+Cattle,Afar,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,Infectious,,,,
+Cattle,Afar,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Afar,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,External,,,,
+Cattle,Afar,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,Infectious,,,,
+Cattle,Afar,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Afar,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,External,,,,
+Cattle,Afar,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,,,,
+Cattle,Afar,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Afar,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,External,,,,
+Cattle,Afar,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,,,,
+Cattle,Afar,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Afar,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,External,,,,
+Cattle,Afar,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,Infectious,,,,
+Cattle,Afar,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Afar,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,External,,,,
+Cattle,Afar,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,Infectious,,,,
+Cattle,Afar,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Afar,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,External,,,,
+Cattle,Afar,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,,,,
+Cattle,Afar,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Afar,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,External,,,,
+Cattle,Afar,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,,,,
+Cattle,Afar,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Afar,Pastoral,Adult,Adult,Overall,2021,Mortality,External,1608221309.13667,263121619.066958,1591913161.8977,1624529456.37563
+Cattle,Afar,Pastoral,Adult,Adult,Overall,2021,Mortality,Infectious,3170538979.57184,330365322.4386,3150063101.00253,3191014858.14115
+Cattle,Afar,Pastoral,Adult,Adult,Overall,2021,Mortality,Non-infectious,1888262737.68873,289466013.657959,1870321777.96011,1906203697.41735
+Cattle,Afar,Pastoral,Adult,Adult,Overall,2021,Production loss,External,13680391040.0333,3382357279.03055,13470754216.1311,13890027863.9355
+Cattle,Afar,Pastoral,Adult,Adult,Overall,2021,Production loss,Infectious,25005709456.6644,5062934893.48399,24691911267.0781,25319507646.2507
+Cattle,Afar,Pastoral,Adult,Adult,Overall,2021,Production loss,Non-infectious,20236426916.4194,4216809636.55556,19975071149.9283,20497782682.9105
+Cattle,Afar,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,External,453914300.728108,75800565.6361227,449216219.325394,458612382.130823
+Cattle,Afar,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,917830540.357274,82998939.7048809,912686307.305711,922974773.408837
+Cattle,Afar,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,382336980.613012,66676129.2113714,378204427.247161,386469533.978862
+Cattle,Afar,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,External,1260369259.43859,288694683.506847,1242476106.36957,1278262412.50762
+Cattle,Afar,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,2782261093.7476,478463833.167775,2752606143.05412,2811916044.44108
+Cattle,Afar,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,2693323274.00207,448078796.211955,2665551572.80476,2721094975.19939
+Cattle,Afar,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,External,501520377.521217,77721611.7427043,496703230.635133,506337524.4073
+Cattle,Afar,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,865170872.881612,89516515.2097862,859622683.737988,870719062.025236
+Cattle,Afar,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,485016556.052113,73016047.1912069,480491057.71935,489542054.384875
+Cattle,Afar,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,External,2145142327.40951,845997808.249597,2092707803.52015,2197576851.29887
+Cattle,Afar,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,3188312799.90084,1204625298.43744,3113650722.32485,3262974877.47683
+Cattle,Afar,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,2703162443.66989,1033853908.61363,2639084692.00116,2767240195.33863
+Cattle,Afar,Periurban dairy,Adult,Adult,Overall,2021,Mortality,External,,,,
+Cattle,Afar,Periurban dairy,Adult,Adult,Overall,2021,Mortality,Infectious,,,,
+Cattle,Afar,Periurban dairy,Adult,Adult,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Afar,Periurban dairy,Adult,Adult,Overall,2021,Production loss,External,,,,
+Cattle,Afar,Periurban dairy,Adult,Adult,Overall,2021,Production loss,Infectious,,,,
+Cattle,Afar,Periurban dairy,Adult,Adult,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Afar,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,External,,,,
+Cattle,Afar,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,,,,
+Cattle,Afar,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Afar,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,External,,,,
+Cattle,Afar,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,,,,
+Cattle,Afar,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Afar,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,External,,,,
+Cattle,Afar,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,,,,
+Cattle,Afar,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Afar,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,External,,,,
+Cattle,Afar,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,,,,
+Cattle,Afar,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Amhara,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,External,1061739073.82187,206457519.814825,1048942939.30555,1074535208.33818
+Cattle,Amhara,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,Infectious,2720825958.64178,255179958.836607,2705010031.55872,2736641885.72484
+Cattle,Amhara,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,Non-infectious,2019972550.13017,241995261.546197,2004973804.03542,2034971296.22493
+Cattle,Amhara,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,External,20080426557.9874,4796891087.38359,19783117631.3408,20377735484.6341
+Cattle,Amhara,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,Infectious,67645368375.7401,10513434673.4851,66993750917.4317,68296985834.0486
+Cattle,Amhara,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,Non-infectious,61123087811.6252,9954805991.93693,60506093881.4894,61740081741.761
+Cattle,Amhara,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,External,321942304.062089,77137901.6763239,317161335.23595,326723272.888227
+Cattle,Amhara,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,1011779153.46567,90974499.0081759,1006140599.2105,1017417707.72084
+Cattle,Amhara,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,456868215.068289,76915500.7180092,452101030.543065,461635399.593513
+Cattle,Amhara,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,External,2804445167.43196,559867288.668473,2769744871.00531,2839145463.85862
+Cattle,Amhara,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,7780307149.97417,941857301.145869,7721931302.33518,7838682997.61317
+Cattle,Amhara,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,5466907699.54566,769217703.360536,5419231968.4153,5514583430.67602
+Cattle,Amhara,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,External,881728642.240927,146146657.202309,872670545.028736,890786739.453118
+Cattle,Amhara,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,Infectious,2084958461.09243,186489396.720973,2073399940.92592,2096516981.25895
+Cattle,Amhara,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,Non-infectious,1331136909.71095,159615945.515213,1321243992.70026,1341029826.72164
+Cattle,Amhara,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,External,3888690112.24556,1402878383.32097,3801740406.95458,3975639817.53654
+Cattle,Amhara,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,Infectious,12792482948.3235,4112560810.18943,12537588472.3029,13047377424.344
+Cattle,Amhara,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,Non-infectious,11402976392.8025,3823800086.30742,11165979163.0006,11639973622.6044
+Cattle,Amhara,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,External,522784086.609248,97964144.0061639,516712317.629349,528855855.589147
+Cattle,Amhara,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,1220588043.72544,113123391.588701,1213576712.11102,1227599375.33985
+Cattle,Amhara,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,750883776.628285,100130310.627348,744677749.717291,757089803.53928
+Cattle,Amhara,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,External,2720676912.68362,559289104.266313,2686012451.83899,2755341373.52826
+Cattle,Amhara,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,9004274033.24374,979683657.602608,8943553726.82254,9064994339.66495
+Cattle,Amhara,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,7697137224.00577,836641139.204245,7645282621.81573,7748991826.19582
+Cattle,Amhara,Pastoral,Adult,Adult,Overall,2021,Mortality,External,,,,
+Cattle,Amhara,Pastoral,Adult,Adult,Overall,2021,Mortality,Infectious,,,,
+Cattle,Amhara,Pastoral,Adult,Adult,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Amhara,Pastoral,Adult,Adult,Overall,2021,Production loss,External,,,,
+Cattle,Amhara,Pastoral,Adult,Adult,Overall,2021,Production loss,Infectious,,,,
+Cattle,Amhara,Pastoral,Adult,Adult,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Amhara,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,External,,,,
+Cattle,Amhara,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,,,,
+Cattle,Amhara,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Amhara,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,External,,,,
+Cattle,Amhara,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,,,,
+Cattle,Amhara,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Amhara,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,External,,,,
+Cattle,Amhara,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,,,,
+Cattle,Amhara,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Amhara,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,External,,,,
+Cattle,Amhara,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,,,,
+Cattle,Amhara,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Amhara,Periurban dairy,Adult,Adult,Overall,2021,Mortality,External,3677717.29483584,545892.621611935,3643883.14133116,3711551.44834052
+Cattle,Amhara,Periurban dairy,Adult,Adult,Overall,2021,Mortality,Infectious,7709417.66125452,719304.550426719,7664835.52254766,7753999.79996137
+Cattle,Amhara,Periurban dairy,Adult,Adult,Overall,2021,Mortality,Non-infectious,6292276.82565958,669078.632501475,6250807.66439503,6333745.98692414
+Cattle,Amhara,Periurban dairy,Adult,Adult,Overall,2021,Production loss,External,2253361970.75135,1098947646.09862,2185249741.56988,2321474199.93283
+Cattle,Amhara,Periurban dairy,Adult,Adult,Overall,2021,Production loss,Infectious,8913140086.95067,3768941713.50879,8679542951.84285,9146737222.05849
+Cattle,Amhara,Periurban dairy,Adult,Adult,Overall,2021,Production loss,Non-infectious,9031568348.23724,3748138857.56092,8799260563.80684,9263876132.66763
+Cattle,Amhara,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,External,5197229.49668155,1073769.29447963,5130677.80922558,5263781.18413751
+Cattle,Amhara,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,20658515.7078308,1634823.32601605,20557190.1702148,20759841.2454468
+Cattle,Amhara,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,10572730.6888024,1483364.28209135,10480792.5074885,10664668.8701162
+Cattle,Amhara,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,External,99252716.4969025,26641367.8716653,97601497.7508369,100903935.242968
+Cattle,Amhara,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,384482671.337152,78748394.1262765,379601884.98901,389363457.685295
+Cattle,Amhara,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,306801599.083929,67985853.7675038,302587869.640721,311015328.527138
+Cattle,Amhara,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,External,8469430.09018721,1721414.11147982,8362737.69870379,8576122.48167063
+Cattle,Amhara,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,25340174.4257426,2236878.60371599,25201533.8010974,25478815.0503877
+Cattle,Amhara,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,14953488.1033055,2053690.94356579,14826201.3588344,15080774.8477766
+Cattle,Amhara,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,External,137611382.590147,35649795.2418789,135401825.990788,139820939.189506
+Cattle,Amhara,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,436509564.720873,78563890.9753036,431640213.786372,441378915.655374
+Cattle,Amhara,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,394513429.803328,76021382.9233158,389801662.254849,399225197.351807
+Cattle,Benishangul Gumz,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,External,21259400.1977257,4083052.39638099,21006334.638534,21512465.7569173
+Cattle,Benishangul Gumz,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,Infectious,54557713.7373903,5064182.86079654,54243838.1994099,54871589.2753707
+Cattle,Benishangul Gumz,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,Non-infectious,40604709.3242362,4879980.17401891,40302250.577276,40907168.0711963
+Cattle,Benishangul Gumz,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,External,624534038.197475,171145221.111806,613926542.412699,635141533.982252
+Cattle,Benishangul Gumz,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,Infectious,2116397010.8914,429483209.011621,2089777854.95103,2143016166.83176
+Cattle,Benishangul Gumz,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,Non-infectious,1900344221.94091,412008205.001902,1874808158.06802,1925880285.8138
+Cattle,Benishangul Gumz,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,External,5262824.98738033,1223908.05776178,5186967.7739605,5338682.20080015
+Cattle,Benishangul Gumz,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,16607249.1349282,1493174.24298251,16514702.9371117,16699795.3327448
+Cattle,Benishangul Gumz,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,7604637.86952756,1186817.90975826,7531079.48505573,7678196.25399938
+Cattle,Benishangul Gumz,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,External,88569878.5257699,28635528.0325183,86795062.7235726,90344694.3279672
+Cattle,Benishangul Gumz,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,243524300.371575,67536432.4907959,239338425.835838,247710174.907311
+Cattle,Benishangul Gumz,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,172741227.586205,49149359.3609316,169694974.708919,175787480.463491
+Cattle,Benishangul Gumz,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,External,7116627.9109228,1201397.10205639,7042165.91535483,7191089.90649076
+Cattle,Benishangul Gumz,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,Infectious,16916380.099935,1465303.10796133,16825561.3412215,17007198.8586485
+Cattle,Benishangul Gumz,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,Non-infectious,10780855.7947954,1266068.46903738,10702385.5000287,10859326.0895621
+Cattle,Benishangul Gumz,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,External,63971932.4725358,43972435.1160719,61246542.7882082,66697322.1568634
+Cattle,Benishangul Gumz,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,Infectious,209691716.064297,137489986.217094,201170155.0194,218213277.109195
+Cattle,Benishangul Gumz,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,Non-infectious,186494531.586265,123484292.960037,178841036.451838,194148026.720692
+Cattle,Benishangul Gumz,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,External,29483304.7677138,5613778.97052118,29135365.5358753,29831243.9995523
+Cattle,Benishangul Gumz,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,69514766.7979642,6497404.75632813,69112060.8788798,69917472.7170486
+Cattle,Benishangul Gumz,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,42547578.8846138,5586121.7260272,42201353.8350498,42893803.9341778
+Cattle,Benishangul Gumz,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,External,58170876.8164739,33596642.9235468,56088573.5778615,60253180.0550864
+Cattle,Benishangul Gumz,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,192481173.062027,104229890.712213,186021056.21392,198941289.910135
+Cattle,Benishangul Gumz,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,164899126.233016,89767689.4561601,159335369.434378,170462883.031655
+Cattle,Benishangul Gumz,Pastoral,Adult,Adult,Overall,2021,Mortality,External,,,,
+Cattle,Benishangul Gumz,Pastoral,Adult,Adult,Overall,2021,Mortality,Infectious,,,,
+Cattle,Benishangul Gumz,Pastoral,Adult,Adult,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Benishangul Gumz,Pastoral,Adult,Adult,Overall,2021,Production loss,External,,,,
+Cattle,Benishangul Gumz,Pastoral,Adult,Adult,Overall,2021,Production loss,Infectious,,,,
+Cattle,Benishangul Gumz,Pastoral,Adult,Adult,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Benishangul Gumz,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,External,,,,
+Cattle,Benishangul Gumz,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,,,,
+Cattle,Benishangul Gumz,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Benishangul Gumz,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,External,,,,
+Cattle,Benishangul Gumz,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,,,,
+Cattle,Benishangul Gumz,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Benishangul Gumz,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,External,,,,
+Cattle,Benishangul Gumz,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,,,,
+Cattle,Benishangul Gumz,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Benishangul Gumz,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,External,,,,
+Cattle,Benishangul Gumz,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,,,,
+Cattle,Benishangul Gumz,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Benishangul Gumz,Periurban dairy,Adult,Adult,Overall,2021,Mortality,External,,,,
+Cattle,Benishangul Gumz,Periurban dairy,Adult,Adult,Overall,2021,Mortality,Infectious,,,,
+Cattle,Benishangul Gumz,Periurban dairy,Adult,Adult,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Benishangul Gumz,Periurban dairy,Adult,Adult,Overall,2021,Production loss,External,,,,
+Cattle,Benishangul Gumz,Periurban dairy,Adult,Adult,Overall,2021,Production loss,Infectious,,,,
+Cattle,Benishangul Gumz,Periurban dairy,Adult,Adult,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Benishangul Gumz,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,External,,,,
+Cattle,Benishangul Gumz,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,,,,
+Cattle,Benishangul Gumz,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Benishangul Gumz,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,External,,,,
+Cattle,Benishangul Gumz,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,,,,
+Cattle,Benishangul Gumz,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Benishangul Gumz,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,External,,,,
+Cattle,Benishangul Gumz,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,,,,
+Cattle,Benishangul Gumz,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Benishangul Gumz,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,External,,,,
+Cattle,Benishangul Gumz,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,,,,
+Cattle,Benishangul Gumz,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Gambela,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,External,,,,
+Cattle,Gambela,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,Infectious,,,,
+Cattle,Gambela,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Gambela,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,External,,,,
+Cattle,Gambela,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,Infectious,,,,
+Cattle,Gambela,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Gambela,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,External,,,,
+Cattle,Gambela,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,,,,
+Cattle,Gambela,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Gambela,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,External,,,,
+Cattle,Gambela,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,,,,
+Cattle,Gambela,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Gambela,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,External,,,,
+Cattle,Gambela,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,Infectious,,,,
+Cattle,Gambela,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Gambela,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,External,,,,
+Cattle,Gambela,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,Infectious,,,,
+Cattle,Gambela,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Gambela,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,External,,,,
+Cattle,Gambela,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,,,,
+Cattle,Gambela,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Gambela,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,External,,,,
+Cattle,Gambela,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,,,,
+Cattle,Gambela,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Gambela,Pastoral,Adult,Adult,Overall,2021,Mortality,External,200395071.947752,32786882.7633449,198362957.241605,202427186.6539
+Cattle,Gambela,Pastoral,Adult,Adult,Overall,2021,Mortality,Infectious,395070117.586894,41164827.44952,392518742.031006,397621493.142783
+Cattle,Gambela,Pastoral,Adult,Adult,Overall,2021,Mortality,Non-infectious,235290165.347189,36069843.2077902,233054574.38357,237525756.310809
+Cattle,Gambela,Pastoral,Adult,Adult,Overall,2021,Production loss,External,63844943.9403462,58233659.0647982,60235650.6802183,67454237.2004742
+Cattle,Gambela,Pastoral,Adult,Adult,Overall,2021,Production loss,Infectious,116088591.32292,103122669.053372,109697099.523193,122480083.122647
+Cattle,Gambela,Pastoral,Adult,Adult,Overall,2021,Production loss,Non-infectious,93979889.263873,84145695.5476891,88764580.854846,99195197.6728999
+Cattle,Gambela,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,External,21716547.9350509,3626471.00737946,21491781.0635339,21941314.806568
+Cattle,Gambela,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,43911629.1156869,3970949.91466609,43665511.6126229,44157746.6187509
+Cattle,Gambela,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,18292087.1861014,3189962.47750087,18094374.8964221,18489799.4757807
+Cattle,Gambela,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,External,64245487.9703279,14389022.6670249,63353663.4934539,65137312.4472018
+Cattle,Gambela,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,141830187.053697,23489150.5455485,140374341.171578,143286032.935815
+Cattle,Gambela,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,137297758.946722,21936364.6102941,135938153.965494,138657363.92795
+Cattle,Gambela,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,External,33526106.9787528,5195592.30560143,33204086.7486637,33848127.208842
+Cattle,Gambela,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,57835772.3410958,5984279.48714297,57464869.6712905,58206675.0109011
+Cattle,Gambela,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,32422815.4555572,4880852.60869237,32120302.6355294,32725328.2755851
+Cattle,Gambela,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,External,101289843.333734,34944068.0310068,99124027.3563214,103455659.311147
+Cattle,Gambela,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,150526823.653,49326290.4257791,147469604.676209,153584042.629791
+Cattle,Gambela,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,127599064.479322,42380390.8633915,124972348.906897,130225780.051748
+Cattle,Gambela,Periurban dairy,Adult,Adult,Overall,2021,Mortality,External,,,,
+Cattle,Gambela,Periurban dairy,Adult,Adult,Overall,2021,Mortality,Infectious,,,,
+Cattle,Gambela,Periurban dairy,Adult,Adult,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Gambela,Periurban dairy,Adult,Adult,Overall,2021,Production loss,External,,,,
+Cattle,Gambela,Periurban dairy,Adult,Adult,Overall,2021,Production loss,Infectious,,,,
+Cattle,Gambela,Periurban dairy,Adult,Adult,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Gambela,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,External,,,,
+Cattle,Gambela,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,,,,
+Cattle,Gambela,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Gambela,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,External,,,,
+Cattle,Gambela,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,,,,
+Cattle,Gambela,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Gambela,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,External,,,,
+Cattle,Gambela,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,,,,
+Cattle,Gambela,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Gambela,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,External,,,,
+Cattle,Gambela,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,,,,
+Cattle,Gambela,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2017,Mortality,External,2369430664.20631,442084213.468093,2342030504.26953,2396830824.14309
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2017,Mortality,Infectious,6011681160.95497,564091090.528573,5976719075.38728,6046643246.52266
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2017,Mortality,Non-infectious,4472455449.29846,548746049.959189,4438444441.72232,4506466456.87461
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2017,Production loss,External,36532935197.3902,9670009416.62634,35933592817.5139,37132277577.2666
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2017,Production loss,Infectious,123215282161.076,23142283365.5828,121780934934.458,124649629387.693
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2017,Production loss,Non-infectious,112650424893.876,21749942731.7675,111302374248.07,113998475539.682
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2018,Mortality,External,2487902191.17612,464188424.14156,2459132023.2425,2516672359.10974
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2018,Mortality,Infectious,6312265204.84227,592295667.52221,6275555013.6037,6348975396.08085
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2018,Mortality,Non-infectious,4696078206.67019,576183327.97256,4660366650.23278,4731789763.1076
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2018,Production loss,External,38359581957.2598,10153509887.4575,37730272458.3896,38988891456.1299
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2018,Production loss,Infectious,129376046269.129,24299397533.8611,127869981681.181,130882110857.077
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2018,Production loss,Non-infectious,118282946138.57,22837439868.3552,116867492960.474,119698399316.666
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2019,Mortality,External,2612297294.49442,487397845.349058,2582088618.16409,2642505970.82475
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2019,Mortality,Infectious,6627878450.92394,621910473.367265,6589332748.73082,6666424153.11706
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2019,Mortality,Non-infectious,4930882101.9105,604992469.887579,4893384969.1687,4968379234.6523
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2019,Production loss,External,40277561055.1227,10661185381.8302,39616786081.3091,40938336028.9364
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2019,Production loss,Infectious,135844848582.586,25514367410.5534,134263480765.24,137426216399.931
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2019,Production loss,Non-infectious,124197093445.498,23979311861.7722,122710867608.498,125683319282.499
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2020,Mortality,External,2742912152.97864,511767737.61727,2711193042.83175,2774631263.12554
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2020,Mortality,Infectious,6959272359.3097,653006019.506228,6918799370.61421,6999745348.00519
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2020,Mortality,Non-infectious,5177426191.91283,635242068.899284,5138054204.05136,5216798179.77429
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2020,Production loss,External,42291439107.8789,11194244650.9215,41597625385.3746,42985252830.3832
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2020,Production loss,Infectious,142637091011.715,26790085781.0803,140976654803.503,144297527219.928
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2020,Production loss,Non-infectious,130406948117.773,25178277454.8601,128846410988.922,131967485246.624
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,External,2880057754.38707,537356124.499216,2846752688.73277,2913362820.04138
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,Infectious,7307235963.11474,685656342.953715,7264739323.59166,7349732602.63783
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,Non-infectious,5436297486.41527,667004147.862462,5394956900.6781,5477638072.15244
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,External,44406011063.2728,11753956883.4674,43677506654.6433,45134515471.9023
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,Infectious,149768945562.301,28129590070.1335,148025487543.678,151512403580.924
+Cattle,National,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,Non-infectious,136927295523.662,26437191327.6025,135288731538.369,138565859508.955
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2017,Mortality,External,1871814831.41543,427734562.934973,1845304055.69022,1898325607.14063
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2017,Mortality,Infectious,5852025048.92573,501034434.39959,5820971183.5803,5883078914.27117
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2017,Mortality,Non-infectious,2683679167.54749,429763217.474738,2657042656.82169,2710315678.2733
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2017,Production loss,External,5017329067.66795,1015819026.99866,4954369109.00253,5080289026.33337
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2017,Production loss,Infectious,13831377028.5272,1782019021.03667,13720928374.8561,13941825682.1983
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2017,Production loss,Non-infectious,9769092767.91232,1457112041.2682,9678781687.4434,9859403848.38124
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2018,Mortality,External,1965405573.16091,449121289.709389,1937569258.7345,1993241887.58732
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2018,Mortality,Infectious,6144626303.24159,526086158.433147,6112019744.48549,6177232861.9977
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2018,Mortality,Non-infectious,2817863126.83576,451251379.386616,2789894790.50932,2845831463.1622
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2018,Production loss,External,5268195521.05136,1066609978.34841,5202087564.45267,5334303477.65004
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2018,Production loss,Infectious,14522945879.9536,1871119972.08771,14406974793.599,14638916966.3082
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2018,Production loss,Non-infectious,10257547406.308,1529967643.33112,10162720771.8156,10352374040.8003
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2019,Mortality,External,2063675851.9859,471577352.883493,2034447721.91945,2092903982.05235
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2019,Mortality,Infectious,6451857620.19019,552390468.565613,6417620733.35925,6486094507.02112
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2019,Mortality,Non-infectious,2958756284.04798,473813949.34797,2929389530.84373,2988123037.25222
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2019,Production loss,External,5531605297.10393,1119940477.26565,5462191942.67532,5601018651.53253
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2019,Production loss,Infectious,15249093173.9513,1964675970.69135,15127323533.279,15370862814.6236
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2019,Production loss,Non-infectious,10770424776.6234,1606466025.4972,10670856810.4064,10869992742.8403
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2020,Mortality,External,2166859644.74468,495156219.274927,2136170108.25255,2197549181.23681
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2020,Mortality,Infectious,6774450502.90635,580009994.10588,6738501771.60296,6810399234.20973
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2020,Mortality,Non-infectious,3106694099.08189,497504647.763048,3075859008.15869,3137529190.00509
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2020,Production loss,External,5808185561.95913,1175937501.12877,5735301539.80911,5881069584.10916
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2020,Production loss,Infectious,16011547832.6489,2062909769.22521,15883689709.9431,16139405955.3547
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2020,Production loss,Non-infectious,11308946015.4545,1686789326.77162,11204399650.9268,11413492379.9823
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,External,2275202627.13423,519914029.042256,2242978613.89165,2307426640.37682
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,7113173029.68158,609010495.828215,7075426861.68802,7150919197.67515
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,3262028804.83012,522379881.056274,3229651959.30466,3294405650.35557
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,External,6098594840.05709,1234734376.18504,6022066616.79957,6175123063.31461
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,16812125224.2813,2166055257.68579,16677874195.4403,16946376253.1224
+Cattle,National,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,11874393316.2273,1771128793.10977,11764619633.4732,11984166998.9814
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2017,Mortality,External,868290021.009067,143810168.970525,859376738.176786,877203303.841348
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2017,Mortality,Infectious,2031165778.82815,178207253.48043,2020120581.78537,2042210975.87093
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2017,Mortality,Non-infectious,1301175438.02451,161206602.692243,1291183932.87218,1311166943.17685
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2017,Production loss,External,8149062513.84838,7443840963.38396,7687696948.81132,8610428078.88544
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2017,Production loss,Infectious,26856092536.1783,24032215069.408,25366587784.6489,28345597287.7077
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2017,Production loss,Non-infectious,23863394141.187,21135013130.1266,22553456526.6126,25173331755.7614
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2018,Mortality,External,911704522.994719,151000663.260736,902345576.898349,921063469.091088
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2018,Mortality,Infectious,2132724076.72918,187117633.617117,2121126618.75194,2144321534.70643
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2018,Mortality,Non-infectious,1366234215.20477,169266942.408741,1355743134.20094,1376725296.20861
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2018,Production loss,External,8556515639.5408,7816033011.55302,8072081796.25189,9040949482.8297
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2018,Production loss,Infectious,28198897162.9872,25233825822.8779,26634917173.8814,29762877152.093
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2018,Production loss,Non-infectious,25056563848.2463,22191763786.6325,23681129352.9432,26431998343.5495
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2019,Mortality,External,957289750.079652,158550682.26623,947462857.555941,967116642.603363
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2019,Mortality,Infectious,2239360289.52527,196473532.763961,2227182957.56663,2251537621.48391
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2019,Mortality,Non-infectious,1434545931.24405,177730299.112572,1423530295.59605,1445561566.89204
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2019,Production loss,External,8984341421.51783,8206834662.13054,8475685886.06449,9492996956.97116
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2019,Production loss,Infectious,29608842021.1365,26495517114.0214,27966663032.5754,31251021009.6976
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2019,Production loss,Non-infectious,26309392040.6586,23301351975.9638,24865185820.5904,27753598260.7269
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2020,Mortality,External,1005154238.51883,166478202.222735,994836002.246368,1015472474.7913
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2020,Mortality,Infectious,2351328312.96116,206297226.871311,2338542113.32186,2364114512.60047
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2020,Mortality,Non-infectious,1506273233.08528,186616823.653031,1494706815.06082,1517839651.10974
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2020,Production loss,External,9433558492.59371,8617176395.23694,8899470180.36771,9967646804.81971
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2020,Production loss,Infectious,31089284122.1934,27820292969.7221,29364996184.2042,32813572060.1825
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2020,Production loss,Non-infectious,27624861642.6916,24466419574.7616,26108445111.6199,29141278173.7632
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,External,1055411951.37997,174802098.177766,1044577804.17127,1066246098.58867
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,Infectious,2468894737.56885,216612105.687043,2455469226.86467,2482320248.27304
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,Non-infectious,1581586900.01858,195947674.421879,1569442160.49875,1593731639.53841
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,External,9905236417.2234,9048035214.99867,9344443689.38611,10466029145.0607
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,Infectious,32643748328.303,29211307618.2078,30833245993.4145,34454250663.1916
+Cattle,National,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,Non-infectious,29006104724.8261,25689740553.4993,27413867367.2009,30598342082.4513
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2017,Mortality,External,2559745771.88331,497675383.276552,2528900098.8578,2590591444.90881
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2017,Mortality,Infectious,6037426215.36365,552864246.639888,6003159964.00303,6071692466.72427
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2017,Mortality,Non-infectious,3701423826.61826,507276270.876487,3669983095.34873,3732864557.88778
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2017,Production loss,External,5242085495.12048,1083971915.14602,5174901454.30396,5309269535.93699
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2017,Production loss,Infectious,17373223292.3545,2067834015.88996,17245059967.2866,17501386617.4224
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2017,Production loss,Non-infectious,14909414076.1933,1896847623.08209,14791848402.8108,15026979749.5758
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2018,Mortality,External,2687733054.10518,522559153.306161,2655345097.37474,2720121010.83562
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2018,Mortality,Infectious,6339297510.22549,580507460.563599,6303317946.19818,6375277074.25279
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2018,Mortality,Non-infectious,3886495007.02157,532640076.943827,3853482239.65196,3919507774.39118
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2018,Production loss,External,5504189769.8765,1138170510.90302,5433646527.01918,5574733012.73382
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2018,Production loss,Infectious,18241884456.9722,2171225716.68281,18107312965.6511,18376455948.2934
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2018,Production loss,Non-infectious,15654884780.0029,1991690004.23486,15531440822.9514,15778328737.0545
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2019,Mortality,External,2822119700.51905,548687111.826308,2788112345.8991,2856127055.139
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2019,Mortality,Infectious,6656262370.03237,609532835.163536,6618483827.70628,6694040912.35845
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2019,Mortality,Non-infectious,4080819746.58379,559272073.409561,4046156341.30319,4115483151.86438
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2019,Production loss,External,5779399258.37033,1195079036.44789,5705328853.37015,5853469663.3705
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2019,Production loss,Infectious,19153978679.8209,2279787002.51537,19012678613.9337,19295278745.708
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2019,Production loss,Non-infectious,16437629019.0031,2091274504.44533,16308012864.099,16567245173.9071
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2020,Mortality,External,2963225679.33933,576121468.260862,2927517956.93612,2998933401.74254
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2020,Mortality,Infectious,6989075473.04356,640009478.472288,6949408003.50507,7028742942.58206
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2020,Mortality,Non-infectious,4284860723.27111,587235669.79925,4248464148.17775,4321257298.36447
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2020,Production loss,External,6068369221.28884,1254832988.27001,5990595296.03868,6146143146.539
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2020,Production loss,Infectious,20111677613.8119,2393776352.63964,19963312544.6305,20260042682.9933
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2020,Production loss,Non-infectious,17259510469.9532,2195838229.66638,17123413507.3041,17395607432.6024
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,External,3111386957.19119,604927542.504882,3073893848.61631,3148880065.76606
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,7338529231.43137,672009953.924062,7296878388.32123,7380180074.5415
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,4499103748.9481,616597446.114763,4460887345.54473,4537320152.35146
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,External,6371787682.35328,1317574637.68326,6290125060.84063,6453450303.86594
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,21117261494.5025,2513465170.2702,20961478171.8621,21273044817.1429
+Cattle,National,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,18122485993.4509,2305630141.14855,17979584182.6693,18265387804.2324
+Cattle,National,Pastoral,Adult,Adult,Overall,2017,Mortality,External,4015089337.67075,670768184.430418,3973515458.81696,4056663216.52454
+Cattle,National,Pastoral,Adult,Adult,Overall,2017,Mortality,Infectious,7915407876.48006,816868679.416299,7864778761.52532,7966036991.4348
+Cattle,National,Pastoral,Adult,Adult,Overall,2017,Mortality,Non-infectious,4797532512.76799,718444311.432098,4753003691.24668,4842061334.2893
+Cattle,National,Pastoral,Adult,Adult,Overall,2017,Production loss,External,26901767541.5209,6514394567.2368,26498008602.3964,27305526480.6454
+Cattle,National,Pastoral,Adult,Adult,Overall,2017,Production loss,Infectious,49412566805.8074,10018887864.629,48791601113.0361,50033532498.5788
+Cattle,National,Pastoral,Adult,Adult,Overall,2017,Production loss,Non-infectious,39513681463.0246,8288011377.7711,38999994635.062,40027368290.9872
+Cattle,National,Pastoral,Adult,Adult,Overall,2018,Mortality,External,4215843817.77316,704306604.084399,4172191244.33008,4259496391.21625
+Cattle,National,Pastoral,Adult,Adult,Overall,2018,Mortality,Infectious,8311178292.21349,857712112.885123,8258017721.54213,8364338862.88486
+Cattle,National,Pastoral,Adult,Adult,Overall,2018,Mortality,Non-infectious,5037409150.74813,754366524.968704,4990653888.27689,5084164413.21938
+Cattle,National,Pastoral,Adult,Adult,Overall,2018,Production loss,External,28246855918.597,6840114295.59825,27822909032.5162,28670802804.6777
+Cattle,National,Pastoral,Adult,Adult,Overall,2018,Production loss,Infectious,51883195146.0979,10519832257.8596,51231181168.688,52535209123.5077
+Cattle,National,Pastoral,Adult,Adult,Overall,2018,Production loss,Non-infectious,41489365536.1759,8702411946.659,40949994366.8151,42028736705.5366
+Cattle,National,Pastoral,Adult,Adult,Overall,2019,Mortality,External,4426636021.88069,739521944.72126,4380800819.11885,4472471224.64254
+Cattle,National,Pastoral,Adult,Adult,Overall,2019,Mortality,Infectious,8726737228.73359,900597718.027951,8670918629.55973,8782555827.90744
+Cattle,National,Pastoral,Adult,Adult,Overall,2019,Mortality,Non-infectious,5289279620.62728,792084849.182376,5240186595.15859,5338372646.09598
+Cattle,National,Pastoral,Adult,Adult,Overall,2019,Production loss,External,29659198714.5268,7182120010.37779,29214054484.1421,30104342944.9116
+Cattle,National,Pastoral,Adult,Adult,Overall,2019,Production loss,Infectious,54477354903.4028,11045823870.7517,53792740227.1225,55161969579.6831
+Cattle,National,Pastoral,Adult,Adult,Overall,2019,Production loss,Non-infectious,43563833812.9847,9137532543.99132,42997494085.156,44130173540.8134
+Cattle,National,Pastoral,Adult,Adult,Overall,2020,Mortality,External,4647967836.1936,776498052.390136,4599840872.64705,4696094799.74016
+Cattle,National,Pastoral,Adult,Adult,Overall,2020,Mortality,Infectious,9163074112.0797,945627603.428457,9104464582.97819,9221683641.1812
+Cattle,National,Pastoral,Adult,Adult,Overall,2020,Mortality,Non-infectious,5553743614.00039,831689089.606955,5502195937.38436,5605291290.61642
+Cattle,National,Pastoral,Adult,Adult,Overall,2020,Production loss,External,31142158650.2532,7541226010.89632,30674757208.3492,31609560092.1571
+Cattle,National,Pastoral,Adult,Adult,Overall,2020,Production loss,Infectious,57201222648.573,11598115064.2885,56482377238.4787,57920068058.6672
+Cattle,National,Pastoral,Adult,Adult,Overall,2020,Production loss,Non-infectious,45742025503.6339,9594409171.19029,45147368789.4138,46336682217.854
+Cattle,National,Pastoral,Adult,Adult,Overall,2021,Mortality,External,4880366241.22216,815322965.442621,4829832928.85164,4930899553.59267
+Cattle,National,Pastoral,Adult,Adult,Overall,2021,Mortality,Infectious,9621227839.59311,992908983.099499,9559687834.06755,9682767845.11868
+Cattle,National,Pastoral,Adult,Adult,Overall,2021,Mortality,Non-infectious,5831430807.04216,873273542.052977,5777305746.72141,5885555867.3629
+Cattle,National,Pastoral,Adult,Adult,Overall,2021,Production loss,External,32699266582.7659,7918287311.4408,32208495068.7667,33190038096.765
+Cattle,National,Pastoral,Adult,Adult,Overall,2021,Production loss,Infectious,60061283781.0016,12178020817.5022,59306496100.4027,60816071461.6006
+Cattle,National,Pastoral,Adult,Adult,Overall,2021,Production loss,Non-infectious,48029126778.8157,10074129629.7492,47404737228.8846,48653516328.7467
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2017,Mortality,External,1062403895.25185,186219607.290291,1050862096.50022,1073945694.00347
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2017,Mortality,Infectious,2139594102.64698,200992868.589084,2127136664.49896,2152051540.795
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2017,Mortality,Non-infectious,878858351.061865,156256756.531619,869173634.915633,888543067.208097
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2017,Production loss,External,2454418254.31818,492232820.188697,2423909908.64916,2484926599.9872
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2017,Production loss,Infectious,5498733332.92276,811865894.517182,5448414288.09083,5549052377.75468
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2017,Production loss,Non-infectious,5352977271.57224,760491714.89923,5305842372.87191,5400112170.27257
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2018,Mortality,External,1115524095.5795,195530594.564511,1103405206.46204,1127642984.69697
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2018,Mortality,Infectious,2246573815.45085,211042498.947316,2233493506.20558,2259654124.69612
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2018,Mortality,Non-infectious,922801272.594824,164069597.011548,912632320.476827,932970224.712821
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2018,Production loss,External,2577139167.03411,516844461.197724,2545105404.08167,2609172929.98656
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2018,Production loss,Infectious,5773669999.56896,852459189.241794,5720835002.49551,5826504996.6424
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2018,Production loss,Non-infectious,5620626135.15091,798516300.642956,5571134491.51564,5670117778.78618
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2019,Mortality,External,1171300305.88804,205307131.158455,1158575471.88917,1184025139.88691
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2019,Mortality,Infectious,2358902513.84597,221594610.907192,2345168189.94339,2372636837.74854
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2019,Mortality,Non-infectious,968941340.17904,172273079.498622,958263940.291735,979618740.066346
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2019,Production loss,External,2705996125.38584,542686684.257222,2672360674.2858,2739631576.48589
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2019,Production loss,Infectious,6062353499.54746,895082148.702697,6006876752.62042,6117830246.4745
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2019,Production loss,Non-infectious,5901657441.90852,838442115.673928,5849691216.09155,5953623667.72548
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2020,Mortality,External,1229865326.67364,215572494.534549,1216504250.55223,1243226402.79504
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2020,Mortality,Infectious,2476847647.10796,232674328.555492,2462426607.80961,2491268686.40631
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2020,Mortality,Non-infectious,1017388411.11503,180886736.091828,1006177141.07108,1028599681.15898
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2020,Production loss,External,2841295931.65516,569821018.469714,2805978708.00013,2876613155.31018
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2020,Production loss,Infectious,6365471174.52489,939836256.136701,6307220590.25156,6423721758.79821
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2020,Production loss,Non-infectious,6196740314.004,880364221.456505,6142175776.89626,6251304851.11174
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,External,1291358598.45713,226351126.028145,1277329468.11025,1305387728.80401
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,2600690036.97599,244308032.183708,2585547946.50604,2615832127.44595
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,1068257835.56822,189931075.495027,1056486001.86101,1080029669.27543
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,External,2983360728.23794,598312069.392848,2946277643.40019,3020443813.0757
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,6683744733.25119,986828068.942459,6622581619.76426,6744907846.73811
+Cattle,National,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,6506577329.70426,924382432.528263,6449284565.74119,6563870093.66732
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2017,Mortality,External,1258151598.16708,183881348.812673,1246754723.51432,1269548472.81983
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2017,Mortality,Infectious,2151764162.71695,216142459.437612,2138367760.454,2165160564.97991
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2017,Mortality,Non-infectious,1222875159.34875,183387342.068258,1211508902.98861,1234241415.7089
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2017,Production loss,External,4453446942.69303,766384017.93525,4405946841.97764,4500947043.40842
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2017,Production loss,Infectious,6579460124.92469,963295398.073114,6519755554.68793,6639164695.16145
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2017,Production loss,Non-infectious,5575301138.31706,827437317.141965,5524016984.44626,5626585292.18786
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2018,Mortality,External,1321059168.07787,193075406.803049,1309092450.2782,1333025885.87754
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2018,Mortality,Infectious,2259352356.48379,226949582.917468,2245286134.0762,2273418578.89137
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2018,Mortality,Non-infectious,1284018910.29476,192556716.032482,1272084340.69137,1295953479.89814
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2018,Production loss,External,4676119289.82775,804703218.830609,4626244184.07668,4725994395.57882
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2018,Production loss,Infectious,6908433131.17101,1011460167.97416,6845743332.42257,6971122929.91944
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2018,Production loss,Non-infectious,5854066195.23297,868809182.996819,5800217833.66877,5907914556.79717
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2019,Mortality,External,1387112116.4856,202729167.694582,1374547063.38157,1399677169.58964
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2019,Mortality,Infectious,2372319959.94098,238297062.571998,2357550426.38149,2387089493.50047
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2019,Mortality,Non-infectious,1348219848.78904,202184558.694251,1335688550.28031,1360751147.29778
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2019,Production loss,External,4909925254.3192,844938379.770802,4857556393.28066,4962294115.35774
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2019,Production loss,Infectious,7253854787.72963,1062033176.37038,7188030499.04393,7319679076.41533
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2019,Production loss,Non-infectious,6146769504.99467,912249642.144523,6090228725.35239,6203310284.63695
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2020,Mortality,External,1456467712.31528,212865616.632451,1443274407.14155,1469661017.489
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2020,Mortality,Infectious,2490935943.57326,250211916.209892,2475427933.30423,2506443953.84229
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2020,Mortality,Non-infectious,1415630834.20913,212293793.488331,1402472970.34982,1428788698.06845
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2020,Production loss,External,5155421517.03521,887185298.758069,5100434212.94482,5210408821.1256
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2020,Production loss,Infectious,7616547527.11618,1115134835.18653,7547432023.99634,7685663030.23602
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2020,Production loss,Non-infectious,6454107980.24444,957862124.249714,6394740161.62018,6513475798.86871
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,External,1529291087.93814,223508888.019109,1515438118.09112,1543144057.78515
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,2615482726.3896,262722512.530276,2599199315.57552,2631766137.20369
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,1486412368.90143,222908490.021214,1472596611.42406,1500228126.37879
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,External,5413192592.88703,931544563.69476,5355455923.5922,5470929262.18187
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,7997374903.47206,1170891576.9436,7924803625.19637,8069946181.74775
+Cattle,National,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,6776813379.25672,1005755230.46026,6714477169.70136,6839149588.81208
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2017,Mortality,External,82436608.7670926,12839608.8452348,81640816.1891916,83232401.3449937
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2017,Mortality,Infectious,171703623.609332,16682865.3505992,170669627.902441,172737619.316223
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2017,Mortality,Non-infectious,142801381.152658,15508434.9437214,141840176.058965,143762586.246352
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2017,Production loss,External,2357496219.58835,1835456325.69138,2243735548.3208,2471256890.8559
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2017,Production loss,Infectious,9107339377.41176,6487355093.89365,8705256331.41266,9509422423.41085
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2017,Production loss,Non-infectious,9310929516.36261,6631141963.52579,8899934631.61265,9721924401.11257
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2018,Mortality,External,86558437.1975484,13481582.884573,85722855.3876023,87394019.0074944
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2018,Mortality,Infectious,180288801.84151,17516996.7128588,179203107.087157,181374496.595862
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2018,Mortality,Non-infectious,149941450.279424,16283871.4280798,148932184.017643,150950716.541205
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2018,Production loss,External,2475371030.56777,1927229141.97584,2355922325.73685,2594819735.39869
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2018,Production loss,Infectious,9562706346.28234,6811722848.58787,9140519147.98332,9984893544.58137
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2018,Production loss,Non-infectious,9776475992.18073,6962699061.70161,9344931363.1933,10208020621.1682
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2019,Mortality,External,90886357.0495269,14155655.6284046,90008996.545777,91763717.5532768
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2019,Mortality,Infectious,189303238.985296,18392834.6516859,188163260.230585,190443217.740007
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2019,Mortality,Non-infectious,157438522.862527,17098079.7429367,156378792.373865,158498253.351189
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2019,Production loss,External,2599139582.09615,2023590599.07452,2473718442.02369,2724560722.16861
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2019,Production loss,Infectious,10040841663.5965,7152308991.01682,9597545105.38251,10484138221.8104
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2019,Production loss,Non-infectious,10265299791.7898,7310834014.78624,9812177931.35299,10718421652.2265
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2020,Mortality,External,95430672.8941043,14863432.0118341,94509444.7617112,96351901.0264974
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2020,Mortality,Infectious,198768397.986272,19312464.4955062,197571421.030684,199965374.941859
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2020,Mortality,Non-infectious,165310449.074786,17952998.4795179,164197731.147528,166423167.002044
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2020,Production loss,External,2729096561.20096,2124770129.02813,2597404364.12488,2860788758.27703
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2020,Production loss,Infectious,10542883746.7763,7509924440.56724,10077422360.6517,11008345132.9009
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2020,Production loss,Non-infectious,10778564781.3792,7676375715.52513,10302786827.9207,11254342734.8378
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2021,Mortality,External,100202204.530911,15606597.2167268,99234915.3883,101169493.673521
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2021,Mortality,Infectious,208706814.937296,20278075.8391861,207449989.870314,209963640.004279
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2021,Mortality,Non-infectious,173575971.597658,18850663.1586248,172407616.859522,174744326.335794
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2021,Production loss,External,2865551389.261,2231008635.47944,2727274582.33113,3003828196.19088
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2021,Production loss,Infectious,11070027934.1151,7885420662.59519,10581293478.6843,11558762389.5459
+Cattle,National,Periurban dairy,Adult,Adult,Overall,2021,Production loss,Non-infectious,11317493020.4482,8060194501.30097,10817926169.3167,11817059871.5797
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2017,Mortality,External,36414252.8025056,7338791.93608609,35959398.1239954,36869107.4810159
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2017,Mortality,Infectious,145750085.567503,10501062.1966153,145099234.949164,146400936.185841
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2017,Mortality,Non-infectious,74384544.8901214,10020542.435904,73763476.6478443,75005613.1323984
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2017,Production loss,External,143215336.238696,34334714.2669925,141087287.704868,145343384.772523
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2017,Production loss,Infectious,555814151.059567,92855414.4453713,550059018.599985,561569283.519149
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2017,Production loss,Non-infectious,441675505.656279,75743027.2498943,436980990.45416,446370020.858399
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2018,Mortality,External,38234968.6127917,7705731.74110168,37757371.1874511,38712566.0381323
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2018,Mortality,Infectious,153037601.93323,11026107.9101938,152354209.242391,153720994.624069
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2018,Mortality,Non-infectious,78103779.103934,10521574.2300065,77451657.1599558,78755901.0479122
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2018,Production loss,External,150376103.050603,36051449.9782386,148141652.090214,152610554.010992
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2018,Production loss,Infectious,583604858.612531,97498185.1567249,577561969.530646,589647747.694416
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2018,Production loss,Non-infectious,463759280.939202,79530178.6045313,458830039.977464,468688521.90094
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2019,Mortality,External,40146720.213592,8091018.53691702,39645242.9040455,40648197.5231385
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2019,Mortality,Infectious,160689494.117243,11577405.9154454,159971932.249907,161407055.98458
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2019,Mortality,Non-infectious,82008975.0284371,11047657.6154619,81324246.6975706,82693703.3593036
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2019,Production loss,External,157894908.203108,37854022.4751473,155548734.694823,160241081.711392
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2019,Production loss,Infectious,612785101.543144,102373094.404166,606440068.007809,619130135.078478
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2019,Production loss,Non-infectious,486947244.986265,83506687.5272743,481771541.976904,492122947.995627
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2020,Mortality,External,42154059.3944323,8495569.67304597,41627508.2064372,42680610.5824274
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2020,Mortality,Infectious,168723980.910457,12156268.8266683,167970541.407444,169477420.41347
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2020,Mortality,Non-infectious,86109430.7491653,11600045.1717591,85390465.7119689,86828395.7863618
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2020,Production loss,External,165789653.613238,39746723.5969967,163326171.429658,168253135.796818
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2020,Production loss,Infectious,643424356.620288,107491749.114474,636762071.4088,650086641.831775
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2020,Production loss,Non-infectious,511294607.235677,87682021.8965109,505860119.076289,516729095.395065
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,External,44261765.5343145,8920348.36647931,43708886.7739175,44814644.2947115
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,177160192.043331,12764074.8888892,176369081.022522,177951303.064141
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,90414909.2559298,12180052.1073655,89659995.6769942,91169822.8348654
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,External,174079136.293877,41734059.7750295,171492480.00123,176665792.586523
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,675595574.451289,112866336.560769,668600174.979811,682590973.922767
+Cattle,National,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,536859337.597554,92066122.9845486,531153125.030618,542565550.164491
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2017,Mortality,External,16193960.5190024,3300410.06820845,15989402.7425181,16398518.2954868
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2017,Mortality,Infectious,48039297.7063633,4257614.29403461,47775412.8874721,48303182.5252544
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2017,Mortality,Non-infectious,28422612.2985741,3899839.8265284,28180902.1634475,28664322.4337007
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2017,Production loss,External,287199179.989162,68237258.5222453,282969868.604145,291428491.374179
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2017,Production loss,Infectious,915517294.684309,138697984.25387,906920862.521188,924113726.847429
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2017,Production loss,Non-infectious,828882813.683522,139329657.579265,820247230.72149,837518396.645554
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2018,Mortality,External,17003655.2759158,3465434.19133684,16788869.3862589,17218441.1655727
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2018,Mortality,Infectious,50441251.4446894,4470487.65028951,50164172.8409266,50718330.0484523
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2018,Mortality,Non-infectious,29843736.236016,4094829.64199952,29589940.7289915,30097531.7430405
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2018,Production loss,External,301559138.988388,71649121.4421657,297118362.034504,305999915.942273
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2018,Production loss,Infectious,961293159.417497,145632883.435082,952266905.648172,970319413.186822
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2018,Production loss,Non-infectious,870326954.366546,146296140.431529,861259592.258066,879394316.475025
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2019,Mortality,External,17853834.7706749,3638709.53174475,17628309.3614974,18079360.1798524
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2019,Mortality,Infectious,52963302.8699319,4694004.74675744,52672370.7875665,53254234.9522973
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2019,Mortality,Non-infectious,31335916.37033,4299568.97591395,31069431.2210977,31602401.5195622
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2019,Production loss,External,316637095.937587,75231577.508377,311974280.136375,321299911.7388
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2019,Production loss,Infectious,1009357817.38739,152914527.576854,999880250.93146,1018835383.84333
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2019,Production loss,Non-infectious,913843302.083776,153610947.427679,904322571.871449,923364032.296103
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2020,Mortality,External,18746523.2401719,3820648.64976646,18509721.3348413,18983325.1455026
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2020,Mortality,Infectious,55611456.8664365,4928697.76700175,55305978.6272647,55916935.1056084
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2020,Mortality,Non-infectious,32902705.5113596,4514545.30287628,32622896.236176,33182514.7865433
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2020,Production loss,External,332468950.734257,78993156.3781796,327572994.143331,337364907.325182
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2020,Production loss,Infectious,1059825708.25583,160560253.927142,1049874263.47887,1069777153.03279
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2020,Production loss,Non-infectious,959535467.18692,161291494.774846,949538700.465477,969532233.908363
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,External,19683846.1331438,4011684.73377817,19435203.906227,19932488.3600606
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,58392018.5627663,5175125.50392807,58071266.8548776,58712770.2706551
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,34547834.1094408,4740270.47128408,34254034.5004526,34841633.718429
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,External,349092398.270769,82942814.1917398,343951643.850629,354233152.690909
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,1112816993.66774,168588266.596305,1102367976.65361,1123266010.68186
+Cattle,National,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,1007512240.54527,169356069.490525,997015635.489185,1018008845.60136
+Cattle,Oromia,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,External,853792525.436494,162627840.916777,843712932.64503,863872118.227957
+Cattle,Oromia,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,Infectious,2170382123.11675,196679206.340446,2158192043.61201,2182572202.62149
+Cattle,Oromia,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,Non-infectious,1618258603.45653,181807068.346829,1606990291.6766,1629526915.23645
+Cattle,Oromia,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,External,22443320340.1591,5835844668.96507,22081617586.6465,22805023093.6717
+Cattle,Oromia,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,Infectious,76228344766.4214,14386321360.5819,75336687715.1788,77120001817.6639
+Cattle,Oromia,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,Non-infectious,68620909435.2527,13702436250.8262,67771639243.3795,69470179627.1259
+Cattle,Oromia,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,External,631547017.652183,146765380.008695,622450572.307815,640643462.996551
+Cattle,Oromia,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,1962901181.8656,168971652.981751,1952428402.75377,1973373960.97744
+Cattle,Oromia,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,892233951.359759,137978052.4163,883682140.21429,900785762.505227
+Cattle,Oromia,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,External,3172730539.62874,948871134.484143,3113919978.08369,3231541101.17379
+Cattle,Oromia,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,8771984008.70036,2192214625.55427,8636111635.23397,8907856382.16676
+Cattle,Oromia,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,6216391138.95799,1619380710.01,6116022727.01058,6316759550.90539
+Cattle,Oromia,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,External,403773123.334207,67031369.2010014,399618552.370272,407927694.298143
+Cattle,Oromia,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,Infectious,955398620.491162,83348966.1133037,950232692.976688,960564548.005637
+Cattle,Oromia,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,Non-infectious,612853786.260983,75141609.3502004,608196546.64152,617511025.880445
+Cattle,Oromia,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,External,4855239985.1149,2321206767.67486,4711372742.75924,4999107227.47056
+Cattle,Oromia,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,Infectious,16107123597.6786,7017145136.77411,15672204428.0053,16542042767.3518
+Cattle,Oromia,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,Non-infectious,14253735197.8612,6265224677.637,13865419684.7141,14642050711.0084
+Cattle,Oromia,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,External,1060002669.98463,206156988.370052,1047225162.25797,1072780177.71129
+Cattle,Oromia,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,2509227148.2711,235336118.560473,2494641132.55054,2523813163.99166
+Cattle,Oromia,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,1526677107.59754,198409687.37375,1514379773.738,1538974441.45707
+Cattle,Oromia,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,External,2908587468.91507,1204767100.2,2833916602.53628,2983258335.29387
+Cattle,Oromia,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,9553166454.99286,3517175363.16699,9335173673.20937,9771159236.77635
+Cattle,Oromia,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,8188683866.17389,3108936117.5242,7995993550.03452,8381374182.31326
+Cattle,Oromia,Pastoral,Adult,Adult,Overall,2021,Mortality,External,836975327.231399,142007620.143926,828173765.479939,845776888.982859
+Cattle,Oromia,Pastoral,Adult,Adult,Overall,2021,Mortality,Infectious,1658614930.51886,169743422.704211,1648094317.50302,1669135543.53471
+Cattle,Oromia,Pastoral,Adult,Adult,Overall,2021,Mortality,Non-infectious,997767730.547349,152479461.807164,988317129.251694,1007218331.843
+Cattle,Oromia,Pastoral,Adult,Adult,Overall,2021,Production loss,External,1413244459.97599,800661702.156781,1363619845.42067,1462869074.53132
+Cattle,Oromia,Pastoral,Adult,Adult,Overall,2021,Production loss,Infectious,2608411379.55075,1412813918.8435,2520845874.70375,2695976884.39774
+Cattle,Oromia,Pastoral,Adult,Adult,Overall,2021,Production loss,Non-infectious,2111042799.34211,1162277257.58191,2039005432.30112,2183080166.38309
+Cattle,Oromia,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,External,153026998.81531,24910779.1938994,151483041.095789,154570956.534831
+Cattle,Oromia,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,307427343.672349,28400675.2437635,305667083.929331,309187603.415367
+Cattle,Oromia,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,128915130.250245,23418267.1910612,127463677.683225,130366582.817265
+Cattle,Oromia,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,External,575701146.845844,118340263.837405,568366476.08104,583035817.610647
+Cattle,Oromia,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,1285998164.10328,192164911.725944,1274087878.33618,1297908449.87037
+Cattle,Oromia,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,1239164217.79359,189772835.449246,1227402191.72581,1250926243.86137
+Cattle,Oromia,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,External,234295468.70449,33963653.9681314,232190418.303654,236400519.105326
+Cattle,Oromia,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,392748587.301805,38875714.5542975,390339089.826,395158084.777609
+Cattle,Oromia,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,223257821.379938,31596660.9712831,221299476.029197,225216166.730679
+Cattle,Oromia,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,External,829318201.244306,262713683.531469,813035337.647183,845601064.84143
+Cattle,Oromia,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,1221235858.09939,363972399.051031,1198677029.61661,1243794686.58217
+Cattle,Oromia,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,1040146196.59132,313558369.563412,1020712004.61203,1059580388.57062
+Cattle,Oromia,Periurban dairy,Adult,Adult,Overall,2021,Mortality,External,116906347.610397,18179621.9653686,115779583.672066,118033111.548728
+Cattle,Oromia,Periurban dairy,Adult,Adult,Overall,2021,Mortality,Infectious,246670636.670804,23504914.8963067,245213813.722056,248127459.619551
+Cattle,Oromia,Periurban dairy,Adult,Adult,Overall,2021,Mortality,Non-infectious,202224092.801065,21833843.3571934,200870842.036174,203577343.565955
+Cattle,Oromia,Periurban dairy,Adult,Adult,Overall,2021,Production loss,External,1088157760.71652,789502563.500581,1039224784.03158,1137090737.40145
+Cattle,Oromia,Periurban dairy,Adult,Adult,Overall,2021,Production loss,Infectious,4306408843.19152,2875234108.14303,4128203261.49755,4484614424.88549
+Cattle,Oromia,Periurban dairy,Adult,Adult,Overall,2021,Production loss,Non-infectious,4391647706.32966,2918627120.93167,4210752647.25938,4572542765.39994
+Cattle,Oromia,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,External,37083790.160994,7758637.68315853,36602913.6516467,37564666.6703412
+Cattle,Oromia,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,147872808.142292,10758370.1103857,147206009.707281,148539606.577303
+Cattle,Oromia,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,76140747.4480203,9889805.93473058,75527782.1891401,76753712.7069005
+Cattle,Oromia,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,External,48747833.2517345,12406545.1332016,47978881.7475724,49516784.7558966
+Cattle,Oromia,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,191072300.201567,37508107.789797,188747566.313641,193397034.089493
+Cattle,Oromia,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,151541439.780355,31385553.4138929,149596178.771149,153486700.789561
+Cattle,Oromia,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,External,48189603.0617292,9993915.65365941,47570185.1341883,48809020.9892701
+Cattle,Oromia,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,144133118.864556,12588775.4546286,143352872.815599,144913364.913514
+Cattle,Oromia,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,86173489.7942276,11820189.3730928,85440880.3287934,86906099.2596619
+Cattle,Oromia,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,External,121564936.719302,30530246.1544552,119672687.229145,123457186.209458
+Cattle,Oromia,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,382929790.485309,61273234.2219806,379132105.866907,386727475.10371
+Cattle,Oromia,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,338689373.569649,57127478.3111267,335148640.843117,342230106.296181
+Cattle,SNNP,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,External,320326016.486197,61014705.0860486,316544355.375211,324107677.597183
+Cattle,SNNP,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,Infectious,814284344.432301,73790147.0746537,809710867.773312,818857821.091291
+Cattle,SNNP,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,Non-infectious,607138567.464155,68210645.1088849,602910905.565278,611366229.363033
+Cattle,SNNP,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,External,8514092998.6423,2255261771.7968,8374312994.3717,8653873002.9129
+Cattle,SNNP,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,Infectious,28918196178.3153,5648637733.78362,28568096417.6465,29268295938.984
+Cattle,SNNP,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,Non-infectious,26034589179.3889,5365648555.03852,25702028947.4384,26367149411.3394
+Cattle,SNNP,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,External,164315507.316927,38185286.7007133,161948802.216505,166682212.41735
+Cattle,SNNP,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,510706432.838725,43963076.207247,507981623.214917,513431242.462533
+Cattle,SNNP,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,232140875.149664,35899007.2117028,229915872.516216,234365877.783112
+Cattle,SNNP,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,External,1159553414.37202,385453108.060843,1135663222.21577,1183443606.52827
+Cattle,SNNP,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,3204947200.4651,922650780.084379,3147761763.46028,3262132637.46993
+Cattle,SNNP,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,2271364846.57739,675316940.68817,2229509038.07042,2313220655.08435
+Cattle,SNNP,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,External,116618344.714921,19360321.5792062,115418401.601059,117818287.828782
+Cattle,SNNP,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,Infectious,275939512.061531,24072561.990566,274447506.627872,277431517.495191
+Cattle,SNNP,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,Non-infectious,177005275.062059,21702498.3473454,175660164.995631,178350385.128487
+Cattle,SNNP,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,External,1022099987.93426,424369593.101841,995797771.367693,1048402204.50082
+Cattle,SNNP,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,Infectious,3391158039.2396,1250681232.35569,3313641437.75854,3468674640.72066
+Cattle,SNNP,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,Non-infectious,3000791443.01665,1118452659.367,2931470302.8023,3070112583.231
+Cattle,SNNP,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,External,395122834.531012,76846366.0887332,390359934.935766,399885734.126257
+Cattle,SNNP,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,935330605.942771,87723106.1460718,929893571.402005,940767640.483537
+Cattle,SNNP,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,569078727.838043,73958437.9983985,564494820.591202,573662635.084884
+Cattle,SNNP,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,External,861435922.392959,470636707.929307,832266093.033483,890605751.752435
+Cattle,SNNP,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,2829007656.06491,1439431830.47999,2739792386.27765,2918222925.85216
+Cattle,SNNP,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,2427652664.08769,1261758799.42002,2349449480.50298,2505855847.6724
+Cattle,SNNP,Pastoral,Adult,Adult,Overall,2021,Mortality,External,1108925066.09588,188148723.928708,1097263701.65334,1120586430.53843
+Cattle,SNNP,Pastoral,Adult,Adult,Overall,2021,Mortality,Infectious,2197531522.2659,224896426.690859,2183592553.46129,2211470491.0705
+Cattle,SNNP,Pastoral,Adult,Adult,Overall,2021,Mortality,Non-infectious,1321962068.27194,202022991.424359,1309440783.62233,1334483352.92155
+Cattle,SNNP,Pastoral,Adult,Adult,Overall,2021,Production loss,External,6460027252.15508,1874074846.9446,6343873024.12476,6576181480.1854
+Cattle,SNNP,Pastoral,Adult,Adult,Overall,2021,Production loss,Infectious,11903853704.1177,3061311468.7762,11714115140.0492,12093592268.1861
+Cattle,SNNP,Pastoral,Adult,Adult,Overall,2021,Production loss,Non-infectious,9626684315.79683,2573301158.25714,9467192388.3457,9786176243.24797
+Cattle,SNNP,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,External,138415650.682519,22532241.8219177,137019113.527729,139812187.83731
+Cattle,SNNP,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,278073516.491221,25688903.9996657,276481330.982787,279665701.999655
+Cattle,SNNP,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,116606037.262884,21182251.9730161,115293171.808294,117918902.717474
+Cattle,SNNP,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,External,755224973.051324,159074286.95877,745365627.76888,765084318.333768
+Cattle,SNNP,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,1686934113.43707,263074808.087718,1670628867.51934,1703239359.35479
+Cattle,SNNP,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,1625582939.6034,259766714.36911,1609482727.69099,1641683151.51581
+Cattle,SNNP,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,External,362273809.653902,52515513.59734,359018924.209246,365528695.098557
+Cattle,SNNP,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,607278172.059567,60110581.238539,603552548.095508,611003796.023625
+Cattle,SNNP,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,345207114.606302,48855646.688757,342179065.89453,348235163.318074
+Cattle,SNNP,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,External,852855865.500345,191378574.616144,840994316.516683,864717414.484006
+Cattle,SNNP,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,1256480672.42467,250256938.372664,1240969871.70436,1271991473.14498
+Cattle,SNNP,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,1070150226.93604,216220495.877279,1056748988.01333,1083551465.85876
+Cattle,SNNP,Periurban dairy,Adult,Adult,Overall,2021,Mortality,External,51004222.6401077,7931451.26834547,50512635.2305991,51495810.0496164
+Cattle,SNNP,Periurban dairy,Adult,Adult,Overall,2021,Mortality,Infectious,107618165.20389,10254982.9246136,106982566.456586,108253763.951194
+Cattle,SNNP,Periurban dairy,Adult,Adult,Overall,2021,Mortality,Non-infectious,88226871.8615766,9525615.83783299,87636478.9239836,88817264.7991697
+Cattle,SNNP,Periurban dairy,Adult,Adult,Overall,2021,Production loss,External,469606040.453382,346433492.766875,448134264.669299,491077816.237465
+Cattle,SNNP,Periurban dairy,Adult,Adult,Overall,2021,Production loss,Infectious,1858284245.87376,1264702318.71399,1779898624.42546,1936669867.32206
+Cattle,SNNP,Periurban dairy,Adult,Adult,Overall,2021,Production loss,Non-infectious,1895139358.03399,1283727072.76707,1815574591.7804,1974704124.28758
+Cattle,SNNP,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,External,16164019.2828341,3381888.6008534,15954411.5073724,16373627.0582957
+Cattle,SNNP,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,64454481.0469599,4689201.92565538,64163846.6410604,64745115.4528593
+Cattle,SNNP,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,33188066.5691466,4310708.84705201,32920890.9762352,33455242.162058
+Cattle,SNNP,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,External,21551221.1348277,5504386.13721395,21210062.0164545,21892380.2532008
+Cattle,SNNP,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,84473956.8387722,16681099.4132341,83440070.5838021,85507843.0937423
+Cattle,SNNP,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,66997164.3254788,13951238.2756625,66132473.5077035,67861855.143254
+Cattle,SNNP,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,External,21024143.9721156,4360028.97026372,20753911.5424682,21294376.4017629
+Cattle,SNNP,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,62882444.4560813,5492614.77461411,62542014.9209145,63222873.9912482
+Cattle,SNNP,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,37595779.6724218,5156957.33444748,37276154.0186521,37915405.3261915
+Cattle,SNNP,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,External,52970754.770524,13206129.5193535,52152245.4233174,53789264.1177306
+Cattle,SNNP,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,166864799.192021,26280519.7795493,165235945.631447,168493652.752596
+Cattle,SNNP,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,147588288.433633,24553028.1886333,146066503.943698,149110072.923568
+Cattle,Sidama,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,External,157564524.355094,29129291.9468828,155759105.310771,159369943.399416
+Cattle,Sidama,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,Infectious,402853594.562906,36200085.7507219,400609931.231176,405097257.894636
+Cattle,Sidama,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,Non-infectious,299855688.917151,36283077.8141241,297606881.77856,302104496.055743
+Cattle,Sidama,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,External,3200942461.04224,823219459.644994,3149919727.8838,3251965194.20068
+Cattle,Sidama,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,Infectious,10839860581.9464,2019555744.45098,10714689520.1591,10965031643.7337
+Cattle,Sidama,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,Non-infectious,9915703971.00426,1957269092.84433,9794393404.94144,10037014537.0671
+Cattle,Sidama,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,External,90451057.3663292,21472611.5457735,89120195.5696616,91781919.1629968
+Cattle,Sidama,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,282250295.393725,24878697.7711234,280708326.06485,283792264.7226
+Cattle,Sidama,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,128610574.810899,20964487.1049837,127311206.314651,129909943.307147
+Cattle,Sidama,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,External,416392175.244302,140142155.829342,407706234.044354,425078116.44425
+Cattle,Sidama,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,1158251766.45,337485757.276204,1137334566.86667,1179168966.03333
+Cattle,Sidama,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,816405154.243468,239338588.695637,801571067.412234,831239241.074702
+Cattle,Sidama,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,External,2962131.65705646,488933.197007672,2931827.82039305,2992435.49371987
+Cattle,Sidama,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,Infectious,6944296.54439985,589216.394525919,6907777.20497189,6980815.88382781
+Cattle,Sidama,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,Non-infectious,4433574.46508789,548463.700237537,4399580.95740723,4467567.97276855
+Cattle,Sidama,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,External,34588684.1211006,30018516.1752717,32728151.4008418,36449216.8413593
+Cattle,Sidama,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,Infectious,116860624.641246,98732287.1080409,110741246.533483,122980002.749009
+Cattle,Sidama,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,Non-infectious,104116094.407935,88941683.2499285,98603533.0636235,109628655.752246
+Cattle,Sidama,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,External,121130995.469048,22903274.075303,119711461.919509,122550529.018586
+Cattle,Sidama,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,285075278.371022,25643233.9778896,283485923.46785,286664633.274194
+Cattle,Sidama,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,173036799.140124,22566895.8277289,171638114.147268,174435484.13298
+Cattle,Sidama,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,External,359818541.49777,195647438.283599,347692410.464642,371944672.530899
+Cattle,Sidama,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,1203232003.43512,610961622.72447,1165364905.56578,1241099101.30446
+Cattle,Sidama,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,1022090863.74704,528283283.81893,989348128.25099,1054833599.24309
+Cattle,Sidama,Pastoral,Adult,Adult,Overall,2021,Mortality,External,,,,
+Cattle,Sidama,Pastoral,Adult,Adult,Overall,2021,Mortality,Infectious,,,,
+Cattle,Sidama,Pastoral,Adult,Adult,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Sidama,Pastoral,Adult,Adult,Overall,2021,Production loss,External,,,,
+Cattle,Sidama,Pastoral,Adult,Adult,Overall,2021,Production loss,Infectious,,,,
+Cattle,Sidama,Pastoral,Adult,Adult,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Sidama,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,External,,,,
+Cattle,Sidama,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,,,,
+Cattle,Sidama,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Sidama,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,External,,,,
+Cattle,Sidama,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,,,,
+Cattle,Sidama,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Sidama,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,External,,,,
+Cattle,Sidama,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,,,,
+Cattle,Sidama,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Sidama,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,External,,,,
+Cattle,Sidama,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,,,,
+Cattle,Sidama,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Sidama,Periurban dairy,Adult,Adult,Overall,2021,Mortality,External,11083215.0914321,1739544.04035634,10975399.0159633,11191031.1669009
+Cattle,Sidama,Periurban dairy,Adult,Adult,Overall,2021,Mortality,Infectious,23425476.4305256,2157161.42004872,23291776.6373231,23559176.2237281
+Cattle,Sidama,Periurban dairy,Adult,Adult,Overall,2021,Mortality,Non-infectious,19028534.2409166,2004929.8438118,18904269.6851852,19152798.796648
+Cattle,Sidama,Periurban dairy,Adult,Adult,Overall,2021,Production loss,External,107192444.997338,74319364.1167502,102586167.728978,111798722.265697
+Cattle,Sidama,Periurban dairy,Adult,Adult,Overall,2021,Production loss,Infectious,421799980.916445,266936858.204115,405255367.051055,438344594.781834
+Cattle,Sidama,Periurban dairy,Adult,Adult,Overall,2021,Production loss,Non-infectious,427961221.091315,269827822.646263,411237426.685944,444685015.496686
+Cattle,Sidama,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,External,3482683.06764844,745737.204209337,3436462.64619107,3528903.4891058
+Cattle,Sidama,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,14068460.7278368,1097265.91118994,14000452.7317496,14136468.7239241
+Cattle,Sidama,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,7246579.33173742,1006246.08154548,7184212.69947564,7308945.9639992
+Cattle,Sidama,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,External,4674100.63888447,1249712.29841915,4596644.09144746,4751557.18632148
+Cattle,Sidama,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,18163363.7114013,3711622.49364866,17933319.1930659,18393408.2297366
+Cattle,Sidama,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,14376570.9501037,3044532.69388131,14187872.3261681,14565269.5740394
+Cattle,Sidama,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,External,4553628.04033611,957196.936212165,4494301.44973597,4612954.63093626
+Cattle,Sidama,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,13645458.2591828,1193854.87234406,13571463.7272657,13719452.7911
+Cattle,Sidama,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,8154830.78071582,1096899.34154761,8086845.50443288,8222816.05699875
+Cattle,Sidama,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,External,11276861.5411447,2802645.76064393,11103154.9491691,11450568.1331204
+Cattle,Sidama,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,35594520.4266131,5840327.87538843,35232539.8061935,35956501.0470327
+Cattle,Sidama,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,31950815.2295363,5619277.14868313,31602535.2233467,32299095.235726
+Cattle,Somali,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,External,,,,
+Cattle,Somali,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,Infectious,,,,
+Cattle,Somali,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Somali,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,External,,,,
+Cattle,Somali,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,Infectious,,,,
+Cattle,Somali,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Somali,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,External,,,,
+Cattle,Somali,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,,,,
+Cattle,Somali,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Somali,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,External,,,,
+Cattle,Somali,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,,,,
+Cattle,Somali,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Somali,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,External,,,,
+Cattle,Somali,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,Infectious,,,,
+Cattle,Somali,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Somali,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,External,,,,
+Cattle,Somali,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,Infectious,,,,
+Cattle,Somali,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Somali,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,External,,,,
+Cattle,Somali,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,,,,
+Cattle,Somali,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Somali,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,External,,,,
+Cattle,Somali,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,,,,
+Cattle,Somali,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Somali,Pastoral,Adult,Adult,Overall,2021,Mortality,External,1721093502.42706,281588672.445283,1703640776.39357,1738546228.46054
+Cattle,Somali,Pastoral,Adult,Adult,Overall,2021,Mortality,Infectious,3393061645.14233,353551861.846649,3371148676.37887,3414974613.90579
+Cattle,Somali,Pastoral,Adult,Adult,Overall,2021,Mortality,Non-infectious,2020789494.63804,309782029.636208,2001589358.33147,2039989630.94462
+Cattle,Somali,Pastoral,Adult,Adult,Overall,2021,Production loss,External,13376035895.0579,3351571338.78198,13168307168.4387,13583764621.677
+Cattle,Somali,Pastoral,Adult,Adult,Overall,2021,Production loss,Infectious,24448598837.9002,5043000870.06491,24136036149.1829,24761161526.6176
+Cattle,Somali,Pastoral,Adult,Adult,Overall,2021,Production loss,Non-infectious,19785615219.0506,4197041198.64329,19525484690.521,20045745747.5803
+Cattle,Somali,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,External,199443343.802324,33305664.0763182,197379075.288113,201507612.316534
+Cattle,Somali,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,403281394.77178,36468529.5756701,401021093.425135,405541696.118425
+Cattle,Somali,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,167993310.151521,29296520.9998987,166177526.333567,169809093.969476
+Cattle,Somali,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,External,879601950.989198,234924421.826964,865041452.027661,894162449.950736
+Cattle,Somali,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,1940942214.6254,422171493.16433,1914776235.20102,1967108194.04979
+Cattle,Somali,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,1878777269.40626,400753514.313485,1853938765.67125,1903615773.14126
+Cattle,Somali,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,External,613561247.939602,95084810.1862564,607667938.639496,619454557.239709
+Cattle,Somali,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,1058452145.80194,109514703.447361,1051664478.88584,1065239812.71804
+Cattle,Somali,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,593370435.447303,89328028.3960444,587833928.62276,598906942.271846
+Cattle,Somali,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,External,1456614922.56922,800277231.632926,1407014137.30597,1506215707.83248
+Cattle,Somali,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,2165817199.21264,1154633526.79202,2094253586.80884,2237380811.61644
+Cattle,Somali,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,1837249831.3054,988640729.886083,1775974369.99367,1898525292.61714
+Cattle,Somali,Periurban dairy,Adult,Adult,Overall,2021,Mortality,External,,,,
+Cattle,Somali,Periurban dairy,Adult,Adult,Overall,2021,Mortality,Infectious,,,,
+Cattle,Somali,Periurban dairy,Adult,Adult,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Somali,Periurban dairy,Adult,Adult,Overall,2021,Production loss,External,,,,
+Cattle,Somali,Periurban dairy,Adult,Adult,Overall,2021,Production loss,Infectious,,,,
+Cattle,Somali,Periurban dairy,Adult,Adult,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Somali,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,External,,,,
+Cattle,Somali,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,,,,
+Cattle,Somali,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Somali,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,External,,,,
+Cattle,Somali,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,,,,
+Cattle,Somali,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Somali,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,External,,,,
+Cattle,Somali,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,,,,
+Cattle,Somali,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Somali,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,External,,,,
+Cattle,Somali,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,,,,
+Cattle,Somali,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,South West Ethiopia,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,External,320326016.486197,61014705.0860486,316544355.375211,324107677.597183
+Cattle,South West Ethiopia,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,Infectious,814284344.432301,73790147.0746537,809710867.773312,818857821.091291
+Cattle,South West Ethiopia,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,Non-infectious,607138567.464155,68210645.1088849,602910905.565278,611366229.363033
+Cattle,South West Ethiopia,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,External,8514092998.6423,2255261771.7968,8374312994.3717,8653873002.9129
+Cattle,South West Ethiopia,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,Infectious,28918196178.3153,5648637733.78362,28568096417.6465,29268295938.984
+Cattle,South West Ethiopia,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,Non-infectious,26034589179.3889,5365648555.03852,25702028947.4384,26367149411.3394
+Cattle,South West Ethiopia,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,External,164315507.316927,38185286.7007133,161948802.216505,166682212.41735
+Cattle,South West Ethiopia,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,510706432.838725,43963076.207247,507981623.214917,513431242.462533
+Cattle,South West Ethiopia,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,232140875.149664,35899007.2117028,229915872.516216,234365877.783112
+Cattle,South West Ethiopia,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,External,1159553414.37202,385453108.060843,1135663222.21577,1183443606.52827
+Cattle,South West Ethiopia,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,3204947200.4651,922650780.084379,3147761763.46028,3262132637.46993
+Cattle,South West Ethiopia,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,2271364846.57739,675316940.68817,2229509038.07042,2313220655.08435
+Cattle,South West Ethiopia,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,External,116618344.714921,19360321.5792062,115418401.601059,117818287.828782
+Cattle,South West Ethiopia,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,Infectious,275939512.061531,24072561.990566,274447506.627872,277431517.495191
+Cattle,South West Ethiopia,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,Non-infectious,177005275.062059,21702498.3473454,175660164.995631,178350385.128487
+Cattle,South West Ethiopia,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,External,1022099987.93426,424369593.101841,995797771.367693,1048402204.50082
+Cattle,South West Ethiopia,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,Infectious,3391158039.2396,1250681232.35569,3313641437.75854,3468674640.72066
+Cattle,South West Ethiopia,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,Non-infectious,3000791443.01665,1118452659.367,2931470302.8023,3070112583.231
+Cattle,South West Ethiopia,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,External,395122834.531012,76846366.0887332,390359934.935766,399885734.126257
+Cattle,South West Ethiopia,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,935330605.942771,87723106.1460718,929893571.402005,940767640.483537
+Cattle,South West Ethiopia,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,569078727.838043,73958437.9983985,564494820.591202,573662635.084884
+Cattle,South West Ethiopia,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,External,861435922.392959,470636707.929307,832266093.033483,890605751.752435
+Cattle,South West Ethiopia,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,2829007656.06491,1439431830.47999,2739792386.27765,2918222925.85216
+Cattle,South West Ethiopia,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,2427652664.08769,1261758799.42002,2349449480.50298,2505855847.6724
+Cattle,South West Ethiopia,Pastoral,Adult,Adult,Overall,2021,Mortality,External,1108925066.09588,188148723.928708,1097263701.65334,1120586430.53843
+Cattle,South West Ethiopia,Pastoral,Adult,Adult,Overall,2021,Mortality,Infectious,2197531522.2659,224896426.690859,2183592553.46129,2211470491.0705
+Cattle,South West Ethiopia,Pastoral,Adult,Adult,Overall,2021,Mortality,Non-infectious,1321962068.27194,202022991.424359,1309440783.62233,1334483352.92155
+Cattle,South West Ethiopia,Pastoral,Adult,Adult,Overall,2021,Production loss,External,6460027252.15508,1874074846.9446,6343873024.12476,6576181480.1854
+Cattle,South West Ethiopia,Pastoral,Adult,Adult,Overall,2021,Production loss,Infectious,11903853704.1177,3061311468.7762,11714115140.0492,12093592268.1861
+Cattle,South West Ethiopia,Pastoral,Adult,Adult,Overall,2021,Production loss,Non-infectious,9626684315.79683,2573301158.25714,9467192388.3457,9786176243.24797
+Cattle,South West Ethiopia,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,External,138415650.682519,22532241.8219177,137019113.527729,139812187.83731
+Cattle,South West Ethiopia,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,278073516.491221,25688903.9996657,276481330.982787,279665701.999655
+Cattle,South West Ethiopia,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,116606037.262884,21182251.9730161,115293171.808294,117918902.717474
+Cattle,South West Ethiopia,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,External,755224973.051324,159074286.95877,745365627.76888,765084318.333768
+Cattle,South West Ethiopia,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,1686934113.43707,263074808.087718,1670628867.51934,1703239359.35479
+Cattle,South West Ethiopia,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,1625582939.6034,259766714.36911,1609482727.69099,1641683151.51581
+Cattle,South West Ethiopia,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,External,362273809.653902,52515513.59734,359018924.209246,365528695.098557
+Cattle,South West Ethiopia,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,607278172.059567,60110581.238539,603552548.095508,611003796.023625
+Cattle,South West Ethiopia,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,345207114.606302,48855646.688757,342179065.89453,348235163.318074
+Cattle,South West Ethiopia,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,External,852855865.500345,191378574.616144,840994316.516683,864717414.484006
+Cattle,South West Ethiopia,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,1256480672.42467,250256938.372664,1240969871.70436,1271991473.14498
+Cattle,South West Ethiopia,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,1070150226.93604,216220495.877279,1056748988.01333,1083551465.85876
+Cattle,South West Ethiopia,Periurban dairy,Adult,Adult,Overall,2021,Mortality,External,51004222.6401077,7931451.26834547,50512635.2305991,51495810.0496164
+Cattle,South West Ethiopia,Periurban dairy,Adult,Adult,Overall,2021,Mortality,Infectious,107618165.20389,10254982.9246136,106982566.456586,108253763.951194
+Cattle,South West Ethiopia,Periurban dairy,Adult,Adult,Overall,2021,Mortality,Non-infectious,88226871.8615766,9525615.83783299,87636478.9239836,88817264.7991697
+Cattle,South West Ethiopia,Periurban dairy,Adult,Adult,Overall,2021,Production loss,External,469606040.453382,346433492.766875,448134264.669299,491077816.237465
+Cattle,South West Ethiopia,Periurban dairy,Adult,Adult,Overall,2021,Production loss,Infectious,1858284245.87376,1264702318.71399,1779898624.42546,1936669867.32206
+Cattle,South West Ethiopia,Periurban dairy,Adult,Adult,Overall,2021,Production loss,Non-infectious,1895139358.03399,1283727072.76707,1815574591.7804,1974704124.28758
+Cattle,South West Ethiopia,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,External,16164019.2828341,3381888.6008534,15954411.5073724,16373627.0582957
+Cattle,South West Ethiopia,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,64454481.0469599,4689201.92565538,64163846.6410604,64745115.4528593
+Cattle,South West Ethiopia,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,33188066.5691466,4310708.84705201,32920890.9762352,33455242.162058
+Cattle,South West Ethiopia,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,External,21551221.1348277,5504386.13721395,21210062.0164545,21892380.2532008
+Cattle,South West Ethiopia,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,84473956.8387722,16681099.4132341,83440070.5838021,85507843.0937423
+Cattle,South West Ethiopia,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,66997164.3254788,13951238.2756625,66132473.5077035,67861855.143254
+Cattle,South West Ethiopia,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,External,21024143.9721156,4360028.97026372,20753911.5424682,21294376.4017629
+Cattle,South West Ethiopia,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,62882444.4560813,5492614.77461411,62542014.9209145,63222873.9912482
+Cattle,South West Ethiopia,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,37595779.6724218,5156957.33444748,37276154.0186521,37915405.3261915
+Cattle,South West Ethiopia,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,External,52970754.770524,13206129.5193535,52152245.4233174,53789264.1177306
+Cattle,South West Ethiopia,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,166864799.192021,26280519.7795493,165235945.631447,168493652.752596
+Cattle,South West Ethiopia,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,147588288.433633,24553028.1886333,146066503.943698,149110072.923568
+Cattle,Tigray,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,External,178062692.677979,32918863.617184,176022397.864075,180102987.491883
+Cattle,Tigray,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,Infectious,455262309.998905,40909232.1309173,452726776.113891,457797843.883919
+Cattle,Tigray,Crop livestock mixed,Adult,Adult,Overall,2021,Mortality,Non-infectious,338865059.296958,41003449.7076341,336323685.853343,341406432.740572
+Cattle,Tigray,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,External,4307419694.6708,1150486082.15757,4236113138.82512,4378726250.51648
+Cattle,Tigray,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,Infectious,14585858132.2672,2910991206.54893,14405436343.377,14766279921.1573
+Cattle,Tigray,Crop livestock mixed,Adult,Adult,Overall,2021,Production loss,Non-infectious,13344903918.0306,2803398782.70735,13171150654.1215,13518657181.9397
+Cattle,Tigray,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,External,102299565.655981,24285383.1765464,100794369.670937,103804761.641024
+Cattle,Tigray,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,319223270.281022,28137632.2859873,317479313.809855,320967226.752189
+Cattle,Tigray,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,145457735.052834,23710703.9084463,143988157.403344,146927312.702324
+Cattle,Tigray,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,External,535058400.974747,186338858.77919,523509211.075082,546607590.874411
+Cattle,Tigray,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,1488305542.47545,452556208.083413,1460256333.51458,1516354751.43632
+Cattle,Tigray,Crop livestock mixed,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,1048957013.20135,320395081.43189,1029099085.21672,1068814941.18598
+Cattle,Tigray,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,External,89010717.7298728,14694289.4062924,88099972.9721463,89921462.4875994
+Cattle,Tigray,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,Infectious,208671024.379183,17686507.8852659,207574823.406573,209767225.351794
+Cattle,Tigray,Crop livestock mixed,Oxen,Oxen,Overall,2021,Mortality,Non-infectious,133227296.902259,16487597.938092,132205403.772592,134249190.031925
+Cattle,Tigray,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,External,768345132.136806,462620454.039509,739672146.211189,797018118.062423
+Cattle,Tigray,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,Infectious,2587314416.22703,1495370087.21926,2494632121.07549,2679996711.37856
+Cattle,Tigray,Crop livestock mixed,Oxen,Oxen,Overall,2021,Production loss,Non-infectious,2307341465.70905,1345981014.95076,2223918231.04478,2390764700.37333
+Cattle,Tigray,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,External,202855606.059757,38355714.5868063,200478337.923617,205232874.195896
+Cattle,Tigray,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,477409698.878197,42943953.2968498,474748053.986107,480071343.770288
+Cattle,Tigray,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,289781187.065209,37792392.7517608,287438833.336565,292123540.793854
+Cattle,Tigray,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,External,468990256.906503,276693139.130513,451840953.595918,486139560.217088
+Cattle,Tigray,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,1568829345.77834,871124627.000513,1514837474.14503,1622821217.41165
+Cattle,Tigray,Crop livestock mixed,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,1332769929.00253,752619052.16643,1286122974.02748,1379416883.97758
+Cattle,Tigray,Pastoral,Adult,Adult,Overall,2021,Mortality,External,,,,
+Cattle,Tigray,Pastoral,Adult,Adult,Overall,2021,Mortality,Infectious,,,,
+Cattle,Tigray,Pastoral,Adult,Adult,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Tigray,Pastoral,Adult,Adult,Overall,2021,Production loss,External,,,,
+Cattle,Tigray,Pastoral,Adult,Adult,Overall,2021,Production loss,Infectious,,,,
+Cattle,Tigray,Pastoral,Adult,Adult,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Tigray,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,External,,,,
+Cattle,Tigray,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,,,,
+Cattle,Tigray,Pastoral,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Tigray,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,External,,,,
+Cattle,Tigray,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,,,,
+Cattle,Tigray,Pastoral,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Tigray,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,External,,,,
+Cattle,Tigray,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,,,,
+Cattle,Tigray,Pastoral,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,,,,
+Cattle,Tigray,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,External,,,,
+Cattle,Tigray,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,,,,
+Cattle,Tigray,Pastoral,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,,,,
+Cattle,Tigray,Periurban dairy,Adult,Adult,Overall,2021,Mortality,External,22542903.8810923,3538119.87313663,22323612.9689855,22762194.7931991
+Cattle,Tigray,Periurban dairy,Adult,Adult,Overall,2021,Mortality,Infectious,47646701.1222464,4387807.43818699,47374746.9969567,47918655.2475362
+Cattle,Tigray,Periurban dairy,Adult,Adult,Overall,2021,Mortality,Non-infectious,38703422.2805516,4077807.99730019,38450681.7666097,38956162.7944934
+Cattle,Tigray,Periurban dairy,Adult,Adult,Overall,2021,Production loss,External,202319080.818592,150222800.290819,193008346.282679,211629815.354505
+Cattle,Tigray,Periurban dairy,Adult,Adult,Overall,2021,Production loss,Infectious,796159436.281758,543583467.666075,762468402.991526,829850469.57199
+Cattle,Tigray,Periurban dairy,Adult,Adult,Overall,2021,Production loss,Non-infectious,807807937.815074,549471318.905985,773751978.429898,841863897.200251
+Cattle,Tigray,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,External,7058750.78455372,1511445.84445787,6965072.12195449,7152429.44715296
+Cattle,Tigray,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,Infectious,28514170.0606153,2223997.02499354,28376327.8298202,28652012.2914104
+Cattle,Tigray,Periurban dairy,Juvenile,Juvenile,Overall,2021,Mortality,Non-infectious,14687465.2404993,2039373.7518092,14561065.8684609,14813864.6125377
+Cattle,Tigray,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,External,9309708.96853527,2516855.62275474,9153715.50733415,9465702.42973639
+Cattle,Tigray,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,Infectious,36177323.6291489,7527059.80330071,35710800.2017544,36643847.0565434
+Cattle,Tigray,Periurban dairy,Juvenile,Juvenile,Overall,2021,Production loss,Non-infectious,28634442.6956912,6166475.87682483,28252247.584163,29016637.8072194
+Cattle,Tigray,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,External,9261237.23630689,1946720.38426541,9140580.47396151,9381893.99865226
+Cattle,Tigray,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,Infectious,27752383.3005558,2428380.70232945,27601873.470971,27902893.1301406
+Cattle,Tigray,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Mortality,Non-infectious,16585404.5803647,2230659.7379722,16447149.397929,16723659.7628004
+Cattle,Tigray,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,External,25747427.5981003,6148958.37124834,25366318.2128656,26128536.983335
+Cattle,Tigray,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,Infectious,81281121.8357317,12219250.7173177,80523778.746424,82038464.9250395
+Cattle,Tigray,Periurban dairy,Sub-adult,Sub-adult,Overall,2021,Production loss,Non-infectious,72961726.4398717,11878282.3944876,72225516.3978303,73697936.4819132
