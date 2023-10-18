@@ -1,6 +1,6 @@
-# Welcome to the Animal Health Loss Envelope interactive dashboard
+# Welcome to the Animal Health Loss Envelope Interactive Case Study Dashboard
 
-This interactive dashboard shows estimates of the animal health loss envelope (AHLE) for livestock using publicly available data.
+This interactive dashboard guides users through country-specific case studies displaying estimates of the animal health loss envelope (AHLE) for livestock.
 
 This is part of the Global Burden of Animal Diseases (GBADs) project. To learn more see [the GBADs webpage](https://animalhealthmetrics.org/). To browse other dashboards and data sources hosted by the GBADs Informatics theme, see [the GBADs Knowledge Engine](http://gbadske.org/).
 
