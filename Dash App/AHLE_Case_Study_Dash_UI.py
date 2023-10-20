@@ -311,6 +311,18 @@ metric_options = [
 # =============================================================================
 #### Ethiopia case study options
 # =============================================================================
+# Country to use display 
+ahle_case_study_country_options = [{'label': i, 'value': i, 'disabled': False} for i in ["Ethiopia",
+                                                                                         ]]
+ahle_case_study_country_options += [{'label': i, 'value': i, 'disabled': True} for i in ["Denmark",
+                                                                                         "Indonesia",
+                                                                                         "Senegal",
+                                                                                         "Kenya",
+                                                                                         "China",
+                                                                                         "India",
+                                                                                         "UK"
+                                                                                         ]]
+
 # Species
 # ecs_species_options = []
 # for i in np.sort(ecs_ahle_summary['species'].unique()):
@@ -874,7 +886,9 @@ gbadsDash.layout = html.Div([
                 html.A(href="https://animalhealthmetrics.org/",
                        target='_blank',
                        children=[
-                       html.Img(title="Link to GBADS site", src=(os.environ.get("DASH_BASE_URL") if os.environ.get("DASH_BASE_URL") else "") + '/assets/GBADs-LOGO-Black-sm.png')
+                       html.Img(title="Link to GBADS site", 
+                                src=(os.environ.get("DASH_BASE_URL") 
+                                     if os.environ.get("DASH_BASE_URL") else "") + '/assets/GBADs-LOGO-Black-sm.png')
                        ]
                        ),
                 html.H5("Inclusiveness Challenge Delivery Rigour Transparency",
@@ -886,18 +900,48 @@ gbadsDash.layout = html.Div([
                             'margin-right':"10px"},
                 )
             ),
-        ], justify='between'),
+                            
+        # Select Country for dashboard
+        dbc.Col([   
+            html.H4("Country"),
+            dcc.Dropdown(id='select-country-ahle',
+                        options=ahle_case_study_country_options,
+                        value='Ethiopia',
+                        clearable = False,
+                        style={'width': '60%'}
+                        ),
+        ], align='start'),
+        
+        ### END OF BRANDING & HEADING      
+        ]),
+                            
+    #### LANDING INTRO                  
+    dbc.Row([
+                dbc.Col([
+                    # Dashboard title
+                    html.Br(),   
+                    html.H1('Burden of Disease by Country',
+                            style={'color': '#F7931D',
+                                   "font-weight": "bold"}
+                            ),
+                    # Dashboard sub title
+                    html.H2('Country Case Study: Animal Health Loss Envelope (AHLE)',
+                            style={'color': '#000000'}
+                            ),
+                    # Dashboard description
+                    html.P(['This interactive dashboard takes publicly available data and consults with \
+                            experts to create models that provide a country-specific estimate of the \
+                            animal health loss envelope. The tool will guide you through this calculations, \
+                            the outputs, and the many scenarios that allow us to use the information to \
+                            aid decision makers with regard to animal health and production.'],
+                           style={'textAlign': 'center'}
+                           )
+                    ],xs =12, sm=12, md=12, lg=9, xl=9)
+        ### END OF LANDING PAGE TAB
+         ], justify='center'),
 
     #### TABS
     dcc.Tabs([ 
-        
-        #### LANDING PAGE
-        dcc.Tab(label="Case Study Overview", children =[
-            html.H3("Country Case Study: Animal Health Loss Envelope (AHLE)"),
-            html.Label(["This interactive dashboard takes publicly available data and consults with experts to create models that provide a country-specific estimate of the animal health loss envelope."]),
-            html.Label(["This tool will guide you through this calculation, the output, and the many scenarios that allow us to use that information to aid decisionmakers with regard to animal health and production."]),
-        ### END OF LANDING PAGE TAB
-        ], style=ecs_tab_style, selected_style=ecs_tab_selected_style),
 
         #### AHLE & ATTRIBUTION
         dcc.Tab(label="AHLE & Attribution", children =[
