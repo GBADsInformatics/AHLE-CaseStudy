@@ -296,7 +296,7 @@ metric_options = [
 # =============================================================================
 #### Ethiopia case study options
 # =============================================================================
-# Country to use display 
+# Country to use display
 ahle_case_study_country_options = [{'label': i, 'value': i, 'disabled': False} for i in ["Ethiopia",
                                                                                          ]]
 ahle_case_study_country_options += [{'label': i, 'value': i, 'disabled': True} for i in ["Denmark",
@@ -871,8 +871,8 @@ gbadsDash.layout = html.Div([
                 html.A(href="https://animalhealthmetrics.org/",
                        target='_blank',
                        children=[
-                       html.Img(title="Link to GBADS site", 
-                                src=(os.environ.get("DASH_BASE_URL") 
+                       html.Img(title="Link to GBADS site",
+                                src=(os.environ.get("DASH_BASE_URL")
                                      if os.environ.get("DASH_BASE_URL") else "") + '/assets/GBADs-LOGO-Black-sm.png')
                        ]
                        ),
@@ -885,9 +885,9 @@ gbadsDash.layout = html.Div([
                             'margin-right':"10px"},
                 )
             ),
-                            
+
         # Select Country for dashboard
-        dbc.Col([   
+        dbc.Col([
             html.H4("Country"),
             dcc.Dropdown(id='select-country-ahle',
                         options=ahle_case_study_country_options,
@@ -896,15 +896,15 @@ gbadsDash.layout = html.Div([
                         style={'width': '60%'}
                         ),
         ], align='start'),
-        
-        ### END OF BRANDING & HEADING      
+
+        ### END OF BRANDING & HEADING
         ]),
-                            
-    #### LANDING INTRO                  
+
+    #### LANDING INTRO
     dbc.Row([
                 dbc.Col([
                     # Dashboard title
-                    html.Br(),   
+                    html.Br(),
                     html.H1('Burden of Disease by Country',
                             style={'color': '#F7931D',
                                    "font-weight": "bold"}
@@ -926,11 +926,11 @@ gbadsDash.layout = html.Div([
          ], justify='center'),
 
     #### TABS
-    dcc.Tabs([ 
+    dcc.Tabs([
 
         #### AHLE & ATTRIBUTION
         dcc.Tab(label="AHLE & Attribution", children =[
-        
+
             html.H3("Ethiopia Animal Health Loss Envelope and Disease Attribution"),
             html.Label(["Displaying production values, expenditures, and gross margin under the current and ideal scenario estimated by a compartmental herd dynamics model. Attribution of AHLE to infectious, non-infectious, and external causes is based on the results of expert elicitation."]),
             # html.Label(["Results on this page are currently limited to cattle, small ruminants, and poultry, as those are the species for which the compartmental herd model has been estimated."]),
@@ -965,9 +965,9 @@ gbadsDash.layout = html.Div([
                                 clearable = False,
                                 ),
                     ]),
-                
+
                 # END OF FIRST CONTROL ROW
-                ],style={"margin-bottom":"30px"}),  
+                ],style={"margin-bottom":"30px"}),
 
             # SECOND CONTROL ROW
             dbc.Row([
@@ -1016,9 +1016,9 @@ gbadsDash.layout = html.Div([
                                  clearable = False,
                                  ),
                     ]),
-                
+
                 # END OF SECOND CONTROL ROW
-                ],justify='evenly'),  
+                ],justify='evenly'),
 
             html.Hr(style={'margin-right':'10px'}),
 
@@ -1382,13 +1382,13 @@ gbadsDash.layout = html.Div([
             #     ),
 
             html.Hr(style={'margin-right':'10px',}),
-            
-            ### END OF AHLE & ATTRIBUTION TAB
-            ], style=ecs_tab_style, selected_style=ecs_tab_selected_style),     
 
-                                        
+            ### END OF AHLE & ATTRIBUTION TAB
+            ], style=ecs_tab_style, selected_style=ecs_tab_selected_style),
+
+
         #### WEI
-        dcc.Tab(label="Wider Economic Impact", children =[     
+        dcc.Tab(label="Wider Economic Impact", children =[
             dbc.Row([
                 html.H3("Wider Economic Impact"),
                 html.Label(["Estimating the total economic impact of each scenario for cattle and small ruminants using the ",
@@ -1441,7 +1441,7 @@ gbadsDash.layout = html.Div([
                               ),
                         ],size="md", color="#393375", fullscreen=False),    # End of Spinner
                     ]),
-            
+
             ### END OF GRAPHICS
                 ]),
 
@@ -1458,11 +1458,11 @@ gbadsDash.layout = html.Div([
             ### END OF FOOTNOTES
 
         ### END OF WEI TAB
-        ], style=ecs_tab_style, selected_style=ecs_tab_selected_style),  
+        ], style=ecs_tab_style, selected_style=ecs_tab_selected_style),
 
 
-        #### DATATABLES 
-        dcc.Tab(label="Data Viewer", children =[ 
+        #### DATATABLES
+        dcc.Tab(label="Data Viewer", children =[
             html.H3("Data Viewer", id="ETH-data-export"),
             #### -- DATATABLES
             dbc.Row([
@@ -1484,10 +1484,10 @@ gbadsDash.layout = html.Div([
                     ]),  # END OF COL
                 ]),     # END OF ROW
         html.Br(),
-        
+
         ### END OF DATATABLES
-        ], style=ecs_tab_style, selected_style=ecs_tab_selected_style),  
-                                        
+        ], style=ecs_tab_style, selected_style=ecs_tab_selected_style),
+
         #### USER GUIDE TAB
         dcc.Tab(label="User Guide & References", children =[
             html.Iframe(src="assets/GBADs_Documentation/_build/html/index.html", # this is for the jupyter books
@@ -1496,8 +1496,8 @@ gbadsDash.layout = html.Div([
                                 },)
         ### END OF USER GUIDE TAB
             ], style=user_guide_tab_style, selected_style=user_guide_tab_selected_style),
-                                        
-                                        
+
+
         ### END OF TABS ###
         ],style={'margin-right':'10px',
                  'margin-left': '10px'}, )
