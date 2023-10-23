@@ -126,8 +126,6 @@ else:
 # -----------------------------------------------------------------------------
 # Compartmental model results summary
 ecs_ahle_summary = pd.read_csv(os.path.join(DASH_DATA_FOLDER ,'ahle_all_summary.csv'))
-## Using alternative data which summarizes results from age/sex specific scenarios
-ahle_all_scensmry = pd.read_csv(os.path.join(DASH_DATA_FOLDER ,'ahle_all_scensmry.csv'))
 
 # Compartmental model results summary with AHLE calculated
 # for stacked bar
@@ -139,7 +137,6 @@ ecs_ahle_summary2 = pd.read_csv(os.path.join(DASH_DATA_FOLDER ,'ahle_all_summary
 ecs_ahle_all_withattr = pd.read_csv(os.path.join(DASH_DATA_FOLDER ,'ahle_all_withattr_disease.csv'))
 
 # JR 2023-4-19: added regional results. Testing with Nationl level (should be same as before).
-# ahle_all_scensmry = ahle_all_scensmry.query("region == 'National'").copy()
 ecs_ahle_summary2 = ecs_ahle_summary2.query("region == 'National'")
 # ecs_ahle_all_withattr = ecs_ahle_all_withattr.query("region == 'National'")
 
