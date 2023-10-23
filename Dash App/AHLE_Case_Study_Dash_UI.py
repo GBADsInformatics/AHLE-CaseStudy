@@ -888,14 +888,14 @@ gbadsDash.layout = html.Div([
                             
         # Select Country for dashboard
         dbc.Col([   
-            html.H4("Country"),
+            html.H4("Select Country", style={'text-align':'center'}),
             dcc.Dropdown(id='select-country-ahle',
                         options=ahle_case_study_country_options,
                         value='Ethiopia',
                         clearable = False,
-                        style={'width': '60%'}
+                        style={'width': '100%'}
                         ),
-        ], align='start'),
+        ],width={"size": 3},),
         
         ### END OF BRANDING & HEADING      
         ]),
@@ -928,8 +928,8 @@ gbadsDash.layout = html.Div([
     #### TABS
     dcc.Tabs([ 
 
-        #### AHLE & ATTRIBUTION
-        dcc.Tab(label="AHLE & Attribution", children =[
+        #### AHLE
+        dcc.Tab(label="AHLE", children =[
         
             html.H3("Ethiopia Animal Health Loss Envelope and Disease Attribution"),
             html.Label(["Displaying production values, expenditures, and gross margin under the current and ideal scenario estimated by a compartmental herd dynamics model. Attribution of AHLE to infectious, non-infectious, and external causes is based on the results of expert elicitation."]),
@@ -1383,10 +1383,18 @@ gbadsDash.layout = html.Div([
 
             html.Hr(style={'margin-right':'10px',}),
             
-            ### END OF AHLE & ATTRIBUTION TAB
+            ### END OF AHLE
             ], style=ecs_tab_style, selected_style=ecs_tab_selected_style),     
 
                                         
+        #### AHLE ATTRIBUTION BY POPULATION 
+        dcc.Tab(label="AHLE Attribution by Population", children =[ 
+        
+            
+        ### END OF AHLE ATTRIBUTION BY POPULATION
+        ], style=ecs_tab_style, selected_style=ecs_tab_selected_style),
+
+                        
         #### WEI
         dcc.Tab(label="Wider Economic Impact", children =[     
             dbc.Row([
