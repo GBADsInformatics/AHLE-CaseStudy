@@ -887,7 +887,7 @@ app.layout = html.Div([
                 html.A(href="https://animalhealthmetrics.org/",
                        target='_blank',
                        children=[
-                       html.Img(title="Link to GBADS site", src=(os.environ.get("DASH_BASE_URL") if os.environ.get("DASH_BASE_URL") else "") + '/assets/GBADs-LOGO-Black-sm.png')
+                       html.Img(title="Link to GBADS site", src=os.environ.get("BASE_URL", "") + '/assets/GBADs-LOGO-Black-sm.png')
                        ]
                        ),
                 html.H5("Inclusiveness Challenge Delivery Rigour Transparency",
