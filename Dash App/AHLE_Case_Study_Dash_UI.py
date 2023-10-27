@@ -1408,7 +1408,15 @@ gbadsDash.layout = html.Div([
 
                         
         #### WEI
-        dbc.Tab(label="Wider Economic Impact", children =[     
+        dbc.Tab(label="Wider Economic Impact", 
+                tabClassName="flex-grow-1 text-center",
+                    tab_style = {'font-size':"1.5625rem",
+                                 'font-weight': 'bold', 
+                                 },
+                    style = {"height":"100vh",
+                            "overflowY": "scroll"
+                        },
+                children =[     
             dbc.Row([
                 html.H3("Wider Economic Impact"),
                 html.Label(["Estimating the total economic impact of each scenario for cattle and small ruminants using the ",
@@ -1484,7 +1492,15 @@ gbadsDash.layout = html.Div([
 
 
         #### DATATABLES 
-        dbc.Tab(label="Data Viewer", children =[ 
+        dbc.Tab(label="Data Viewer",
+                tabClassName="flex-grow-1 text-center",
+                    tab_style = {'font-size':"1.5625rem",
+                                 'font-weight': 'bold', 
+                                 },
+                    style = {"height":"100vh",
+                            "overflowY": "scroll"
+                        },
+                children =[ 
             html.H3("Data Viewer", id="ETH-data-export"),
             #### -- DATATABLES
             dbc.Row([
@@ -1513,7 +1529,15 @@ gbadsDash.layout = html.Div([
             ),  
                                         
         #### USER GUIDE TAB
-        dbc.Tab(label="User Guide & References", children =[
+        dbc.Tab(label="User Guide & References", 
+                tabClassName="flex-grow-1 text-center",
+                    tab_style = {'font-size':"1.5625rem",
+                                 'font-weight': 'bold', 
+                                 },
+                    style = {"height":"100vh",
+                            "overflowY": "scroll"
+                        },
+                children =[
             html.Iframe(src="assets/GBADs_Documentation/_build/html/index.html", # this is for the jupyter books
                         style={"width":"100%",
                                 "height":"3600px",   # Set large enough for your largest page and guide will use browser scroll bar. Otherwise, longer pages will get their own scroll bars.
