@@ -80,27 +80,27 @@ app.config.suppress_callback_exceptions = True    # Use to remove warnings when 
 ###############################################################################################
 # Define tab styles
 
-# Tab colors based on grouping
-ecs_tab_style = {
-    'backgroundColor': '#d7bce1',
-    'border-color': 'grey',
-    'fontWeight': 'bold'
-}
-ecs_tab_selected_style = {
-    'backgroundColor': '#d7bce1',
-    'border-color': 'grey',
-    'fontWeight': 'bold'
-}
+# # Tab colors based on grouping
+# ecs_tab_style = {
+#     'backgroundColor': '#d7bce1',
+#     'border-color': 'grey',
+#     'fontWeight': 'bold'
+# }
+# ecs_tab_selected_style = {
+#     'backgroundColor': '#d7bce1',
+#     'border-color': 'grey',
+#     'fontWeight': 'bold'
+# }
 
-user_guide_tab_style ={
-    'border-color': 'grey',
-    'fontWeight': 'bold'
-}
+# user_guide_tab_style ={
+#     'border-color': 'grey',
+#     'fontWeight': 'bold'
+# }
 
-user_guide_tab_selected_style ={
-    'border-color': 'grey',
-    'fontWeight': 'bold'
-}
+# user_guide_tab_selected_style ={
+#     'border-color': 'grey',
+#     'fontWeight': 'bold'
+# }
 
 # =============================================================================
 #### Read data
@@ -926,16 +926,26 @@ gbadsDash.layout = html.Div([
          ], justify='center'),
 
     #### TABS
-    dcc.Tabs([ 
+    dbc.Tabs([ 
 
         #### AHLE
-        dcc.Tab(label="AHLE", children =[
+        dbc.Tab(label="AHLE & Attribution", 
+                tabClassName="flex-grow-1 text-center",
+                    tab_style = {'font-size':"1.5625rem",
+                                 'font-weight': 'bold', 
+                                 },
+                    style = {"height":"100vh",
+                            "overflowY": "scroll"
+                        },
+                children =[
         
-            html.H3("Ethiopia Animal Health Loss Envelope and Disease Attribution"),
+            # html.H3("Ethiopia Animal Health Loss Envelope and Disease Attribution"),
             html.Label(["Displaying production values, expenditures, and gross margin under the current and ideal scenario estimated by a compartmental herd dynamics model. Attribution of AHLE to infectious, non-infectious, and external causes is based on the results of expert elicitation."]),
             # html.Label(["Results on this page are currently limited to cattle, small ruminants, and poultry, as those are the species for which the compartmental herd model has been estimated."]),
             html.Label(["Results on this page are currently limited to cattle, small ruminants, and poultry."]),
-            html.Hr(style={'margin-right':'10px'}),
+            html.Hr(style={'margin-right':'10px',
+                           'margin-top':'0px',
+                           'margin-bottom':'5px'}),
             html.Label(["Select a species and production system to view and the currency to display for all charts"]
                        ,style={"font-style":"italic"}
                        ),
@@ -943,7 +953,7 @@ gbadsDash.layout = html.Div([
             #### -- DROPDOWNS CONTROLS
             dbc.Row([
                 dbc.Col([
-                    html.H4("Species"),
+                    html.H5("Species"),
                     dcc.Dropdown(id='select-species-ecs',
                                 options=ecs_species_options,
                                 value='Cattle',
@@ -951,14 +961,14 @@ gbadsDash.layout = html.Div([
                                 ),
                     ]),
                 dbc.Col([
-                    html.H4("Production System"),
+                    html.H5("Production System"),
                     dcc.Dropdown(id='select-prodsys-ecs',
                                  # Options and value are now defined in a callback based on selected species
                                  clearable = False,
                                  ),
                     ]),
                 dbc.Col([
-                    html.H4("Currency"),
+                    html.H5("Currency"),
                     dcc.Dropdown(id='select-currency-ecs',
                                 options=ecs_currency_options,
                                 value='Birr',
@@ -973,7 +983,7 @@ gbadsDash.layout = html.Div([
             dbc.Row([
                 dbc.Col([
                     # Switch between single year and over time
-                    html.H4("Display AHLE for..."),
+                    html.H5("Display AHLE for..."),
                     dcc.RadioItems(id='select-graph-ahle-ecs',
                                   inline=True,                  # True: arrange buttons horizontally
                                   inputStyle={
@@ -995,7 +1005,7 @@ gbadsDash.layout = html.Div([
 
                 # Geographical breakdown options
                 dbc.Col([
-                    html.H4("AHLE Geographic Scope"),
+                    html.H5("AHLE Geographic Scope"),
                     dcc.RadioItems(id='select-geo-view-ecs',
                                   inline=True,                  # True: arrange buttons horizontally
                                   inputStyle={
@@ -1384,19 +1394,21 @@ gbadsDash.layout = html.Div([
             html.Hr(style={'margin-right':'10px',}),
             
             ### END OF AHLE
-            ], style=ecs_tab_style, selected_style=ecs_tab_selected_style),     
+            ], 
+                                        # style=ecs_tab_style, selected_style=ecs_tab_selected_style
+                                        ),     
 
                                         
-        #### AHLE ATTRIBUTION BY POPULATION 
-        dcc.Tab(label="AHLE Attribution by Population", children =[ 
+        # #### AHLE ATTRIBUTION BY POPULATION 
+        # dbc.Tab(label="AHLE Attribution by Population", children =[ 
         
             
-        ### END OF AHLE ATTRIBUTION BY POPULATION
-        ], style=ecs_tab_style, selected_style=ecs_tab_selected_style),
+        # ### END OF AHLE ATTRIBUTION BY POPULATION
+        # ], style=ecs_tab_style, selected_style=ecs_tab_selected_style),
 
                         
         #### WEI
-        dcc.Tab(label="Wider Economic Impact", children =[     
+        dbc.Tab(label="Wider Economic Impact", children =[     
             dbc.Row([
                 html.H3("Wider Economic Impact"),
                 html.Label(["Estimating the total economic impact of each scenario for cattle and small ruminants using the ",
@@ -1466,11 +1478,13 @@ gbadsDash.layout = html.Div([
             ### END OF FOOTNOTES
 
         ### END OF WEI TAB
-        ], style=ecs_tab_style, selected_style=ecs_tab_selected_style),  
+        ], 
+            # style=ecs_tab_style, selected_style=ecs_tab_selected_style
+            ),  
 
 
         #### DATATABLES 
-        dcc.Tab(label="Data Viewer", children =[ 
+        dbc.Tab(label="Data Viewer", children =[ 
             html.H3("Data Viewer", id="ETH-data-export"),
             #### -- DATATABLES
             dbc.Row([
@@ -1494,16 +1508,20 @@ gbadsDash.layout = html.Div([
         html.Br(),
         
         ### END OF DATATABLES
-        ], style=ecs_tab_style, selected_style=ecs_tab_selected_style),  
+        ], 
+            # style=ecs_tab_style, selected_style=ecs_tab_selected_styl
+            ),  
                                         
         #### USER GUIDE TAB
-        dcc.Tab(label="User Guide & References", children =[
+        dbc.Tab(label="User Guide & References", children =[
             html.Iframe(src="assets/GBADs_Documentation/_build/html/index.html", # this is for the jupyter books
                         style={"width":"100%",
                                 "height":"3600px",   # Set large enough for your largest page and guide will use browser scroll bar. Otherwise, longer pages will get their own scroll bars.
                                 },)
         ### END OF USER GUIDE TAB
-            ], style=user_guide_tab_style, selected_style=user_guide_tab_selected_style),
+            ], 
+            # style=user_guide_tab_style, selected_style=user_guide_tab_selected_style
+            ),
                                         
                                         
         ### END OF TABS ###
