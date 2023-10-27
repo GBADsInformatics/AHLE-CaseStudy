@@ -126,8 +126,6 @@ else:
 # -----------------------------------------------------------------------------
 # Compartmental model results summary
 ecs_ahle_summary = pd.read_csv(os.path.join(DASH_DATA_FOLDER ,'ahle_all_summary.csv'))
-## Using alternative data which summarizes results from age/sex specific scenarios
-ahle_all_scensmry = pd.read_csv(os.path.join(DASH_DATA_FOLDER ,'ahle_all_scensmry.csv'))
 
 # Compartmental model results summary with AHLE calculated
 # for stacked bar
@@ -139,7 +137,6 @@ ecs_ahle_summary2 = pd.read_csv(os.path.join(DASH_DATA_FOLDER ,'ahle_all_summary
 ecs_ahle_all_withattr = pd.read_csv(os.path.join(DASH_DATA_FOLDER ,'ahle_all_withattr_disease.csv'))
 
 # JR 2023-4-19: added regional results. Testing with Nationl level (should be same as before).
-# ahle_all_scensmry = ahle_all_scensmry.query("region == 'National'").copy()
 ecs_ahle_summary2 = ecs_ahle_summary2.query("region == 'National'")
 # ecs_ahle_all_withattr = ecs_ahle_all_withattr.query("region == 'National'")
 
@@ -296,7 +293,7 @@ metric_options = [
 # =============================================================================
 #### Ethiopia case study options
 # =============================================================================
-# Country to use display 
+# Country to use display
 ahle_case_study_country_options = [{'label': i, 'value': i, 'disabled': False} for i in ["Ethiopia",
                                                                                          ]]
 ahle_case_study_country_options += [{'label': i, 'value': i, 'disabled': True} for i in ["Denmark",
@@ -871,12 +868,13 @@ gbadsDash.layout = html.Div([
                 html.A(href="https://animalhealthmetrics.org/",
                        target='_blank',
                        children=[
-                       html.Img(title="Link to GBADS site", 
-                                src=(os.environ.get("DASH_BASE_URL") 
+                       html.Img(title="Link to GBADS site",
+                                src=(os.environ.get("DASH_BASE_URL")
                                      if os.environ.get("DASH_BASE_URL") else "") + '/assets/GBADs-LOGO-Black-sm.png')
                        ]
                        ),
-                html.H5("Inclusiveness Challenge Delivery Rigour Transparency",
+                # html.H5("Inclusiveness Challenge Delivery Rigour Transparency",
+                html.H5("Global Burden of Animal Diseases",
                         style={"font-style": "italic",
                                "margin": "0",
                                "padding": "0"}),
@@ -885,7 +883,7 @@ gbadsDash.layout = html.Div([
                             'margin-right':"10px"},
                 )
             ),
-                            
+
         # Select Country for dashboard
         dbc.Col([   
             html.H4("Select Country", style={'text-align':'center'}),
@@ -899,12 +897,12 @@ gbadsDash.layout = html.Div([
         
         ### END OF BRANDING & HEADING      
         ]),
-                            
-    #### LANDING INTRO                  
+
+    #### LANDING INTRO
     dbc.Row([
                 dbc.Col([
                     # Dashboard title
-                    html.Br(),   
+                    html.Br(),
                     html.H1('Burden of Disease by Country',
                             style={'color': '#F7931D',
                                    "font-weight": "bold"}
@@ -975,9 +973,9 @@ gbadsDash.layout = html.Div([
                                 clearable = False,
                                 ),
                     ]),
-                
+
                 # END OF FIRST CONTROL ROW
-                ],style={"margin-bottom":"30px"}),  
+                ],style={"margin-bottom":"30px"}),
 
             # SECOND CONTROL ROW
             dbc.Row([
@@ -1026,9 +1024,9 @@ gbadsDash.layout = html.Div([
                                  clearable = False,
                                  ),
                     ]),
-                
+
                 # END OF SECOND CONTROL ROW
-                ],justify='evenly'),  
+                ],justify='evenly'),
 
             html.Hr(style={'margin-right':'10px'}),
 
@@ -1469,7 +1467,7 @@ gbadsDash.layout = html.Div([
                               ),
                         ],size="md", color="#393375", fullscreen=False),    # End of Spinner
                     ]),
-            
+
             ### END OF GRAPHICS
                 ]),
 
@@ -1522,7 +1520,7 @@ gbadsDash.layout = html.Div([
                     ]),  # END OF COL
                 ]),     # END OF ROW
         html.Br(),
-        
+
         ### END OF DATATABLES
         ], 
             # style=ecs_tab_style, selected_style=ecs_tab_selected_styl
