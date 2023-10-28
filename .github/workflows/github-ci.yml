@@ -14,7 +14,6 @@ jobs:
       DOCKERFILE: "./Dash App/Dockerfile"
 
   aws:
-    if: false
     needs: docker
     uses: GBADsInformatics/DevopsWorkflows/.github/workflows/aws.yml@main
     secrets: inherit
