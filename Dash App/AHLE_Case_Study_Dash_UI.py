@@ -868,7 +868,7 @@ gbadsDash.layout = html.Div([
                 html.A(href="https://animalhealthmetrics.org/",
                        target='_blank',
                        children=[
-                       html.Img(title="Link to GBADS site", 
+                       html.Img(title="Link to GBADS site",
                                 src=os.environ.get("BASE_URL", "") + '/assets/GBADs-LOGO-Black-sm.png')
                        ]
                        ),
@@ -884,7 +884,7 @@ gbadsDash.layout = html.Div([
             ),
 
         # Select Country for dashboard
-        dbc.Col([   
+        dbc.Col([
             html.H4("Select Country", style={'text-align':'center'}),
             dcc.Dropdown(id='select-country-ahle',
                         options=ahle_case_study_country_options,
@@ -893,8 +893,8 @@ gbadsDash.layout = html.Div([
                         style={'width': '100%'}
                         ),
         ],width={"size": 3},),
-        
-        ### END OF BRANDING & HEADING      
+
+        ### END OF BRANDING & HEADING
         ]),
 
     #### LANDING INTRO
@@ -911,7 +911,7 @@ gbadsDash.layout = html.Div([
                             style={'color': '#000000'}
                             ),
                     # Dashboard description
-                    html.P(['This interactive dashboard takes publicly available data and consults with \
+                    html.P(['This interactive dashboard uses publicly available data in consultation with \
                             experts to create models that provide a country-specific estimate of the \
                             animal health loss envelope. The tool will guide you through this calculations, \
                             the outputs, and the many scenarios that allow us to use the information to \
@@ -923,19 +923,19 @@ gbadsDash.layout = html.Div([
          ], justify='center'),
 
     #### TABS
-    dbc.Tabs([ 
+    dbc.Tabs([
 
         #### AHLE
-        dbc.Tab(label="AHLE & Attribution", 
+        dbc.Tab(label="AHLE & Attribution",
                 tabClassName="flex-grow-1 text-center",
                     tab_style = {'font-size':"1.5625rem",
-                                 'font-weight': 'bold', 
+                                 'font-weight': 'bold',
                                  },
                     style = {"height":"100vh",
                             "overflowY": "scroll"
                         },
                 children =[
-        
+
             # html.H3("Ethiopia Animal Health Loss Envelope and Disease Attribution"),
             html.Label(["Displaying production values, expenditures, and gross margin under the current and ideal scenario estimated by a compartmental herd dynamics model. Attribution of AHLE to infectious, non-infectious, and external causes is based on the results of expert elicitation."]),
             # html.Label(["Results on this page are currently limited to cattle, small ruminants, and poultry, as those are the species for which the compartmental herd model has been estimated."]),
@@ -1389,31 +1389,31 @@ gbadsDash.layout = html.Div([
             #     ),
 
             html.Hr(style={'margin-right':'10px',}),
-            
-            ### END OF AHLE
-            ], 
-                                        # style=ecs_tab_style, selected_style=ecs_tab_selected_style
-                                        ),     
 
-                                        
-        # #### AHLE ATTRIBUTION BY POPULATION 
-        # dbc.Tab(label="AHLE Attribution by Population", children =[ 
-        
-            
+            ### END OF AHLE
+            ],
+                                        # style=ecs_tab_style, selected_style=ecs_tab_selected_style
+                                        ),
+
+
+        # #### AHLE ATTRIBUTION BY POPULATION
+        # dbc.Tab(label="AHLE Attribution by Population", children =[
+
+
         # ### END OF AHLE ATTRIBUTION BY POPULATION
         # ], style=ecs_tab_style, selected_style=ecs_tab_selected_style),
 
-                        
+
         #### WEI
-        dbc.Tab(label="Wider Economic Impact", 
+        dbc.Tab(label="Wider Economic Impact",
                 tabClassName="flex-grow-1 text-center",
                     tab_style = {'font-size':"1.5625rem",
-                                 'font-weight': 'bold', 
+                                 'font-weight': 'bold',
                                  },
                     style = {"height":"100vh",
                             "overflowY": "scroll"
                         },
-                children =[     
+                children =[
             dbc.Row([
                 html.H3("Wider Economic Impact"),
                 html.Label(["Estimating the total economic impact of each scenario for cattle and small ruminants using the ",
@@ -1483,21 +1483,21 @@ gbadsDash.layout = html.Div([
             ### END OF FOOTNOTES
 
         ### END OF WEI TAB
-        ], 
+        ],
             # style=ecs_tab_style, selected_style=ecs_tab_selected_style
-            ),  
+            ),
 
 
-        #### DATATABLES 
+        #### DATATABLES
         dbc.Tab(label="Data Viewer",
                 tabClassName="flex-grow-1 text-center",
                     tab_style = {'font-size':"1.5625rem",
-                                 'font-weight': 'bold', 
+                                 'font-weight': 'bold',
                                  },
                     style = {"height":"100vh",
                             "overflowY": "scroll"
                         },
-                children =[ 
+                children =[
             html.H3("Data Viewer", id="ETH-data-export"),
             #### -- DATATABLES
             dbc.Row([
@@ -1521,15 +1521,15 @@ gbadsDash.layout = html.Div([
         html.Br(),
 
         ### END OF DATATABLES
-        ], 
+        ],
             # style=ecs_tab_style, selected_style=ecs_tab_selected_styl
-            ),  
-                                        
+            ),
+
         #### USER GUIDE TAB
-        dbc.Tab(label="User Guide & References", 
+        dbc.Tab(label="User Guide & References",
                 tabClassName="flex-grow-1 text-center",
                     tab_style = {'font-size':"1.5625rem",
-                                 'font-weight': 'bold', 
+                                 'font-weight': 'bold',
                                  },
                     style = {"height":"100vh",
                             "overflowY": "scroll"
@@ -1540,11 +1540,11 @@ gbadsDash.layout = html.Div([
                                 "height":"3600px",   # Set large enough for your largest page and guide will use browser scroll bar. Otherwise, longer pages will get their own scroll bars.
                                 },)
         ### END OF USER GUIDE TAB
-            ], 
+            ],
             # style=user_guide_tab_style, selected_style=user_guide_tab_selected_style
             ),
-                                        
-                                        
+
+
         ### END OF TABS ###
         ],style={'margin-right':'10px',
                  'margin-left': '10px'}, )
