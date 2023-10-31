@@ -591,13 +591,6 @@ def create_sankey(label_list, color, x, y, source, target, values, n):
 def create_attr_treemap_ecs(input_df, path):
     treemap_fig = px.treemap(
         input_df,
-        # path=[
-        #    'cause',
-        #    'production_system',
-        #    'age_group',
-        #    'sex',
-        #    'ahle_component',
-        #    ],
         path = path,
         values='mean',
         # hover_data=['pct_of_total'],
@@ -608,7 +601,7 @@ def create_attr_treemap_ecs(input_df, path):
             'Infectious':'#68000D',
             'Non-infectious':'#08316C',
             'External':'#00441B'
-            }
+            },
         )
 
     return treemap_fig
