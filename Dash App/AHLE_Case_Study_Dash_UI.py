@@ -1638,54 +1638,54 @@ gbadsDash.layout = html.Div([
         ### END OF DATATABLES
         ]),
 
-        #### TEST
-        dbc.Tab(label="TEST",
-                tabClassName="flex-grow-1 text-center",
-                    tab_style = tab_style,
-                    style = {"height":"100vh",
-                        },
-                children =[
-            dbc.Row([
-                dbc.Col([
-                    html.Div(id="drag_container0", className="container", children=[
-                    html.Div(id="drag_container", className="container", children=[
-                        dbc.Card(id='cause_card', children=[
-                            dbc.CardHeader("Cause"),
-                        ]),
-                        dbc.Card(id='prod_sys_card', children=[
-                            dbc.CardHeader("Production System"),
-                        ]),
-                        dbc.Card(id='age_group_card', children=[
-                            dbc.CardHeader("Age Group"),
-                        ]),
-                    ], style={'padding': 10}) ,
-                    ]),
-                ], style={
-                          'border-radius': '20px',
-                          "border":"1px black dashed"}),
+        # #### TEST
+        # dbc.Tab(label="TEST",
+        #         tabClassName="flex-grow-1 text-center",
+        #             tab_style = tab_style,
+        #             style = {"height":"100vh",
+        #                 },
+        #         children =[
+        #     dbc.Row([
+        #         dbc.Col([
+        #             html.Div(id="drag_container0", className="container", children=[
+        #             html.Div(id="drag_container", className="container", children=[
+        #                 dbc.Card(id='cause_card', children=[
+        #                     dbc.CardHeader("Cause"),
+        #                 ]),
+        #                 dbc.Card(id='prod_sys_card', children=[
+        #                     dbc.CardHeader("Production System"),
+        #                 ]),
+        #                 dbc.Card(id='age_group_card', children=[
+        #                     dbc.CardHeader("Age Group"),
+        #                 ]),
+        #             ], style={'padding': 10}) ,
+        #             ]),
+        #         ], style={
+        #                   'border-radius': '20px',
+        #                   "border":"1px black dashed"}),
 
-                dbc.Col([
-                    html.Div(id="drag_container2", className="container", children=[
-                    dbc.Card(id='sex_card', children=[
-                        dbc.CardHeader("Sex"),
-                    ]),
-                    dbc.Card(id='ahle_comp_card', children=[
-                        dbc.CardHeader("AHLE Component"),
-                    ]),
-                    dbc.Card(id='disease_card', children=[
-                        dbc.CardHeader("Disease"),
-                    ]),
-                    ], style={'padding': 10} )
-                ], style={
-                          'background-color': '#2DCC70',
-                          'border-radius': '20px',}),
+        #         dbc.Col([
+        #             html.Div(id="drag_container2", className="container", children=[
+        #             dbc.Card(id='sex_card', children=[
+        #                 dbc.CardHeader("Sex"),
+        #             ]),
+        #             dbc.Card(id='ahle_comp_card', children=[
+        #                 dbc.CardHeader("AHLE Component"),
+        #             ]),
+        #             dbc.Card(id='disease_card', children=[
+        #                 dbc.CardHeader("Disease"),
+        #             ]),
+        #             ], style={'padding': 10} )
+        #         ], style={
+        #                   'background-color': '#2DCC70',
+        #                   'border-radius': '20px',}),
 
-         ],justify='evenly'),
+        #  ],justify='evenly'),
 
-        html.Br(),
+        # html.Br(),
 
-        ### END OF TEST
-        ]),
+        # ### END OF TEST
+        # ]),
 
 
         #### USER GUIDE TAB
@@ -2181,13 +2181,13 @@ def update_footnote(graph):
 
     return block
 
-# TEST callback for drag and drop option
-clientside_callback(
-    ClientsideFunction(namespace="clientside", function_name="make_draggable"),
-    Output("drag_container0", "data-drag"),
-    [Input("drag_container2", "id"),
-     Input("drag_container", "id")]
-)
+# # TEST callback for drag and drop option
+# clientside_callback(
+#     ClientsideFunction(namespace="clientside", function_name="make_draggable"),
+#     Output("drag_container0", "data-drag"),
+#     [Input("drag_container2", "id"),
+#      Input("drag_container", "id")]
+# )
 
 # ------------------------------------------------------------------------------
 #### -- Data
