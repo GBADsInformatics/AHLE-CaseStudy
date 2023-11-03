@@ -1255,7 +1255,7 @@ gbadsDash.layout = html.Div([
             dbc.Row([
                 dbc.Col([   # Waterfall footnote
                     html.P("Blue indicates an increase, red indicates a decrease for each item. Orange is the net value of all of them.", id="waterfall-footnote-ecs"),
-                    html.P("Error bars show 95% confidence interval for each item based on simulation results and reflect uncertainty in the input parameters"),
+                    html.P("Error bars show 95% confidence interval for each item based on simulation results. These reflect uncertainty in the input parameters and natural variation in the population."),
                 ]),
                 dbc.Col([   # Treemap footnote
                     html.P("Attribution to infectious, non-infectious, and external causes is based on expert opinion. See the expert opinion attribution proportions in the table below."),
@@ -2835,8 +2835,8 @@ def update_ahle_value_and_cost_viz_ecs(
                     go.Scatter(
                          x=x_len+.3,
                          y=y_error_sum,
-                        marker=dict(color='black'),
-                        customdata=np.stack((y, prep_df['item']), axis=-1),
+                         marker=dict(color='black'),
+                         customdata=np.stack((y, prep_df['item']), axis=-1),
                          error_y=dict(
                             type='data',
                             array=prep_df['stdev_current']
@@ -2908,16 +2908,15 @@ def update_ahle_value_and_cost_viz_ecs(
                     go.Scatter(
                          x=x_len-.3,
                          y=y_error_sum,
-                        marker=dict(color='black'),
-                        customdata=np.stack((y, prep_df['item']), axis=-1),
+                         marker=dict(color='black'),
+                         customdata=np.stack((y, prep_df['item']), axis=-1),
                          error_y=dict(
                             type='data',
                             array=stdev
-                        ),
-                        mode="markers",
-                        hoverinfo='none',
-                        showlegend=False
-
+                            ),
+                         mode="markers",
+                         hoverinfo='none',
+                         showlegend=False
                     ),
                 )
 
@@ -2952,15 +2951,15 @@ def update_ahle_value_and_cost_viz_ecs(
                     go.Scatter(
                          x=x_len+.3,
                          y=y_error_sum,
-                        marker=dict(color='black'),
-                        customdata=np.stack((y, prep_df['item']), axis=-1),
+                         marker=dict(color='black'),
+                         customdata=np.stack((y, prep_df['item']), axis=-1),
                          error_y=dict(
                             type='data',
                             array=prep_df['stdev_current']
-                        ),
-                        mode="markers",
-                        hoverinfo='none',
-                        name='95% Confidence'
+                            ),
+                         mode="markers",
+                         hoverinfo='none',
+                         name='95% Confidence'
                     ),
                 )
 
