@@ -23,7 +23,15 @@ background-color: #F2F2F2 !important;
 /* Changes the line that indicates which tab is selected to orange*/
 div.tab--selected {
 	border-bottom: none;
-	border-top: 3px solid #F7931D !important ;
+	border-top: 3px solid #F7931D !important;
+}
+
+/* Changes selected tab to highlight tab text and border in orange*/
+.nav-link.active {
+    background-color: #f2f2f2 !important;
+    border-color: #F7931D #F7931D #f2f2f2 !important;
+    color: #000000 !important;
+	box-shadow: 2px -2px 5px #F7931D;
 }
 
 /* Set an h1 (top heading) style*/
@@ -44,7 +52,7 @@ div.tab--selected {
 
 /* Adjust the vertical spacing around the headings*/
 .heading-style, h3, h4, h5, h6 {
-    margin: .5rem 0 1.05rem !important;
+    margin: .5rem 0 0.05rem !important;
 }
 
 /*Changing the font to Raleway custom Google font*/

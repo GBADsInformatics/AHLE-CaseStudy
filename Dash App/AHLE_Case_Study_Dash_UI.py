@@ -84,28 +84,6 @@ tab_style = {'font-size':"1.5625rem",
              'font-weight': 'bold',
              }
 
-# # Tab colors based on grouping
-# ecs_tab_style = {
-#     'backgroundColor': '#d7bce1',
-#     'border-color': 'grey',
-#     'fontWeight': 'bold'
-# }
-# ecs_tab_selected_style = {
-#     'backgroundColor': '#d7bce1',
-#     'border-color': 'grey',
-#     'fontWeight': 'bold'
-# }
-
-# user_guide_tab_style ={
-#     'border-color': 'grey',
-#     'fontWeight': 'bold'
-# }
-
-# user_guide_tab_selected_style ={
-#     'border-color': 'grey',
-#     'fontWeight': 'bold'
-# }
-
 # =============================================================================
 #### Read data
 # =============================================================================
@@ -594,19 +572,20 @@ def create_ahle_waterfall_ecs(input_df, name, measure, x, y):
     return waterfall_fig
 
 # Define the AHLE bar chart alternative to waterfall
-def create_ahle_bar_chart_ecs(input_df, name, x, y):
+def create_ahle_bar_chart_ecs(input_df, name, x, y, x_var):
     # Adding a column for colors
     input_df["Color"] = np.where(y<0, '#E84C3D', '#3598DB')
 
     # input_df["Color"] = np.where(x.str.contains('Gross'), '#F7931D', input_df["Color"])
-    input_df["Color"] = np.where((x=='Gross Margin (AHLE)') | (x=='Gross Margin'), '#F7931D', input_df["Color"])
+    input_df["Color"] = np.where((x_var=='Gross Margin (AHLE)') | (x_var=='Gross Margin'), '#F7931D', input_df["Color"])
 
     barchart_fig = go.Figure(go.Bar(
         name = name,
         orientation = "v",
         x=x,
         y=y,
-        marker_color=input_df['Color']
+        marker_color=input_df['Color'],
+        customdata=np.stack((y, input_df['item']), axis=-1)
         ))
 
     barchart_fig.update_layout(plot_bgcolor="#ededed",)
@@ -876,18 +855,14 @@ gbadsDash.layout = html.Div([
                 dbc.Col([
                     # Dashboard title
                     html.Br(),
-                    html.H1('Burden of Disease by Country',
+                    html.H1(id='bod-select-country-ecs-title',
                             style={'color': '#F7931D',
                                    "font-weight": "bold"}
-                            ),
-                    # Dashboard sub title
-                    html.H2('Country Case Study: Animal Health Loss Envelope (AHLE)',
-                            style={'color': '#000000'}
                             ),
                     # Dashboard description
                     html.P(['This interactive dashboard uses publicly available data in consultation with \
                             experts to create models that provide a country-specific estimate of the \
-                            animal health loss envelope. The tool will guide you through this calculations, \
+                            animal health loss envelope (AHLE). The tool will guide you through this calculations, \
                             the outputs, and the many scenarios that allow us to use the information to \
                             aid decision makers with regard to animal health and production.'],
                            style={'textAlign': 'center'}
@@ -907,10 +882,12 @@ gbadsDash.layout = html.Div([
                         },
                 children =[
 
-            # html.H3("Ethiopia Animal Health Loss Envelope and Disease Attribution"),
-            html.Label(["Displaying production values, expenditures, and gross margin under the current and ideal scenario estimated by a compartmental herd dynamics model. Attribution of AHLE to infectious, non-infectious, and external causes is based on the results of expert elicitation."]),
-            # html.Label(["Results on this page are currently limited to cattle, small ruminants, and poultry, as those are the species for which the compartmental herd model has been estimated."]),
-            html.Label(["Results on this page are currently limited to cattle, small ruminants, and poultry."]),
+            html.Label(["Displaying production values, expenditures, and gross margin under the \
+                        current and ideal scenario estimated by a compartmental herd dynamics model."]),
+            html.Br(),
+            html.Label(["Results on this page are currently limited to cattle, small ruminants, and \
+                        poultry."],
+                       style={"font-style":"italic"}),
             html.Hr(style={'margin-right':'10px',
                            'margin-top':'0px',
                            'margin-bottom':'5px'}),
@@ -1084,120 +1061,11 @@ gbadsDash.layout = html.Div([
                         ], color='#F2F2F2'),    # END OF CARD
                     ],width=6),
 
-                #### -- Attribution Specific Controls
-                # dbc.Col([
-                    # dbc.Card([
-                        # dbc.CardBody([
-                            # html.H5("AHLE Attribution",
-                            #         className="card-title",
-                            #         style={"font-weight": "bold"}),
-                            # html.Label(["Showing how each component contributes to the total animal health loss envelope, including attribution to infectious, non-infectious, and external causes."]),
-                            # html.Label(["NOTE: this is shown for species groups (cattle, all small ruminants, or all poultry) rather than for individual species."] ,style={"font-style":"italic"}),
-                            # html.H5("Segment by..."),
-                            # dbc.Row([
-                            #     # Top Level
-                            #     dbc.Col([
-                            #         html.H6("Top Level", id="select-top-lvl-attr-ecs-title"),
-                            #         dcc.Dropdown(id='select-top-lvl-attr-ecs',
-                            #                       options=ecs_hierarchy_attr_options,
-                            #                       value='cause',
-                            #                       clearable = False,
-                            #                       ),
-                            #         ], style={
-                            #             "margin-bottom":"30px", # Adding this to account for the additional space created by the radio buttons
-                            #             },
-                            #         ),
-                            #     # Drilldown 1
-                            #     dbc.Col([
-                            #         html.H6("Drilldown 1", id="select-dd-1-attr-ecs-title"),
-                            #         dcc.Dropdown(id='select-dd-1-attr-ecs',
-                            #                        clearable = False,
-                            #                       ),
-                            #         ], style={
-                            #             "margin-bottom":"30px", # Adding this to account for the additional space created by the radio buttons
-                            #             },
-                            #         ),
-                            #     # Drilldown 2
-                            #     dbc.Col([
-                            #         html.H6("Drilldown 2", id="select-dd-2-attr-ecs-title"),
-                            #         dcc.Dropdown(id='select-dd-2-attr-ecs',
-                            #                       options=ecs_hierarchy_dd_attr_options,
-                            #                       value='age_group',
-                            #                       clearable = False,
-                            #                       ),
-                            #         ], style={
-                            #             "margin-bottom":"30px", # Adding this to account for the additional space created by the radio buttons
-                            #             },
-                            #         ),
-                            #     ]), # END OF ROW
-                            # dbc.Row([
-                            #     # Drilldown 3
-                            #     dbc.Col([
-                            #         html.H6("Drilldown 3", id="select-dd-3-attr-ecs-title"),
-                            #         dcc.Dropdown(id='select-dd-3-attr-ecs',
-                            #                       options=ecs_hierarchy_dd_attr_options,
-                            #                       value='disease',
-                            #                       clearable = False,
-                            #                       ),
-                            #         ]),
-                            #     # Drilldown 4
-                            #     dbc.Col([
-                            #         html.H6("Drilldown 4", id="select-dd-4-attr-ecs-title"),
-                            #         dcc.Dropdown(id='select-dd-4-attr-ecs',
-                            #                       options=ecs_hierarchy_dd_attr_options,
-                            #                       value='ahle_component',
-                            #                       clearable = False,
-                            #                       ),
-                            #         ]),
-                            #     ]), # END OF ROW
-                            # html.Label([
-                            #     "Disease drilldown shows infectious AHLE broken out as follows depending on species:"
-                            #     ,html.Br()
-                            #     ,"- Cattle: Brucellosis | FMD | Other Infectious"
-                            #     ,html.Br()
-                            #     ,"- Small ruminants: Brucellosis | PPR | Other Infectious"
-                            #     ,html.Br()
-                            #     ,html.Br()
-                            #     ,"Set any drill down to None to segment by fewer factors"
-                            #     ] ,style={"font-style":"italic" ,"margin-top":"10px"}
-                            #     ),
-                            # ]),     # END OF CARD BODY
-                        # ], color='#F2F2F2'),    # END OF CARD
-
-                    # ]), # END OF Attribution Specific Controls
-
                 ], justify='evenly'),   # END OF Controls Row
             html.Br(),
 
             #### -- GRAPHICS PT.1
             dbc.Row([  # Row with GRAPHICS
-
-                # Values and Costs Waterfall
-                dbc.Col([
-                    dbc.Spinner(children=[
-                    dcc.Graph(id='ecs-ahle-waterfall',
-                              style = {"height":"650px"},
-                              config = {
-                                  "displayModeBar" : True,
-                                  "displaylogo": False,
-                                  'toImageButtonOptions': {
-                                      'format': 'png', # one of png, svg, jpeg, webp
-                                      'filename': 'GBADs_Ethiopia_AHLE_Sunburst'
-                                      },
-                                  'modeBarButtonsToRemove': ['zoom',
-                                                              'zoomIn',
-                                                              'zoomOut',
-                                                              'autoScale',
-                                                              #'resetScale',  # Removes home button
-                                                              'pan',
-                                                              'select2d',
-                                                              'lasso2d']
-                                  }
-                              )
-                    # End of Spinner
-                    ],size="md", color="#393375", fullscreen=False),
-                    # End of AHLE Sunburst
-                    ],style={"width":5}),
 
                 # AHLE Bar Chart
                 dbc.Col(
@@ -1224,36 +1092,36 @@ gbadsDash.layout = html.Div([
                               )
                     # End of Spinner
                     ],size="md", color="#393375", fullscreen=False),
-                    # End of Attribution Treemap
-                    style={"width":5}),
+                # End of AHLE Bar Chart Column
+                style={"width":5}),
 
-                # # Attribution Treemap
-                # dbc.Col(
-                #     dbc.Spinner(children=[
+                # Values and Costs Waterfall
+                dbc.Col([
+                    dbc.Spinner(children=[
+                    dcc.Graph(id='ecs-ahle-waterfall',
+                              style = {"height":"650px"},
+                              config = {
+                                  "displayModeBar" : True,
+                                  "displaylogo": False,
+                                  'toImageButtonOptions': {
+                                      'format': 'png', # one of png, svg, jpeg, webp
+                                      'filename': 'GBADs_Ethiopia_AHLE_Sunburst'
+                                      },
+                                  'modeBarButtonsToRemove': ['zoom',
+                                                              'zoomIn',
+                                                              'zoomOut',
+                                                              'autoScale',
+                                                              #'resetScale',  # Removes home button
+                                                              'pan',
+                                                              'select2d',
+                                                              'lasso2d']
+                                  }
+                              )
+                        # End of Spinner
+                        ],size="md", color="#393375", fullscreen=False),
+                    # End of AHLE Waterfall
+                    ],style={"width":5}),
 
-                #     dcc.Graph(id='ecs-attr-treemap',
-                #               style = {"height":"650px"},
-                #               config = {
-                #                   "displayModeBar" : True,
-                #                   "displaylogo": False,
-                #                   'toImageButtonOptions': {
-                #                       'format': 'png', # one of png, svg, jpeg, webp
-                #                       'filename': 'GBADs_Ethiopia_Attribution_Treemap'
-                #                       },
-                #                   'modeBarButtonsToRemove': ['zoom',
-                #                                              'zoomIn',
-                #                                              'zoomOut',
-                #                                              'autoScale',
-                #                                              #'resetScale',  # Removes home button
-                #                                              'pan',
-                #                                              'select2d',
-                #                                              'lasso2d']
-                #                   }
-                #               )
-                #     # End of Spinner
-                #     ],size="md", color="#393375", fullscreen=False),
-                #     # End of Attribution Treemap
-                #     style={"width":5}),
                 ]), # END OF GRAPHICS ROW
 
             #### -- FOOTNOTES PT.1
@@ -1271,62 +1139,6 @@ gbadsDash.layout = html.Div([
             ### END OF FOOTNOTES
 
             html.Hr(style={'margin-right':'10px',}),
-
-            #### -- MAP
-            dbc.Card([
-                dbc.CardBody([
-                    html.H3("Subnational AHLE"),
-                    html.Label(["Showing the animal health loss envelope for each subnational state. Use the dropdown to view an individual item of revenue, expenditure, or gross margin instead."]),
-                    html.Label(["Note: a subnational state will appear blank if there is no data for the selected production system there"] ,style={"font-style":"italic"}),
-                    dbc.Row([
-                        # Map Display
-                        dbc.Col([
-                            html.H5("Item"),
-                            dcc.Dropdown(id='select-map-display-ecs',
-                                         value='Animal Health Loss Envelope',
-                                         clearable=False,
-                                         ),
-                            ],width=3),
-
-                        # Denominator
-                        dbc.Col([
-                            html.H5("Show values as..."),
-                            dcc.RadioItems(id='select-map-denominator-ecs',
-                                          options=ecs_map_denominator_options,
-                                          value= "Per kg biomass",
-                                          inputStyle={"margin-right": "2px", # This pulls the words off of the button
-                                                      "margin-left": "10px"},
-                                          ),
-                            ]),
-                        ]), # END OF MAP SELECTIONS ROW
-                    ]),     # END OF CARD BODY
-                ], color='#F2F2F2', style={"margin-right": "10px"}),    # END OF CARD
-
-            # Map viz
-            dbc.Row([
-                dbc.Col([ # Ethiopian subnational level
-                    dbc.Spinner(children=[
-                    dcc.Graph(id='ecs-map',
-                                style = {"height":"650px"},
-                              config = {
-                                  "displayModeBar" : True,
-                                  "displaylogo": False,
-                                  'toImageButtonOptions': {
-                                      'format': 'png', # one of png, svg, jpeg, webp
-                                      'filename': 'GBADs_Ethiopia_Subnational_Viz'
-                                      },
-                                  }
-                              )
-                        ],size="md", color="#393375", fullscreen=False),    # End of Spinner
-                    ]),     # End of Map
-                ]),     # END OF MAP ROW
-
-            #### -- MAP FOOTNOTES
-            dbc.Row([
-                html.P("Livestock data is not shown for city regions (Addis Ababa, Dire Dawa, and Harari)"),
-                html.P("South West Ethiopia did not have data available at the time of analysis. It is showing the same values as SNNP."),
-                ], style={'font-style': 'italic'}
-                ),
 
             #### -- GRAPHICS PT.2
             # dbc.Row([
@@ -1392,140 +1204,464 @@ gbadsDash.layout = html.Div([
             ]),
 
 
-        #### AHLE ATTRIBUTION BY POPULATION
-        dbc.Tab(label="AHLE Attribution by Population",
+        # #### AHLE V2
+        # dbc.Tab(label="AHLE v2",
+        #         tabClassName="flex-grow-1 text-center",
+        #             tab_style = tab_style,
+        #             style = {"height":"100vh",
+        #                 },
+        #         children =[
+        #        html.Label(["Displaying production values, expenditures, and gross margin under the \
+        #                    current and ideal scenario estimated by a compartmental herd dynamics model."]),
+        #        html.Br(),
+        #        html.Label(["Results on this page are currently limited to cattle, small ruminants, and \
+        #                    poultry."],
+        #                   style={"font-style":"italic"}),
+        #        html.Hr(style={'margin-right':'10px',
+        #                       'margin-top':'0px',
+        #                       'margin-bottom':'5px'}),
+        #        html.Label(["Select a species and production system to view and the currency to display for all charts"]
+        #                   ,style={"font-style":"italic"}
+        #                   ),
+
+        #        #### -- DROPDOWNS CONTROLS
+        #        dbc.Row([
+        #            dbc.Col([
+        #                html.H5("Species"),
+        #                dcc.Dropdown(id='select-species-ecs',
+        #                            options=ecs_species_options,
+        #                            value='Cattle',
+        #                            clearable = False,
+        #                            ),
+        #                ]),
+        #            dbc.Col([
+        #                html.H5("Production System"),
+        #                dcc.Dropdown(id='select-prodsys-ecs',
+        #                             # Options and value are now defined in a callback based on selected species
+        #                             clearable = False,
+        #                             ),
+        #                ]),
+        #            dbc.Col([
+        #                html.H5("Currency"),
+        #                dcc.Dropdown(id='select-currency-ecs',
+        #                            options=ecs_currency_options,
+        #                            value='Birr',
+        #                            clearable = False,
+        #                            ),
+        #                ]),
+
+        #            # END OF FIRST CONTROL ROW
+        #            ],style={"margin-bottom":"30px"}),
+
+        #        # SECOND CONTROL ROW
+        #        dbc.Row([
+        #            dbc.Col([
+        #                # Switch between single year and over time
+        #                html.H5("Display AHLE for..."),
+        #                dcc.RadioItems(id='select-graph-ahle-ecs',
+        #                              inline=True,                  # True: arrange buttons horizontally
+        #                              inputStyle={
+        #                                  "margin-right":"2px",     # This pulls the words off of the button
+        #                                  "margin-left":"10px",     # Space between buttons if inline=True
+        #                                  },
+        #                              ),
+        #                # Text underneath
+        #                html.P("Estimates over time or for any year other than 2021 are currently placeholders" ,style={'font-style':'italic'}),
+        #                ]),
+
+        #            # Year selector
+        #            dbc.Col([
+        #                html.H5("Year"),
+        #                dcc.Dropdown(id='select-year-ecs',
+        #                             clearable = False,
+        #                             ),
+        #                ]),
+
+        #            # Geographical breakdown options
+        #            dbc.Col([
+        #                html.H5("AHLE Geographic Scope"),
+        #                dcc.RadioItems(id='select-geo-view-ecs',
+        #                              inline=True,                  # True: arrange buttons horizontally
+        #                              inputStyle={
+        #                                  "margin-right":"2px",     # This pulls the words off of the button
+        #                                  "margin-left":"10px",     # Space between buttons if inline=True
+        #                                  },
+        #                              ),
+        #                # Text underneath
+        #                html.P("Subnational estimates are currently only available for cattle for 2021" ,style={'font-style':'italic'}),
+        #                ]),
+
+        #            # Subnational dropdwon
+        #            dbc.Col([
+        #                html.H5("Subnational state", id='select-region-ecs-title'),
+        #                dcc.Dropdown(id='select-region-ecs',
+        #                             options=ecs_region_options,
+        #                             placeholder='Select Subnational...',
+        #                             clearable = False,
+        #                             ),
+        #                ]),
+
+        #            # END OF SECOND CONTROL ROW
+        #            ],justify='evenly'),
+
+        #        html.Hr(style={'margin-right':'10px'}),
+
+        #        dbc.Row([
+        #            #### -- AHLE Specific Controls
+        #            dbc.Col([
+        #                dbc.Card([
+        #                    dbc.CardBody([
+        #                        html.H5("Animal Health Loss Envelope (AHLE)",
+        #                                className="card-title",
+        #                                style={"font-weight": "bold"}
+        #                                ),
+        #                        html.Label(["Comparing current values, expenditures, and gross margin to the ideal. Note that the ideal values and expenditures describe the system in an ideal state (for example, zero health expenditure); they do not describe what is required to achieve that state."]),
+        #                        dbc.Row([
+        #                            # Switch between side by side and difference
+        #                            dbc.Col([
+        #                                html.H6("Show current and ideal as..."),
+        #                                dcc.RadioItems(id='select-display-ecs',
+        #                                               options=ecs_display_options,
+        #                                               value='Difference',
+        #                                               labelStyle={'display': 'block'},
+        #                                               inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
+        #                                               ),
+        #                                html.Label(["Difference: show a single bar for each item representing the difference between the current and ideal values"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
+        #                                html.Label(["Side by Side: show two bars for each item, one for current and another for the ideal value"] ,style={'font-style':'italic'}),
+        #                                ]),
+
+        #                            # Compare
+        #                            dbc.Col([
+        #                                html.H6("Compare current to...", id='select-compare-ecs-title'),
+        #                                dcc.RadioItems(id='select-compare-ecs',
+        #                                               options=ecs_compare_options_limited,
+        #                                               value='Ideal',
+        #                                               labelStyle={'display': 'block'},
+        #                                               inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
+        #                                               ),
+        #                                html.Label(["Ideal: zero mortality and ideal growth and production rates"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
+        #                                html.Label(["Zero Mortality: zero mortality but growth and production rates at current levels"] ,style={'font-style':'italic'}),
+        #                                ]),
+
+        #                        ]), # END OF ROW
+        #                        dbc.Row([
+        #                            dbc.Col([
+        #                                html.H6("Item", id='select-item-ecs-title'),
+        #                                dcc.Dropdown(id='select-item-ecs',
+        #                                             value='Gross Margin',
+        #                                             clearable = False,
+        #                                             ),
+        #                                ]),
+
+        #                            # Factor dropdown
+        #                            dbc.Col([
+        #                                html.H6("Improvement Factor", id='select-factor-ecs-title'),
+        #                                dcc.Dropdown(id='select-factor-ecs',
+        #                                              options=ecs_factor_options,
+        #                                              value='Mortality',
+        #                                              clearable = True,
+        #                                              ),
+        #                                  ],width=4,
+        #                                ),
+
+        #                            # Reduction
+        #                            dbc.Col([
+        #                                html.H6("Improvement Amount", id='select-improve-ecs-title'),
+        #                                dcc.RadioItems(id='select-improve-ecs',
+        #                                              options=ecs_improve_options,
+        #                                              value= "25%",
+        #                                              inputStyle={"margin-right": "2px", # This pulls the words off of the button
+        #                                                          "margin-left": "10px"},
+        #                                              ),
+        #                                ]),
+        #                            ]),     ## END OF ROW ##
+        #                        ]),    # END OF CARD BODY
+        #                    ], color='#F2F2F2'),    # END OF CARD
+        #                ]),
+
+        #            ], justify='evenly'),   # END OF Controls Row
+        #        html.Br(),
+
+        #        #### -- GRAPHICS PT.1
+        #        dbc.Row([  # Row with GRAPHICS
+
+        #            # AHLE Bar Chart
+        #            dbc.Col(
+        #                dbc.Spinner(children=[
+
+        #                dcc.Graph(id='ecs-ahle-bar-chart',
+        #                          style = {"height":"650px"},
+        #                          config = {
+        #                              "displayModeBar" : True,
+        #                              "displaylogo": False,
+        #                              'toImageButtonOptions': {
+        #                                  'format': 'png', # one of png, svg, jpeg, webp
+        #                                  'filename': 'GBADs_Ethiopia_Attribution_Treemap'
+        #                                  },
+        #                              'modeBarButtonsToRemove': ['zoom',
+        #                                                          'zoomIn',
+        #                                                          'zoomOut',
+        #                                                          'autoScale',
+        #                                                          #'resetScale',  # Removes home button
+        #                                                          'pan',
+        #                                                          'select2d',
+        #                                                          'lasso2d']
+        #                              }
+        #                          )
+        #                # End of Spinner
+        #                ],size="md", color="#393375", fullscreen=False),
+        #            # End of AHLE Bar Chart Column
+        #            style={"width":5}),
+
+        #            # Values and Costs Waterfall
+        #            dbc.Col([
+        #                dbc.Spinner(children=[
+        #                dcc.Graph(id='ecs-ahle-waterfall',
+        #                          style = {"height":"650px"},
+        #                          config = {
+        #                              "displayModeBar" : True,
+        #                              "displaylogo": False,
+        #                              'toImageButtonOptions': {
+        #                                  'format': 'png', # one of png, svg, jpeg, webp
+        #                                  'filename': 'GBADs_Ethiopia_AHLE_Sunburst'
+        #                                  },
+        #                              'modeBarButtonsToRemove': ['zoom',
+        #                                                          'zoomIn',
+        #                                                          'zoomOut',
+        #                                                          'autoScale',
+        #                                                          #'resetScale',  # Removes home button
+        #                                                          'pan',
+        #                                                          'select2d',
+        #                                                          'lasso2d']
+        #                              }
+        #                          )
+        #                    # End of Spinner
+        #                    ],size="md", color="#393375", fullscreen=False),
+        #                # End of AHLE Waterfall
+        #                ],style={"width":5}),
+
+        #            ]), # END OF GRAPHICS ROW
+
+        #        #### -- FOOTNOTES PT.1
+        #        dbc.Row([
+        #            dbc.Col([   # Waterfall footnote
+        #                html.P("Blue indicates an increase, red indicates a decrease for each item. Orange is the net value of all of them.", id="waterfall-footnote-ecs"),
+        #                html.P("Error bars show 95% confidence interval for each item based on simulation results. These reflect uncertainty in the input parameters and natural variation in the population."),
+        #            ]),
+
+        #        ], style={'font-style': 'italic'}
+        #        ),
+        #        ### END OF FOOTNOTES
+
+        #        # html.Hr(style={'margin-right':'10px',}),
+        #     ### END OF AHLE V2 TAB
+        #         ]),
+
+
+            #### AHLE ATTRIBUTION BY POPULATION
+            dbc.Tab(label="AHLE Attribution by Population",
+                    tabClassName="flex-grow-1 text-center",
+                        tab_style = tab_style,
+                        style = {"height":"100vh",
+                            },
+                    children =[
+
+                        #### -- Attribution Specific Controls
+                        html.Label(["Showing how each component contributes to the total animal health loss envelope, \
+                                    including attribution to infectious, non-infectious, and external causes. \
+                                    Attribution of AHLE to infectious, non-infectious, and external \
+                                    causes is based on the results of expert elicitation."]),
+                        dbc.Col([
+                            dbc.Card([
+                                dbc.CardBody([
+                                    # html.H5("AHLE Attribution",
+                                    #         className="card-title",
+                                    #         style={"font-weight": "bold"}),
+                                    html.Label(["NOTE: this is shown for species groups (cattle, all small ruminants, or all poultry) rather than for individual species."] ,style={"font-style":"italic"}),
+                                    html.H5("Segment by..."),
+                                    dbc.Row([
+                                        # Top Level
+                                        dbc.Col([
+                                            html.H6("Top Level", id="select-top-lvl-attr-ecs-title"),
+                                            dcc.Dropdown(id='select-top-lvl-attr-ecs',
+                                                          options=ecs_hierarchy_attr_options,
+                                                          value='cause',
+                                                          # labelStyle={'display': 'block'}
+                                                          clearable = False,
+                                                          ),
+                                            ], style={
+                                                "margin-bottom":"30px", # Adding this to account for the additional space created by the radio buttons
+                                                },
+                                            ),
+                                        # Drilldown 1
+                                        dbc.Col([
+                                            html.H6("Drilldown 1", id="select-dd-1-attr-ecs-title"),
+                                            dcc.Dropdown(id='select-dd-1-attr-ecs',
+                                                           clearable = False,
+                                                          ),
+                                            ], style={
+                                                "margin-bottom":"30px", # Adding this to account for the additional space created by the radio buttons
+                                                },
+                                            ),
+                                        # Drilldown 2
+                                        dbc.Col([
+                                            html.H6("Drilldown 2", id="select-dd-2-attr-ecs-title"),
+                                            dcc.Dropdown(id='select-dd-2-attr-ecs',
+                                                          options=ecs_hierarchy_dd_attr_options,
+                                                          value='age_group',
+                                                          clearable = False,
+                                                          ),
+                                            ], style={
+                                                "margin-bottom":"30px", # Adding this to account for the additional space created by the radio buttons
+                                                },
+                                            ),
+                                        ]), # END OF ROW
+                                    dbc.Row([
+                                        # Drilldown 3
+                                        dbc.Col([
+                                            html.H6("Drilldown 3", id="select-dd-3-attr-ecs-title"),
+                                            dcc.Dropdown(id='select-dd-3-attr-ecs',
+                                                          options=ecs_hierarchy_dd_attr_options,
+                                                          value='disease',
+                                                          clearable = False,
+                                                          ),
+                                            ]),
+                                        # Drilldown 4
+                                        dbc.Col([
+                                            html.H6("Drilldown 4", id="select-dd-4-attr-ecs-title"),
+                                            dcc.Dropdown(id='select-dd-4-attr-ecs',
+                                                          options=ecs_hierarchy_dd_attr_options,
+                                                          value='ahle_component',
+                                                          clearable = False,
+                                                          ),
+                                            ]),
+                                        ]), # END OF ROW
+                                    html.Label([
+                                        "Disease drilldown shows infectious AHLE broken out as follows depending on species:"
+                                        ,html.Br()
+                                        ,"- Cattle: Brucellosis | FMD | Other Infectious"
+                                        ,html.Br()
+                                        ,"- Small ruminants: Brucellosis | PPR | Other Infectious"
+                                        ,html.Br()
+                                        ,html.Br()
+                                        ,"Set any drill down to None to segment by fewer factors"
+                                        ] ,style={"font-style":"italic" ,"margin-top":"10px"}
+                                        ),
+                                    ]),     # END OF CARD BODY
+                                ], color='#F2F2F2'),    # END OF CARD
+                        ]),
+
+                        html.Br(),
+
+                        #### -- GRAPHICS
+                        dbc.Row([  # Row with GRAPHICS
+                            # Attribution Treemap
+                            dbc.Col(
+                                dbc.Spinner(children=[
+
+                                dcc.Graph(id='ecs-attr-treemap',
+                                          style = {"height":"650px"},
+                                          config = {
+                                              "displayModeBar" : True,
+                                              "displaylogo": False,
+                                              'toImageButtonOptions': {
+                                                  'format': 'png', # one of png, svg, jpeg, webp
+                                                  'filename': 'GBADs_Ethiopia_Attribution_Treemap'
+                                                  },
+                                              'modeBarButtonsToRemove': ['zoom',
+                                                                         'zoomIn',
+                                                                         'zoomOut',
+                                                                         'autoScale',
+                                                                         #'resetScale',  # Removes home button
+                                                                         'pan',
+                                                                         'select2d',
+                                                                         'lasso2d']
+                                              }
+                                          )
+                                # End of Spinner
+                                ],size="md", color="#393375", fullscreen=False),
+                                # End of Attribution Treemap
+                                style={"width":5}),
+                        ]), # END OF GRAPHICS ROW
+
+                        #### -- FOOTNOTES
+                        dbc.Col([   # Treemap footnote
+                            html.P("Attribution to infectious, non-infectious, and external causes is based on expert opinion. See the expert opinion attribution proportions in the table below."),
+                            html.P("AHLE Components are production loss, mortality loss, and health cost. Health cost makes up the smallest proportion and may not be visible in this view."),
+                        ], style={'font-style': 'italic'}),
+
+            html.Br(),
+
+        ### END OF AHLE ATTRIBUTION BY POPULATION
+        ]),
+
+
+        #### SUBNATIONAL AHLE MAP
+        dbc.Tab(label="AHLE Map",
                 tabClassName="flex-grow-1 text-center",
                     tab_style = tab_style,
                     style = {"height":"100vh",
                         },
                 children =[
+            #### -- CONTROLS
+            dbc.Card([
+                dbc.CardBody([
+                    html.H3("Subnational AHLE"),
+                    html.Label(["Showing the animal health loss envelope for each subnational state. Use the dropdown to view an individual item of revenue, expenditure, or gross margin instead."]),
+                    html.Label(["Note: a subnational state will appear blank if there is no data for the selected production system there"] ,style={"font-style":"italic"}),
+                    dbc.Row([
+                        # Map Display
+                        dbc.Col([
+                            html.H5("Item"),
+                            dcc.Dropdown(id='select-map-display-ecs',
+                                         value='Animal Health Loss Envelope',
+                                         clearable=False,
+                                         ),
+                            ],width=3),
 
-                    #### -- Attribution Specific Controls
-                    html.Label(["Showing how each component contributes to the total animal health loss envelope, \
-                                including attribution to infectious, non-infectious, and external causes."]),
-                    dbc.Col([
-                        dbc.Card([
-                            dbc.CardBody([
-                                # html.H5("AHLE Attribution",
-                                #         className="card-title",
-                                #         style={"font-weight": "bold"}),
-                                html.Label(["NOTE: this is shown for species groups (cattle, all small ruminants, or all poultry) rather than for individual species."] ,style={"font-style":"italic"}),
-                                html.H5("Segment by..."),
-                                dbc.Row([
-                                    # Top Level
-                                    dbc.Col([
-                                        html.H6("Top Level", id="select-top-lvl-attr-ecs-title"),
-                                        dcc.Dropdown(id='select-top-lvl-attr-ecs',
-                                                      options=ecs_hierarchy_attr_options,
-                                                      value='cause',
-                                                      # labelStyle={'display': 'block'}
-                                                      clearable = False,
-                                                      ),
-                                        ], style={
-                                            "margin-bottom":"30px", # Adding this to account for the additional space created by the radio buttons
-                                            },
-                                        ),
-                                    # Drilldown 1
-                                    dbc.Col([
-                                        html.H6("Drilldown 1", id="select-dd-1-attr-ecs-title"),
-                                        dcc.Dropdown(id='select-dd-1-attr-ecs',
-                                                       clearable = False,
-                                                      ),
-                                        ], style={
-                                            "margin-bottom":"30px", # Adding this to account for the additional space created by the radio buttons
-                                            },
-                                        ),
-                                    # Drilldown 2
-                                    dbc.Col([
-                                        html.H6("Drilldown 2", id="select-dd-2-attr-ecs-title"),
-                                        dcc.Dropdown(id='select-dd-2-attr-ecs',
-                                                      options=ecs_hierarchy_dd_attr_options,
-                                                      value='age_group',
-                                                      clearable = False,
-                                                      ),
-                                        ], style={
-                                            "margin-bottom":"30px", # Adding this to account for the additional space created by the radio buttons
-                                            },
-                                        ),
-                                    ]), # END OF ROW
-                                dbc.Row([
-                                    # Drilldown 3
-                                    dbc.Col([
-                                        html.H6("Drilldown 3", id="select-dd-3-attr-ecs-title"),
-                                        dcc.Dropdown(id='select-dd-3-attr-ecs',
-                                                      options=ecs_hierarchy_dd_attr_options,
-                                                      value='disease',
-                                                      clearable = False,
-                                                      ),
-                                        ]),
-                                    # Drilldown 4
-                                    dbc.Col([
-                                        html.H6("Drilldown 4", id="select-dd-4-attr-ecs-title"),
-                                        dcc.Dropdown(id='select-dd-4-attr-ecs',
-                                                      options=ecs_hierarchy_dd_attr_options,
-                                                      value='ahle_component',
-                                                      clearable = False,
-                                                      ),
-                                        ]),
-                                    ]), # END OF ROW
-                                html.Label([
-                                    "Disease drilldown shows infectious AHLE broken out as follows depending on species:"
-                                    ,html.Br()
-                                    ,"- Cattle: Brucellosis | FMD | Other Infectious"
-                                    ,html.Br()
-                                    ,"- Small ruminants: Brucellosis | PPR | Other Infectious"
-                                    ,html.Br()
-                                    ,html.Br()
-                                    ,"Set any drill down to None to segment by fewer factors"
-                                    ] ,style={"font-style":"italic" ,"margin-top":"10px"}
-                                    ),
-                                ]),     # END OF CARD BODY
-                            ], color='#F2F2F2'),    # END OF CARD
-                    ]),
+                        # Denominator
+                        dbc.Col([
+                            html.H5("Show values as..."),
+                            dcc.RadioItems(id='select-map-denominator-ecs',
+                                          options=ecs_map_denominator_options,
+                                          value= "Per kg biomass",
+                                          inputStyle={"margin-right": "2px", # This pulls the words off of the button
+                                                      "margin-left": "10px"},
+                                          ),
+                            ]),
+                        ]), # END OF MAP CONTROLS ROW
+                    ]),     # END OF CARD BODY
+                ], color='#F2F2F2', style={"margin-right": "10px"}),    # END OF CARD
 
-                    html.Br(),
+            html.Br(),
 
-                    #### -- GRAPHICS
-                    dbc.Row([  # Row with GRAPHICS
-                        # Attribution Treemap
-                        dbc.Col(
-                            dbc.Spinner(children=[
+            #### -- MAP GRAPHIC
+            dbc.Row([
+                dbc.Col([ # Ethiopian subnational level
+                    dbc.Spinner(children=[
+                    dcc.Graph(id='ecs-map',
+                                style = {"height":"650px"},
+                              config = {
+                                  "displayModeBar" : True,
+                                  "displaylogo": False,
+                                  'toImageButtonOptions': {
+                                      'format': 'png', # one of png, svg, jpeg, webp
+                                      'filename': 'GBADs_Ethiopia_Subnational_Viz'
+                                      },
+                                  }
+                              )
+                        ],size="md", color="#393375", fullscreen=False),    # End of Spinner
+                    ]),     # End of COL
+                ]),     # END OF MAP GRAPHIC ROW
 
-                            dcc.Graph(id='ecs-attr-treemap',
-                                      style = {"height":"650px"},
-                                      config = {
-                                          "displayModeBar" : True,
-                                          "displaylogo": False,
-                                          'toImageButtonOptions': {
-                                              'format': 'png', # one of png, svg, jpeg, webp
-                                              'filename': 'GBADs_Ethiopia_Attribution_Treemap'
-                                              },
-                                          'modeBarButtonsToRemove': ['zoom',
-                                                                     'zoomIn',
-                                                                     'zoomOut',
-                                                                     'autoScale',
-                                                                     #'resetScale',  # Removes home button
-                                                                     'pan',
-                                                                     'select2d',
-                                                                     'lasso2d']
-                                          }
-                                      )
-                            # End of Spinner
-                            ],size="md", color="#393375", fullscreen=False),
-                            # End of Attribution Treemap
-                            style={"width":5}),
-                    ]), # END OF GRAPHICS ROW
-
-                    #### -- FOOTNOTES
-                    dbc.Col([   # Treemap footnote
-                        html.P("Attribution to infectious, non-infectious, and external causes is based on expert opinion. See the expert opinion attribution proportions in the table below."),
-                        html.P("AHLE Components are production loss, mortality loss, and health cost. Health cost makes up the smallest proportion and may not be visible in this view."),
-                    ], style={'font-style': 'italic'}),
-
-        html.Br(),
-
-        ### END OF AHLE ATTRIBUTION BY POPULATION
-        ]),
+            #### -- MAP FOOTNOTES
+            dbc.Row([
+                html.P("Livestock data is not shown for city regions (Addis Ababa, Dire Dawa, and Harari)"),
+                html.P("South West Ethiopia did not have data available at the time of analysis. It is showing the same values as SNNP."),
+                ], style={'font-style': 'italic'}
+                ),
+        ### END OF SUBNATIONAL AHLE MAP TAB
+            ]),
 
 
         #### WEI
@@ -1722,6 +1858,14 @@ gbadsDash.layout = html.Div([
 # ------------------------------------------------------------------------------
 #### -- Controls
 # ------------------------------------------------------------------------------
+# Update dashboard title based on selected country
+@gbadsDash.callback(
+    Output('bod-select-country-ecs-title', 'children'),
+    Input('select-country-ahle', 'value'),
+    )
+def update_dashboard_country_title(country):
+    return f'Burden of Disease by {country}'
+
 # Update production system options based on species
 @gbadsDash.callback(
     Output('select-prodsys-ecs', 'options'),
@@ -3519,7 +3663,7 @@ def update_ahle_bar_chart_ecs(
 
             # Create graph
             name = 'Difference'
-            ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x, y)
+            ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x, y, x)
 
             # Add error bars
             # Reset indicies
@@ -3561,7 +3705,7 @@ def update_ahle_bar_chart_ecs(
                 x_len = np.arange(1,len(x)+1,1)
 
                 # Create graph
-                ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x_len, y)
+                ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x_len, y, x)
                 # Add error bars
                 # Reset indicies
                 x = x.reset_index(drop=True)
@@ -3586,17 +3730,20 @@ def update_ahle_bar_chart_ecs(
                     ),
                 )
 
+                y = prep_df['mean_current']
+
                 # Add current with lag
-                prep_df["Color"] = np.where(y<0, '#E84C3D', '#3598DB')
+                prep_df["Color"] = np.where(y<0, '#E88A81', '#77B3DB')
                 prep_df["Color"] = np.where((x=='Gross Margin (AHLE)') | (x=='Gross Margin'), '#F7931D', prep_df["Color"])
 
-                y = prep_df['mean_current']
+                # y = prep_df['mean_current']
                 ecs_waterfall_fig.add_trace(go.Bar(
                     name = 'Current (outline)',
                     x = x_len,
                     y = y,
                     marker_color=prep_df['Color'],
-                    marker_pattern_shape=".",
+                    marker_pattern_shape="x",
+                    customdata=np.stack((y, prep_df['item']), axis=-1),
                     ))
 
                 # Add error bars
@@ -3637,7 +3784,7 @@ def update_ahle_bar_chart_ecs(
                 x_len = np.arange(1,len(x)+1,1)
 
                 # Create graph
-                ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x_len, y)
+                ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x_len, y, x)
                 # Add error bars
                 # Reset indicies
                 x = x.reset_index(drop=True)
@@ -3731,7 +3878,7 @@ def update_ahle_bar_chart_ecs(
                 x_len = np.arange(1,len(x)+1,1)
 
                 # Create graph
-                ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x_len, y)
+                ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x_len, y, x)
                 # Add error bars
                 # Reset indicies
                 x = x.reset_index(drop=True)
