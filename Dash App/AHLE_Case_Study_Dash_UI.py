@@ -965,7 +965,8 @@ gbadsDash.layout = html.Div([
 
                 # Year selector
                 dbc.Col([
-                    html.H5("Year"),
+                    # html.H5("Year"),
+                    html.H5(id='select-year-ecs-title'),
                     dcc.Dropdown(id='select-year-ecs',
                                  clearable = False,
                                  ),
@@ -1756,6 +1757,7 @@ def update_longitudinal_options_ecs(species):
 
 # Year selector
 @gbadsDash.callback(
+    Output('select-year-ecs-title','children'),
     Output('select-year-ecs','options'),
     Output('select-year-ecs','value'),
     Output('select-year-ecs','placeholder'),
@@ -1767,8 +1769,12 @@ def update_year_select_ecs(graph, species):
     ecs_year_options=[]     # By default, list is blank
     placeholder = '2021'
 
-    if graph == 'Over Time':   # Over time placeholder is (all)
-        placeholder = '(all)'
+    if graph == 'Over Time':
+        # placeholder = '(all)'
+        value = ecs_ahle_summary['year'].min()
+        dropdown_title = 'Starting from'
+        for i in np.sort(ecs_ahle_summary['year'].unique()):
+            str(ecs_year_options.append({'label':i,'value':(i)}))
     # Other years only available for Cattle
     # elif (graph == 'Single Year') & (species.upper() == 'CATTLE'):
     #     ecs_year_options=[]
@@ -1776,13 +1782,14 @@ def update_year_select_ecs(graph, species):
     #         str(ecs_year_options.append({'label':i,'value':(i)}))
     # Have placeholder values for all species and years
     elif graph == 'Single Year':
-        ecs_year_options=[]
+        dropdown_title = 'Year'
+        # ecs_year_options=[]
         for i in np.sort(ecs_ahle_summary['year'].unique()):
             str(ecs_year_options.append({'label':i,'value':(i)}))
     else:
         None
 
-    return ecs_year_options, value, placeholder
+    return dropdown_title, ecs_year_options, value, placeholder
 
 # Geographical options
 @gbadsDash.callback(
@@ -2572,6 +2579,9 @@ def update_ahle_value_and_cost_viz_ecs(
 
         # Sort data by year
         prep_df = prep_df.sort_values('year')
+
+        # Filter to selected year or later
+        prep_df = prep_df.query('year >= @selected_year')
 
         # Establish x
         x = prep_df['year']
