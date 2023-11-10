@@ -1940,7 +1940,7 @@ gbadsDash.layout = html.Div([
     Input('select-country-ahle', 'value'),
     )
 def update_dashboard_country_title(country):
-    return f'Burden of Disease by {country}'
+    return f'Burden of Disease for {country}'
 
 # Update production system options based on species
 @gbadsDash.callback(
