@@ -84,6 +84,9 @@ tab_style = {'font-size':"1.5625rem",
              'font-weight': 'bold',
              }
 
+control_heading_style={"font-weight": "bold",
+                       "color": "#555555"}
+
 # =============================================================================
 #### Read data
 # =============================================================================
@@ -854,7 +857,6 @@ gbadsDash.layout = html.Div([
     dbc.Row([
                 dbc.Col([
                     # Dashboard title
-                    html.Br(),
                     html.H1(id='bod-select-country-ecs-title',
                             style={'color': '#F7931D',
                                    "font-weight": "bold"}
@@ -1214,20 +1216,20 @@ gbadsDash.layout = html.Div([
                 html.Label(["Displaying production values, expenditures, and gross margin under the \
                             current and ideal scenario estimated by a compartmental herd dynamics model."]),
                 html.Br(),
-                html.Label(["Results on this page are currently limited to cattle, small ruminants, and \
-                            poultry."],
-                          style={"font-style":"italic"}),
+                # html.Label(["Results on this page are currently limited to cattle, small ruminants, and \
+                #             poultry."],
+                #           style={"font-style":"italic"}),
                 html.Hr(style={'margin-right':'10px',
                               'margin-top':'0px',
                               'margin-bottom':'5px'}),
-                html.Label(["Select a species and production system to view and the currency to display for all charts"]
-                          ,style={"font-style":"italic"}
-                          ),
+                # html.Label(["Select a species and production system to view and the currency to display for all charts"]
+                #           ,style={"font-style":"italic"}
+                #           ),
 
                 #### -- DROPDOWNS CONTROLS
                 dbc.Row([
                     dbc.Col([
-                        html.H5("Species"),
+                        html.H5("Species", style=control_heading_style),
                         dcc.Dropdown(id='select-species-ecs',
                                     options=ecs_species_options,
                                     value='Cattle',
@@ -1235,14 +1237,14 @@ gbadsDash.layout = html.Div([
                                     ),
                         ]),
                     dbc.Col([
-                        html.H5("Production System"),
+                        html.H5("Production System", style=control_heading_style),
                         dcc.Dropdown(id='select-prodsys-ecs',
                                     # Options and value are now defined in a callback based on selected species
                                     clearable = False,
                                     ),
                         ]),
                     dbc.Col([
-                        html.H5("Currency"),
+                        html.H5("Currency", style=control_heading_style),
                         dcc.Dropdown(id='select-currency-ecs',
                                     options=ecs_currency_options,
                                     value='Birr',
@@ -1257,7 +1259,7 @@ gbadsDash.layout = html.Div([
                 dbc.Row([
                     dbc.Col([
                         # Switch between single year and over time
-                        html.H5("Display AHLE for..."),
+                        html.H5("Display AHLE for...", style=control_heading_style),
                         dcc.RadioItems(id='select-graph-ahle-ecs',
                                       inline=True,                  # True: arrange buttons horizontally
                                       inputStyle={
@@ -1271,7 +1273,7 @@ gbadsDash.layout = html.Div([
 
                     # Year selector
                     dbc.Col([
-                        html.H5("Year"),
+                        html.H5("Year", style=control_heading_style),
                         dcc.Dropdown(id='select-year-ecs',
                                     clearable = False,
                                     ),
@@ -1279,7 +1281,7 @@ gbadsDash.layout = html.Div([
 
                     # Geographical breakdown options
                     dbc.Col([
-                        html.H5("AHLE Geographic Scope"),
+                        html.H5("AHLE Geographic Scope", style=control_heading_style),
                         dcc.RadioItems(id='select-geo-view-ecs',
                                       inline=True,                  # True: arrange buttons horizontally
                                       inputStyle={
@@ -1307,83 +1309,160 @@ gbadsDash.layout = html.Div([
                 html.Hr(style={'margin-right':'10px'}),
 
                 dbc.Row([
-                    #### -- AHLE Specific Controls
-                    dbc.Col([
-                        dbc.Card([
-                            dbc.CardBody([
-                                html.H5("Animal Health Loss Envelope (AHLE)",
-                                        className="card-title",
-                                        style={"font-weight": "bold"}
-                                        ),
-                                html.Label(["Comparing current values, expenditures, and gross margin to the ideal. Note that the ideal values and expenditures describe the system in an ideal state (for example, zero health expenditure); they do not describe what is required to achieve that state."]),
-                                dbc.Row([
-                                    # Switch between side by side and difference
-                                    dbc.Col([
-                                        html.H6("Show current and ideal as..."),
-                                        dcc.RadioItems(id='select-display-ecs',
-                                                      options=ecs_display_options,
-                                                      value='Side by Side',
-                                                      labelStyle={'display': 'block'},
-                                                      inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
-                                                      ),
-                                        html.Label(["Difference: show a single bar for each item representing the difference between the current and ideal values"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
-                                        html.Label(["Side by Side: show two bars for each item, one for current and another for the ideal value"] ,style={'font-style':'italic'}),
-                                        ]),
+                    # #### -- AHLE Specific Controls
+                    # dbc.Col([
+                    #     dbc.Card([
+                    #         dbc.CardBody([
+                    #             html.H5("Animal Health Loss Envelope (AHLE)",
+                    #                     className="card-title",
+                    #                     style={"font-weight": "bold"}
+                    #                     ),
+                    #             html.Label(["Comparing current values, expenditures, and gross margin to the ideal. Note that the ideal values and expenditures describe the system in an ideal state (for example, zero health expenditure); they do not describe what is required to achieve that state."]),
+                    #             dbc.Row([
+                    #                 # Switch between side by side and difference
+                    #                 dbc.Col([
+                    #                     html.H6("Show current and ideal as..."),
+                    #                     dcc.RadioItems(id='select-display-ecs',
+                    #                                   options=ecs_display_options,
+                    #                                   value='Side by Side',
+                    #                                   labelStyle={'display': 'block'},
+                    #                                   inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
+                    #                                   ),
+                    #                     html.Label(["Difference: show a single bar for each item representing the difference between the current and ideal values"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
+                    #                     html.Label(["Side by Side: show two bars for each item, one for current and another for the ideal value"] ,style={'font-style':'italic'}),
+                    #                     ]),
 
-                                    # Compare
-                                    dbc.Col([
-                                        html.H6("Compare current to...", id='select-compare-ecs-title'),
-                                        dcc.RadioItems(id='select-compare-ecs',
-                                                      options=ecs_compare_options_limited,
-                                                      value='Ideal',
-                                                      labelStyle={'display': 'block'},
-                                                      inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
-                                                      ),
-                                        html.Label(["Ideal: zero mortality and ideal growth and production rates"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
-                                        html.Label(["Zero Mortality: zero mortality but growth and production rates at current levels"] ,style={'font-style':'italic'}),
-                                        ]),
+                    #                 # Compare
+                    #                 dbc.Col([
+                    #                     html.H6("Compare current to...", id='select-compare-ecs-title'),
+                    #                     dcc.RadioItems(id='select-compare-ecs',
+                    #                                   options=ecs_compare_options_limited,
+                    #                                   value='Ideal',
+                    #                                   labelStyle={'display': 'block'},
+                    #                                   inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
+                    #                                   ),
+                    #                     html.Label(["Ideal: zero mortality and ideal growth and production rates"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
+                    #                     # html.Label(["Zero Mortality: zero mortality but growth and production rates at current levels"] ,style={'font-style':'italic'}),
+                    #                     ]),
 
-                                ]), # END OF ROW
-                                dbc.Row([
-                                    dbc.Col([
-                                        html.H6("Item", id='select-item-ecs-title'),
-                                        dcc.Dropdown(id='select-item-ecs',
-                                                    value='Gross Margin',
-                                                    clearable = False,
-                                                    ),
-                                        ]),
+                    #             ]), # END OF ROW
+                    #             dbc.Row([
+                    #                 dbc.Col([
+                    #                     html.H6("Item", id='select-item-ecs-title'),
+                    #                     dcc.Dropdown(id='select-item-ecs',
+                    #                                 value='Gross Margin',
+                    #                                 clearable = False,
+                    #                                 ),
+                    #                     ]),
 
-                                    # Factor dropdown
-                                    dbc.Col([
-                                        html.H6("Improvement Factor", id='select-factor-ecs-title'),
-                                        dcc.Dropdown(id='select-factor-ecs',
-                                                      options=ecs_factor_options,
-                                                      value='Mortality',
-                                                      clearable = True,
-                                                      ),
-                                          ],width=4,
-                                        ),
+                    #                 # Factor dropdown
+                    #                 dbc.Col([
+                    #                     html.H6("Improvement Factor", id='select-factor-ecs-title'),
+                    #                     dcc.Dropdown(id='select-factor-ecs',
+                    #                                   options=ecs_factor_options,
+                    #                                   value='Mortality',
+                    #                                   clearable = True,
+                    #                                   ),
+                    #                       ],width=4,
+                    #                     ),
 
-                                    # Reduction
-                                    dbc.Col([
-                                        html.H6("Improvement Amount", id='select-improve-ecs-title'),
-                                        dcc.RadioItems(id='select-improve-ecs',
-                                                      options=ecs_improve_options,
-                                                      value= "25%",
-                                                      inputStyle={"margin-right": "2px", # This pulls the words off of the button
-                                                                  "margin-left": "10px"},
-                                                      ),
-                                        ]),
-                                    ]),     ## END OF ROW ##
-                                ]),    # END OF CARD BODY
-                            ], color='#F2F2F2'),    # END OF CARD
-                        ]),
+                    #                 # Reduction
+                    #                 dbc.Col([
+                    #                     html.H6("Improvement Amount", id='select-improve-ecs-title'),
+                    #                     dcc.RadioItems(id='select-improve-ecs',
+                    #                                   options=ecs_improve_options,
+                    #                                   value= "25%",
+                    #                                   inputStyle={"margin-right": "2px", # This pulls the words off of the button
+                    #                                               "margin-left": "10px"},
+                    #                                   ),
+                    #                     ]),
+                    #                 ]),     ## END OF ROW ##
+                    #             ]),    # END OF CARD BODY
+                    #         ], color='#F2F2F2'),    # END OF CARD
+                    #     ]),
 
                     ], justify='evenly'),   # END OF Controls Row
                 html.Br(),
 
-                #### -- GRAPHICS PT.1
+                #### -- BAR CHART AND CONTROLS
                 dbc.Row([  # Row with GRAPHICS
+                    # CONTROLS
+                     dbc.Col([
+                         dbc.Card([
+                             dbc.CardBody([
+                                 html.H5("Animal Health Loss Envelope (AHLE)",
+                                         className="card-title",
+                                         style={"font-weight": "bold"}
+                                         ),
+                                 html.Label(["Comparing current values, expenditures, and gross margin to the ideal. Note that the ideal values and expenditures describe the system in an ideal state (for example, zero health expenditure); they do not describe what is required to achieve that state."]),
+                                 dbc.Row([
+                                     # Switch between side by side and difference
+                                     dbc.Col([
+                                         html.H6("Show current and ideal as...", style=control_heading_style),
+                                         dcc.RadioItems(id='select-display-ecs',
+                                                       options=ecs_display_options,
+                                                       value='Side by Side',
+                                                       labelStyle={'display': 'block'},
+                                                       inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
+                                                       ),
+                                         html.Label(["Difference: show a single bar for each item representing the difference between the current and ideal values"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
+                                         html.Label(["Side by Side: show two bars for each item, one for current and another for the ideal value"] ,style={'font-style':'italic'}),
+                                         ]),
+
+                                     # Compare
+                                     dbc.Col([
+                                         html.H6("Compare current to...", id='select-compare-ecs-title', style=control_heading_style),
+                                         dcc.RadioItems(id='select-compare-ecs',
+                                                       options=ecs_compare_options_limited,
+                                                       value='Ideal',
+                                                       labelStyle={'display': 'block'},
+                                                       inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
+                                                       ),
+                                         html.Label(["Ideal: zero mortality and ideal growth and production rates"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
+                                         # html.Label(["Zero Mortality: zero mortality but growth and production rates at current levels"] ,style={'font-style':'italic'}),
+                                         ]),
+
+                                 ]), # END OF ROW
+                                 dbc.Row([
+                                     dbc.Col([
+                                         html.H6("Item", id='select-item-ecs-title', style=control_heading_style),
+                                         dcc.Dropdown(id='select-item-ecs',
+                                                     value='Gross Margin',
+                                                     clearable = False,
+                                                     ),
+                                         ]),
+
+                                     # Factor dropdown
+                                     dbc.Col([
+                                         html.H6("Improvement Factor", id='select-factor-ecs-title', style=control_heading_style),
+                                         dcc.Dropdown(id='select-factor-ecs',
+                                                       options=ecs_factor_options,
+                                                       value='Mortality',
+                                                       clearable = True,
+                                                       ),
+                                           ],width=4,
+                                         ),
+
+                                     # Reduction
+                                     dbc.Col([
+                                         html.H6("Improvement Amount", id='select-improve-ecs-title', style=control_heading_style),
+                                         dcc.RadioItems(id='select-improve-ecs',
+                                                       options=ecs_improve_options,
+                                                       value= "25%",
+                                                       inputStyle={"margin-right": "2px", # This pulls the words off of the button
+                                                                   "margin-left": "10px"},
+                                                       ),
+                                         ]),
+                                     ]),     ## END OF ROW ##
+                                 ]),    # END OF CARD BODY
+                             ], color='#F2F2F2'),    # END OF CARD
+
+                             dbc.Col([   # Waterfall footnote
+                                 html.P("Blue indicates an increase, red indicates a decrease for each item. Orange is the net value of all of them.", id="waterfall-footnote-ecs"),
+                                 html.P("Error bars show 95% confidence interval for each item based on simulation results. These reflect uncertainty in the input parameters and natural variation in the population."),
+                             ]),
+                        # End of CONTROLS COL
+                         ],  width=4),
 
                     # AHLE Bar Chart
                     dbc.Col(
@@ -1413,45 +1492,45 @@ gbadsDash.layout = html.Div([
                     # End of AHLE Bar Chart Column
                     style={"width":5}),
 
-                    # Values and Costs Waterfall
-                    dbc.Col([
-                        dbc.Spinner(children=[
-                        dcc.Graph(id='ecs-ahle-waterfall',
-                                  style = {"height":"650px"},
-                                  config = {
-                                      "displayModeBar" : True,
-                                      "displaylogo": False,
-                                      'toImageButtonOptions': {
-                                          'format': 'png', # one of png, svg, jpeg, webp
-                                          'filename': 'GBADs_Ethiopia_AHLE_Sunburst'
-                                          },
-                                      'modeBarButtonsToRemove': ['zoom',
-                                                                  'zoomIn',
-                                                                  'zoomOut',
-                                                                  'autoScale',
-                                                                  #'resetScale',  # Removes home button
-                                                                  'pan',
-                                                                  'select2d',
-                                                                  'lasso2d']
-                                      }
-                                  )
-                            # End of Spinner
-                            ],size="md", color="#393375", fullscreen=False),
-                        # End of AHLE Waterfall
-                        ],style={"width":5}),
+                    # # Values and Costs Waterfall
+                    # dbc.Col([
+                    #     dbc.Spinner(children=[
+                    #     dcc.Graph(id='ecs-ahle-waterfall',
+                    #               style = {"height":"650px"},
+                    #               config = {
+                    #                   "displayModeBar" : True,
+                    #                   "displaylogo": False,
+                    #                   'toImageButtonOptions': {
+                    #                       'format': 'png', # one of png, svg, jpeg, webp
+                    #                       'filename': 'GBADs_Ethiopia_AHLE_Sunburst'
+                    #                       },
+                    #                   'modeBarButtonsToRemove': ['zoom',
+                    #                                               'zoomIn',
+                    #                                               'zoomOut',
+                    #                                               'autoScale',
+                    #                                               #'resetScale',  # Removes home button
+                    #                                               'pan',
+                    #                                               'select2d',
+                    #                                               'lasso2d']
+                    #                   }
+                    #               )
+                    #         # End of Spinner
+                    #         ],size="md", color="#393375", fullscreen=False),
+                    #     # End of AHLE Waterfall
+                    #     ],style={"width":5}),
 
                     ]), # END OF GRAPHICS ROW
 
-                #### -- FOOTNOTES PT.1
-                dbc.Row([
-                    dbc.Col([   # Waterfall footnote
-                        html.P("Blue indicates an increase, red indicates a decrease for each item. Orange is the net value of all of them.", id="waterfall-footnote-ecs"),
-                        html.P("Error bars show 95% confidence interval for each item based on simulation results. These reflect uncertainty in the input parameters and natural variation in the population."),
-                    ]),
+                # #### -- FOOTNOTES
+                # dbc.Row([
+                #     dbc.Col([   # Waterfall footnote
+                #         html.P("Blue indicates an increase, red indicates a decrease for each item. Orange is the net value of all of them.", id="waterfall-footnote-ecs"),
+                #         html.P("Error bars show 95% confidence interval for each item based on simulation results. These reflect uncertainty in the input parameters and natural variation in the population."),
+                #     ]),
 
-                ], style={'font-style': 'italic'}
-                ),
-                ### END OF FOOTNOTES
+                # ], style={'font-style': 'italic'}
+                # ),
+                # ### END OF FOOTNOTES
 
                 # html.Hr(style={'margin-right':'10px',}),
             ### END OF AHLE V2 TAB
@@ -1475,11 +1554,11 @@ gbadsDash.layout = html.Div([
                             dbc.Card([
                                 dbc.CardBody([
                                     html.Label(["NOTE: this is shown for species groups (cattle, all small ruminants, or all poultry) rather than for individual species."] ,style={"font-style":"italic"}),
-                                    html.H5("Segment by..."),
+                                    html.H5("Segment by...", style={'font-weight':"bold"}),
                                     dbc.Row([
                                         # Top Level
                                         dbc.Col([
-                                            html.H6("Top Level", id="select-top-lvl-attr-ecs-title"),
+                                            html.H6("Top Level", id="select-top-lvl-attr-ecs-title", style=control_heading_style),
                                             dcc.Dropdown(id='select-top-lvl-attr-ecs',
                                                           options=ecs_hierarchy_attr_options,
                                                           value='cause',
@@ -1491,7 +1570,7 @@ gbadsDash.layout = html.Div([
                                             ),
                                         # Drilldown 1
                                         dbc.Col([
-                                            html.H6("Drilldown 1", id="select-dd-1-attr-ecs-title"),
+                                            html.H6("Drilldown 1", id="select-dd-1-attr-ecs-title", style=control_heading_style),
                                             dcc.Dropdown(id='select-dd-1-attr-ecs',
                                                            clearable = False,
                                                           ),
@@ -1501,7 +1580,7 @@ gbadsDash.layout = html.Div([
                                             ),
                                         # Drilldown 2
                                         dbc.Col([
-                                            html.H6("Drilldown 2", id="select-dd-2-attr-ecs-title"),
+                                            html.H6("Drilldown 2", id="select-dd-2-attr-ecs-title", style=control_heading_style),
                                             dcc.Dropdown(id='select-dd-2-attr-ecs',
                                                           options=ecs_hierarchy_dd_attr_options,
                                                           value='age_group',
@@ -1515,7 +1594,7 @@ gbadsDash.layout = html.Div([
                                     dbc.Row([
                                         # Drilldown 3
                                         dbc.Col([
-                                            html.H6("Drilldown 3", id="select-dd-3-attr-ecs-title"),
+                                            html.H6("Drilldown 3", id="select-dd-3-attr-ecs-title", style=control_heading_style),
                                             dcc.Dropdown(id='select-dd-3-attr-ecs',
                                                           options=ecs_hierarchy_dd_attr_options,
                                                           value='disease',
@@ -1524,7 +1603,7 @@ gbadsDash.layout = html.Div([
                                             ]),
                                         # Drilldown 4
                                         dbc.Col([
-                                            html.H6("Drilldown 4", id="select-dd-4-attr-ecs-title"),
+                                            html.H6("Drilldown 4", id="select-dd-4-attr-ecs-title", style=control_heading_style),
                                             dcc.Dropdown(id='select-dd-4-attr-ecs',
                                                           options=ecs_hierarchy_dd_attr_options,
                                                           value='ahle_component',
@@ -1602,13 +1681,13 @@ gbadsDash.layout = html.Div([
             #### -- CONTROLS
             dbc.Card([
                 dbc.CardBody([
-                    html.H3("Subnational AHLE"),
+                    html.H3("Subnational AHLE", style={'font-weight':"bold"}),
                     html.Label(["Showing the animal health loss envelope for each subnational state. Use the dropdown to view an individual item of revenue, expenditure, or gross margin instead."]),
                     html.Label(["Note: a subnational state will appear blank if there is no data for the selected production system there"] ,style={"font-style":"italic"}),
                     dbc.Row([
                         # Map Display
                         dbc.Col([
-                            html.H5("Item"),
+                            html.H5("Item", style=control_heading_style),
                             dcc.Dropdown(id='select-map-display-ecs',
                                          value='Animal Health Loss Envelope',
                                          clearable=False,
@@ -1617,7 +1696,7 @@ gbadsDash.layout = html.Div([
 
                         # Denominator
                         dbc.Col([
-                            html.H5("Show values as..."),
+                            html.H5("Show values as...", style=control_heading_style),
                             dcc.RadioItems(id='select-map-denominator-ecs',
                                           options=ecs_map_denominator_options,
                                           value= "Per kg biomass",
@@ -2013,7 +2092,10 @@ def update_dd1_options_ecs(graph, top_lvl_hierarchy):
     if graph == 'Over Time':
         for d in options:
             d['disabled']=True
-        display_style = {'display': 'none'}
+        display_val_style = {'display': 'none'}
+        display_title_style = {'display': 'none',
+                               "font-weight": "bold",
+                               "color": "#555555"}
 
     else:
         for d in options:
@@ -2021,11 +2103,14 @@ def update_dd1_options_ecs(graph, top_lvl_hierarchy):
                 d['disabled']=True
             else:
                 d['disabled']=False
-        display_style = {'display': 'block'}
+        display_val_style = {'display': 'block'}
+        display_title_style = {'display': 'block',
+                               "font-weight": "bold",
+                               "color": "#555555"}
 
     value='production_system'
 
-    return options, value, display_style, display_style
+    return options, value, display_val_style, display_title_style
 
 @gbadsDash.callback(
     Output('select-dd-2-attr-ecs','options'),
@@ -2041,7 +2126,10 @@ def update_dd2_options_ecs(graph, top_lvl_hierarchy, dd1_hierarchy):
     if graph == 'Over Time':
         for d in options:
             d['disabled']=True
-        display_style = {'display': 'none'}
+        display_val_style = {'display': 'none'}
+        display_title_style = {'display': 'none',
+                               "font-weight": "bold",
+                               "color": "#555555"}
 
     else:
         for d in options:
@@ -2050,9 +2138,12 @@ def update_dd2_options_ecs(graph, top_lvl_hierarchy, dd1_hierarchy):
                     d['disabled']= True
                 else:
                     d['disabled']=False
-        display_style = {'display': 'block'}
+        display_val_style = {'display': 'block'}
+        display_title_style = {'display': 'block',
+                               "font-weight": "bold",
+                               "color": "#555555"}
 
-    return options, display_style, display_style
+    return options, display_val_style, display_title_style
 
 @gbadsDash.callback(
     Output('select-dd-3-attr-ecs','options'),
@@ -2069,7 +2160,10 @@ def update_dd3_options_ecs(graph, top_lvl_hierarchy, dd1_hierarchy, dd2_hierarch
     if graph == 'Over Time':
         for d in options:
             d['disabled']=True
-        display_style = {'display': 'none'}
+        display_val_style = {'display': 'none'}
+        display_title_style = {'display': 'none',
+                               "font-weight": "bold",
+                               "color": "#555555"}
 
     else:
         for d in options:
@@ -2078,9 +2172,12 @@ def update_dd3_options_ecs(graph, top_lvl_hierarchy, dd1_hierarchy, dd2_hierarch
                     d['disabled']= True
                 else:
                     d['disabled']=False
-        display_style = {'display': 'block'}
+        display_val_style = {'display': 'block'}
+        display_title_style = {'display': 'block',
+                               "font-weight": "bold",
+                               "color": "#555555"}
 
-    return options, display_style, display_style
+    return options, display_val_style, display_title_style
 
 @gbadsDash.callback(
     Output('select-dd-4-attr-ecs','options'),
@@ -2097,7 +2194,10 @@ def update_dd4_options_ecs(graph, top_lvl_hierarchy, dd1_hierarchy, dd2_hierarch
     if graph == 'Over Time':
         for d in options:
             d['disabled']=True
-        display_style = {'display': 'none'}
+        display_val_style = {'display': 'none'}
+        display_title_style = {'display': 'none',
+                               "font-weight": "bold",
+                               "color": "#555555"}
 
     else:
         for d in options:
@@ -2106,9 +2206,12 @@ def update_dd4_options_ecs(graph, top_lvl_hierarchy, dd1_hierarchy, dd2_hierarch
                     d['disabled']= True
                 else:
                     d['disabled']=False
-        display_style = {'display': 'block'}
+        display_val_style = {'display': 'block'}
+        display_title_style = {'display': 'block',
+                               "font-weight": "bold",
+                               "color": "#555555"}
 
-    return options, display_style, display_style
+    return options, display_val_style, display_title_style
 
 # @gbadsDash.callback(
 #     Output('select-dd-5-attr-ecs','options'),
@@ -2141,12 +2244,18 @@ def update_ahle_graph_controls(graph, geo_view):
 
     for d in options2:
         if graph == 'Over Time':
-            block = {'display': 'none'} # hide
+            block_vals = {'display': 'none'} # hide
+            block_title = {'display': 'none',
+                           "font-weight": "bold",
+                           "color": "#555555"}
             value = ''
             d['disabled']=True
 
         else:
-            block = {'display': 'block'}
+            block_vals = {'display': 'block'}
+            block_title = {'display': 'block',
+                           "font-weight": "bold",
+                           "color": "#555555"}
             if geo_view == 'National':
                 value = ''
                 d['disabled']=True
@@ -2154,7 +2263,7 @@ def update_ahle_graph_controls(graph, geo_view):
                 value='Afar'
                 d['disabled']=False
 
-    return block, block, value, options2
+    return block_vals, block_title, value, options2
 
 # Show Item select when display is over time
 @gbadsDash.callback(
@@ -3680,7 +3789,7 @@ def update_ahle_bar_chart_ecs(
                      x=x,
                      y=y,
                      marker=dict(color='black'),
-                     customdata=np.stack((y, prep_df['item']), axis=-1),
+                     customdata=np.stack((y, prep_df['item'], stdev), axis=-1),
                      error_y=dict(
                         type='data',
                         array=stdev
@@ -3722,7 +3831,7 @@ def update_ahle_bar_chart_ecs(
                          x=x_len-.2,
                          y=y,
                          marker=dict(color='black'),
-                         customdata=np.stack((y, prep_df['item']), axis=-1),
+                         customdata=np.stack((y, prep_df['item'], stdev), axis=-1),
                          error_y=dict(
                             type='data',
                             array=stdev
@@ -3761,7 +3870,7 @@ def update_ahle_bar_chart_ecs(
                          x=x_len+.2,
                          y=y,
                          marker=dict(color='black'),
-                         customdata=np.stack((y, prep_df['item']), axis=-1),
+                         customdata=np.stack((y, prep_df['item'], prep_df['stdev_current']), axis=-1),
                          error_y=dict(
                              type='data',
                              array=prep_df['stdev_current']
@@ -3895,7 +4004,7 @@ def update_ahle_bar_chart_ecs(
                          x=x_len-.2,
                          y=y,
                         marker=dict(color='black'),
-                        customdata=np.stack((y, prep_df['item']), axis=-1),
+                        customdata=np.stack((y, prep_df['item'], stdev), axis=-1),
                          error_y=dict(
                             type='data',
                             array=stdev
@@ -3930,7 +4039,7 @@ def update_ahle_bar_chart_ecs(
                          x=x_len+.2,
                          y=y,
                         marker=dict(color='black'),
-                        customdata=np.stack((y, prep_df['item']), axis=-1),
+                        customdata=np.stack((y, prep_df['item'], prep_df['stdev_current']), axis=-1),
                          error_y=dict(
                             type='data',
                             array=prep_df['stdev_current']
@@ -3961,15 +4070,18 @@ def update_ahle_bar_chart_ecs(
         # Add tooltip
         if currency == 'Birr':
             ecs_waterfall_fig.update_traces(hovertemplate='Category: %{customdata[1]}'+
-                                            '<br>Value: %{customdata[0]:,.0f} Birr<extra></extra>'
+                                            '<br>Value: %{customdata[0]:,.0f} Birr<extra></extra>'+
+                                            '<br>95% CI: %{customdata[2]:,.0f} Birr'
                                             )
         elif currency == 'USD':
             ecs_waterfall_fig.update_traces(hovertemplate='Category: %{customdata[1]}'+
-                                            '<br>Value: %{customdata[0]:,.0f} USD<extra></extra>'
+                                            '<br>Value: %{customdata[0]:,.0f} USD<extra></extra>'+
+                                            '<br>95% CI: %{customdata[2]:,.0f} USD'
                                             )
         else:
             ecs_waterfall_fig.update_traces(hovertemplate='Category: %{customdata[1]}'+
-                                            '<br>Value: %{customdata[0]:,.0f} <extra></extra>'
+                                            '<br>Value: %{customdata[0]:,.0f} <extra></extra>'+
+                                            '<br>95% CI: %{customdata[2]:,.0f}'
                                             )
 
     return ecs_waterfall_fig
