@@ -357,7 +357,7 @@ ecs_compare_options = [{'label': i, 'value': i, 'disabled': False} for i in ["Id
 # August 2023: updated scenarios do not include zero mortality or improvement
 ecs_compare_options_limited = [
     {'label': "Ideal", 'value': "Ideal", 'disabled': False}
-    ,{'label': "Zero Mortality", 'value': "Zero Mortality", 'disabled': True}
+    # ,{'label': "Zero Mortality", 'value': "Zero Mortality", 'disabled': True}
     ,{'label': "Improvement", 'value': "Improvement", 'disabled': True}
     ]
 
@@ -874,592 +874,592 @@ gbadsDash.layout = html.Div([
     #### TABS
     dbc.Tabs([
 
-        #### AHLE
-        dbc.Tab(label="AHLE",
-                tabClassName="flex-grow-1 text-center",
-                    tab_style = tab_style,
-                    style = {"height":"100vh",
-                        },
-                children =[
-
-            html.Label(["Displaying production values, expenditures, and gross margin under the \
-                        current and ideal scenario estimated by a compartmental herd dynamics model."]),
-            html.Br(),
-            html.Label(["Results on this page are currently limited to cattle, small ruminants, and \
-                        poultry."],
-                       style={"font-style":"italic"}),
-            html.Hr(style={'margin-right':'10px',
-                           'margin-top':'0px',
-                           'margin-bottom':'5px'}),
-            html.Label(["Select a species and production system to view and the currency to display for all charts"]
-                       ,style={"font-style":"italic"}
-                       ),
-
-            #### -- DROPDOWNS CONTROLS
-            dbc.Row([
-                dbc.Col([
-                    html.H5("Species"),
-                    dcc.Dropdown(id='select-species-ecs',
-                                options=ecs_species_options,
-                                value='Cattle',
-                                clearable = False,
-                                ),
-                    ]),
-                dbc.Col([
-                    html.H5("Production System"),
-                    dcc.Dropdown(id='select-prodsys-ecs',
-                                 # Options and value are now defined in a callback based on selected species
-                                 clearable = False,
-                                 ),
-                    ]),
-                dbc.Col([
-                    html.H5("Currency"),
-                    dcc.Dropdown(id='select-currency-ecs',
-                                options=ecs_currency_options,
-                                value='Birr',
-                                clearable = False,
-                                ),
-                    ]),
-
-                # END OF FIRST CONTROL ROW
-                ],style={"margin-bottom":"30px"}),
-
-            # SECOND CONTROL ROW
-            dbc.Row([
-                dbc.Col([
-                    # Switch between single year and over time
-                    html.H5("Display AHLE for..."),
-                    dcc.RadioItems(id='select-graph-ahle-ecs',
-                                  inline=True,                  # True: arrange buttons horizontally
-                                  inputStyle={
-                                      "margin-right":"2px",     # This pulls the words off of the button
-                                      "margin-left":"10px",     # Space between buttons if inline=True
-                                      },
-                                  ),
-                    # Text underneath
-                    html.P("Estimates over time or for any year other than 2021 are currently placeholders" ,style={'font-style':'italic'}),
-                    ]),
-
-                # Year selector
-                dbc.Col([
-                    html.H5("Year"),
-                    dcc.Dropdown(id='select-year-ecs',
-                                 clearable = False,
-                                 ),
-                    ]),
-
-                # Geographical breakdown options
-                dbc.Col([
-                    html.H5("AHLE Geographic Scope"),
-                    dcc.RadioItems(id='select-geo-view-ecs',
-                                  inline=True,                  # True: arrange buttons horizontally
-                                  inputStyle={
-                                      "margin-right":"2px",     # This pulls the words off of the button
-                                      "margin-left":"10px",     # Space between buttons if inline=True
-                                      },
-                                  ),
-                    # Text underneath
-                    html.P("Subnational estimates are currently only available for cattle for 2021" ,style={'font-style':'italic'}),
-                    ]),
-
-                # Subnational dropdwon
-                dbc.Col([
-                    html.H5("Subnational state", id='select-region-ecs-title'),
-                    dcc.Dropdown(id='select-region-ecs',
-                                 options=ecs_region_options,
-                                 placeholder='Select Subnational...',
-                                 clearable = False,
-                                 ),
-                    ]),
-
-                # END OF SECOND CONTROL ROW
-                ],justify='evenly'),
-
-            html.Hr(style={'margin-right':'10px'}),
-
-            dbc.Row([
-                #### -- AHLE Specific Controls
-                dbc.Col([
-                    dbc.Card([
-                        dbc.CardBody([
-                            html.H5("Animal Health Loss Envelope (AHLE)",
-                                    className="card-title",
-                                    style={"font-weight": "bold"}
-                                    ),
-                            html.Label(["Comparing current values, expenditures, and gross margin to the ideal. Note that the ideal values and expenditures describe the system in an ideal state (for example, zero health expenditure); they do not describe what is required to achieve that state."]),
-                            dbc.Row([
-                                # Switch between side by side and difference
-                                dbc.Col([
-                                    html.H6("Show current and ideal as..."),
-                                    dcc.RadioItems(id='select-display-ecs',
-                                                   options=ecs_display_options,
-                                                   value='Difference',
-                                                   labelStyle={'display': 'block'},
-                                                   inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
-                                                   ),
-                                    html.Label(["Difference: show a single bar for each item representing the difference between the current and ideal values"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
-                                    html.Label(["Side by Side: show two bars for each item, one for current and another for the ideal value"] ,style={'font-style':'italic'}),
-                                    ]),
-
-                                # Compare
-                                dbc.Col([
-                                    html.H6("Compare current to...", id='select-compare-ecs-title'),
-                                    dcc.RadioItems(id='select-compare-ecs',
-                                                   options=ecs_compare_options_limited,
-                                                   value='Ideal',
-                                                   labelStyle={'display': 'block'},
-                                                   inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
-                                                   ),
-                                    html.Label(["Ideal: zero mortality and ideal growth and production rates"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
-                                    html.Label(["Zero Mortality: zero mortality but growth and production rates at current levels"] ,style={'font-style':'italic'}),
-                                    ]),
-
-                                # Age/Sex combination
-                                dbc.Col([
-                                    html.H6("Show results for group...", id='select-agesex-ecs-title'),
-                                    dcc.Dropdown(id='select-agesex-ecs',
-                                                 options=ecs_agesex_options,
-                                                 value='Overall',
-                                                 clearable = False,
-                                                 ),
-                                    html.Label(["Overall: show values and costs for whole system"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
-                                    html.Label(["Otherwise, show values and costs for just the selected age/sex group"] ,style={'font-style':'italic'}),
-                                    ]),
-                            ]), # END OF ROW
-                            dbc.Row([
-                                dbc.Col([
-                                    html.H6("Item", id='select-item-ecs-title'),
-                                    dcc.Dropdown(id='select-item-ecs',
-                                                 value='Gross Margin',
-                                                 clearable = False,
-                                                 ),
-                                    ]),
-
-                                # Factor dropdown
-                                dbc.Col([
-                                    html.H6("Improvement Factor", id='select-factor-ecs-title'),
-                                    dcc.Dropdown(id='select-factor-ecs',
-                                                  options=ecs_factor_options,
-                                                  value='Mortality',
-                                                  clearable = True,
-                                                  ),
-                                      ],width=4,
-                                    ),
-
-                                # Reduction
-                                dbc.Col([
-                                    html.H6("Improvement Amount", id='select-improve-ecs-title'),
-                                    dcc.RadioItems(id='select-improve-ecs',
-                                                  options=ecs_improve_options,
-                                                  value= "25%",
-                                                  inputStyle={"margin-right": "2px", # This pulls the words off of the button
-                                                              "margin-left": "10px"},
-                                                  ),
-                                    ]),
-                                ]),     ## END OF ROW ##
-                            ]),    # END OF CARD BODY
-                        ], color='#F2F2F2'),    # END OF CARD
-                    ],width=6),
-
-                ], justify='evenly'),   # END OF Controls Row
-            html.Br(),
-
-            #### -- GRAPHICS PT.1
-            dbc.Row([  # Row with GRAPHICS
-
-                # AHLE Bar Chart
-                dbc.Col(
-                    dbc.Spinner(children=[
-
-                    dcc.Graph(id='ecs-ahle-bar-chart',
-                              style = {"height":"650px"},
-                              config = {
-                                  "displayModeBar" : True,
-                                  "displaylogo": False,
-                                  'toImageButtonOptions': {
-                                      'format': 'png', # one of png, svg, jpeg, webp
-                                      'filename': 'GBADs_Ethiopia_Attribution_Treemap'
-                                      },
-                                  'modeBarButtonsToRemove': ['zoom',
-                                                              'zoomIn',
-                                                              'zoomOut',
-                                                              'autoScale',
-                                                              #'resetScale',  # Removes home button
-                                                              'pan',
-                                                              'select2d',
-                                                              'lasso2d']
-                                  }
-                              )
-                    # End of Spinner
-                    ],size="md", color="#393375", fullscreen=False),
-                # End of AHLE Bar Chart Column
-                style={"width":5}),
-
-                # Values and Costs Waterfall
-                dbc.Col([
-                    dbc.Spinner(children=[
-                    dcc.Graph(id='ecs-ahle-waterfall',
-                              style = {"height":"650px"},
-                              config = {
-                                  "displayModeBar" : True,
-                                  "displaylogo": False,
-                                  'toImageButtonOptions': {
-                                      'format': 'png', # one of png, svg, jpeg, webp
-                                      'filename': 'GBADs_Ethiopia_AHLE_Sunburst'
-                                      },
-                                  'modeBarButtonsToRemove': ['zoom',
-                                                              'zoomIn',
-                                                              'zoomOut',
-                                                              'autoScale',
-                                                              #'resetScale',  # Removes home button
-                                                              'pan',
-                                                              'select2d',
-                                                              'lasso2d']
-                                  }
-                              )
-                        # End of Spinner
-                        ],size="md", color="#393375", fullscreen=False),
-                    # End of AHLE Waterfall
-                    ],style={"width":5}),
-
-                ]), # END OF GRAPHICS ROW
-
-            #### -- FOOTNOTES PT.1
-            dbc.Row([
-                dbc.Col([   # Waterfall footnote
-                    html.P("Blue indicates an increase, red indicates a decrease for each item. Orange is the net value of all of them.", id="waterfall-footnote-ecs"),
-                    html.P("Error bars show 95% confidence interval for each item based on simulation results. These reflect uncertainty in the input parameters and natural variation in the population."),
-                ]),
-                # dbc.Col([   # Treemap footnote
-                #     html.P("Attribution to infectious, non-infectious, and external causes is based on expert opinion. See the expert opinion attribution proportions in the table below."),
-                #     html.P("AHLE Components are production loss, mortality loss, and health cost. Health cost makes up the smallest proportion and may not be visible in this view."),
-                # ]),
-            ], style={'font-style': 'italic'}
-            ),
-            ### END OF FOOTNOTES
-
-            html.Hr(style={'margin-right':'10px',}),
-
-            #### -- GRAPHICS PT.2
-            # dbc.Row([
-            #     dbc.Col([ # AHLE Stacked Bar
-            #         dbc.Spinner(children=[
-            #         dcc.Graph(id='ahle-stacked-bar-ecs',
-            #                   style = {"height":"500px"},
-            #                   config = {
-            #                       "displayModeBar" : True,
-            #                       "displaylogo": False,
-            #                       'toImageButtonOptions': {
-            #                           'format': 'png', # one of png, svg, jpeg, webp
-            #                           'filename': 'GBADs_AHLE_Stacked_Bar_ECS'
-            #                           },
-            #                       'modeBarButtonsToRemove': ['zoom',
-            #                                                   'zoomIn',
-            #                                                   'zoomOut',
-            #                                                   'autoScale',
-            #                                                   #'resetScale',  # Removes home button
-            #                                                   'pan',
-            #                                                   'select2d',
-            #                                                   'lasso2d']
-            #                       }
-            #                   )
-            #             ],size="md", color="#393375", fullscreen=False),    # End of Spinner
-            #         ],style={"width":5}     # End of Stacked Bar
-            #         ),
-
-            #     # Sankey
-            #     dbc.Col([
-            #     dbc.Spinner(children=[
-            #         html.H4("Sankey for Attribution"),
-            #             html.Div(children=[
-            #                     html.Img(src=os.environ.get("BASE_URL", "") + '/assets/ECS_Sanky_diagram_from_Gemma.png',
-            #                     style = {'width':'120vw'}),
-            #                     ],
-            #                       style = {
-            #                               "margin-bottom":"10px",
-            #                               'margin-right':"10px",},
-            #                       ),
-            #             # End of Spinner
-            #             ],size="md", color="#393375", fullscreen=False),
-            #         ]),
-            #     ]), # END OF ROW
-
-            #### -- FOOTNOTES PT.2
-            # dbc.Row([
-            #     dbc.Col([
-            #         # Stacked bar
-            #         html.P("Expenditure on Health is not recorded for individual age groups so is not included in individual AHLE calculations."),
-            #         html.P("Expenditure on Health is very small, so the impact on AHLE is negligible."),
-            #         ]),
-            #     dbc.Col([
-            #         # Sankey
-            #         # No footnote
-            #         ]),
-            #     ], style={'font-style': 'italic'}
-            #     ),
-
-            html.Hr(style={'margin-right':'10px',}),
-
-            ### END OF AHLE
-            ]),
-
-
-        # #### AHLE V2
-        # dbc.Tab(label="AHLE v2",
+        # #### AHLE
+        # dbc.Tab(label="AHLE",
         #         tabClassName="flex-grow-1 text-center",
         #             tab_style = tab_style,
         #             style = {"height":"100vh",
         #                 },
         #         children =[
-        #        html.Label(["Displaying production values, expenditures, and gross margin under the \
-        #                    current and ideal scenario estimated by a compartmental herd dynamics model."]),
-        #        html.Br(),
-        #        html.Label(["Results on this page are currently limited to cattle, small ruminants, and \
-        #                    poultry."],
-        #                   style={"font-style":"italic"}),
-        #        html.Hr(style={'margin-right':'10px',
-        #                       'margin-top':'0px',
-        #                       'margin-bottom':'5px'}),
-        #        html.Label(["Select a species and production system to view and the currency to display for all charts"]
-        #                   ,style={"font-style":"italic"}
-        #                   ),
 
-        #        #### -- DROPDOWNS CONTROLS
-        #        dbc.Row([
-        #            dbc.Col([
-        #                html.H5("Species"),
-        #                dcc.Dropdown(id='select-species-ecs',
-        #                            options=ecs_species_options,
-        #                            value='Cattle',
-        #                            clearable = False,
-        #                            ),
-        #                ]),
-        #            dbc.Col([
-        #                html.H5("Production System"),
-        #                dcc.Dropdown(id='select-prodsys-ecs',
-        #                             # Options and value are now defined in a callback based on selected species
-        #                             clearable = False,
+        #     html.Label(["Displaying production values, expenditures, and gross margin under the \
+        #                 current and ideal scenario estimated by a compartmental herd dynamics model."]),
+        #     html.Br(),
+        #     html.Label(["Results on this page are currently limited to cattle, small ruminants, and \
+        #                 poultry."],
+        #                style={"font-style":"italic"}),
+        #     html.Hr(style={'margin-right':'10px',
+        #                    'margin-top':'0px',
+        #                    'margin-bottom':'5px'}),
+        #     html.Label(["Select a species and production system to view and the currency to display for all charts"]
+        #                ,style={"font-style":"italic"}
+        #                ),
+
+        #     #### -- DROPDOWNS CONTROLS
+        #     dbc.Row([
+        #         dbc.Col([
+        #             html.H5("Species"),
+        #             dcc.Dropdown(id='select-species-ecs',
+        #                         options=ecs_species_options,
+        #                         value='Cattle',
+        #                         clearable = False,
+        #                         ),
+        #             ]),
+        #         dbc.Col([
+        #             html.H5("Production System"),
+        #             dcc.Dropdown(id='select-prodsys-ecs',
+        #                          # Options and value are now defined in a callback based on selected species
+        #                          clearable = False,
+        #                          ),
+        #             ]),
+        #         dbc.Col([
+        #             html.H5("Currency"),
+        #             dcc.Dropdown(id='select-currency-ecs',
+        #                         options=ecs_currency_options,
+        #                         value='Birr',
+        #                         clearable = False,
+        #                         ),
+        #             ]),
+
+        #         # END OF FIRST CONTROL ROW
+        #         ],style={"margin-bottom":"30px"}),
+
+        #     # SECOND CONTROL ROW
+        #     dbc.Row([
+        #         dbc.Col([
+        #             # Switch between single year and over time
+        #             html.H5("Display AHLE for..."),
+        #             dcc.RadioItems(id='select-graph-ahle-ecs',
+        #                           inline=True,                  # True: arrange buttons horizontally
+        #                           inputStyle={
+        #                               "margin-right":"2px",     # This pulls the words off of the button
+        #                               "margin-left":"10px",     # Space between buttons if inline=True
+        #                               },
+        #                           ),
+        #             # Text underneath
+        #             html.P("Estimates over time or for any year other than 2021 are currently placeholders" ,style={'font-style':'italic'}),
+        #             ]),
+
+        #         # Year selector
+        #         dbc.Col([
+        #             html.H5("Year"),
+        #             dcc.Dropdown(id='select-year-ecs',
+        #                          clearable = False,
+        #                          ),
+        #             ]),
+
+        #         # Geographical breakdown options
+        #         dbc.Col([
+        #             html.H5("AHLE Geographic Scope"),
+        #             dcc.RadioItems(id='select-geo-view-ecs',
+        #                           inline=True,                  # True: arrange buttons horizontally
+        #                           inputStyle={
+        #                               "margin-right":"2px",     # This pulls the words off of the button
+        #                               "margin-left":"10px",     # Space between buttons if inline=True
+        #                               },
+        #                           ),
+        #             # Text underneath
+        #             html.P("Subnational estimates are currently only available for cattle for 2021" ,style={'font-style':'italic'}),
+        #             ]),
+
+        #         # Subnational dropdwon
+        #         dbc.Col([
+        #             html.H5("Subnational state", id='select-region-ecs-title'),
+        #             dcc.Dropdown(id='select-region-ecs',
+        #                          options=ecs_region_options,
+        #                          placeholder='Select Subnational...',
+        #                          clearable = False,
+        #                          ),
+        #             ]),
+
+        #         # END OF SECOND CONTROL ROW
+        #         ],justify='evenly'),
+
+        #     html.Hr(style={'margin-right':'10px'}),
+
+        #     dbc.Row([
+        #         #### -- AHLE Specific Controls
+        #         dbc.Col([
+        #             dbc.Card([
+        #                 dbc.CardBody([
+        #                     html.H5("Animal Health Loss Envelope (AHLE)",
+        #                             className="card-title",
+        #                             style={"font-weight": "bold"}
         #                             ),
-        #                ]),
-        #            dbc.Col([
-        #                html.H5("Currency"),
-        #                dcc.Dropdown(id='select-currency-ecs',
-        #                            options=ecs_currency_options,
-        #                            value='Birr',
-        #                            clearable = False,
-        #                            ),
-        #                ]),
+        #                     html.Label(["Comparing current values, expenditures, and gross margin to the ideal. Note that the ideal values and expenditures describe the system in an ideal state (for example, zero health expenditure); they do not describe what is required to achieve that state."]),
+        #                     dbc.Row([
+        #                         # Switch between side by side and difference
+        #                         dbc.Col([
+        #                             html.H6("Show current and ideal as..."),
+        #                             dcc.RadioItems(id='select-display-ecs',
+        #                                            options=ecs_display_options,
+        #                                            value='Difference',
+        #                                            labelStyle={'display': 'block'},
+        #                                            inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
+        #                                            ),
+        #                             html.Label(["Difference: show a single bar for each item representing the difference between the current and ideal values"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
+        #                             html.Label(["Side by Side: show two bars for each item, one for current and another for the ideal value"] ,style={'font-style':'italic'}),
+        #                             ]),
 
-        #            # END OF FIRST CONTROL ROW
-        #            ],style={"margin-bottom":"30px"}),
+        #                         # Compare
+        #                         dbc.Col([
+        #                             html.H6("Compare current to...", id='select-compare-ecs-title'),
+        #                             dcc.RadioItems(id='select-compare-ecs',
+        #                                            options=ecs_compare_options_limited,
+        #                                            value='Ideal',
+        #                                            labelStyle={'display': 'block'},
+        #                                            inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
+        #                                            ),
+        #                             html.Label(["Ideal: zero mortality and ideal growth and production rates"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
+        #                             html.Label(["Zero Mortality: zero mortality but growth and production rates at current levels"] ,style={'font-style':'italic'}),
+        #                             ]),
 
-        #        # SECOND CONTROL ROW
-        #        dbc.Row([
-        #            dbc.Col([
-        #                # Switch between single year and over time
-        #                html.H5("Display AHLE for..."),
-        #                dcc.RadioItems(id='select-graph-ahle-ecs',
-        #                              inline=True,                  # True: arrange buttons horizontally
-        #                              inputStyle={
-        #                                  "margin-right":"2px",     # This pulls the words off of the button
-        #                                  "margin-left":"10px",     # Space between buttons if inline=True
-        #                                  },
-        #                              ),
-        #                # Text underneath
-        #                html.P("Estimates over time or for any year other than 2021 are currently placeholders" ,style={'font-style':'italic'}),
-        #                ]),
+        #                         # Age/Sex combination
+        #                         dbc.Col([
+        #                             html.H6("Show results for group...", id='select-agesex-ecs-title'),
+        #                             dcc.Dropdown(id='select-agesex-ecs',
+        #                                          options=ecs_agesex_options,
+        #                                          value='Overall',
+        #                                          clearable = False,
+        #                                          ),
+        #                             html.Label(["Overall: show values and costs for whole system"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
+        #                             html.Label(["Otherwise, show values and costs for just the selected age/sex group"] ,style={'font-style':'italic'}),
+        #                             ]),
+        #                     ]), # END OF ROW
+        #                     dbc.Row([
+        #                         dbc.Col([
+        #                             html.H6("Item", id='select-item-ecs-title'),
+        #                             dcc.Dropdown(id='select-item-ecs',
+        #                                          value='Gross Margin',
+        #                                          clearable = False,
+        #                                          ),
+        #                             ]),
 
-        #            # Year selector
-        #            dbc.Col([
-        #                html.H5("Year"),
-        #                dcc.Dropdown(id='select-year-ecs',
-        #                             clearable = False,
+        #                         # Factor dropdown
+        #                         dbc.Col([
+        #                             html.H6("Improvement Factor", id='select-factor-ecs-title'),
+        #                             dcc.Dropdown(id='select-factor-ecs',
+        #                                           options=ecs_factor_options,
+        #                                           value='Mortality',
+        #                                           clearable = True,
+        #                                           ),
+        #                               ],width=4,
         #                             ),
-        #                ]),
 
-        #            # Geographical breakdown options
-        #            dbc.Col([
-        #                html.H5("AHLE Geographic Scope"),
-        #                dcc.RadioItems(id='select-geo-view-ecs',
-        #                              inline=True,                  # True: arrange buttons horizontally
-        #                              inputStyle={
-        #                                  "margin-right":"2px",     # This pulls the words off of the button
-        #                                  "margin-left":"10px",     # Space between buttons if inline=True
-        #                                  },
-        #                              ),
-        #                # Text underneath
-        #                html.P("Subnational estimates are currently only available for cattle for 2021" ,style={'font-style':'italic'}),
-        #                ]),
+        #                         # Reduction
+        #                         dbc.Col([
+        #                             html.H6("Improvement Amount", id='select-improve-ecs-title'),
+        #                             dcc.RadioItems(id='select-improve-ecs',
+        #                                           options=ecs_improve_options,
+        #                                           value= "25%",
+        #                                           inputStyle={"margin-right": "2px", # This pulls the words off of the button
+        #                                                       "margin-left": "10px"},
+        #                                           ),
+        #                             ]),
+        #                         ]),     ## END OF ROW ##
+        #                     ]),    # END OF CARD BODY
+        #                 ], color='#F2F2F2'),    # END OF CARD
+        #             ],width=6),
 
-        #            # Subnational dropdwon
-        #            dbc.Col([
-        #                html.H5("Subnational state", id='select-region-ecs-title'),
-        #                dcc.Dropdown(id='select-region-ecs',
-        #                             options=ecs_region_options,
-        #                             placeholder='Select Subnational...',
-        #                             clearable = False,
-        #                             ),
-        #                ]),
+        #         ], justify='evenly'),   # END OF Controls Row
+        #     html.Br(),
 
-        #            # END OF SECOND CONTROL ROW
-        #            ],justify='evenly'),
+        #     #### -- GRAPHICS PT.1
+        #     dbc.Row([  # Row with GRAPHICS
 
-        #        html.Hr(style={'margin-right':'10px'}),
+        #         # AHLE Bar Chart
+        #         dbc.Col(
+        #             dbc.Spinner(children=[
 
-        #        dbc.Row([
-        #            #### -- AHLE Specific Controls
-        #            dbc.Col([
-        #                dbc.Card([
-        #                    dbc.CardBody([
-        #                        html.H5("Animal Health Loss Envelope (AHLE)",
-        #                                className="card-title",
-        #                                style={"font-weight": "bold"}
-        #                                ),
-        #                        html.Label(["Comparing current values, expenditures, and gross margin to the ideal. Note that the ideal values and expenditures describe the system in an ideal state (for example, zero health expenditure); they do not describe what is required to achieve that state."]),
-        #                        dbc.Row([
-        #                            # Switch between side by side and difference
-        #                            dbc.Col([
-        #                                html.H6("Show current and ideal as..."),
-        #                                dcc.RadioItems(id='select-display-ecs',
-        #                                               options=ecs_display_options,
-        #                                               value='Difference',
-        #                                               labelStyle={'display': 'block'},
-        #                                               inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
-        #                                               ),
-        #                                html.Label(["Difference: show a single bar for each item representing the difference between the current and ideal values"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
-        #                                html.Label(["Side by Side: show two bars for each item, one for current and another for the ideal value"] ,style={'font-style':'italic'}),
-        #                                ]),
+        #             dcc.Graph(id='ecs-ahle-bar-chart',
+        #                       style = {"height":"650px"},
+        #                       config = {
+        #                           "displayModeBar" : True,
+        #                           "displaylogo": False,
+        #                           'toImageButtonOptions': {
+        #                               'format': 'png', # one of png, svg, jpeg, webp
+        #                               'filename': 'GBADs_Ethiopia_Attribution_Treemap'
+        #                               },
+        #                           'modeBarButtonsToRemove': ['zoom',
+        #                                                       'zoomIn',
+        #                                                       'zoomOut',
+        #                                                       'autoScale',
+        #                                                       #'resetScale',  # Removes home button
+        #                                                       'pan',
+        #                                                       'select2d',
+        #                                                       'lasso2d']
+        #                           }
+        #                       )
+        #             # End of Spinner
+        #             ],size="md", color="#393375", fullscreen=False),
+        #         # End of AHLE Bar Chart Column
+        #         style={"width":5}),
 
-        #                            # Compare
-        #                            dbc.Col([
-        #                                html.H6("Compare current to...", id='select-compare-ecs-title'),
-        #                                dcc.RadioItems(id='select-compare-ecs',
-        #                                               options=ecs_compare_options_limited,
-        #                                               value='Ideal',
-        #                                               labelStyle={'display': 'block'},
-        #                                               inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
-        #                                               ),
-        #                                html.Label(["Ideal: zero mortality and ideal growth and production rates"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
-        #                                html.Label(["Zero Mortality: zero mortality but growth and production rates at current levels"] ,style={'font-style':'italic'}),
-        #                                ]),
+        #         # Values and Costs Waterfall
+        #         dbc.Col([
+        #             dbc.Spinner(children=[
+        #             dcc.Graph(id='ecs-ahle-waterfall',
+        #                       style = {"height":"650px"},
+        #                       config = {
+        #                           "displayModeBar" : True,
+        #                           "displaylogo": False,
+        #                           'toImageButtonOptions': {
+        #                               'format': 'png', # one of png, svg, jpeg, webp
+        #                               'filename': 'GBADs_Ethiopia_AHLE_Sunburst'
+        #                               },
+        #                           'modeBarButtonsToRemove': ['zoom',
+        #                                                       'zoomIn',
+        #                                                       'zoomOut',
+        #                                                       'autoScale',
+        #                                                       #'resetScale',  # Removes home button
+        #                                                       'pan',
+        #                                                       'select2d',
+        #                                                       'lasso2d']
+        #                           }
+        #                       )
+        #                 # End of Spinner
+        #                 ],size="md", color="#393375", fullscreen=False),
+        #             # End of AHLE Waterfall
+        #             ],style={"width":5}),
 
-        #                        ]), # END OF ROW
-        #                        dbc.Row([
-        #                            dbc.Col([
-        #                                html.H6("Item", id='select-item-ecs-title'),
-        #                                dcc.Dropdown(id='select-item-ecs',
-        #                                             value='Gross Margin',
-        #                                             clearable = False,
-        #                                             ),
-        #                                ]),
+        #         ]), # END OF GRAPHICS ROW
 
-        #                            # Factor dropdown
-        #                            dbc.Col([
-        #                                html.H6("Improvement Factor", id='select-factor-ecs-title'),
-        #                                dcc.Dropdown(id='select-factor-ecs',
-        #                                              options=ecs_factor_options,
-        #                                              value='Mortality',
-        #                                              clearable = True,
-        #                                              ),
-        #                                  ],width=4,
-        #                                ),
-
-        #                            # Reduction
-        #                            dbc.Col([
-        #                                html.H6("Improvement Amount", id='select-improve-ecs-title'),
-        #                                dcc.RadioItems(id='select-improve-ecs',
-        #                                              options=ecs_improve_options,
-        #                                              value= "25%",
-        #                                              inputStyle={"margin-right": "2px", # This pulls the words off of the button
-        #                                                          "margin-left": "10px"},
-        #                                              ),
-        #                                ]),
-        #                            ]),     ## END OF ROW ##
-        #                        ]),    # END OF CARD BODY
-        #                    ], color='#F2F2F2'),    # END OF CARD
-        #                ]),
-
-        #            ], justify='evenly'),   # END OF Controls Row
-        #        html.Br(),
-
-        #        #### -- GRAPHICS PT.1
-        #        dbc.Row([  # Row with GRAPHICS
-
-        #            # AHLE Bar Chart
-        #            dbc.Col(
-        #                dbc.Spinner(children=[
-
-        #                dcc.Graph(id='ecs-ahle-bar-chart',
-        #                          style = {"height":"650px"},
-        #                          config = {
-        #                              "displayModeBar" : True,
-        #                              "displaylogo": False,
-        #                              'toImageButtonOptions': {
-        #                                  'format': 'png', # one of png, svg, jpeg, webp
-        #                                  'filename': 'GBADs_Ethiopia_Attribution_Treemap'
-        #                                  },
-        #                              'modeBarButtonsToRemove': ['zoom',
-        #                                                          'zoomIn',
-        #                                                          'zoomOut',
-        #                                                          'autoScale',
-        #                                                          #'resetScale',  # Removes home button
-        #                                                          'pan',
-        #                                                          'select2d',
-        #                                                          'lasso2d']
-        #                              }
-        #                          )
-        #                # End of Spinner
-        #                ],size="md", color="#393375", fullscreen=False),
-        #            # End of AHLE Bar Chart Column
-        #            style={"width":5}),
-
-        #            # Values and Costs Waterfall
-        #            dbc.Col([
-        #                dbc.Spinner(children=[
-        #                dcc.Graph(id='ecs-ahle-waterfall',
-        #                          style = {"height":"650px"},
-        #                          config = {
-        #                              "displayModeBar" : True,
-        #                              "displaylogo": False,
-        #                              'toImageButtonOptions': {
-        #                                  'format': 'png', # one of png, svg, jpeg, webp
-        #                                  'filename': 'GBADs_Ethiopia_AHLE_Sunburst'
-        #                                  },
-        #                              'modeBarButtonsToRemove': ['zoom',
-        #                                                          'zoomIn',
-        #                                                          'zoomOut',
-        #                                                          'autoScale',
-        #                                                          #'resetScale',  # Removes home button
-        #                                                          'pan',
-        #                                                          'select2d',
-        #                                                          'lasso2d']
-        #                              }
-        #                          )
-        #                    # End of Spinner
-        #                    ],size="md", color="#393375", fullscreen=False),
-        #                # End of AHLE Waterfall
-        #                ],style={"width":5}),
-
-        #            ]), # END OF GRAPHICS ROW
-
-        #        #### -- FOOTNOTES PT.1
-        #        dbc.Row([
-        #            dbc.Col([   # Waterfall footnote
-        #                html.P("Blue indicates an increase, red indicates a decrease for each item. Orange is the net value of all of them.", id="waterfall-footnote-ecs"),
-        #                html.P("Error bars show 95% confidence interval for each item based on simulation results. These reflect uncertainty in the input parameters and natural variation in the population."),
-        #            ]),
-
-        #        ], style={'font-style': 'italic'}
-        #        ),
-        #        ### END OF FOOTNOTES
-
-        #        # html.Hr(style={'margin-right':'10px',}),
-        #     ### END OF AHLE V2 TAB
+        #     #### -- FOOTNOTES PT.1
+        #     dbc.Row([
+        #         dbc.Col([   # Waterfall footnote
+        #             html.P("Blue indicates an increase, red indicates a decrease for each item. Orange is the net value of all of them.", id="waterfall-footnote-ecs"),
+        #             html.P("Error bars show 95% confidence interval for each item based on simulation results. These reflect uncertainty in the input parameters and natural variation in the population."),
         #         ]),
+        #         # dbc.Col([   # Treemap footnote
+        #         #     html.P("Attribution to infectious, non-infectious, and external causes is based on expert opinion. See the expert opinion attribution proportions in the table below."),
+        #         #     html.P("AHLE Components are production loss, mortality loss, and health cost. Health cost makes up the smallest proportion and may not be visible in this view."),
+        #         # ]),
+        #     ], style={'font-style': 'italic'}
+        #     ),
+        #     ### END OF FOOTNOTES
+
+        #     html.Hr(style={'margin-right':'10px',}),
+
+        #     #### -- GRAPHICS PT.2
+        #     # dbc.Row([
+        #     #     dbc.Col([ # AHLE Stacked Bar
+        #     #         dbc.Spinner(children=[
+        #     #         dcc.Graph(id='ahle-stacked-bar-ecs',
+        #     #                   style = {"height":"500px"},
+        #     #                   config = {
+        #     #                       "displayModeBar" : True,
+        #     #                       "displaylogo": False,
+        #     #                       'toImageButtonOptions': {
+        #     #                           'format': 'png', # one of png, svg, jpeg, webp
+        #     #                           'filename': 'GBADs_AHLE_Stacked_Bar_ECS'
+        #     #                           },
+        #     #                       'modeBarButtonsToRemove': ['zoom',
+        #     #                                                   'zoomIn',
+        #     #                                                   'zoomOut',
+        #     #                                                   'autoScale',
+        #     #                                                   #'resetScale',  # Removes home button
+        #     #                                                   'pan',
+        #     #                                                   'select2d',
+        #     #                                                   'lasso2d']
+        #     #                       }
+        #     #                   )
+        #     #             ],size="md", color="#393375", fullscreen=False),    # End of Spinner
+        #     #         ],style={"width":5}     # End of Stacked Bar
+        #     #         ),
+
+        #     #     # Sankey
+        #     #     dbc.Col([
+        #     #     dbc.Spinner(children=[
+        #     #         html.H4("Sankey for Attribution"),
+        #     #             html.Div(children=[
+        #     #                     html.Img(src=os.environ.get("BASE_URL", "") + '/assets/ECS_Sanky_diagram_from_Gemma.png',
+        #     #                     style = {'width':'120vw'}),
+        #     #                     ],
+        #     #                       style = {
+        #     #                               "margin-bottom":"10px",
+        #     #                               'margin-right':"10px",},
+        #     #                       ),
+        #     #             # End of Spinner
+        #     #             ],size="md", color="#393375", fullscreen=False),
+        #     #         ]),
+        #     #     ]), # END OF ROW
+
+        #     #### -- FOOTNOTES PT.2
+        #     # dbc.Row([
+        #     #     dbc.Col([
+        #     #         # Stacked bar
+        #     #         html.P("Expenditure on Health is not recorded for individual age groups so is not included in individual AHLE calculations."),
+        #     #         html.P("Expenditure on Health is very small, so the impact on AHLE is negligible."),
+        #     #         ]),
+        #     #     dbc.Col([
+        #     #         # Sankey
+        #     #         # No footnote
+        #     #         ]),
+        #     #     ], style={'font-style': 'italic'}
+        #     #     ),
+
+        #     html.Hr(style={'margin-right':'10px',}),
+
+        #     ### END OF AHLE
+        #     ]),
+
+
+        #### AHLE V2
+        dbc.Tab(label="AHLE v2",
+                tabClassName="flex-grow-1 text-center",
+                    tab_style = tab_style,
+                    style = {"height":"100vh",
+                        },
+                children =[
+                html.Label(["Displaying production values, expenditures, and gross margin under the \
+                            current and ideal scenario estimated by a compartmental herd dynamics model."]),
+                html.Br(),
+                html.Label(["Results on this page are currently limited to cattle, small ruminants, and \
+                            poultry."],
+                          style={"font-style":"italic"}),
+                html.Hr(style={'margin-right':'10px',
+                              'margin-top':'0px',
+                              'margin-bottom':'5px'}),
+                html.Label(["Select a species and production system to view and the currency to display for all charts"]
+                          ,style={"font-style":"italic"}
+                          ),
+
+                #### -- DROPDOWNS CONTROLS
+                dbc.Row([
+                    dbc.Col([
+                        html.H5("Species"),
+                        dcc.Dropdown(id='select-species-ecs',
+                                    options=ecs_species_options,
+                                    value='Cattle',
+                                    clearable = False,
+                                    ),
+                        ]),
+                    dbc.Col([
+                        html.H5("Production System"),
+                        dcc.Dropdown(id='select-prodsys-ecs',
+                                    # Options and value are now defined in a callback based on selected species
+                                    clearable = False,
+                                    ),
+                        ]),
+                    dbc.Col([
+                        html.H5("Currency"),
+                        dcc.Dropdown(id='select-currency-ecs',
+                                    options=ecs_currency_options,
+                                    value='Birr',
+                                    clearable = False,
+                                    ),
+                        ]),
+
+                    # END OF FIRST CONTROL ROW
+                    ],style={"margin-bottom":"30px"}),
+
+                # SECOND CONTROL ROW
+                dbc.Row([
+                    dbc.Col([
+                        # Switch between single year and over time
+                        html.H5("Display AHLE for..."),
+                        dcc.RadioItems(id='select-graph-ahle-ecs',
+                                      inline=True,                  # True: arrange buttons horizontally
+                                      inputStyle={
+                                          "margin-right":"2px",     # This pulls the words off of the button
+                                          "margin-left":"10px",     # Space between buttons if inline=True
+                                          },
+                                      ),
+                        # Text underneath
+                        html.P("Estimates over time or for any year other than 2021 are currently placeholders" ,style={'font-style':'italic'}),
+                        ]),
+
+                    # Year selector
+                    dbc.Col([
+                        html.H5("Year"),
+                        dcc.Dropdown(id='select-year-ecs',
+                                    clearable = False,
+                                    ),
+                        ]),
+
+                    # Geographical breakdown options
+                    dbc.Col([
+                        html.H5("AHLE Geographic Scope"),
+                        dcc.RadioItems(id='select-geo-view-ecs',
+                                      inline=True,                  # True: arrange buttons horizontally
+                                      inputStyle={
+                                          "margin-right":"2px",     # This pulls the words off of the button
+                                          "margin-left":"10px",     # Space between buttons if inline=True
+                                          },
+                                      ),
+                        # Text underneath
+                        html.P("Subnational estimates are currently only available for cattle for 2021" ,style={'font-style':'italic'}),
+                        ]),
+
+                    # Subnational dropdwon
+                    dbc.Col([
+                        html.H5("Subnational state", id='select-region-ecs-title'),
+                        dcc.Dropdown(id='select-region-ecs',
+                                    options=ecs_region_options,
+                                    placeholder='Select Subnational...',
+                                    clearable = False,
+                                    ),
+                        ]),
+
+                    # END OF SECOND CONTROL ROW
+                    ],justify='evenly'),
+
+                html.Hr(style={'margin-right':'10px'}),
+
+                dbc.Row([
+                    #### -- AHLE Specific Controls
+                    dbc.Col([
+                        dbc.Card([
+                            dbc.CardBody([
+                                html.H5("Animal Health Loss Envelope (AHLE)",
+                                        className="card-title",
+                                        style={"font-weight": "bold"}
+                                        ),
+                                html.Label(["Comparing current values, expenditures, and gross margin to the ideal. Note that the ideal values and expenditures describe the system in an ideal state (for example, zero health expenditure); they do not describe what is required to achieve that state."]),
+                                dbc.Row([
+                                    # Switch between side by side and difference
+                                    dbc.Col([
+                                        html.H6("Show current and ideal as..."),
+                                        dcc.RadioItems(id='select-display-ecs',
+                                                      options=ecs_display_options,
+                                                      value='Side by Side',
+                                                      labelStyle={'display': 'block'},
+                                                      inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
+                                                      ),
+                                        html.Label(["Difference: show a single bar for each item representing the difference between the current and ideal values"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
+                                        html.Label(["Side by Side: show two bars for each item, one for current and another for the ideal value"] ,style={'font-style':'italic'}),
+                                        ]),
+
+                                    # Compare
+                                    dbc.Col([
+                                        html.H6("Compare current to...", id='select-compare-ecs-title'),
+                                        dcc.RadioItems(id='select-compare-ecs',
+                                                      options=ecs_compare_options_limited,
+                                                      value='Ideal',
+                                                      labelStyle={'display': 'block'},
+                                                      inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
+                                                      ),
+                                        html.Label(["Ideal: zero mortality and ideal growth and production rates"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
+                                        html.Label(["Zero Mortality: zero mortality but growth and production rates at current levels"] ,style={'font-style':'italic'}),
+                                        ]),
+
+                                ]), # END OF ROW
+                                dbc.Row([
+                                    dbc.Col([
+                                        html.H6("Item", id='select-item-ecs-title'),
+                                        dcc.Dropdown(id='select-item-ecs',
+                                                    value='Gross Margin',
+                                                    clearable = False,
+                                                    ),
+                                        ]),
+
+                                    # Factor dropdown
+                                    dbc.Col([
+                                        html.H6("Improvement Factor", id='select-factor-ecs-title'),
+                                        dcc.Dropdown(id='select-factor-ecs',
+                                                      options=ecs_factor_options,
+                                                      value='Mortality',
+                                                      clearable = True,
+                                                      ),
+                                          ],width=4,
+                                        ),
+
+                                    # Reduction
+                                    dbc.Col([
+                                        html.H6("Improvement Amount", id='select-improve-ecs-title'),
+                                        dcc.RadioItems(id='select-improve-ecs',
+                                                      options=ecs_improve_options,
+                                                      value= "25%",
+                                                      inputStyle={"margin-right": "2px", # This pulls the words off of the button
+                                                                  "margin-left": "10px"},
+                                                      ),
+                                        ]),
+                                    ]),     ## END OF ROW ##
+                                ]),    # END OF CARD BODY
+                            ], color='#F2F2F2'),    # END OF CARD
+                        ]),
+
+                    ], justify='evenly'),   # END OF Controls Row
+                html.Br(),
+
+                #### -- GRAPHICS PT.1
+                dbc.Row([  # Row with GRAPHICS
+
+                    # AHLE Bar Chart
+                    dbc.Col(
+                        dbc.Spinner(children=[
+
+                        dcc.Graph(id='ecs-ahle-bar-chart',
+                                  style = {"height":"650px"},
+                                  config = {
+                                      "displayModeBar" : True,
+                                      "displaylogo": False,
+                                      'toImageButtonOptions': {
+                                          'format': 'png', # one of png, svg, jpeg, webp
+                                          'filename': 'GBADs_Ethiopia_Attribution_Treemap'
+                                          },
+                                      'modeBarButtonsToRemove': ['zoom',
+                                                                  'zoomIn',
+                                                                  'zoomOut',
+                                                                  'autoScale',
+                                                                  #'resetScale',  # Removes home button
+                                                                  'pan',
+                                                                  'select2d',
+                                                                  'lasso2d']
+                                      }
+                                  )
+                        # End of Spinner
+                        ],size="md", color="#393375", fullscreen=False),
+                    # End of AHLE Bar Chart Column
+                    style={"width":5}),
+
+                    # Values and Costs Waterfall
+                    dbc.Col([
+                        dbc.Spinner(children=[
+                        dcc.Graph(id='ecs-ahle-waterfall',
+                                  style = {"height":"650px"},
+                                  config = {
+                                      "displayModeBar" : True,
+                                      "displaylogo": False,
+                                      'toImageButtonOptions': {
+                                          'format': 'png', # one of png, svg, jpeg, webp
+                                          'filename': 'GBADs_Ethiopia_AHLE_Sunburst'
+                                          },
+                                      'modeBarButtonsToRemove': ['zoom',
+                                                                  'zoomIn',
+                                                                  'zoomOut',
+                                                                  'autoScale',
+                                                                  #'resetScale',  # Removes home button
+                                                                  'pan',
+                                                                  'select2d',
+                                                                  'lasso2d']
+                                      }
+                                  )
+                            # End of Spinner
+                            ],size="md", color="#393375", fullscreen=False),
+                        # End of AHLE Waterfall
+                        ],style={"width":5}),
+
+                    ]), # END OF GRAPHICS ROW
+
+                #### -- FOOTNOTES PT.1
+                dbc.Row([
+                    dbc.Col([   # Waterfall footnote
+                        html.P("Blue indicates an increase, red indicates a decrease for each item. Orange is the net value of all of them.", id="waterfall-footnote-ecs"),
+                        html.P("Error bars show 95% confidence interval for each item based on simulation results. These reflect uncertainty in the input parameters and natural variation in the population."),
+                    ]),
+
+                ], style={'font-style': 'italic'}
+                ),
+                ### END OF FOOTNOTES
+
+                # html.Hr(style={'margin-right':'10px',}),
+            ### END OF AHLE V2 TAB
+                ]),
 
 
             #### AHLE ATTRIBUTION BY POPULATION
-            dbc.Tab(label="AHLE Attribution by Population",
+            dbc.Tab(label="Attribution by Population",
                     tabClassName="flex-grow-1 text-center",
                         tab_style = tab_style,
                         style = {"height":"100vh",
@@ -1474,9 +1474,6 @@ gbadsDash.layout = html.Div([
                         dbc.Col([
                             dbc.Card([
                                 dbc.CardBody([
-                                    # html.H5("AHLE Attribution",
-                                    #         className="card-title",
-                                    #         style={"font-weight": "bold"}),
                                     html.Label(["NOTE: this is shown for species groups (cattle, all small ruminants, or all poultry) rather than for individual species."] ,style={"font-style":"italic"}),
                                     html.H5("Segment by..."),
                                     dbc.Row([
@@ -1486,7 +1483,6 @@ gbadsDash.layout = html.Div([
                                             dcc.Dropdown(id='select-top-lvl-attr-ecs',
                                                           options=ecs_hierarchy_attr_options,
                                                           value='cause',
-                                                          # labelStyle={'display': 'block'}
                                                           clearable = False,
                                                           ),
                                             ], style={
@@ -1597,7 +1593,7 @@ gbadsDash.layout = html.Div([
 
 
         #### SUBNATIONAL AHLE MAP
-        dbc.Tab(label="AHLE Map",
+        dbc.Tab(label="Map",
                 tabClassName="flex-grow-1 text-center",
                     tab_style = tab_style,
                     style = {"height":"100vh",
@@ -1959,20 +1955,20 @@ def update_geo_view_options_ecs(graph, species, year):
             d['disabled']=True
     return options, value
 
-# Update agesex group options based on species
-@gbadsDash.callback(
-    Output('select-agesex-ecs', 'options'),
-    Input('select-species-ecs', 'value'),
-    )
-def update_age_options_ecs(species):
-    if species == "Cattle":
-        options = ecs_agesex_options
-    else:
-        options = ecs_agesex_options.copy()
-        for d in options:
-            if d['value'] == 'Oxen':
-                options.remove(d)
-    return options
+# # Update agesex group options based on species
+# @gbadsDash.callback(
+#     Output('select-agesex-ecs', 'options'),
+#     Input('select-species-ecs', 'value'),
+#     )
+# def update_age_options_ecs(species):
+#     if species == "Cattle":
+#         options = ecs_agesex_options
+#     else:
+#         options = ecs_agesex_options.copy()
+#         for d in options:
+#             if d['value'] == 'Oxen':
+#                 options.remove(d)
+#     return options
 
 # Remove improvement option from scenario for cattle and poultry while those are misssing
 # August 2023: updated scenarios do not include zero mortality or improvement
@@ -2340,9 +2336,10 @@ def update_footnote(graph):
     Input('select-currency-ecs','value'),
     Input('select-species-ecs','value'),
     Input('select-prodsys-ecs','value'),
-    Input('select-agesex-ecs', 'value'),
+    # Input('select-agesex-ecs', 'value'),
 )
-def update_ecs_ahle_data(currency, species, prodsys, agesex):
+# def update_ecs_ahle_data(currency, species, prodsys, agesex):
+def update_ecs_ahle_data(currency, species, prodsys):
     # Read in data and apply filters
     input_df = ecs_ahle_summary.copy()
 
@@ -2354,8 +2351,9 @@ def update_ecs_ahle_data(currency, species, prodsys, agesex):
     input_df['production_system'] = input_df['production_system'].replace({'Overall': 'All Production Systems'})
     input_df=input_df.loc[(input_df['production_system'] == prodsys)]
 
-    # Age/sex filter
-    input_df=input_df.loc[(input_df['group'] == agesex)]
+    # # Age/sex filter
+    # input_df=input_df.loc[(input_df['group'] == agesex)]
+    input_df=input_df.loc[(input_df['group'] == 'Overall')]
 
     # If currency is USD, use USD columns
     display_currency = 'Birr'
@@ -2596,7 +2594,7 @@ def update_ecs_attr_expert_data(species):
 @gbadsDash.callback(
     Output('ecs-ahle-waterfall','figure'),
     Input('select-graph-ahle-ecs', 'value'),
-    Input('select-agesex-ecs', 'value'),
+    # Input('select-agesex-ecs', 'value'),
     Input('select-species-ecs','value'),
     Input('select-display-ecs','value'),
     Input('select-compare-ecs','value'),
@@ -2611,7 +2609,7 @@ def update_ecs_attr_expert_data(species):
     )
 def update_ahle_value_and_cost_viz_ecs(
         graph_options,
-        agesex,
+        # agesex,
         species,
         display,
         compare,
@@ -2633,8 +2631,9 @@ def update_ahle_value_and_cost_viz_ecs(
     # Production System filter
     input_df=input_df.loc[(input_df['production_system'] == prodsys)]
 
-    # Age/sex filter
-    input_df=input_df.loc[(input_df['group'] == agesex)]
+    # # Age/sex filter
+    # input_df=input_df.loc[(input_df['group'] == agesex)]
+    input_df=input_df.loc[(input_df['group'] == 'Overall')]
 
     # Geographic filter
     if geo_view.upper() == "NATIONAL":
@@ -2734,9 +2733,9 @@ def update_ahle_value_and_cost_viz_ecs(
             if compare == 'Ideal':
                 y = prep_df['mean_diff_ideal']
                 stdev = prep_df['stdev_diff_ideal']
-            elif compare == 'Zero Mortality':
-                y = prep_df['mean_diff_mortzero']
-                stdev = prep_df['stdev_diff_mortzero']
+            # elif compare == 'Zero Mortality':
+            #     y = prep_df['mean_diff_mortzero']
+            #     stdev = prep_df['stdev_diff_mortzero']
             else:
                 compare = impvmnt_factor + "- " + impvmnt_value
                 if impvmnt_factor == 'Mortality' and impvmnt_value == '25%':
@@ -2795,15 +2794,15 @@ def update_ahle_value_and_cost_viz_ecs(
                     ,name=compare
                     ,line=dict(color='#00CA0F')
                     )
-            elif compare == 'Zero Mortality':
-                # Overlay zero mortality value
-                plot_compare_value = go.Scatter(
-                    x=x
-                    ,y = prep_df['mean_mortality_zero']
-                    ,error_y=dict(type='data' ,array=prep_df['stdev_mortality_zero']*1.96)
-                    ,name=compare
-                    ,line=dict(color='#00CA0F')
-                    )
+            # elif compare == 'Zero Mortality':
+            #     # Overlay zero mortality value
+            #     plot_compare_value = go.Scatter(
+            #         x=x
+            #         ,y = prep_df['mean_mortality_zero']
+            #         ,error_y=dict(type='data' ,array=prep_df['stdev_mortality_zero']*1.96)
+            #         ,name=compare
+            #         ,line=dict(color='#00CA0F')
+            #         )
             else:
                 if impvmnt_factor == 'Mortality' and impvmnt_value == '25%':
                     y = prep_df['mean_all_mort_25_imp']
@@ -2908,9 +2907,9 @@ def update_ahle_value_and_cost_viz_ecs(
             if compare == 'Ideal':
                 y = prep_df['mean_diff_ideal']
                 stdev = prep_df['stdev_diff_ideal']
-            elif compare == 'Zero Mortality':
-                y = prep_df['mean_diff_mortzero']
-                stdev = prep_df['stdev_diff_mortzero']
+            # elif compare == 'Zero Mortality':
+            #     y = prep_df['mean_diff_mortzero']
+            #     stdev = prep_df['stdev_diff_mortzero']
             else:
                 compare = impvmnt_factor + "- " + impvmnt_value
                 if impvmnt_factor == 'Mortality' and impvmnt_value == '25%':
@@ -2972,7 +2971,8 @@ def update_ahle_value_and_cost_viz_ecs(
             )
             # Add title
             ecs_waterfall_fig.update_layout(
-                title_text=f'{reg_title} Animal Health Loss Envelope | {species}, {prodsys} <br><sup>Difference between current and {compare} values for {agesex}, {selected_year}</sup><br>',
+                # title_text=f'{reg_title} Animal Health Loss Envelope | {species}, {prodsys} <br><sup>Difference between current and {compare} values for {agesex}, {selected_year}</sup><br>',
+                title_text=f'{reg_title} Animal Health Loss Envelope | {species}, {prodsys} <br><sup>Difference between current and {compare}, {selected_year}</sup><br>',
                 yaxis_title=display_currency,
                 font_size=15,
                 margin=dict(t=100)
@@ -3077,102 +3077,102 @@ def update_ahle_value_and_cost_viz_ecs(
                 #     # scattergap=0.75
                 #     )
 
-            elif compare == 'Zero Mortality':
-                y = prep_df['mean_mortality_zero']
-                stdev = prep_df['stdev_mortality_zero']
-                name = 'Zero Mortality (solid)'
-                # Create numeric, dynamic x axis based off of items
-                x_len = np.arange(1,len(x)+1,1)
+            # elif compare == 'Zero Mortality':
+            #     y = prep_df['mean_mortality_zero']
+            #     stdev = prep_df['stdev_mortality_zero']
+            #     name = 'Zero Mortality (solid)'
+            #     # Create numeric, dynamic x axis based off of items
+            #     x_len = np.arange(1,len(x)+1,1)
 
-                # Create graph
-                ecs_waterfall_fig = create_ahle_waterfall_ecs(prep_df, name, measure, x_len-.3, y)
-                # Add error bars
-                # Reset indicies
-                x = x.reset_index(drop=True)
-                y = y.reset_index(drop=True)
+            #     # Create graph
+            #     ecs_waterfall_fig = create_ahle_waterfall_ecs(prep_df, name, measure, x_len-.3, y)
+            #     # Add error bars
+            #     # Reset indicies
+            #     x = x.reset_index(drop=True)
+            #     y = y.reset_index(drop=True)
 
-                # Scale standard deviation to achieve 95% confidence
-                stdev = 1.96 * stdev    # Simulation results are Normally distributed
+            #     # Scale standard deviation to achieve 95% confidence
+            #     stdev = 1.96 * stdev    # Simulation results are Normally distributed
 
-                # Get cumulative sum value for Y unless Gross Margin
-                y_error_sum=[]
-                for i in x.values:
-                    if i != 'Gross Margin':
-                        y_error_sum = np.cumsum(y)
-                    elif i == 'Gross Margin':
-                        GM_index = x[x == 'Gross Margin'].index[0]
-                        y_error_sum[GM_index] = y[GM_index]
-                # Add trace for error
-                ecs_waterfall_fig.add_trace(
-                    go.Scatter(
-                        x=x_len-.3,
-                        y=y_error_sum,
-                        marker=dict(color='black'),
-                        customdata=np.stack((y, prep_df['item']), axis=-1),
-                        error_y=dict(
-                            type='data',
-                            array=stdev
-                        ),
-                        mode="markers",
-                        hoverinfo='none',
-                        showlegend=False
-                    ),
-                )
+            #     # Get cumulative sum value for Y unless Gross Margin
+            #     y_error_sum=[]
+            #     for i in x.values:
+            #         if i != 'Gross Margin':
+            #             y_error_sum = np.cumsum(y)
+            #         elif i == 'Gross Margin':
+            #             GM_index = x[x == 'Gross Margin'].index[0]
+            #             y_error_sum[GM_index] = y[GM_index]
+            #     # Add trace for error
+            #     ecs_waterfall_fig.add_trace(
+            #         go.Scatter(
+            #             x=x_len-.3,
+            #             y=y_error_sum,
+            #             marker=dict(color='black'),
+            #             customdata=np.stack((y, prep_df['item']), axis=-1),
+            #             error_y=dict(
+            #                 type='data',
+            #                 array=stdev
+            #             ),
+            #             mode="markers",
+            #             hoverinfo='none',
+            #             showlegend=False
+            #         ),
+            #     )
 
-                # Add current with lag
-                ecs_waterfall_fig.add_trace(go.Waterfall(
-                    name = 'Current (outline)',
-                    measure = measure,
-                    x = x_len+.3,
-                    y = prep_df['mean_current'],
-                    decreasing = {"marker":{"color":"white", "line":{"color":"#E84C3D", "width":3}}},
-                    increasing = {"marker":{"color":"white", "line":{"color":"#3598DB", "width":3}}},
-                    totals = {"marker":{"color":"white", "line":{"color":"#F7931D", "width":3}}},
-                    connector = {"line":{"dash":"dot"}},
-                    customdata=np.stack((prep_df['mean_current'], prep_df['item']), axis=-1),
-                    ))
-                # Add error bars
-                # Reset indicies
-                y = prep_df['mean_current']
-                x = x.reset_index(drop=True)
-                y = y.reset_index(drop=True)
-                # Get cumulative sum value for Y unless Gross Margin
-                y_error_sum=[]
-                for i in x.values:
-                    if i != 'Gross Margin':
-                        y_error_sum = np.cumsum(y)
-                    elif i == 'Gross Margin':
-                        GM_index = x[x == 'Gross Margin'].index[0]
-                        y_error_sum[GM_index] = y[GM_index]
+            #     # Add current with lag
+            #     ecs_waterfall_fig.add_trace(go.Waterfall(
+            #         name = 'Current (outline)',
+            #         measure = measure,
+            #         x = x_len+.3,
+            #         y = prep_df['mean_current'],
+            #         decreasing = {"marker":{"color":"white", "line":{"color":"#E84C3D", "width":3}}},
+            #         increasing = {"marker":{"color":"white", "line":{"color":"#3598DB", "width":3}}},
+            #         totals = {"marker":{"color":"white", "line":{"color":"#F7931D", "width":3}}},
+            #         connector = {"line":{"dash":"dot"}},
+            #         customdata=np.stack((prep_df['mean_current'], prep_df['item']), axis=-1),
+            #         ))
+            #     # Add error bars
+            #     # Reset indicies
+            #     y = prep_df['mean_current']
+            #     x = x.reset_index(drop=True)
+            #     y = y.reset_index(drop=True)
+            #     # Get cumulative sum value for Y unless Gross Margin
+            #     y_error_sum=[]
+            #     for i in x.values:
+            #         if i != 'Gross Margin':
+            #             y_error_sum = np.cumsum(y)
+            #         elif i == 'Gross Margin':
+            #             GM_index = x[x == 'Gross Margin'].index[0]
+            #             y_error_sum[GM_index] = y[GM_index]
 
-                # Add trace for error
-                ecs_waterfall_fig.add_trace(
-                    go.Scatter(
-                         x=x_len+.3,
-                         y=y_error_sum,
-                         marker=dict(color='black'),
-                         customdata=np.stack((y, prep_df['item']), axis=-1),
-                         error_y=dict(
-                            type='data',
-                            array=prep_df['stdev_current']
-                        ),
-                        mode="markers",
-                        hoverinfo='none',
-                        name='95% Confidence'
-                    ),
-                )
+            #     # Add trace for error
+            #     ecs_waterfall_fig.add_trace(
+            #         go.Scatter(
+            #              x=x_len+.3,
+            #              y=y_error_sum,
+            #              marker=dict(color='black'),
+            #              customdata=np.stack((y, prep_df['item']), axis=-1),
+            #              error_y=dict(
+            #                 type='data',
+            #                 array=prep_df['stdev_current']
+            #             ),
+            #             mode="markers",
+            #             hoverinfo='none',
+            #             name='95% Confidence'
+            #         ),
+            #     )
 
-                ecs_waterfall_fig.update_layout(
-                    xaxis = dict(
-                        tickmode = 'array',
-                        tickvals = x_len,
-                        ticktext = waterfall_plot_items
-                    )
-                )
+            #     ecs_waterfall_fig.update_layout(
+            #         xaxis = dict(
+            #             tickmode = 'array',
+            #             tickvals = x_len,
+            #             ticktext = waterfall_plot_items
+            #         )
+            #     )
 
-                # ecs_waterfall_fig.update_layout(
-                #     waterfallgroupgap = 0.5,
-                #     )
+            #     # ecs_waterfall_fig.update_layout(
+            #     #     waterfallgroupgap = 0.5,
+            #     #     )
 
             else:
                 if impvmnt_factor == 'Mortality' and impvmnt_value == '25%':
@@ -3292,7 +3292,8 @@ def update_ahle_value_and_cost_viz_ecs(
 
             # Add title
             ecs_waterfall_fig.update_layout(
-                title_text=f'{reg_title} Values and Costs | {species}, {prodsys} <br><sup>Current vs. {compare} scenario for {agesex}, {selected_year}</sup><br>',
+                # title_text=f'{reg_title} Values and Costs | {species}, {prodsys} <br><sup>Current vs. {compare} scenario for {agesex}, {selected_year}</sup><br>',
+                title_text=f'{reg_title} Values and Costs | {species}, {prodsys} <br><sup>Current vs. {compare} scenario, {selected_year}</sup><br>',
                 yaxis_title=display_currency,
                 font_size=15,
                 margin=dict(t=100),
@@ -3323,11 +3324,11 @@ def update_ahle_value_and_cost_viz_ecs(
     return ecs_waterfall_fig
 
 
-# AHLE Waterfall or Longitudinal Graph
+# AHLE Bar chart or Longitudinal Graph
 @gbadsDash.callback(
     Output('ecs-ahle-bar-chart','figure'),
     Input('select-graph-ahle-ecs', 'value'),
-    Input('select-agesex-ecs', 'value'),
+    # Input('select-agesex-ecs', 'value'),
     Input('select-species-ecs','value'),
     Input('select-display-ecs','value'),
     Input('select-compare-ecs','value'),
@@ -3342,7 +3343,7 @@ def update_ahle_value_and_cost_viz_ecs(
     )
 def update_ahle_bar_chart_ecs(
         graph_options,
-        agesex,
+        # agesex,
         species,
         display,
         compare,
@@ -3364,8 +3365,9 @@ def update_ahle_bar_chart_ecs(
     # Production System filter
     input_df=input_df.loc[(input_df['production_system'] == prodsys)]
 
-    # Age/sex filter
-    input_df=input_df.loc[(input_df['group'] == agesex)]
+    # # Age/sex filter
+    # input_df=input_df.loc[(input_df['group'] == agesex)]
+    input_df=input_df.loc[(input_df['group'] == 'Overall')]
 
     # Geographic filter
     if geo_view.upper() == "NATIONAL":
@@ -3465,9 +3467,9 @@ def update_ahle_bar_chart_ecs(
             if compare == 'Ideal':
                 y = prep_df['mean_diff_ideal']
                 stdev = prep_df['stdev_diff_ideal']
-            elif compare == 'Zero Mortality':
-                y = prep_df['mean_diff_mortzero']
-                stdev = prep_df['stdev_diff_mortzero']
+            # elif compare == 'Zero Mortality':
+            #     y = prep_df['mean_diff_mortzero']
+            #     stdev = prep_df['stdev_diff_mortzero']
             else:
                 compare = impvmnt_factor + "- " + impvmnt_value
                 if impvmnt_factor == 'Mortality' and impvmnt_value == '25%':
@@ -3526,15 +3528,15 @@ def update_ahle_bar_chart_ecs(
                     ,name=compare
                     ,line=dict(color='#00CA0F')
                     )
-            elif compare == 'Zero Mortality':
-                # Overlay zero mortality value
-                plot_compare_value = go.Scatter(
-                    x=x
-                    ,y = prep_df['mean_mortality_zero']
-                    ,error_y=dict(type='data' ,array=prep_df['stdev_mortality_zero']*1.96)
-                    ,name=compare
-                    ,line=dict(color='#00CA0F')
-                    )
+            # elif compare == 'Zero Mortality':
+            #     # Overlay zero mortality value
+            #     plot_compare_value = go.Scatter(
+            #         x=x
+            #         ,y = prep_df['mean_mortality_zero']
+            #         ,error_y=dict(type='data' ,array=prep_df['stdev_mortality_zero']*1.96)
+            #         ,name=compare
+            #         ,line=dict(color='#00CA0F')
+            #         )
             else:
                 if impvmnt_factor == 'Mortality' and impvmnt_value == '25%':
                     y = prep_df['mean_all_mort_25_imp']
@@ -3635,9 +3637,9 @@ def update_ahle_bar_chart_ecs(
             if compare == 'Ideal':
                 y = prep_df['mean_diff_ideal']
                 stdev = prep_df['stdev_diff_ideal']
-            elif compare == 'Zero Mortality':
-                y = prep_df['mean_diff_mortzero']
-                stdev = prep_df['stdev_diff_mortzero']
+            # elif compare == 'Zero Mortality':
+            #     y = prep_df['mean_diff_mortzero']
+            #     stdev = prep_df['stdev_diff_mortzero']
             else:
                 compare = impvmnt_factor + "- " + impvmnt_value
                 if impvmnt_factor == 'Mortality' and impvmnt_value == '25%':
@@ -3691,7 +3693,8 @@ def update_ahle_bar_chart_ecs(
 
             # Add title
             ecs_waterfall_fig.update_layout(
-                title_text=f'{reg_title} Animal Health Loss Envelope | {species}, {prodsys} <br><sup>Difference between current and {compare} values for {agesex}, {selected_year}</sup><br>',
+                # title_text=f'{reg_title} Animal Health Loss Envelope | {species}, {prodsys} <br><sup>Difference between current and {compare} values for {agesex}, {selected_year}</sup><br>',
+                title_text=f'{reg_title} Animal Health Loss Envelope | {species}, {prodsys} <br><sup>Difference between current and {compare}, {selected_year}</sup><br>',
                 yaxis_title=display_currency,
                 font_size=15,
                 margin=dict(t=100)
@@ -3776,80 +3779,80 @@ def update_ahle_bar_chart_ecs(
                     )
                 )
 
-            elif compare == 'Zero Mortality':
-                y = prep_df['mean_mortality_zero']
-                stdev = prep_df['stdev_mortality_zero']
-                name = 'Zero Mortality (solid)'
-                # Create numeric, dynamic x axis based off of items
-                x_len = np.arange(1,len(x)+1,1)
+            # elif compare == 'Zero Mortality':
+            #     y = prep_df['mean_mortality_zero']
+            #     stdev = prep_df['stdev_mortality_zero']
+            #     name = 'Zero Mortality (solid)'
+            #     # Create numeric, dynamic x axis based off of items
+            #     x_len = np.arange(1,len(x)+1,1)
 
-                # Create graph
-                ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x_len, y, x)
-                # Add error bars
-                # Reset indicies
-                x = x.reset_index(drop=True)
-                y = y.reset_index(drop=True)
+            #     # Create graph
+            #     ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x_len, y, x)
+            #     # Add error bars
+            #     # Reset indicies
+            #     x = x.reset_index(drop=True)
+            #     y = y.reset_index(drop=True)
 
-                # Scale standard deviation to achieve 95% confidence
-                stdev = 1.96 * stdev    # Simulation results are Normally distributed
-                # Add trace for error
-                ecs_waterfall_fig.add_trace(
-                    go.Scatter(
-                        x=x_len-.2,
-                        y=y,
-                        marker=dict(color='black'),
-                        customdata=np.stack((y, prep_df['item']), axis=-1),
-                        error_y=dict(
-                            type='data',
-                            array=stdev
-                        ),
-                        mode="markers",
-                        hoverinfo='none',
-                        showlegend=False
-                    ),
-                )
+            #     # Scale standard deviation to achieve 95% confidence
+            #     stdev = 1.96 * stdev    # Simulation results are Normally distributed
+            #     # Add trace for error
+            #     ecs_waterfall_fig.add_trace(
+            #         go.Scatter(
+            #             x=x_len-.2,
+            #             y=y,
+            #             marker=dict(color='black'),
+            #             customdata=np.stack((y, prep_df['item']), axis=-1),
+            #             error_y=dict(
+            #                 type='data',
+            #                 array=stdev
+            #             ),
+            #             mode="markers",
+            #             hoverinfo='none',
+            #             showlegend=False
+            #         ),
+            #     )
 
-                # # Add current with lag
-                # ecs_waterfall_fig.add_trace(go.Waterfall(
-                #     name = 'Current (outline)',
-                #     x = x_len+.3,
-                #     y = prep_df['mean_current'],
-                #     decreasing = {"marker":{"color":"white", "line":{"color":"#E84C3D", "width":3}}},
-                #     increasing = {"marker":{"color":"white", "line":{"color":"#3598DB", "width":3}}},
-                #     totals = {"marker":{"color":"white", "line":{"color":"#F7931D", "width":3}}},
-                #     connector = {"line":{"dash":"dot"}},
-                #     customdata=np.stack((prep_df['mean_current'], prep_df['item']), axis=-1),
-                #     ))
-                # Add error bars
-                # Reset indicies
-                y = prep_df['mean_current']
-                x = x.reset_index(drop=True)
-                y = y.reset_index(drop=True)
+            #     # # Add current with lag
+            #     # ecs_waterfall_fig.add_trace(go.Waterfall(
+            #     #     name = 'Current (outline)',
+            #     #     x = x_len+.3,
+            #     #     y = prep_df['mean_current'],
+            #     #     decreasing = {"marker":{"color":"white", "line":{"color":"#E84C3D", "width":3}}},
+            #     #     increasing = {"marker":{"color":"white", "line":{"color":"#3598DB", "width":3}}},
+            #     #     totals = {"marker":{"color":"white", "line":{"color":"#F7931D", "width":3}}},
+            #     #     connector = {"line":{"dash":"dot"}},
+            #     #     customdata=np.stack((prep_df['mean_current'], prep_df['item']), axis=-1),
+            #     #     ))
+            #     # Add error bars
+            #     # Reset indicies
+            #     y = prep_df['mean_current']
+            #     x = x.reset_index(drop=True)
+            #     y = y.reset_index(drop=True)
 
-                # Add trace for error
-                ecs_waterfall_fig.add_trace(
-                    go.Scatter(
-                         x=x_len+.2,
-                         y=y,
-                        marker=dict(color='black'),
-                        customdata=np.stack((y, prep_df['item']), axis=-1),
-                         error_y=dict(
-                            type='data',
-                            array=prep_df['stdev_current']
-                        ),
-                        mode="markers",
-                        hoverinfo='none',
-                        name='95% Confidence'
-                    ),
-                )
+            #     # Add trace for error
+            #     ecs_waterfall_fig.add_trace(
+            #         go.Scatter(
+            #              x=x_len+.2,
+            #              y=y,
+            #             marker=dict(color='black'),
+            #             customdata=np.stack((y, prep_df['item']), axis=-1),
+            #              error_y=dict(
+            #                 type='data',
+            #                 array=prep_df['stdev_current']
+            #             ),
+            #             mode="markers",
+            #             hoverinfo='none',
+            #             name='95% Confidence'
+            #         ),
+            #     )
 
-                ecs_waterfall_fig.update_layout(
-                    xaxis = dict(
-                        tickmode = 'array',
-                        tickvals = x_len,
-                        ticktext = bar_chart_plot_items
-                    )
-                )
+            #     ecs_waterfall_fig.update_layout(
+            #         xaxis = dict(
+            #             tickmode = 'array',
+            #             tickvals = x_len,
+            #             ticktext = bar_chart_plot_items
+            #         )
+            #     )
 
             else:
                 if impvmnt_factor == 'Mortality' and impvmnt_value == '25%':
@@ -3948,7 +3951,8 @@ def update_ahle_bar_chart_ecs(
 
             # Add title
             ecs_waterfall_fig.update_layout(
-                title_text=f'{reg_title} Values and Costs | {species}, {prodsys} <br><sup>Current vs. {compare} scenario for {agesex}, {selected_year}</sup><br>',
+                # title_text=f'{reg_title} Values and Costs | {species}, {prodsys} <br><sup>Current vs. {compare} scenario for {agesex}, {selected_year}</sup><br>',
+                title_text=f'{reg_title} Values and Costs | {species}, {prodsys} <br><sup>Current vs. {compare} scenario, {selected_year}</sup><br>',
                 yaxis_title=display_currency,
                 font_size=15,
                 margin=dict(t=100),
@@ -4190,32 +4194,32 @@ def update_stacked_bar_ecs(
           ,'ahle_when_af_ideal_mean_usd':'Adult female'
        }
 
-    elif compare == 'Zero Mortality':
-        cols_birr_costs = [
-        'ahle_when_n_mort_imp100_mean'
-        ,'ahle_when_j_mort_imp100_mean'
-        ,'ahle_when_am_mort_imp100_mean'
-        ,'ahle_when_af_mort_imp100_mean'
-        ]
-        cols_usd_costs = [
-        'ahle_when_n_mort_imp100_mean_usd'
-        ,'ahle_when_j_mort_imp100_mean_usd'
-        ,'ahle_when_am_mort_imp100_mean_usd'
-        ,'ahle_when_af_mort_imp100_mean_usd'
-        ]
-        pretty_ahle_cost_names = {
-            'ahle_when_n_mort_imp100_mean':'Neonatal'
-            ,'ahle_when_n_mort_imp100_mean_usd':'Neonatal'
+    # elif compare == 'Zero Mortality':
+    #     cols_birr_costs = [
+    #     'ahle_when_n_mort_imp100_mean'
+    #     ,'ahle_when_j_mort_imp100_mean'
+    #     ,'ahle_when_am_mort_imp100_mean'
+    #     ,'ahle_when_af_mort_imp100_mean'
+    #     ]
+    #     cols_usd_costs = [
+    #     'ahle_when_n_mort_imp100_mean_usd'
+    #     ,'ahle_when_j_mort_imp100_mean_usd'
+    #     ,'ahle_when_am_mort_imp100_mean_usd'
+    #     ,'ahle_when_af_mort_imp100_mean_usd'
+    #     ]
+    #     pretty_ahle_cost_names = {
+    #         'ahle_when_n_mort_imp100_mean':'Neonatal'
+    #         ,'ahle_when_n_mort_imp100_mean_usd':'Neonatal'
 
-            ,'ahle_when_j_mort_imp100_mean':'Juvenile'
-            ,'ahle_when_j_mort_imp100_mean_usd':'Juvenile'
+    #         ,'ahle_when_j_mort_imp100_mean':'Juvenile'
+    #         ,'ahle_when_j_mort_imp100_mean_usd':'Juvenile'
 
-            ,'ahle_when_am_mort_imp100_mean':'Adult male'
-            ,'ahle_when_am_mort_imp100_mean_usd':'Adult male'
+    #         ,'ahle_when_am_mort_imp100_mean':'Adult male'
+    #         ,'ahle_when_am_mort_imp100_mean_usd':'Adult male'
 
-            ,'ahle_when_af_mort_imp100_mean':'Adult female'
-            ,'ahle_when_af_mort_imp100_mean_usd':'Adult female'
-        }
+    #         ,'ahle_when_af_mort_imp100_mean':'Adult female'
+    #         ,'ahle_when_af_mort_imp100_mean_usd':'Adult female'
+    #     }
     else:
         if impvmnt_factor == 'Mortality' and impvmnt_value == '25%':
             cols_birr_costs = [
@@ -4619,13 +4623,19 @@ def update_wei_display_ecs(species):
 @gbadsDash.callback(
     Output('ecs-map','figure'),
     Input('select-species-ecs','value'),
-    Input('select-agesex-ecs', 'value'),
+    # Input('select-agesex-ecs', 'value'),
     Input('select-prodsys-ecs','value'),
     Input('select-map-display-ecs','value'),
     Input('select-currency-ecs','value'),
     Input('select-map-denominator-ecs','value'),
     )
-def update_map_display_ecs(species, group, prodsys, item, currency, denominator):
+def update_map_display_ecs(
+        species,
+        # group,
+        prodsys,
+        item,
+        currency,
+        denominator):
     if species.upper() != 'CATTLE':
         ecs_map_fig = go.Figure()
         ecs_map_fig.update_layout(
@@ -4670,7 +4680,8 @@ def update_map_display_ecs(species, group, prodsys, item, currency, denominator)
         input_df=input_df.loc[(input_df['production_system'] == prodsys)]
 
         # Age/sex filter
-        input_df=input_df.loc[(input_df['group'] == group)]
+        # input_df=input_df.loc[(input_df['group'] == group)]
+        input_df=input_df.loc[(input_df['group'] == 'Overall')]
 
         if item == 'Ideal Gross Margin' or item == 'Animal Health Loss Envelope':
             item_filter = 'Gross Margin'
@@ -4732,7 +4743,8 @@ def update_map_display_ecs(species, group, prodsys, item, currency, denominator)
 
         # Add title
         ecs_map_fig.update_layout(
-            title_text=f'{item} in {currency} {denominator} by subnational state | {group} Cattle, {prodsys} in 2021',
+            # title_text=f'{item} in {currency} {denominator} by subnational state | {group} Cattle, {prodsys} in 2021',
+            title_text=f'{item} in {currency} {denominator} by subnational state | Cattle, {prodsys} in 2021',
             font_size=15
             )
 
