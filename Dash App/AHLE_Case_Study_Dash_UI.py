@@ -575,7 +575,7 @@ def create_ahle_waterfall_ecs(input_df, name, measure, x, y):
     return waterfall_fig
 
 # Define the AHLE bar chart alternative to waterfall
-def create_ahle_bar_chart_ecs(input_df, name, x, y, x_var):
+def create_ahle_bar_chart_ecs(input_df, name, x, y, x_var, currency):
     # Adding a column for colors
     input_df["Color"] = np.where(y<0, '#E84C3D', '#3598DB')
 
@@ -588,10 +588,24 @@ def create_ahle_bar_chart_ecs(input_df, name, x, y, x_var):
         x=x,
         y=y,
         marker_color=input_df['Color'],
-        customdata=np.stack((y, input_df['item']), axis=-1)
+        customdata=np.stack((y, input_df['item']), axis=-1),
         ))
 
     barchart_fig.update_layout(plot_bgcolor="#ededed",)
+
+    # Add tooltip
+    if currency == 'Birr':
+        barchart_fig.update_traces(hovertemplate='%{customdata[1]}'+
+                                        '<br>%{customdata[0]:,.0f} Birr<extra></extra>'
+                                        )
+    elif currency == 'USD':
+        barchart_fig.update_traces(hovertemplate='%{customdata[1]}'+
+                                        '<br>customdata[0]:,.0f} USD<extra></extra>'
+                                        )
+    else:
+        barchart_fig.update_traces(hovertemplate='%{customdata[1]}'+
+                                        '<br>%{customdata[0]:,.0f} <extra></extra>'
+                                        )
 
     barchart_fig.update_xaxes(
         fixedrange=True
@@ -3084,7 +3098,6 @@ def update_ahle_value_and_cost_viz_ecs(
                         array=stdev
                         ),
                      mode="markers",
-                     hoverinfo='none',
                      name='95% Confidence'
                 ),
             )
@@ -3134,7 +3147,6 @@ def update_ahle_value_and_cost_viz_ecs(
                             array=stdev
                             ),
                          mode="markers",
-                         hoverinfo='none',
                          showlegend=False
                     ),
                 )
@@ -3178,7 +3190,6 @@ def update_ahle_value_and_cost_viz_ecs(
                              array=prep_df['stdev_current']
                              ),
                          mode="markers",
-                         hoverinfo='none',
                          name='95% Confidence'
                     ),
                 )
@@ -3233,7 +3244,6 @@ def update_ahle_value_and_cost_viz_ecs(
             #                 array=stdev
             #             ),
             #             mode="markers",
-            #             hoverinfo='none',
             #             showlegend=False
             #         ),
             #     )
@@ -3276,7 +3286,6 @@ def update_ahle_value_and_cost_viz_ecs(
             #                 array=prep_df['stdev_current']
             #             ),
             #             mode="markers",
-            #             hoverinfo='none',
             #             name='95% Confidence'
             #         ),
             #     )
@@ -3349,7 +3358,6 @@ def update_ahle_value_and_cost_viz_ecs(
                             array=stdev
                             ),
                          mode="markers",
-                         hoverinfo='none',
                          showlegend=False
                     ),
                 )
@@ -3392,7 +3400,6 @@ def update_ahle_value_and_cost_viz_ecs(
                             array=prep_df['stdev_current']
                             ),
                          mode="markers",
-                         hoverinfo='none',
                          name='95% Confidence'
                     ),
                 )
@@ -3787,12 +3794,20 @@ def update_ahle_bar_chart_ecs(
 
             # Create graph
             name = 'Difference'
-            ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x, y, x)
+            ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x, y, x, currency)
 
             # Add error bars
             # Reset indicies
             x = x.reset_index(drop=True)
             y = y.reset_index(drop=True)
+
+            # Set hover template for error bars based on currency
+            if currency == 'Birr':
+                hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} Birr <extra></extra>'
+            elif currency == 'USD':
+                hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} USD <extra></extra>'
+            else:
+                hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} <extra></extra>'
 
             # Scale standard deviation to achieve 95% confidence
             stdev = 1.96 * stdev    # Simulation results are Normally distributed
@@ -3809,7 +3824,8 @@ def update_ahle_bar_chart_ecs(
                         ),
                      mode="markers",
                      hoverinfo='none',
-                     name='95% Confidence'
+                     name='95% Confidence',
+                     hovertemplate=hovertemplate_error
                 ),
             )
 
@@ -3830,11 +3846,19 @@ def update_ahle_bar_chart_ecs(
                 x_len = np.arange(1,len(x)+1,1)
 
                 # Create graph
-                ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x_len, y, x)
+                ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x_len, y, x, currency)
                 # Add error bars
                 # Reset indicies
                 x = x.reset_index(drop=True)
                 y = y.reset_index(drop=True)
+
+                # Set hover template for error bars based on currency
+                if currency == 'Birr':
+                    hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} Birr <extra></extra>'
+                elif currency == 'USD':
+                    hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} USD <extra></extra>'
+                else:
+                    hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} <extra></extra>'
 
                 # Scale standard deviation to achieve 95% confidence
                 stdev = 1.96 * stdev    # Simulation results are Normally distributed
@@ -3850,8 +3874,9 @@ def update_ahle_bar_chart_ecs(
                             array=stdev
                             ),
                          mode="markers",
-                         hoverinfo='none',
-                         showlegend=False
+                         showlegend=False,
+                         hovertemplate=hovertemplate_error
+
                     ),
                 )
 
@@ -3861,6 +3886,17 @@ def update_ahle_bar_chart_ecs(
                 prep_df["Color"] = np.where(y<0, '#E88A81', '#77B3DB')
                 prep_df["Color"] = np.where((x=='Gross Margin (AHLE)') | (x=='Gross Margin'), '#F7931D', prep_df["Color"])
 
+                # Set hover template for bars based on currency
+                if currency == 'Birr':
+                    hovertemplate_bar=('%{customdata[1]}' +
+                                      '<br>%{customdata[0]:,.0f} Birr<extra></extra>')
+                elif currency == 'USD':
+                    hovertemplate_bar=('%{customdata[1]}' +
+                                      '<br>%{customdata[0]:,.0f} USD<extra></extra>')
+                else:
+                    hovertemplate_bar=('%{customdata[1]}' +
+                                      '<br>%{customdata[0]:,.0f} <extra></extra>')
+
                 # y = prep_df['mean_current']
                 ecs_waterfall_fig.add_trace(go.Bar(
                     name = 'Current (x)',
@@ -3869,6 +3905,7 @@ def update_ahle_bar_chart_ecs(
                     marker_color=prep_df['Color'],
                     marker_pattern_shape="x",
                     customdata=np.stack((y, prep_df['item']), axis=-1),
+                    hovertemplate=hovertemplate_bar
                     ))
 
                 # Add error bars
@@ -3889,8 +3926,8 @@ def update_ahle_bar_chart_ecs(
                              array=prep_df['stdev_current']
                              ),
                          mode="markers",
-                         hoverinfo='none',
-                         name='95% Confidence'
+                         name='95% Confidence',
+                         hovertemplate=hovertemplate_error
                     ),
                 )
                 ecs_waterfall_fig.update_layout(
@@ -3909,7 +3946,7 @@ def update_ahle_bar_chart_ecs(
             #     x_len = np.arange(1,len(x)+1,1)
 
             #     # Create graph
-            #     ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x_len, y, x)
+            #     ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x_len, y, x, currency)
             #     # Add error bars
             #     # Reset indicies
             #     x = x.reset_index(drop=True)
@@ -3929,7 +3966,6 @@ def update_ahle_bar_chart_ecs(
             #                 array=stdev
             #             ),
             #             mode="markers",
-            #             hoverinfo='none',
             #             showlegend=False
             #         ),
             #     )
@@ -3963,7 +3999,6 @@ def update_ahle_bar_chart_ecs(
             #                 array=prep_df['stdev_current']
             #             ),
             #             mode="markers",
-            #             hoverinfo='none',
             #             name='95% Confidence'
             #         ),
             #     )
@@ -4003,11 +4038,19 @@ def update_ahle_bar_chart_ecs(
                 x_len = np.arange(1,len(x)+1,1)
 
                 # Create graph
-                ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x_len, y, x)
+                ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x_len, y, x, currency)
                 # Add error bars
                 # Reset indicies
                 x = x.reset_index(drop=True)
                 y = y.reset_index(drop=True)
+
+                # Set hover template for error bars based on currency
+                if currency == 'Birr':
+                    hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} Birr <extra></extra>'
+                elif currency == 'USD':
+                    hovertemplate_error='95% CI: +- %customdata[2]:,.0f} USD <extra></extra>'
+                else:
+                    hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} <extra></extra>'
 
                 # Scale standard deviation to achieve 95% confidence
                 stdev = 1.96 * stdev    # Simulation results are Normally distributed
@@ -4023,8 +4066,8 @@ def update_ahle_bar_chart_ecs(
                             array=stdev
                         ),
                         mode="markers",
-                        hoverinfo='none',
-                        showlegend=False
+                        showlegend=False,
+                        hovertemplate=hovertemplate_error
 
                     ),
                 )
@@ -4058,8 +4101,8 @@ def update_ahle_bar_chart_ecs(
                             array=prep_df['stdev_current']
                         ),
                         mode="markers",
-                        hoverinfo='none',
-                        name='95% Confidence'
+                        name='95% Confidence',
+                        hovertemplate=hovertemplate_error
                     ),
                 )
 
@@ -4079,23 +4122,6 @@ def update_ahle_bar_chart_ecs(
                 font_size=15,
                 margin=dict(t=100),
                 )
-
-        # Add tooltip
-        if currency == 'Birr':
-            ecs_waterfall_fig.update_traces(hovertemplate='Category: %{customdata[1]}'+
-                                            '<br>Value: %{customdata[0]:,.0f} Birr<extra></extra>'+
-                                            '<br>95% CI: %{customdata[2]:,.0f} Birr'
-                                            )
-        elif currency == 'USD':
-            ecs_waterfall_fig.update_traces(hovertemplate='Category: %{customdata[1]}'+
-                                            '<br>Value: %{customdata[0]:,.0f} USD<extra></extra>'+
-                                            '<br>95% CI: %{customdata[2]:,.0f} USD'
-                                            )
-        else:
-            ecs_waterfall_fig.update_traces(hovertemplate='Category: %{customdata[1]}'+
-                                            '<br>Value: %{customdata[0]:,.0f} <extra></extra>'+
-                                            '<br>95% CI: %{customdata[2]:,.0f}'
-                                            )
 
     return ecs_waterfall_fig
 
@@ -4851,7 +4877,7 @@ def update_map_display_ecs(
         elif "VALUE" in item.upper():
             color_scale = [(0, "#ecf5fc"), (0.5, "#88c2ea"), (1, "#3598db")]
         elif "COST" in item.upper():
-            color_scale = [(0, "#fdeeec"), (0.5, "#f08d83"), (1, "#E84C3D")]
+            color_scale = [(0, "#E84C3D"), (0.5, "#f08d83"), (1, "#fdeeec")]
 
         ecs_map_fig = create_map_display_ecs(input_df, geojson_ecs_df, location, featurekey, color_by, color_scale)
 
