@@ -1940,7 +1940,7 @@ gbadsDash.layout = html.Div([
     Input('select-country-ahle', 'value'),
     )
 def update_dashboard_country_title(country):
-    return f'Burden of Disease by {country}'
+    return f'Burden of Disease in {country}'
 
 # Update production system options based on species
 @gbadsDash.callback(
@@ -3863,7 +3863,7 @@ def update_ahle_bar_chart_ecs(
 
                 # y = prep_df['mean_current']
                 ecs_waterfall_fig.add_trace(go.Bar(
-                    name = 'Current (outline)',
+                    name = 'Current (x)',
                     x = x_len,
                     y = y,
                     marker_color=prep_df['Color'],
