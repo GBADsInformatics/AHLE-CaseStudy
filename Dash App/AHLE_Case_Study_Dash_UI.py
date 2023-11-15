@@ -314,7 +314,7 @@ ecs_ahle_summary['production_system'] = ecs_ahle_summary['production_system'].re
 #    str(ecs_prodsys_options.append({'label':i,'value':(i)}))
 
 # Year
-# Year options are now set in a callback
+# Years to display are now controlled by a callback
 # ecs_year_options=[]
 # for i in np.sort(ecs_ahle_summary['year'].unique()):
 #     str(ecs_year_options.append({'label':i,'value':(i)}))
@@ -1280,6 +1280,14 @@ gbadsDash.layout = html.Div([
                                      ),
                         ]),
 
+                    # End year selector (only visible for over time display)
+                    dbc.Col([
+                        html.H5(id='select-end-year-ecs-title'),
+                        dcc.Dropdown(id='select-end-year-ecs',
+                                     clearable = False,
+                                     ),
+                        ]),
+
                     # Geographical breakdown options
                     dbc.Col([
                         html.H5("AHLE Geographic Scope", style=control_heading_style),
@@ -1305,7 +1313,7 @@ gbadsDash.layout = html.Div([
                         ]),
 
                     # END OF SECOND CONTROL ROW
-                    ],justify='evenly'),
+                    ], justify='evenly'),
 
                 html.Hr(style={'margin-right':'10px'}),
 
@@ -1980,36 +1988,61 @@ def update_longitudinal_options_ecs(species):
     Output('select-year-ecs-title','children'),
     Output('select-year-ecs','options'),
     Output('select-year-ecs','value'),
-    Output('select-year-ecs','placeholder'),
     Input('select-graph-ahle-ecs','value'),
     Input('select-species-ecs','value'),
     )
 def update_year_select_ecs(graph, species):
-    value=2021
-    ecs_year_options=[]     # By default, list is blank
-    placeholder = '2021'
+    year_options = ecs_ahle_summary['year'].unique()
+    year_options_str = []
+    for i in np.sort(year_options):
+        str(year_options_str.append({'label':i,'value':(i)}))
 
     if graph == 'Over Time':
-        # placeholder = '(all)'
-        value = ecs_ahle_summary['year'].min()
-        dropdown_title = 'Starting from'
-        for i in np.sort(ecs_ahle_summary['year'].unique()):
-            str(ecs_year_options.append({'label':i,'value':(i)}))
+        dropdown_title = 'Start year'
+        value = year_options.min()
     # Other years only available for Cattle
-    # elif (graph == 'Single Year') & (species.upper() == 'CATTLE'):
-    #     ecs_year_options=[]
-    #     for i in np.sort(ecs_ahle_summary['year'].unique()):
-    #         str(ecs_year_options.append({'label':i,'value':(i)}))
-    # Have placeholder values for all species and years
+    # UPDATE: Have placeholder values for all species and years
     elif graph == 'Single Year':
         dropdown_title = 'Year'
-        # ecs_year_options=[]
-        for i in np.sort(ecs_ahle_summary['year'].unique()):
-            str(ecs_year_options.append({'label':i,'value':(i)}))
+        value = year_options.max()
     else:
         None
 
-    return dropdown_title, ecs_year_options, value, placeholder
+    return dropdown_title, year_options_str, value
+
+# End year selector (only available if over time display)
+@gbadsDash.callback(
+    Output('select-end-year-ecs-title','children'),
+    Output('select-end-year-ecs-title','style'),
+    Output('select-end-year-ecs','options'),
+    Output('select-end-year-ecs','value'),
+    Output('select-end-year-ecs','style'),
+    Input('select-graph-ahle-ecs','value'),
+    Input('select-species-ecs','value'),
+    )
+def update_end_year_select_ecs(graph, species):
+    year_options = ecs_ahle_summary['year'].unique()
+    year_options_str = []
+    for i in np.sort(year_options):
+        str(year_options_str.append({'label':i,'value':(i)}))
+
+    if graph == 'Over Time':
+        dropdown_title = 'End year'
+        value = year_options.max()
+        title_display_style = {'display': 'block'}
+        dropdown_display_style = {'display': 'block'}
+    # Hide controls if Single Year selected
+    elif graph == 'Single Year':
+        dropdown_title = ''
+        value = None
+        for d in year_options_str:
+            d['disabled']=True
+        title_display_style = {'display': 'none'}
+        dropdown_display_style = {'display': 'none'}
+    else:
+        None
+
+    return dropdown_title, title_display_style, year_options_str, value, dropdown_display_style
 
 # Geographical options
 @gbadsDash.callback(
@@ -3457,6 +3490,7 @@ def update_ahle_value_and_cost_viz_ecs(
     Input('select-factor-ecs','value'),
     Input('select-improve-ecs','value'),
     Input('select-year-ecs', 'value'),
+    Input('select-end-year-ecs','value'),
     Input('select-item-ecs', 'value'),
     Input('select-geo-view-ecs','value'),
     Input('select-region-ecs','value'),
@@ -3472,6 +3506,7 @@ def update_ahle_bar_chart_ecs(
         impvmnt_factor,
         impvmnt_value,
         selected_year,
+        selected_end_year,
         selected_item,
         geo_view,
         region,
@@ -3570,8 +3605,8 @@ def update_ahle_bar_chart_ecs(
         # Sort data by year
         prep_df = prep_df.sort_values('year')
 
-        # Filter to selected year or later
-        prep_df = prep_df.query('year >= @selected_year')
+        # Filter to selected start and end years
+        prep_df = prep_df.query('year >= @selected_year').query('year <= @selected_end_year')
 
         # Establish x
         x = prep_df['year']
