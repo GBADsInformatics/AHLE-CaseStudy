@@ -347,8 +347,8 @@ for i in ecs_ahle_summary.query("region != 'National'").region.unique():
     str(ecs_region_options.append({'label':i,'value':(i)}))
 
 # Display
-ecs_display_options = [{'label': i, 'value': i, 'disabled': False} for i in ["Difference",
-                                                                             "Side by Side",
+ecs_display_options = [{'label': i, 'value': i, 'disabled': False} for i in ["Side by Side",
+                                                                             "Difference",
                                                                             ]]
 # Item
 
@@ -1406,8 +1406,8 @@ gbadsDash.layout = html.Div([
                                                        labelStyle={'display': 'block'},
                                                        inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
                                                        ),
-                                         html.Label(["Difference: show a single bar for each item representing the difference between the current and ideal values"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
-                                         html.Label(["Side by Side: show two bars for each item, one for current and another for the ideal value"] ,style={'font-style':'italic'}),
+                                         html.Label(["Side by Side: show two bars for each item, one for current and another for the ideal value"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
+                                         html.Label(["Difference: show a single bar for each item representing the difference between the current and ideal values"] ,style={'font-style':'italic'}),
                                          ]),
 
                                      # Compare
@@ -1421,6 +1421,7 @@ gbadsDash.layout = html.Div([
                                                        ),
                                          html.Label(["Ideal: zero mortality and ideal growth and production rates"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
                                          # html.Label(["Zero Mortality: zero mortality but growth and production rates at current levels"] ,style={'font-style':'italic'}),
+                                         html.Label(["Improvement: marginal improvement in mortality, growth, or production rates"] ,style={'font-style':'italic'}),
                                          ]),
 
                                  ]), # END OF ROW
@@ -1538,8 +1539,8 @@ gbadsDash.layout = html.Div([
                 ]),
 
 
-            #### AHLE ATTRIBUTION BY POPULATION
-            dbc.Tab(label="Attribution by Population",
+            #### ATTRIBUTION
+            dbc.Tab(label="Attribution",
                     tabClassName="flex-grow-1 text-center",
                         tab_style = tab_style,
                         style = {"height":"100vh",
@@ -3821,7 +3822,7 @@ def update_ahle_bar_chart_ecs(
                 font_size=15,
                 margin=dict(t=100)
                 )
-        else:
+        else:   # If display is not 'Difference'...
             if compare == 'Ideal':
                 y = prep_df['mean_ideal']
                 stdev = prep_df['stdev_ideal']
