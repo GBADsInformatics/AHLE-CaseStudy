@@ -2055,7 +2055,7 @@ def update_end_year_select_ecs(graph, species):
 def update_geo_view_options_ecs(graph, species, year):
     options = [
         {'label': "National", 'value': "National", 'disabled': False},
-        {'label': "Subnational", 'value': "Subnational", 'disabled': True}  # Update Aug 2023: disabling subnational views as these scenarios are incomplete and cause missing values in attribution
+        {'label': "Subnational", 'value': "Subnational", 'disabled': False}  # Update Aug 2023: disabling subnational views as these scenarios are incomplete and cause missing values in attribution
         ]
     value='National'
 
@@ -2618,10 +2618,12 @@ def update_ecs_attr_data(currency, prodsys, species, year, geo_view, region):
     input_df=input_df.loc[(input_df['year'] == year)]
 
     # Geographic filter
-    if geo_view.upper() == "NATIONAL":
-        input_df = input_df.query("region == 'National'")
-    else:
-        input_df = input_df.query("region == @region")
+    # if geo_view.upper() == "NATIONAL":
+    #     input_df = input_df.query("region == 'National'")
+    # else:
+    #     input_df = input_df.query("region == @region")
+    # Nov. 2023: only showing national attribution results as regional results are out of date and cause missing values
+    input_df = input_df.query("region == 'National'")
 
     # If currency is USD, use USD columns
     display_currency = 'Birr'
@@ -4172,12 +4174,15 @@ def update_attr_treemap_ecs(
     input_df = ecs_ahle_all_withattr
 
     # Geographic filter
-    if geo_view.upper() == "NATIONAL":
-        input_df = input_df.query("region == 'National'")
-        reg_title = 'National'
-    else:
-        input_df = input_df.query("region == @region")
-        reg_title = region
+    # if geo_view.upper() == "NATIONAL":
+    #     input_df = input_df.query("region == 'National'")
+    #     reg_title = 'National'
+    # else:
+    #     input_df = input_df.query("region == @region")
+    #     reg_title = region
+    # Nov. 2023: only showing national attribution results as regional results are out of date and cause missing values
+    input_df = input_df.query("region == 'National'")
+    reg_title = 'National'
 
     # Production System filter
     # If All production systems, don't filter. Attribution data is not aggregated to that level.
