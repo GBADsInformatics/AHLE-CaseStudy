@@ -864,9 +864,9 @@ gbadsDash.layout = html.Div([
                     # Dashboard description
                     html.P(['This interactive dashboard uses publicly available data in consultation with \
                             experts to create models that provide a country-specific estimate of the \
-                            animal health loss envelope (AHLE). The tool will guide you through this calculations, \
-                            the outputs, and the many scenarios that allow us to use the information to \
-                            aid decision makers with regard to animal health and production.'],
+                            animal health loss envelope (AHLE). The tool will guide you through the calculations, \
+                            the outputs, and the scenarios that allow us to aid decision makers with regard to \
+                            animal health and production.'],
                            style={'textAlign': 'center'}
                            )
                     ],xs =12, sm=12, md=12, lg=9, xl=9)
@@ -1558,12 +1558,11 @@ gbadsDash.layout = html.Div([
                         #### -- Attribution Specific Controls
                         html.Label(["Showing how each component contributes to the total animal health loss envelope, \
                                     including attribution to infectious, non-infectious, and external causes. \
-                                    Attribution of AHLE to infectious, non-infectious, and external \
-                                    causes is based on the results of expert elicitation."]),
+                                    Attribution is based on the results of expert elicitation."]),
+                        html.Label(["NOTE: this is shown for species groups (cattle, all small ruminants, or all poultry) rather than for individual species."] ,style={"font-style":"italic"}),
                         dbc.Col([
                             dbc.Card([
                                 dbc.CardBody([
-                                    html.Label(["NOTE: this is shown for species groups (cattle, all small ruminants, or all poultry) rather than for individual species."] ,style={"font-style":"italic"}),
                                     html.H5("Segment by...", style={'font-weight':"bold"}),
                                     dbc.Row([
                                         # Top Level
