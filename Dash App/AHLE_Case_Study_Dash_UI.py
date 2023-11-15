@@ -1261,14 +1261,14 @@ gbadsDash.layout = html.Div([
                         # Switch between single year and over time
                         html.H5("Display AHLE for...", style=control_heading_style),
                         dcc.RadioItems(id='select-graph-ahle-ecs',
-                                      inline=True,                  # True: arrange buttons horizontally
-                                      inputStyle={
-                                          "margin-right":"2px",     # This pulls the words off of the button
-                                          "margin-left":"10px",     # Space between buttons if inline=True
-                                          },
-                                      ),
+                                       inline=True,                  # True: arrange buttons horizontally
+                                       inputStyle={
+                                           "margin-right":"2px",     # This pulls the words off of the button
+                                           "margin-left":"10px",     # Space between buttons if inline=True
+                                           },
+                                       ),
                         # Text underneath
-                        html.P("Estimates over time or for any year other than 2021 are currently placeholders" ,style={'font-style':'italic'}),
+                        html.P("Estimates for any year other than 2021 are currently placeholders" ,style={'font-style':'italic'}),
                         ]),
 
                     # Year selector
@@ -1292,12 +1292,12 @@ gbadsDash.layout = html.Div([
                     dbc.Col([
                         html.H5("AHLE Geographic Scope", style=control_heading_style),
                         dcc.RadioItems(id='select-geo-view-ecs',
-                                      inline=True,                  # True: arrange buttons horizontally
-                                      inputStyle={
-                                          "margin-right":"2px",     # This pulls the words off of the button
-                                          "margin-left":"10px",     # Space between buttons if inline=True
-                                          },
-                                      ),
+                                       inline=True,                  # True: arrange buttons horizontally
+                                       inputStyle={
+                                           "margin-right":"2px",     # This pulls the words off of the button
+                                           "margin-left":"10px",     # Space between buttons if inline=True
+                                           },
+                                       ),
                         # Text underneath
                         html.P("Subnational estimates are currently only available for cattle for 2021" ,style={'font-style':'italic'}),
                         ]),
