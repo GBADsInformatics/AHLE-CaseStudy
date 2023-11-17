@@ -84,8 +84,14 @@ tab_style = {'font-size':"1.5625rem",
              'font-weight': 'bold',
              }
 
-control_heading_style={"font-weight": "bold",
-                       "color": "#555555"}
+control_heading_style = {"font-weight": "bold",
+                         "color": "#555555",
+                         }
+
+# Radio Item input style
+Radio_input_style = {"margin-right":"2px",     # This pulls the words off of the button
+                     "margin-left":"10px",     # Space between buttons if inline=True
+                     }
 
 # =============================================================================
 #### Read data
@@ -382,6 +388,12 @@ ecs_map_denominator_options = [{'label': i, 'value': i, 'disabled': False} for i
                                                                                      'Total',
                                                                                      ]]
 
+# Attribution display options
+esc_attr_display_options = [{'label': i, 'value': i, 'disabled': False} for i in ['Tree Map',
+                                                                                 'Bar',
+                                                                                 ]]
+
+
 # =============================================================================
 #### Prep data for plots
 # =============================================================================
@@ -537,7 +549,7 @@ def create_attr_treemap_ecs(input_df, path):
     return treemap_fig
 
 # Define the AHLE waterfall
-def create_ahle_waterfall_ecs(input_df, name, measure, x, y):
+def create_ahle_waterfall_ecs(input_df, name, measure, x, y, currency):
     waterfall_fig = go.Figure(go.Waterfall(
         name = name,
         orientation = "v",
@@ -550,6 +562,20 @@ def create_ahle_waterfall_ecs(input_df, name, measure, x, y):
         connector = {"line":{"color":"darkgrey"}},
         customdata=np.stack((y, input_df['item']), axis=-1),
         ))
+
+    # Add tooltip
+    if currency == 'Birr':
+        waterfall_fig.update_traces(hovertemplate='%{customdata[1]}'+
+                                                '<br>%{customdata[0]:,.0f} Birr<extra></extra>'
+                                                )
+    elif currency == 'USD':
+        waterfall_fig.update_traces(hovertemplate='%{customdata[1]}'+
+                                                '<br>customdata[0]:,.0f} USD<extra></extra>'
+                                                )
+    else:
+        waterfall_fig.update_traces(hovertemplate='%{customdata[1]}'+
+                                                '<br>%{customdata[0]:,.0f} <extra></extra>'
+                                                )
 
     waterfall_fig.update_layout(clickmode='event+select', ### EVENT SELECT ??????
                                 plot_bgcolor="#ededed",)
@@ -575,11 +601,9 @@ def create_ahle_waterfall_ecs(input_df, name, measure, x, y):
     return waterfall_fig
 
 # Define the AHLE bar chart alternative to waterfall
-def create_ahle_bar_chart_ecs(input_df, name, x, y, x_var):
+def create_ahle_bar_chart_ecs(input_df, name, x, y, x_var, currency):
     # Adding a column for colors
     input_df["Color"] = np.where(y<0, '#E84C3D', '#3598DB')
-
-    # input_df["Color"] = np.where(x.str.contains('Gross'), '#F7931D', input_df["Color"])
     input_df["Color"] = np.where((x_var=='Gross Margin (AHLE)') | (x_var=='Gross Margin'), '#F7931D', input_df["Color"])
 
     barchart_fig = go.Figure(go.Bar(
@@ -588,10 +612,24 @@ def create_ahle_bar_chart_ecs(input_df, name, x, y, x_var):
         x=x,
         y=y,
         marker_color=input_df['Color'],
-        customdata=np.stack((y, input_df['item']), axis=-1)
+        customdata=np.stack((y, input_df['item']), axis=-1),
         ))
 
     barchart_fig.update_layout(plot_bgcolor="#ededed",)
+
+    # Add tooltip
+    if currency == 'Birr':
+        barchart_fig.update_traces(hovertemplate='%{customdata[1]}'+
+                                        '<br>%{customdata[0]:,.0f} Birr<extra></extra>'
+                                        )
+    elif currency == 'USD':
+        barchart_fig.update_traces(hovertemplate='%{customdata[1]}'+
+                                        '<br>customdata[0]:,.0f} USD<extra></extra>'
+                                        )
+    else:
+        barchart_fig.update_traces(hovertemplate='%{customdata[1]}'+
+                                        '<br>%{customdata[0]:,.0f} <extra></extra>'
+                                        )
 
     barchart_fig.update_xaxes(
         fixedrange=True
@@ -933,10 +971,7 @@ gbadsDash.layout = html.Div([
         #             html.H5("Display AHLE for..."),
         #             dcc.RadioItems(id='select-graph-ahle-ecs',
         #                           inline=True,                  # True: arrange buttons horizontally
-        #                           inputStyle={
-        #                               "margin-right":"2px",     # This pulls the words off of the button
-        #                               "margin-left":"10px",     # Space between buttons if inline=True
-        #                               },
+        #                           inputStyle=Radio_input_style
         #                           ),
         #             # Text underneath
         #             html.P("Estimates over time or for any year other than 2021 are currently placeholders" ,style={'font-style':'italic'}),
@@ -955,10 +990,7 @@ gbadsDash.layout = html.Div([
         #             html.H5("AHLE Geographic Scope"),
         #             dcc.RadioItems(id='select-geo-view-ecs',
         #                           inline=True,                  # True: arrange buttons horizontally
-        #                           inputStyle={
-        #                               "margin-right":"2px",     # This pulls the words off of the button
-        #                               "margin-left":"10px",     # Space between buttons if inline=True
-        #                               },
+        #                           inputStyle=Radio_input_style
         #                           ),
         #             # Text underneath
         #             html.P("Subnational estimates are currently only available for cattle for 2021" ,style={'font-style':'italic'}),
@@ -1054,8 +1086,7 @@ gbadsDash.layout = html.Div([
         #                             dcc.RadioItems(id='select-improve-ecs',
         #                                           options=ecs_improve_options,
         #                                           value= "25%",
-        #                                           inputStyle={"margin-right": "2px", # This pulls the words off of the button
-        #                                                       "margin-left": "10px"},
+        #                                           inputStyle=Radio_input_style
         #                                           ),
         #                             ]),
         #                         ]),     ## END OF ROW ##
@@ -1207,7 +1238,7 @@ gbadsDash.layout = html.Div([
 
 
         #### AHLE V2
-        dbc.Tab(label="AHLE v2",
+        dbc.Tab(label="AHLE",
                 tabClassName="flex-grow-1 text-center",
                     tab_style = tab_style,
                     style = {"height":"100vh",
@@ -1259,14 +1290,11 @@ gbadsDash.layout = html.Div([
                 dbc.Row([
                     dbc.Col([
                         # Switch between single year and over time
-                        html.H5("Display AHLE for...", style=control_heading_style),
+                        html.H5("View AHLE as...", style=control_heading_style),
                         dcc.RadioItems(id='select-graph-ahle-ecs',
-                                       inline=True,                  # True: arrange buttons horizontally
-                                       inputStyle={
-                                           "margin-right":"2px",     # This pulls the words off of the button
-                                           "margin-left":"10px",     # Space between buttons if inline=True
-                                           },
-                                       ),
+                                      inline=True,                  # True: arrange buttons horizontally
+                                      inputStyle=Radio_input_style,
+                                      ),
                         # Text underneath
                         html.P("Estimates for any year other than 2021 are currently placeholders" ,style={'font-style':'italic'}),
                         ]),
@@ -1292,12 +1320,10 @@ gbadsDash.layout = html.Div([
                     dbc.Col([
                         html.H5("AHLE Geographic Scope", style=control_heading_style),
                         dcc.RadioItems(id='select-geo-view-ecs',
-                                       inline=True,                  # True: arrange buttons horizontally
-                                       inputStyle={
-                                           "margin-right":"2px",     # This pulls the words off of the button
-                                           "margin-left":"10px",     # Space between buttons if inline=True
-                                           },
-                                       ),
+
+                                      inline=True,                  # True: arrange buttons horizontally
+                                      inputStyle=Radio_input_style,
+                                      ),
                         # Text underneath
                         html.P("Subnational estimates are currently only available for cattle for 2021" ,style={'font-style':'italic'}),
                         ]),
@@ -1381,8 +1407,7 @@ gbadsDash.layout = html.Div([
                     #                     dcc.RadioItems(id='select-improve-ecs',
                     #                                   options=ecs_improve_options,
                     #                                   value= "25%",
-                    #                                   inputStyle={"margin-right": "2px", # This pulls the words off of the button
-                    #                                               "margin-left": "10px"},
+                    #                                   inputStyle=Radio_input_style
                     #                                   ),
                     #                     ]),
                     #                 ]),     ## END OF ROW ##
@@ -1459,8 +1484,7 @@ gbadsDash.layout = html.Div([
                                          dcc.RadioItems(id='select-improve-ecs',
                                                        options=ecs_improve_options,
                                                        value= "25%",
-                                                       inputStyle={"margin-right": "2px", # This pulls the words off of the button
-                                                                   "margin-left": "10px"},
+                                                       inputStyle=Radio_input_style,
                                                        ),
                                          ]),
                                      ]),     ## END OF ROW ##
@@ -1563,6 +1587,15 @@ gbadsDash.layout = html.Div([
                         dbc.Col([
                             dbc.Card([
                                 dbc.CardBody([
+                                    # Graph Display
+                                    html.H5("Visualization", style=control_heading_style),
+                                    dcc.RadioItems(id='select-attr-display-ecs',
+                                                   options=esc_attr_display_options,
+                                                   value='Tree Map',
+                                                   inputStyle=Radio_input_style,
+                                                   ),
+
+                                    html.Label(["NOTE: this is shown for species groups (cattle, all small ruminants, or all poultry) rather than for individual species."] ,style={"font-style":"italic"}),
                                     html.H5("Segment by...", style={'font-weight':"bold"}),
                                     dbc.Row([
                                         # Top Level
@@ -1709,8 +1742,7 @@ gbadsDash.layout = html.Div([
                             dcc.RadioItems(id='select-map-denominator-ecs',
                                           options=ecs_map_denominator_options,
                                           value= "Per kg biomass",
-                                          inputStyle={"margin-right": "2px", # This pulls the words off of the button
-                                                      "margin-left": "10px"},
+                                          inputStyle=Radio_input_style,
                                           ),
                             ]),
                         ]), # END OF MAP CONTROLS ROW
@@ -1899,7 +1931,7 @@ gbadsDash.layout = html.Div([
         #                   'background-color': '#2DCC70',
         #                   'border-radius': '20px',}),
 
-        #  ],justify='evenly'),
+        #   ],justify='evenly'),
 
         # html.Br(),
 
@@ -1948,7 +1980,8 @@ gbadsDash.layout = html.Div([
     Input('select-country-ahle', 'value'),
     )
 def update_dashboard_country_title(country):
-    return f'Burden of Disease for {country}'
+
+    return f'Burden of Disease in {country}'
 
 # Update production system options based on species
 @gbadsDash.callback(
@@ -1971,10 +2004,11 @@ def update_prodsys_options_ecs(species):
     )
 def update_longitudinal_options_ecs(species):
     options = [
-        {'label': "Single Year", 'value': "Single Year", 'disabled': False},
+        {'label': "Components", 'value': "Bar", 'disabled': False},
+        {'label': "Cumulative", 'value': "Cumulative", 'disabled': False},
         {'label': "Over Time", 'value': "Over Time", 'disabled': False}
         ]
-    value='Single Year'
+    value='Bar'
 
     # Disable option if species doesn't support it
     # if species.upper() != 'CATTLE':
@@ -2006,7 +2040,6 @@ def update_year_select_ecs(graph, species):
         value = year_options.max()
     else:
         None
-
     return dropdown_title, year_options_str, value
 
 # End year selector (only available if over time display)
@@ -2109,10 +2142,10 @@ def update_geo_view_options_ecs(graph, species, year):
 # And change if displaying stacked bar
 @gbadsDash.callback(
     Output('select-top-lvl-attr-ecs-title','children'),
-    Input('select-graph-ahle-ecs','value'),
+    Input('select-attr-display-ecs','value'),
     )
 def update_year_item_switch(graph):
-    if graph == 'Single Year':
+    if graph == 'Tree Map':
         title = 'Top Level'
     else:
         title = 'Segmentation'
@@ -2123,13 +2156,13 @@ def update_year_item_switch(graph):
     Output('select-dd-1-attr-ecs','value'),
     Output('select-dd-1-attr-ecs','style'),
     Output('select-dd-1-attr-ecs-title','style'),
-    Input('select-graph-ahle-ecs','value'),
+    Input('select-attr-display-ecs','value'),
     Input('select-top-lvl-attr-ecs','value'),
     )
 def update_dd1_options_ecs(graph, top_lvl_hierarchy):
     options = ecs_hierarchy_dd_attr_options
 
-    if graph == 'Over Time':
+    if graph == 'Bar':
         for d in options:
             d['disabled']=True
         display_val_style = {'display': 'none'}
@@ -2156,14 +2189,14 @@ def update_dd1_options_ecs(graph, top_lvl_hierarchy):
     Output('select-dd-2-attr-ecs','options'),
     Output('select-dd-2-attr-ecs','style'),
     Output('select-dd-2-attr-ecs-title','style'),
-    Input('select-graph-ahle-ecs','value'),
+    Input('select-attr-display-ecs','value'),
     Input('select-top-lvl-attr-ecs','value'),
     Input('select-dd-1-attr-ecs','value'),
     )
 def update_dd2_options_ecs(graph, top_lvl_hierarchy, dd1_hierarchy):
     options = ecs_hierarchy_dd_attr_options
 
-    if graph == 'Over Time':
+    if graph == 'Bar':
         for d in options:
             d['disabled']=True
         display_val_style = {'display': 'none'}
@@ -2189,7 +2222,7 @@ def update_dd2_options_ecs(graph, top_lvl_hierarchy, dd1_hierarchy):
     Output('select-dd-3-attr-ecs','options'),
     Output('select-dd-3-attr-ecs','style'),
     Output('select-dd-3-attr-ecs-title','style'),
-    Input('select-graph-ahle-ecs','value'),
+    Input('select-attr-display-ecs','value'),
     Input('select-top-lvl-attr-ecs','value'),
     Input('select-dd-1-attr-ecs','value'),
     Input('select-dd-2-attr-ecs','value'),
@@ -2197,7 +2230,7 @@ def update_dd2_options_ecs(graph, top_lvl_hierarchy, dd1_hierarchy):
 def update_dd3_options_ecs(graph, top_lvl_hierarchy, dd1_hierarchy, dd2_hierarchy):
     options = ecs_hierarchy_dd_attr_options
 
-    if graph == 'Over Time':
+    if graph == 'Bar':
         for d in options:
             d['disabled']=True
         display_val_style = {'display': 'none'}
@@ -2223,7 +2256,7 @@ def update_dd3_options_ecs(graph, top_lvl_hierarchy, dd1_hierarchy, dd2_hierarch
     Output('select-dd-4-attr-ecs','options'),
     Output('select-dd-4-attr-ecs','style'),
     Output('select-dd-4-attr-ecs-title','style'),
-    Input('select-graph-ahle-ecs','value'),
+    Input('select-attr-display-ecs','value'),
     Input('select-top-lvl-attr-ecs','value'),
     Input('select-dd-1-attr-ecs','value'),
     Input('select-dd-2-attr-ecs','value'),
@@ -2231,7 +2264,7 @@ def update_dd3_options_ecs(graph, top_lvl_hierarchy, dd1_hierarchy, dd2_hierarch
     )
 def update_dd4_options_ecs(graph, top_lvl_hierarchy, dd1_hierarchy, dd2_hierarchy, dd3_hierarchy):
     options = ecs_hierarchy_dd_attr_options
-    if graph == 'Over Time':
+    if graph == 'Bar':
         for d in options:
             d['disabled']=True
         display_val_style = {'display': 'none'}
@@ -2253,23 +2286,6 @@ def update_dd4_options_ecs(graph, top_lvl_hierarchy, dd1_hierarchy, dd2_hierarch
 
     return options, display_val_style, display_title_style
 
-# @gbadsDash.callback(
-#     Output('select-dd-5-attr-ecs','options'),
-#     Input('select-top-lvl-attr-ecs','value'),
-#     Input('select-dd-1-attr-ecs','value'),
-#     Input('select-dd-2-attr-ecs','value'),
-#     Input('select-dd-3-attr-ecs','value'),
-#     Input('select-dd-4-attr-ecs','value'),
-#     )
-# def update_dd5_options_ecs(top_lvl_hierarchy, dd1_hierarchy, dd2_hierarchy, dd3_hierarchy, dd4_hierarchy):
-#     options = ecs_hierarchy_dd_attr_options
-#     for d in options:
-#         if d['value'] != 'None':
-#             if d['value'] == top_lvl_hierarchy or d['value'] == dd1_hierarchy or d['value'] == dd2_hierarchy or d['value'] == dd3_hierarchy or d['value'] == dd4_hierarchy:
-#                 d['disabled']= True
-#             else:
-#                 d['disabled']=False
-#     return options
 
 @gbadsDash.callback(
     Output('select-region-ecs','style'),
@@ -2363,8 +2379,8 @@ def update_item_dropdown_ecs(graph, species):
         str(options.append({'label':i,'value':(i)}))
     display_style = {'display': 'block'}
 
-    # Hide controls if Single Year selected
-    if graph == 'Single Year':
+    # Hide controls if Bar selected
+    if graph == 'Bar' or graph == 'Cumulative':
         for d in options:
             d['disabled']=True
         display_style = {'display': 'none'}
@@ -2461,7 +2477,7 @@ def update_map_display_options_ecs(species):
     Input('select-graph-ahle-ecs','value'),
     )
 def update_footnote(graph):
-    if graph.upper() == 'SINGLE YEAR':
+    if graph.upper() != 'OVER TIME':
         block = {'display': 'block'}
     else:
         block = {'display': 'none'} # hide
@@ -2473,7 +2489,7 @@ def update_footnote(graph):
 #     ClientsideFunction(namespace="clientside", function_name="make_draggable"),
 #     Output("drag_container0", "data-drag"),
 #     [Input("drag_container2", "id"),
-#      Input("drag_container", "id")]
+#       Input("drag_container", "id")]
 # )
 
 # ------------------------------------------------------------------------------
@@ -3119,7 +3135,6 @@ def update_ahle_value_and_cost_viz_ecs(
                         array=stdev
                         ),
                      mode="markers",
-                     hoverinfo='none',
                      name='95% Confidence'
                 ),
             )
@@ -3169,7 +3184,6 @@ def update_ahle_value_and_cost_viz_ecs(
                             array=stdev
                             ),
                          mode="markers",
-                         hoverinfo='none',
                          showlegend=False
                     ),
                 )
@@ -3213,7 +3227,6 @@ def update_ahle_value_and_cost_viz_ecs(
                              array=prep_df['stdev_current']
                              ),
                          mode="markers",
-                         hoverinfo='none',
                          name='95% Confidence'
                     ),
                 )
@@ -3225,11 +3238,6 @@ def update_ahle_value_and_cost_viz_ecs(
                     )
                 )
 
-                # ecs_waterfall_fig.update_layout(
-                #     waterfallgroupgap = 0.5,
-                #     # scattermode="group",
-                #     # scattergap=0.75
-                #     )
 
             # elif compare == 'Zero Mortality':
             #     y = prep_df['mean_mortality_zero']
@@ -3268,7 +3276,6 @@ def update_ahle_value_and_cost_viz_ecs(
             #                 array=stdev
             #             ),
             #             mode="markers",
-            #             hoverinfo='none',
             #             showlegend=False
             #         ),
             #     )
@@ -3311,7 +3318,6 @@ def update_ahle_value_and_cost_viz_ecs(
             #                 array=prep_df['stdev_current']
             #             ),
             #             mode="markers",
-            #             hoverinfo='none',
             #             name='95% Confidence'
             #         ),
             #     )
@@ -3384,7 +3390,6 @@ def update_ahle_value_and_cost_viz_ecs(
                             array=stdev
                             ),
                          mode="markers",
-                         hoverinfo='none',
                          showlegend=False
                     ),
                 )
@@ -3427,7 +3432,6 @@ def update_ahle_value_and_cost_viz_ecs(
                             array=prep_df['stdev_current']
                             ),
                          mode="markers",
-                         hoverinfo='none',
                          name='95% Confidence'
                     ),
                 )
@@ -3440,10 +3444,6 @@ def update_ahle_value_and_cost_viz_ecs(
                     )
                 )
 
-                # ecs_waterfall_fig.update_layout(
-                #     waterfallgroupgap = 0.5,
-                #     )
-
             # Add title
             ecs_waterfall_fig.update_layout(
                 # title_text=f'{reg_title} Values and Costs | {species}, {prodsys} <br><sup>Current vs. {compare} scenario for {agesex}, {selected_year}</sup><br>',
@@ -3451,11 +3451,6 @@ def update_ahle_value_and_cost_viz_ecs(
                 yaxis_title=display_currency,
                 font_size=15,
                 margin=dict(t=100),
-                # legend=dict(orientation="v",
-                #             xanchor="right",
-                #             x=1,
-                #             yanchor="bottom",
-                #             y=1.02,)
                 )
 
         # Add tooltip
@@ -3496,7 +3491,7 @@ def update_ahle_value_and_cost_viz_ecs(
     Input('select-geo-view-ecs','value'),
     Input('select-region-ecs','value'),
     )
-def update_ahle_bar_chart_ecs(
+def update_ahle_chart_ecs(
         graph_options,
         # agesex,
         species,
@@ -3738,8 +3733,8 @@ def update_ahle_bar_chart_ecs(
                                             plot_bgcolor="#ededed",)
             ecs_waterfall_fig.update_xaxes(ticklabelmode="period", dtick = 1)
 
-    # Create waterfall chart
-    if graph_options == "Single Year":
+    # Create Bar chart
+    if graph_options == "Bar":
         # Filter to a specific year
         prep_df = prep_df.query('year == @selected_year')
 
@@ -3824,12 +3819,20 @@ def update_ahle_bar_chart_ecs(
 
             # Create graph
             name = 'Difference'
-            ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x, y, x)
+            ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x, y, x, currency)
 
             # Add error bars
             # Reset indicies
             x = x.reset_index(drop=True)
             y = y.reset_index(drop=True)
+
+            # Set hover template for error bars based on currency
+            if currency == 'Birr':
+                hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} Birr <extra></extra>'
+            elif currency == 'USD':
+                hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} USD <extra></extra>'
+            else:
+                hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} <extra></extra>'
 
             # Scale standard deviation to achieve 95% confidence
             stdev = 1.96 * stdev    # Simulation results are Normally distributed
@@ -3846,7 +3849,8 @@ def update_ahle_bar_chart_ecs(
                         ),
                      mode="markers",
                      hoverinfo='none',
-                     name='95% Confidence'
+                     name='95% Confidence',
+                     hovertemplate=hovertemplate_error
                 ),
             )
 
@@ -3867,11 +3871,19 @@ def update_ahle_bar_chart_ecs(
                 x_len = np.arange(1,len(x)+1,1)
 
                 # Create graph
-                ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x_len, y, x)
+                ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x_len, y, x, currency)
                 # Add error bars
                 # Reset indicies
                 x = x.reset_index(drop=True)
                 y = y.reset_index(drop=True)
+
+                # Set hover template for error bars based on currency
+                if currency == 'Birr':
+                    hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} Birr <extra></extra>'
+                elif currency == 'USD':
+                    hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} USD <extra></extra>'
+                else:
+                    hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} <extra></extra>'
 
                 # Scale standard deviation to achieve 95% confidence
                 stdev = 1.96 * stdev    # Simulation results are Normally distributed
@@ -3887,8 +3899,9 @@ def update_ahle_bar_chart_ecs(
                             array=stdev
                             ),
                          mode="markers",
-                         hoverinfo='none',
-                         showlegend=False
+                         showlegend=False,
+                         hovertemplate=hovertemplate_error
+
                     ),
                 )
 
@@ -3898,14 +3911,26 @@ def update_ahle_bar_chart_ecs(
                 prep_df["Color"] = np.where(y<0, '#E88A81', '#77B3DB')
                 prep_df["Color"] = np.where((x=='Gross Margin (AHLE)') | (x=='Gross Margin'), '#F7931D', prep_df["Color"])
 
+                # Set hover template for bars based on currency
+                if currency == 'Birr':
+                    hovertemplate_bar=('%{customdata[1]}' +
+                                      '<br>%{customdata[0]:,.0f} Birr<extra></extra>')
+                elif currency == 'USD':
+                    hovertemplate_bar=('%{customdata[1]}' +
+                                      '<br>%{customdata[0]:,.0f} USD<extra></extra>')
+                else:
+                    hovertemplate_bar=('%{customdata[1]}' +
+                                      '<br>%{customdata[0]:,.0f} <extra></extra>')
+
                 # y = prep_df['mean_current']
                 ecs_waterfall_fig.add_trace(go.Bar(
-                    name = 'Current (outline)',
+                    name = 'Current (x)',
                     x = x_len,
                     y = y,
                     marker_color=prep_df['Color'],
                     marker_pattern_shape="x",
                     customdata=np.stack((y, prep_df['item']), axis=-1),
+                    hovertemplate=hovertemplate_bar
                     ))
 
                 # Add error bars
@@ -3926,8 +3951,8 @@ def update_ahle_bar_chart_ecs(
                              array=prep_df['stdev_current']
                              ),
                          mode="markers",
-                         hoverinfo='none',
-                         name='95% Confidence'
+                         name='95% Confidence',
+                         hovertemplate=hovertemplate_error
                     ),
                 )
                 ecs_waterfall_fig.update_layout(
@@ -3946,7 +3971,7 @@ def update_ahle_bar_chart_ecs(
             #     x_len = np.arange(1,len(x)+1,1)
 
             #     # Create graph
-            #     ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x_len, y, x)
+            #     ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x_len, y, x, currency)
             #     # Add error bars
             #     # Reset indicies
             #     x = x.reset_index(drop=True)
@@ -3966,7 +3991,6 @@ def update_ahle_bar_chart_ecs(
             #                 array=stdev
             #             ),
             #             mode="markers",
-            #             hoverinfo='none',
             #             showlegend=False
             #         ),
             #     )
@@ -4000,7 +4024,6 @@ def update_ahle_bar_chart_ecs(
             #                 array=prep_df['stdev_current']
             #             ),
             #             mode="markers",
-            #             hoverinfo='none',
             #             name='95% Confidence'
             #         ),
             #     )
@@ -4040,11 +4063,19 @@ def update_ahle_bar_chart_ecs(
                 x_len = np.arange(1,len(x)+1,1)
 
                 # Create graph
-                ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x_len, y, x)
+                ecs_waterfall_fig = create_ahle_bar_chart_ecs(prep_df, name, x_len, y, x, currency)
                 # Add error bars
                 # Reset indicies
                 x = x.reset_index(drop=True)
                 y = y.reset_index(drop=True)
+
+                # Set hover template for error bars based on currency
+                if currency == 'Birr':
+                    hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} Birr <extra></extra>'
+                elif currency == 'USD':
+                    hovertemplate_error='95% CI: +- %customdata[2]:,.0f} USD <extra></extra>'
+                else:
+                    hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} <extra></extra>'
 
                 # Scale standard deviation to achieve 95% confidence
                 stdev = 1.96 * stdev    # Simulation results are Normally distributed
@@ -4060,8 +4091,8 @@ def update_ahle_bar_chart_ecs(
                             array=stdev
                         ),
                         mode="markers",
-                        hoverinfo='none',
-                        showlegend=False
+                        showlegend=False,
+                        hovertemplate=hovertemplate_error
 
                     ),
                 )
@@ -4095,8 +4126,8 @@ def update_ahle_bar_chart_ecs(
                             array=prep_df['stdev_current']
                         ),
                         mode="markers",
-                        hoverinfo='none',
-                        name='95% Confidence'
+                        name='95% Confidence',
+                        hovertemplate=hovertemplate_error
                     ),
                 )
 
@@ -4116,23 +4147,481 @@ def update_ahle_bar_chart_ecs(
                 font_size=15,
                 margin=dict(t=100),
                 )
+    # Create waterfall chart
+    if graph_options == "Cumulative":
+        # Filter to a specific year
+        prep_df = prep_df.query('year == @selected_year')
 
-        # Add tooltip
-        if currency == 'Birr':
-            ecs_waterfall_fig.update_traces(hovertemplate='Category: %{customdata[1]}'+
-                                            '<br>Value: %{customdata[0]:,.0f} Birr<extra></extra>'+
-                                            '<br>95% CI: %{customdata[2]:,.0f} Birr'
-                                            )
-        elif currency == 'USD':
-            ecs_waterfall_fig.update_traces(hovertemplate='Category: %{customdata[1]}'+
-                                            '<br>Value: %{customdata[0]:,.0f} USD<extra></extra>'+
-                                            '<br>95% CI: %{customdata[2]:,.0f} USD'
-                                            )
+        # Select items to show - depends on species
+        if species.upper() == "CATTLE":     # Cattle have draught
+            waterfall_plot_items = ('Value of Offtake',
+                                     'Value of Herd Increase',
+                                     'Value of Draught',
+                                     'Value of Milk',
+                                     'Value of Manure',
+                                     'Value of Hides',
+                                     'Expenditure on Feed',
+                                     'Expenditure on Labour',
+                                     'Expenditure on Health',
+                                     # May 2023: Wudu does not want housing and captial expenses in waterfall chart
+                                     # 'Expenditure on Housing',
+                                     # 'Expenditure on Capital',
+                                     'Gross Margin')
+        elif 'POULTRY' in species.upper():   # Poultry have value of eggs, do not have manure or hides
+            waterfall_plot_items = ('Value of Offtake',
+                                     'Value of Herd Increase',
+                                     'Value of Eggs consumed',
+                                     'Value of Eggs sold',
+                                     'Expenditure on Feed',
+                                     'Expenditure on Labour',
+                                     'Expenditure on Health',
+                                     # May 2023: Wudu does not want housing and captial expenses in waterfall chart
+                                     # 'Expenditure on Housing',
+                                     # 'Expenditure on Capital',
+                                     'Gross Margin')
+        else:   # Goats, Sheep, All Small Ruminants
+            waterfall_plot_items = ('Value of Offtake',
+                                     'Value of Herd Increase',
+                                     'Value of Milk',
+                                     'Value of Manure',
+                                     'Value of Hides',
+                                     'Expenditure on Feed',
+                                     'Expenditure on Labour',
+                                     'Expenditure on Health',
+                                     # May 2023: Wudu does not want housing and captial expenses in waterfall chart
+                                     # 'Expenditure on Housing',
+                                     # 'Expenditure on Capital',
+                                     'Gross Margin')
+        waterfall_plot_items_upper = [i.upper() for i in waterfall_plot_items]
+        prep_df = prep_df.loc[prep_df['item'].str.upper().isin(waterfall_plot_items_upper)]
+
+        # Get list of items from data - may differ from list specified because not all items appear for all age/sex groups
+        waterfall_plot_items_indata = list(prep_df['item'].unique())
+
+        measure = ['relative'] * (len(waterfall_plot_items_indata) - 1) + ['total']
+        x = prep_df['item']
+
+        # Display and Compare filters
+        if display == "Difference":
+            # Applying the condition
+            prep_df["item"] = np.where(prep_df["item"] == "Gross Margin", "Gross Margin (AHLE)", prep_df["item"])
+            x = prep_df['item']
+            if compare == 'Ideal':
+                y = prep_df['mean_diff_ideal']
+                stdev = prep_df['stdev_diff_ideal']
+            # elif compare == 'Zero Mortality':
+            #     y = prep_df['mean_diff_mortzero']
+            #     stdev = prep_df['stdev_diff_mortzero']
+            else:
+                compare = impvmnt_factor + "- " + impvmnt_value
+                if impvmnt_factor == 'Mortality' and impvmnt_value == '25%':
+                    y = prep_df['mean_diff_mortimp25']
+                    stdev = prep_df['stdev_diff_mortimp25']
+                elif impvmnt_factor == 'Mortality' and impvmnt_value == '50%':
+                    y = prep_df['mean_diff_mortimp50']
+                    stdev = prep_df['stdev_diff_mortimp50']
+                elif impvmnt_factor == 'Mortality' and impvmnt_value == '75%':
+                    y = prep_df['mean_diff_mortimp75']
+                    stdev = prep_df['stdev_diff_mortimp75']
+                elif impvmnt_factor == 'Mortality' and impvmnt_value == '100%':
+                    y = prep_df['mean_diff_mortzero']
+                    stdev = prep_df['stdev_diff_mortzero']
+                elif impvmnt_factor == 'Parturition Rate':
+                    number_split = impvmnt_value.split('%')[0]
+                    y = prep_df[f'mean_diff_reprimp{number_split}']
+                    stdev = prep_df[f'stdev_diff_reprimp{number_split}']
+                elif impvmnt_factor == 'Live Weight':
+                    number_split = impvmnt_value.split('%')[0]
+                    y = prep_df[f'mean_diff_growimp{number_split}']
+                    stdev = prep_df[f'stdev_diff_growimp{number_split}']
+
+            # Create graph
+            name = 'Difference'
+            ecs_waterfall_fig = create_ahle_waterfall_ecs(prep_df, name, measure, x, y, currency)
+
+            # Add error bars
+            # Reset indicies
+            x = x.reset_index(drop=True)
+            y = y.reset_index(drop=True)
+
+			# Set hover template for error bars based on currency
+            if currency == 'Birr':
+                hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} Birr <extra></extra>'
+            elif currency == 'USD':
+                hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} USD <extra></extra>'
+            else:
+                hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} <extra></extra>'
+
+            # Scale standard deviation to achieve 95% confidence
+            stdev = 1.96 * stdev    # Simulation results are Normally distributed
+
+            # Get cumulative sum value for Y unless Gross Margin
+            y_error_sum=[]
+            for i in x.values:
+                if i != 'Gross Margin (AHLE)':
+                    y_error_sum = np.cumsum(y)
+                elif i == 'Gross Margin (AHLE)':
+                    GM_index = x[x == 'Gross Margin (AHLE)'].index[0]
+                    y_error_sum[GM_index] = y[GM_index]
+            # Add trace for error
+            ecs_waterfall_fig.add_trace(
+                go.Scatter(
+                     x=x,
+                     y=y_error_sum,
+                     marker=dict(color='black'),
+                     customdata=np.stack((y, prep_df['item'], stdev), axis=-1),
+                     error_y=dict(
+                        type='data',
+                        array=stdev
+                        ),
+                     mode="markers",
+					 hoverinfo='none',
+                     name='95% Confidence',
+					 hovertemplate=hovertemplate_error
+                ),
+            )
+            # Add title
+            ecs_waterfall_fig.update_layout(
+                # title_text=f'{reg_title} Animal Health Loss Envelope | {species}, {prodsys} <br><sup>Difference between current and {compare} values for {agesex}, {selected_year}</sup><br>',
+                title_text=f'{reg_title} Animal Health Loss Envelope | {species}, {prodsys} <br><sup>Difference between current and {compare}, {selected_year}</sup><br>',
+                yaxis_title=display_currency,
+                font_size=15,
+                margin=dict(t=100)
+                )
         else:
-            ecs_waterfall_fig.update_traces(hovertemplate='Category: %{customdata[1]}'+
-                                            '<br>Value: %{customdata[0]:,.0f} <extra></extra>'+
-                                            '<br>95% CI: %{customdata[2]:,.0f}'
-                                            )
+            if compare == 'Ideal':
+                y = prep_df['mean_ideal']
+                stdev = prep_df['stdev_ideal']
+                name = "Ideal (solid)"
+                # Create numeric, dynamic x axis based off of items
+                x_len = np.arange(1,len(x)+1,1)
+
+                # Create graph
+                ecs_waterfall_fig = create_ahle_waterfall_ecs(prep_df, name, measure, x_len-.3, y, currency)
+                # Add error bars
+                # Reset indicies
+                x = x.reset_index(drop=True)
+                y = y.reset_index(drop=True)
+
+				# Set hover template for error bars based on currency
+                if currency == 'Birr':
+                    hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} Birr <extra></extra>'
+                elif currency == 'USD':
+                    hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} USD <extra></extra>'
+                else:
+                    hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} <extra></extra>'
+
+                # Scale standard deviation to achieve 95% confidence
+                stdev = 1.96 * stdev    # Simulation results are Normally distributed
+
+                # Get cumulative sum value for Y unless Gross Margin
+                y_error_sum=[]
+                for i in x.values:
+                    if i != 'Gross Margin':
+                        y_error_sum = np.cumsum(y)
+                    elif i == 'Gross Margin':
+                        GM_index = x[x == 'Gross Margin'].index[0]
+                        y_error_sum[GM_index] = y[GM_index]
+                # Add trace for error
+                ecs_waterfall_fig.add_trace(
+                    go.Scatter(
+                         x=x_len-.3,
+                         y=y_error_sum,
+                         marker=dict(color='black'),
+                         customdata=np.stack((y, prep_df['item'], stdev), axis=-1),
+                         error_y=dict(
+                            type='data',
+                            array=stdev
+                            ),
+                         mode="markers",
+                         showlegend=False,
+						 hovertemplate=hovertemplate_error
+                    ),
+                )
+
+                # Add current with lag
+                y = prep_df['mean_current']
+				# Set hover template for bars based on currency
+                if currency == 'Birr':
+                    hovertemplate_bar=('%{customdata[1]}' +
+                                      '<br>%{customdata[0]:,.0f} Birr<extra></extra>')
+                elif currency == 'USD':
+                    hovertemplate_bar=('%{customdata[1]}' +
+                                      '<br>%{customdata[0]:,.0f} USD<extra></extra>')
+                else:
+                    hovertemplate_bar=('%{customdata[1]}' +
+                                      '<br>%{customdata[0]:,.0f} <extra></extra>')
+
+                ecs_waterfall_fig.add_trace(go.Waterfall(
+                    name = 'Current (outline)',
+                    measure = measure,
+                    x = x_len+.3,
+                    y = y,
+                    decreasing = {"marker":{"color":"white", "line":{"color":"#E84C3D", "width":3}}},
+                    increasing = {"marker":{"color":"white", "line":{"color":"#3598DB", "width":3}}},
+                    totals = {"marker":{"color":"white", "line":{"color":"#F7931D", "width":3}}},
+                    connector = {"line":{"dash":"dot"}},
+                    customdata=np.stack((y, prep_df['item']), axis=-1),
+					hovertemplate=hovertemplate_bar
+                    ))
+                # Add error bars
+                # Reset indicies
+                y = prep_df['mean_current']
+                x = x.reset_index(drop=True)
+                y = y.reset_index(drop=True)
+                # Get cumulative sum value for Y unless Gross Margin
+                y_error_sum=[]
+                for i in x.values:
+                    if i != 'Gross Margin':
+                        y_error_sum = np.cumsum(y)
+                    elif i == 'Gross Margin':
+                        GM_index = x[x == 'Gross Margin'].index[0]
+                        y_error_sum[GM_index] = y[GM_index]
+
+                # Add trace for error
+                ecs_waterfall_fig.add_trace(
+                    go.Scatter(
+                         x=x_len+.3,
+                         y=y_error_sum,
+                         marker=dict(color='black'),
+                         customdata=np.stack((y, prep_df['item'], prep_df['stdev_current']), axis=-1),
+                         error_y=dict(
+                             type='data',
+                             array=prep_df['stdev_current']
+                             ),
+                         mode="markers",
+                         name='95% Confidence',
+						 hovertemplate=hovertemplate_error
+                    ),
+                )
+                ecs_waterfall_fig.update_layout(
+                    xaxis = dict(
+                        tickmode = 'array',
+                        tickvals = x_len,
+                        ticktext = waterfall_plot_items
+                    )
+                )
+
+            # elif compare == 'Zero Mortality':
+            #     y = prep_df['mean_mortality_zero']
+            #     stdev = prep_df['stdev_mortality_zero']
+            #     name = 'Zero Mortality (solid)'
+            #     # Create numeric, dynamic x axis based off of items
+            #     x_len = np.arange(1,len(x)+1,1)
+
+            #     # Create graph
+            #     ecs_waterfall_fig = create_ahle_waterfall_ecs(prep_df, name, measure, x_len-.3, y, currency)
+            #     # Add error bars
+            #     # Reset indicies
+            #     x = x.reset_index(drop=True)
+            #     y = y.reset_index(drop=True)
+
+            #     # Scale standard deviation to achieve 95% confidence
+            #     stdev = 1.96 * stdev    # Simulation results are Normally distributed
+
+            #     # Get cumulative sum value for Y unless Gross Margin
+            #     y_error_sum=[]
+            #     for i in x.values:
+            #         if i != 'Gross Margin':
+            #             y_error_sum = np.cumsum(y)
+            #         elif i == 'Gross Margin':
+            #             GM_index = x[x == 'Gross Margin'].index[0]
+            #             y_error_sum[GM_index] = y[GM_index]
+            #     # Add trace for error
+            #     ecs_waterfall_fig.add_trace(
+            #         go.Scatter(
+            #             x=x_len-.3,
+            #             y=y_error_sum,
+            #             marker=dict(color='black'),
+            #             customdata=np.stack((y, prep_df['item']), axis=-1),
+            #             error_y=dict(
+            #                 type='data',
+            #                 array=stdev
+            #             ),
+            #             mode="markers",
+            #             showlegend=False
+            #         ),
+            #     )
+
+            #     # Add current with lag
+            #     ecs_waterfall_fig.add_trace(go.Waterfall(
+            #         name = 'Current (outline)',
+            #         measure = measure,
+            #         x = x_len+.3,
+            #         y = prep_df['mean_current'],
+            #         decreasing = {"marker":{"color":"white", "line":{"color":"#E84C3D", "width":3}}},
+            #         increasing = {"marker":{"color":"white", "line":{"color":"#3598DB", "width":3}}},
+            #         totals = {"marker":{"color":"white", "line":{"color":"#F7931D", "width":3}}},
+            #         connector = {"line":{"dash":"dot"}},
+            #         customdata=np.stack((prep_df['mean_current'], prep_df['item']), axis=-1),
+            #         ))
+            #     # Add error bars
+            #     # Reset indicies
+            #     y = prep_df['mean_current']
+            #     x = x.reset_index(drop=True)
+            #     y = y.reset_index(drop=True)
+            #     # Get cumulative sum value for Y unless Gross Margin
+            #     y_error_sum=[]
+            #     for i in x.values:
+            #         if i != 'Gross Margin':
+            #             y_error_sum = np.cumsum(y)
+            #         elif i == 'Gross Margin':
+            #             GM_index = x[x == 'Gross Margin'].index[0]
+            #             y_error_sum[GM_index] = y[GM_index]
+
+            #     # Add trace for error
+            #     ecs_waterfall_fig.add_trace(
+            #         go.Scatter(
+            #              x=x_len+.3,
+            #              y=y_error_sum,
+            #              marker=dict(color='black'),
+            #              customdata=np.stack((y, prep_df['item']), axis=-1),
+            #              error_y=dict(
+            #                 type='data',
+            #                 array=prep_df['stdev_current']
+            #             ),
+            #             mode="markers",
+            #             name='95% Confidence'
+            #         ),
+            #     )
+
+            #     ecs_waterfall_fig.update_layout(
+            #         xaxis = dict(
+            #             tickmode = 'array',
+            #             tickvals = x_len,
+            #             ticktext = waterfall_plot_items
+            #         )
+            #     )
+
+
+            else:
+                if impvmnt_factor == 'Mortality' and impvmnt_value == '25%':
+                    y = prep_df['mean_all_mort_25_imp']
+                    stdev = prep_df['stdev_all_mort_25_imp']
+                elif impvmnt_factor == 'Mortality' and impvmnt_value == '50%':
+                    y = prep_df['mean_all_mort_50_imp']
+                    stdev = prep_df['stdev_all_mort_50_imp']
+                elif impvmnt_factor == 'Mortality' and impvmnt_value == '75%':
+                    y = prep_df['mean_all_mort_75_imp']
+                    stdev = prep_df['stdev_all_mort_75_imp']
+                elif impvmnt_factor == 'Mortality' and impvmnt_value == '100%':
+                    y = prep_df['mean_mortality_zero']
+                    y = prep_df['stdev_mortality_zero']
+                elif impvmnt_factor == 'Parturition Rate':
+                    number_split = impvmnt_value.split('%')[0]
+                    y = prep_df[f'mean_current_repro_{number_split}_imp']
+                    stdev = prep_df[f'stdev_current_repro_{number_split}_imp']
+                elif impvmnt_factor == 'Live Weight':
+                    number_split = impvmnt_value.split('%')[0]
+                    y = prep_df[f'mean_current_growth_{number_split}_imp_all']
+                    stdev = prep_df[f'stdev_current_growth_{number_split}_imp_all']
+
+                name = impvmnt_factor + "- " + impvmnt_value + " (solid)"
+                # Create numeric, dynamic x axis based off of items
+                x_len = np.arange(1,len(x)+1,1)
+
+                # Create graph
+                ecs_waterfall_fig = create_ahle_waterfall_ecs(prep_df, name, measure, x_len-.3, y, currency)
+                # Add error bars
+                # Reset indicies
+                x = x.reset_index(drop=True)
+                y = y.reset_index(drop=True)
+
+				# Set hover template for error bars based on currency
+                if currency == 'Birr':
+                    hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} Birr <extra></extra>'
+                elif currency == 'USD':
+                    hovertemplate_error='95% CI: +- %customdata[2]:,.0f} USD <extra></extra>'
+                else:
+                    hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} <extra></extra>'
+
+                # Scale standard deviation to achieve 95% confidence
+                stdev = 1.96 * stdev    # Simulation results are Normally distributed
+
+                # Get cumulative sum value for Y unless Gross Margin
+                y_error_sum=[]
+                for i in x.values:
+                    if i != 'Gross Margin':
+                        y_error_sum = np.cumsum(y)
+                    elif i == 'Gross Margin':
+                        GM_index = x[x == 'Gross Margin'].index[0]
+                        y_error_sum[GM_index] = y[GM_index]
+                # Add trace for error
+                ecs_waterfall_fig.add_trace(
+                    go.Scatter(
+                         x=x_len-.3,
+                         y=y_error_sum,
+                         marker=dict(color='black'),
+                         customdata=np.stack((y, prep_df['item'], stdev), axis=-1),
+                         error_y=dict(
+                            type='data',
+                            array=stdev
+                            ),
+                         mode="markers",
+                         showlegend=False,
+						 hovertemplate=hovertemplate_error
+                    ),
+                )
+
+                # Add current with lag
+                ecs_waterfall_fig.add_trace(go.Waterfall(
+                    name = 'Current (outline)',
+                    measure = measure,
+                    x = x_len+.3,
+                    y = prep_df['mean_current'],
+                    decreasing = {"marker":{"color":"white", "line":{"color":"#E84C3D", "width":3}}},
+                    increasing = {"marker":{"color":"white", "line":{"color":"#3598DB", "width":3}}},
+                    totals = {"marker":{"color":"white", "line":{"color":"#F7931D", "width":3}}},
+                    connector = {"line":{"dash":"dot"}},
+                    customdata=np.stack((prep_df['mean_current'], prep_df['item']), axis=-1),
+                    ))
+                # Add error bars
+                # Reset indicies
+                y = prep_df['mean_current']
+                x = x.reset_index(drop=True)
+                y = y.reset_index(drop=True)
+                # Get cumulative sum value for Y unless Gross Margin
+                y_error_sum=[]
+                for i in x.values:
+                    if i != 'Gross Margin':
+                        y_error_sum = np.cumsum(y)
+                    elif i == 'Gross Margin':
+                        GM_index = x[x == 'Gross Margin'].index[0]
+                        y_error_sum[GM_index] = y[GM_index]
+
+                # Add trace for error
+                ecs_waterfall_fig.add_trace(
+                    go.Scatter(
+                         x=x_len+.3,
+                         y=y_error_sum,
+                         marker=dict(color='black'),
+                         customdata=np.stack((y, prep_df['item'], prep_df['stdev_current']), axis=-1),
+                         error_y=dict(
+                            type='data',
+                            array=prep_df['stdev_current']
+                            ),
+                         mode="markers",
+                         name='95% Confidence',
+						 hovertemplate=hovertemplate_error
+                    ),
+                )
+
+                ecs_waterfall_fig.update_layout(
+                    xaxis = dict(
+                        tickmode = 'array',
+                        tickvals = x_len,
+                        ticktext = waterfall_plot_items
+                    )
+                )
+
+            # Add title
+            ecs_waterfall_fig.update_layout(
+                # title_text=f'{reg_title} Values and Costs | {species}, {prodsys} <br><sup>Current vs. {compare} scenario for {agesex}, {selected_year}</sup><br>',
+                title_text=f'{reg_title} Values and Costs | {species}, {prodsys} <br><sup>Current vs. {compare} scenario, {selected_year}</sup><br>',
+                yaxis_title=display_currency,
+                font_size=15,
+                margin=dict(t=100),
+                )
 
     return ecs_waterfall_fig
 
@@ -4148,7 +4637,7 @@ def update_ahle_bar_chart_ecs(
     Input('select-dd-2-attr-ecs','value'),
     Input('select-dd-3-attr-ecs','value'),
     Input('select-dd-4-attr-ecs','value'),
-    Input('select-graph-ahle-ecs', 'value'),
+    Input('select-attr-display-ecs', 'value'),
     Input('select-year-ecs', 'value'),
     Input('select-item-ecs', 'value'),
     Input('select-geo-view-ecs','value'),
@@ -4216,7 +4705,7 @@ def update_attr_treemap_ecs(
     input_df = prep_ahle_fortreemap_ecs(input_df)
 
     # Create treemap
-    if graph_options == "Single Year":
+    if graph_options == "Tree Map":
         # Year filter
         input_df = input_df.query(f'year == {selected_year}')
 
@@ -4258,7 +4747,7 @@ def update_attr_treemap_ecs(
 
     # Create view over time
     # A stacked bar for each year, segmented by one of the hierarchy factors
-    elif graph_options == "Over Time":
+    elif graph_options == "Bar":
         segment_by = top_lvl_hierarchy   # For now, segment bars by selected top level component
 
         # Aggregate data to year and segment
@@ -4684,7 +5173,7 @@ def update_stacked_bar_ecs(
     # Base plot
     # -----------------------------------------------------------------------------
     # Apply year filter
-    if graph_options == "Single Year":
+    if graph_options == "Bar":
         input_df = input_df.loc[input_df['year'] == selected_year]
     else:
         input_df = input_df.loc[input_df['year'] == 2021]
@@ -4891,7 +5380,7 @@ def update_map_display_ecs(
         elif "VALUE" in item.upper():
             color_scale = [(0, "#ecf5fc"), (0.5, "#88c2ea"), (1, "#3598db")]
         elif "COST" in item.upper():
-            color_scale = [(0, "#fdeeec"), (0.5, "#f08d83"), (1, "#E84C3D")]
+            color_scale = [(0, "#E84C3D"), (0.5, "#f08d83"), (1, "#fdeeec")]
 
         ecs_map_fig = create_map_display_ecs(input_df, geojson_ecs_df, location, featurekey, color_by, color_scale)
 
