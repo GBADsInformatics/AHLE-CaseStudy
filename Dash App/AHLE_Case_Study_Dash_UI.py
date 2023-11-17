@@ -314,7 +314,7 @@ ecs_ahle_summary['production_system'] = ecs_ahle_summary['production_system'].re
 #    str(ecs_prodsys_options.append({'label':i,'value':(i)}))
 
 # Year
-# Year options are now set in a callback
+# Years to display are now controlled by a callback
 # ecs_year_options=[]
 # for i in np.sort(ecs_ahle_summary['year'].unique()):
 #     str(ecs_year_options.append({'label':i,'value':(i)}))
@@ -347,8 +347,8 @@ for i in ecs_ahle_summary.query("region != 'National'").region.unique():
     str(ecs_region_options.append({'label':i,'value':(i)}))
 
 # Display
-ecs_display_options = [{'label': i, 'value': i, 'disabled': False} for i in ["Difference",
-                                                                             "Side by Side",
+ecs_display_options = [{'label': i, 'value': i, 'disabled': False} for i in ["Side by Side",
+                                                                             "Difference",
                                                                             ]]
 # Item
 
@@ -864,9 +864,9 @@ gbadsDash.layout = html.Div([
                     # Dashboard description
                     html.P(['This interactive dashboard uses publicly available data in consultation with \
                             experts to create models that provide a country-specific estimate of the \
-                            animal health loss envelope (AHLE). The tool will guide you through this calculations, \
-                            the outputs, and the many scenarios that allow us to use the information to \
-                            aid decision makers with regard to animal health and production.'],
+                            animal health loss envelope (AHLE). The tool will guide you through the calculations, \
+                            the outputs, and the scenarios that allow us to aid decision makers with regard to \
+                            animal health and production.'],
                            style={'textAlign': 'center'}
                            )
                     ],xs =12, sm=12, md=12, lg=9, xl=9)
@@ -1261,14 +1261,14 @@ gbadsDash.layout = html.Div([
                         # Switch between single year and over time
                         html.H5("Display AHLE for...", style=control_heading_style),
                         dcc.RadioItems(id='select-graph-ahle-ecs',
-                                      inline=True,                  # True: arrange buttons horizontally
-                                      inputStyle={
-                                          "margin-right":"2px",     # This pulls the words off of the button
-                                          "margin-left":"10px",     # Space between buttons if inline=True
-                                          },
-                                      ),
+                                       inline=True,                  # True: arrange buttons horizontally
+                                       inputStyle={
+                                           "margin-right":"2px",     # This pulls the words off of the button
+                                           "margin-left":"10px",     # Space between buttons if inline=True
+                                           },
+                                       ),
                         # Text underneath
-                        html.P("Estimates over time or for any year other than 2021 are currently placeholders" ,style={'font-style':'italic'}),
+                        html.P("Estimates for any year other than 2021 are currently placeholders" ,style={'font-style':'italic'}),
                         ]),
 
                     # Year selector
@@ -1280,16 +1280,24 @@ gbadsDash.layout = html.Div([
                                      ),
                         ]),
 
+                    # End year selector (only visible for over time display)
+                    dbc.Col([
+                        html.H5(id='select-end-year-ecs-title'),
+                        dcc.Dropdown(id='select-end-year-ecs',
+                                     clearable = False,
+                                     ),
+                        ]),
+
                     # Geographical breakdown options
                     dbc.Col([
                         html.H5("AHLE Geographic Scope", style=control_heading_style),
                         dcc.RadioItems(id='select-geo-view-ecs',
-                                      inline=True,                  # True: arrange buttons horizontally
-                                      inputStyle={
-                                          "margin-right":"2px",     # This pulls the words off of the button
-                                          "margin-left":"10px",     # Space between buttons if inline=True
-                                          },
-                                      ),
+                                       inline=True,                  # True: arrange buttons horizontally
+                                       inputStyle={
+                                           "margin-right":"2px",     # This pulls the words off of the button
+                                           "margin-left":"10px",     # Space between buttons if inline=True
+                                           },
+                                       ),
                         # Text underneath
                         html.P("Subnational estimates are currently only available for cattle for 2021" ,style={'font-style':'italic'}),
                         ]),
@@ -1305,7 +1313,7 @@ gbadsDash.layout = html.Div([
                         ]),
 
                     # END OF SECOND CONTROL ROW
-                    ],justify='evenly'),
+                    ], justify='evenly'),
 
                 html.Hr(style={'margin-right':'10px'}),
 
@@ -1406,8 +1414,8 @@ gbadsDash.layout = html.Div([
                                                        labelStyle={'display': 'block'},
                                                        inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
                                                        ),
-                                         html.Label(["Difference: show a single bar for each item representing the difference between the current and ideal values"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
-                                         html.Label(["Side by Side: show two bars for each item, one for current and another for the ideal value"] ,style={'font-style':'italic'}),
+                                         html.Label(["Side by Side: show two bars for each item, one for current and another for the ideal value"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
+                                         html.Label(["Difference: show a single bar for each item representing the difference between the current and ideal values"] ,style={'font-style':'italic'}),
                                          ]),
 
                                      # Compare
@@ -1421,6 +1429,7 @@ gbadsDash.layout = html.Div([
                                                        ),
                                          html.Label(["Ideal: zero mortality and ideal growth and production rates"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
                                          # html.Label(["Zero Mortality: zero mortality but growth and production rates at current levels"] ,style={'font-style':'italic'}),
+                                         html.Label(["Improvement: marginal improvement in mortality, growth, or production rates"] ,style={'font-style':'italic'}),
                                          ]),
 
                                  ]), # END OF ROW
@@ -1538,8 +1547,8 @@ gbadsDash.layout = html.Div([
                 ]),
 
 
-            #### AHLE ATTRIBUTION BY POPULATION
-            dbc.Tab(label="Attribution by Population",
+            #### ATTRIBUTION
+            dbc.Tab(label="Attribution",
                     tabClassName="flex-grow-1 text-center",
                         tab_style = tab_style,
                         style = {"height":"100vh",
@@ -1549,12 +1558,11 @@ gbadsDash.layout = html.Div([
                         #### -- Attribution Specific Controls
                         html.Label(["Showing how each component contributes to the total animal health loss envelope, \
                                     including attribution to infectious, non-infectious, and external causes. \
-                                    Attribution of AHLE to infectious, non-infectious, and external \
-                                    causes is based on the results of expert elicitation."]),
+                                    Attribution is based on the results of expert elicitation."]),
+                        html.Label(["NOTE: this is shown for species groups (cattle, all small ruminants, or all poultry) rather than for individual species."] ,style={"font-style":"italic"}),
                         dbc.Col([
                             dbc.Card([
                                 dbc.CardBody([
-                                    html.Label(["NOTE: this is shown for species groups (cattle, all small ruminants, or all poultry) rather than for individual species."] ,style={"font-style":"italic"}),
                                     html.H5("Segment by...", style={'font-weight':"bold"}),
                                     dbc.Row([
                                         # Top Level
@@ -1940,7 +1948,7 @@ gbadsDash.layout = html.Div([
     Input('select-country-ahle', 'value'),
     )
 def update_dashboard_country_title(country):
-    return f'Burden of Disease by {country}'
+    return f'Burden of Disease for {country}'
 
 # Update production system options based on species
 @gbadsDash.callback(
@@ -1979,36 +1987,61 @@ def update_longitudinal_options_ecs(species):
     Output('select-year-ecs-title','children'),
     Output('select-year-ecs','options'),
     Output('select-year-ecs','value'),
-    Output('select-year-ecs','placeholder'),
     Input('select-graph-ahle-ecs','value'),
     Input('select-species-ecs','value'),
     )
 def update_year_select_ecs(graph, species):
-    value=2021
-    ecs_year_options=[]     # By default, list is blank
-    placeholder = '2021'
+    year_options = ecs_ahle_summary['year'].unique()
+    year_options_str = []
+    for i in np.sort(year_options):
+        str(year_options_str.append({'label':i,'value':(i)}))
 
     if graph == 'Over Time':
-        # placeholder = '(all)'
-        value = ecs_ahle_summary['year'].min()
-        dropdown_title = 'Starting from'
-        for i in np.sort(ecs_ahle_summary['year'].unique()):
-            str(ecs_year_options.append({'label':i,'value':(i)}))
+        dropdown_title = 'Start year'
+        value = year_options.min()
     # Other years only available for Cattle
-    # elif (graph == 'Single Year') & (species.upper() == 'CATTLE'):
-    #     ecs_year_options=[]
-    #     for i in np.sort(ecs_ahle_summary['year'].unique()):
-    #         str(ecs_year_options.append({'label':i,'value':(i)}))
-    # Have placeholder values for all species and years
+    # UPDATE: Have placeholder values for all species and years
     elif graph == 'Single Year':
         dropdown_title = 'Year'
-        # ecs_year_options=[]
-        for i in np.sort(ecs_ahle_summary['year'].unique()):
-            str(ecs_year_options.append({'label':i,'value':(i)}))
+        value = year_options.max()
     else:
         None
 
-    return dropdown_title, ecs_year_options, value, placeholder
+    return dropdown_title, year_options_str, value
+
+# End year selector (only available if over time display)
+@gbadsDash.callback(
+    Output('select-end-year-ecs-title','children'),
+    Output('select-end-year-ecs-title','style'),
+    Output('select-end-year-ecs','options'),
+    Output('select-end-year-ecs','value'),
+    Output('select-end-year-ecs','style'),
+    Input('select-graph-ahle-ecs','value'),
+    Input('select-species-ecs','value'),
+    )
+def update_end_year_select_ecs(graph, species):
+    year_options = ecs_ahle_summary['year'].unique()
+    year_options_str = []
+    for i in np.sort(year_options):
+        str(year_options_str.append({'label':i,'value':(i)}))
+
+    if graph == 'Over Time':
+        dropdown_title = 'End year'
+        value = year_options.max()
+        title_display_style = {'display': 'block'}
+        dropdown_display_style = {'display': 'block'}
+    # Hide controls if Single Year selected
+    elif graph == 'Single Year':
+        dropdown_title = ''
+        value = None
+        for d in year_options_str:
+            d['disabled']=True
+        title_display_style = {'display': 'none'}
+        dropdown_display_style = {'display': 'none'}
+    else:
+        None
+
+    return dropdown_title, title_display_style, year_options_str, value, dropdown_display_style
 
 # Geographical options
 @gbadsDash.callback(
@@ -2021,7 +2054,7 @@ def update_year_select_ecs(graph, species):
 def update_geo_view_options_ecs(graph, species, year):
     options = [
         {'label': "National", 'value': "National", 'disabled': False},
-        {'label': "Subnational", 'value': "Subnational", 'disabled': True}  # Update Aug 2023: disabling subnational views as these scenarios are incomplete and cause missing values in attribution
+        {'label': "Subnational", 'value': "Subnational", 'disabled': False}  # Update Aug 2023: disabling subnational views as these scenarios are incomplete and cause missing values in attribution
         ]
     value='National'
 
@@ -2584,10 +2617,12 @@ def update_ecs_attr_data(currency, prodsys, species, year, geo_view, region):
     input_df=input_df.loc[(input_df['year'] == year)]
 
     # Geographic filter
-    if geo_view.upper() == "NATIONAL":
-        input_df = input_df.query("region == 'National'")
-    else:
-        input_df = input_df.query("region == @region")
+    # if geo_view.upper() == "NATIONAL":
+    #     input_df = input_df.query("region == 'National'")
+    # else:
+    #     input_df = input_df.query("region == @region")
+    # Nov. 2023: only showing national attribution results as regional results are out of date and cause missing values
+    input_df = input_df.query("region == 'National'")
 
     # If currency is USD, use USD columns
     display_currency = 'Birr'
@@ -3456,6 +3491,7 @@ def update_ahle_value_and_cost_viz_ecs(
     Input('select-factor-ecs','value'),
     Input('select-improve-ecs','value'),
     Input('select-year-ecs', 'value'),
+    Input('select-end-year-ecs','value'),
     Input('select-item-ecs', 'value'),
     Input('select-geo-view-ecs','value'),
     Input('select-region-ecs','value'),
@@ -3471,6 +3507,7 @@ def update_ahle_bar_chart_ecs(
         impvmnt_factor,
         impvmnt_value,
         selected_year,
+        selected_end_year,
         selected_item,
         geo_view,
         region,
@@ -3569,8 +3606,8 @@ def update_ahle_bar_chart_ecs(
         # Sort data by year
         prep_df = prep_df.sort_values('year')
 
-        # Filter to selected year or later
-        prep_df = prep_df.query('year >= @selected_year')
+        # Filter to selected start and end years
+        prep_df = prep_df.query('year >= @selected_year').query('year <= @selected_end_year')
 
         # Establish x
         x = prep_df['year']
@@ -3821,7 +3858,7 @@ def update_ahle_bar_chart_ecs(
                 font_size=15,
                 margin=dict(t=100)
                 )
-        else:
+        else:   # If display is not 'Difference'...
             if compare == 'Ideal':
                 y = prep_df['mean_ideal']
                 stdev = prep_df['stdev_ideal']
@@ -4136,12 +4173,15 @@ def update_attr_treemap_ecs(
     input_df = ecs_ahle_all_withattr
 
     # Geographic filter
-    if geo_view.upper() == "NATIONAL":
-        input_df = input_df.query("region == 'National'")
-        reg_title = 'National'
-    else:
-        input_df = input_df.query("region == @region")
-        reg_title = region
+    # if geo_view.upper() == "NATIONAL":
+    #     input_df = input_df.query("region == 'National'")
+    #     reg_title = 'National'
+    # else:
+    #     input_df = input_df.query("region == @region")
+    #     reg_title = region
+    # Nov. 2023: only showing national attribution results as regional results are out of date and cause missing values
+    input_df = input_df.query("region == 'National'")
+    reg_title = 'National'
 
     # Production System filter
     # If All production systems, don't filter. Attribution data is not aggregated to that level.
