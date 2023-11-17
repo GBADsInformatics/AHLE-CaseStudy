@@ -84,8 +84,14 @@ tab_style = {'font-size':"1.5625rem",
              'font-weight': 'bold',
              }
 
-control_heading_style={"font-weight": "bold",
-                       "color": "#555555"}
+control_heading_style = {"font-weight": "bold",
+                         "color": "#555555",
+                         }
+
+# Radio Item input style
+Radio_input_style = {"margin-right":"2px",     # This pulls the words off of the button
+                     "margin-left":"10px",     # Space between buttons if inline=True
+                     }
 
 # =============================================================================
 #### Read data
@@ -543,7 +549,7 @@ def create_attr_treemap_ecs(input_df, path):
     return treemap_fig
 
 # Define the AHLE waterfall
-def create_ahle_waterfall_ecs(input_df, name, measure, x, y):
+def create_ahle_waterfall_ecs(input_df, name, measure, x, y, currency):
     waterfall_fig = go.Figure(go.Waterfall(
         name = name,
         orientation = "v",
@@ -556,6 +562,20 @@ def create_ahle_waterfall_ecs(input_df, name, measure, x, y):
         connector = {"line":{"color":"darkgrey"}},
         customdata=np.stack((y, input_df['item']), axis=-1),
         ))
+
+    # Add tooltip
+    if currency == 'Birr':
+        waterfall_fig.update_traces(hovertemplate='%{customdata[1]}'+
+                                                '<br>%{customdata[0]:,.0f} Birr<extra></extra>'
+                                                )
+    elif currency == 'USD':
+        waterfall_fig.update_traces(hovertemplate='%{customdata[1]}'+
+                                                '<br>customdata[0]:,.0f} USD<extra></extra>'
+                                                )
+    else:
+        waterfall_fig.update_traces(hovertemplate='%{customdata[1]}'+
+                                                '<br>%{customdata[0]:,.0f} <extra></extra>'
+                                                )
 
     waterfall_fig.update_layout(clickmode='event+select', ### EVENT SELECT ??????
                                 plot_bgcolor="#ededed",)
@@ -584,8 +604,6 @@ def create_ahle_waterfall_ecs(input_df, name, measure, x, y):
 def create_ahle_bar_chart_ecs(input_df, name, x, y, x_var, currency):
     # Adding a column for colors
     input_df["Color"] = np.where(y<0, '#E84C3D', '#3598DB')
-
-    # input_df["Color"] = np.where(x.str.contains('Gross'), '#F7931D', input_df["Color"])
     input_df["Color"] = np.where((x_var=='Gross Margin (AHLE)') | (x_var=='Gross Margin'), '#F7931D', input_df["Color"])
 
     barchart_fig = go.Figure(go.Bar(
@@ -953,10 +971,7 @@ gbadsDash.layout = html.Div([
         #             html.H5("Display AHLE for..."),
         #             dcc.RadioItems(id='select-graph-ahle-ecs',
         #                           inline=True,                  # True: arrange buttons horizontally
-        #                           inputStyle={
-        #                               "margin-right":"2px",     # This pulls the words off of the button
-        #                               "margin-left":"10px",     # Space between buttons if inline=True
-        #                               },
+        #                           inputStyle=Radio_input_style
         #                           ),
         #             # Text underneath
         #             html.P("Estimates over time or for any year other than 2021 are currently placeholders" ,style={'font-style':'italic'}),
@@ -975,10 +990,7 @@ gbadsDash.layout = html.Div([
         #             html.H5("AHLE Geographic Scope"),
         #             dcc.RadioItems(id='select-geo-view-ecs',
         #                           inline=True,                  # True: arrange buttons horizontally
-        #                           inputStyle={
-        #                               "margin-right":"2px",     # This pulls the words off of the button
-        #                               "margin-left":"10px",     # Space between buttons if inline=True
-        #                               },
+        #                           inputStyle=Radio_input_style
         #                           ),
         #             # Text underneath
         #             html.P("Subnational estimates are currently only available for cattle for 2021" ,style={'font-style':'italic'}),
@@ -1074,8 +1086,7 @@ gbadsDash.layout = html.Div([
         #                             dcc.RadioItems(id='select-improve-ecs',
         #                                           options=ecs_improve_options,
         #                                           value= "25%",
-        #                                           inputStyle={"margin-right": "2px", # This pulls the words off of the button
-        #                                                       "margin-left": "10px"},
+        #                                           inputStyle=Radio_input_style
         #                                           ),
         #                             ]),
         #                         ]),     ## END OF ROW ##
@@ -1227,7 +1238,7 @@ gbadsDash.layout = html.Div([
 
 
         #### AHLE V2
-        dbc.Tab(label="AHLE v2",
+        dbc.Tab(label="AHLE",
                 tabClassName="flex-grow-1 text-center",
                     tab_style = tab_style,
                     style = {"height":"100vh",
@@ -1282,10 +1293,7 @@ gbadsDash.layout = html.Div([
                         html.H5("View AHLE as...", style=control_heading_style),
                         dcc.RadioItems(id='select-graph-ahle-ecs',
                                       inline=True,                  # True: arrange buttons horizontally
-                                      inputStyle={
-                                          "margin-right":"2px",     # This pulls the words off of the button
-                                          "margin-left":"10px",     # Space between buttons if inline=True
-                                          },
+                                      inputStyle=Radio_input_style,
                                       ),
                         # Text underneath
                         html.P("Estimates over time or for any year other than 2021 are currently placeholders" ,style={'font-style':'italic'}),
@@ -1305,10 +1313,7 @@ gbadsDash.layout = html.Div([
                         html.H5("AHLE Geographic Scope", style=control_heading_style),
                         dcc.RadioItems(id='select-geo-view-ecs',
                                       inline=True,                  # True: arrange buttons horizontally
-                                      inputStyle={
-                                          "margin-right":"2px",     # This pulls the words off of the button
-                                          "margin-left":"10px",     # Space between buttons if inline=True
-                                          },
+                                      inputStyle=Radio_input_style,
                                       ),
                         # Text underneath
                         html.P("Subnational estimates are currently only available for cattle for 2021" ,style={'font-style':'italic'}),
@@ -1393,8 +1398,7 @@ gbadsDash.layout = html.Div([
                     #                     dcc.RadioItems(id='select-improve-ecs',
                     #                                   options=ecs_improve_options,
                     #                                   value= "25%",
-                    #                                   inputStyle={"margin-right": "2px", # This pulls the words off of the button
-                    #                                               "margin-left": "10px"},
+                    #                                   inputStyle=Radio_input_style
                     #                                   ),
                     #                     ]),
                     #                 ]),     ## END OF ROW ##
@@ -1470,8 +1474,7 @@ gbadsDash.layout = html.Div([
                                          dcc.RadioItems(id='select-improve-ecs',
                                                        options=ecs_improve_options,
                                                        value= "25%",
-                                                       inputStyle={"margin-right": "2px", # This pulls the words off of the button
-                                                                   "margin-left": "10px"},
+                                                       inputStyle=Radio_input_style,
                                                        ),
                                          ]),
                                      ]),     ## END OF ROW ##
@@ -1579,8 +1582,7 @@ gbadsDash.layout = html.Div([
                                     dcc.RadioItems(id='select-attr-display-ecs',
                                                    options=esc_attr_display_options,
                                                    value='Tree Map',
-                                                   inputStyle={"margin-right": "2px", # This pulls the words off of the button
-                                                               "margin-left": "10px"},
+                                                   inputStyle=Radio_input_style,
                                                    ),
 
                                     html.Label(["NOTE: this is shown for species groups (cattle, all small ruminants, or all poultry) rather than for individual species."] ,style={"font-style":"italic"}),
@@ -1730,8 +1732,7 @@ gbadsDash.layout = html.Div([
                             dcc.RadioItems(id='select-map-denominator-ecs',
                                           options=ecs_map_denominator_options,
                                           value= "Per kg biomass",
-                                          inputStyle={"margin-right": "2px", # This pulls the words off of the button
-                                                      "margin-left": "10px"},
+                                          inputStyle=Radio_input_style,
                                           ),
                             ]),
                         ]), # END OF MAP CONTROLS ROW
@@ -1920,7 +1921,7 @@ gbadsDash.layout = html.Div([
         #                   'background-color': '#2DCC70',
         #                   'border-radius': '20px',}),
 
-        #  ],justify='evenly'),
+        #   ],justify='evenly'),
 
         # html.Br(),
 
@@ -2342,7 +2343,7 @@ def update_item_dropdown_ecs(graph, species):
     display_style = {'display': 'block'}
 
     # Hide controls if Bar selected
-    if graph == 'Bar':
+    if graph == 'Bar' or graph == 'Cumulative':
         for d in options:
             d['disabled']=True
         display_style = {'display': 'none'}
@@ -2451,7 +2452,7 @@ def update_footnote(graph):
 #     ClientsideFunction(namespace="clientside", function_name="make_draggable"),
 #     Output("drag_container0", "data-drag"),
 #     [Input("drag_container2", "id"),
-#      Input("drag_container", "id")]
+#       Input("drag_container", "id")]
 # )
 
 # ------------------------------------------------------------------------------
@@ -3198,11 +3199,6 @@ def update_ahle_value_and_cost_viz_ecs(
                     )
                 )
 
-                # ecs_waterfall_fig.update_layout(
-                #     waterfallgroupgap = 0.5,
-                #     # scattermode="group",
-                #     # scattergap=0.75
-                #     )
 
             # elif compare == 'Zero Mortality':
             #     y = prep_df['mean_mortality_zero']
@@ -3409,10 +3405,6 @@ def update_ahle_value_and_cost_viz_ecs(
                     )
                 )
 
-                # ecs_waterfall_fig.update_layout(
-                #     waterfallgroupgap = 0.5,
-                #     )
-
             # Add title
             ecs_waterfall_fig.update_layout(
                 # title_text=f'{reg_title} Values and Costs | {species}, {prodsys} <br><sup>Current vs. {compare} scenario for {agesex}, {selected_year}</sup><br>',
@@ -3420,11 +3412,6 @@ def update_ahle_value_and_cost_viz_ecs(
                 yaxis_title=display_currency,
                 font_size=15,
                 margin=dict(t=100),
-                # legend=dict(orientation="v",
-                #             xanchor="right",
-                #             x=1,
-                #             yanchor="bottom",
-                #             y=1.02,)
                 )
 
         # Add tooltip
@@ -4209,12 +4196,20 @@ def update_ahle_chart_ecs(
 
             # Create graph
             name = 'Difference'
-            ecs_waterfall_fig = create_ahle_waterfall_ecs(prep_df, name, measure, x, y)
+            ecs_waterfall_fig = create_ahle_waterfall_ecs(prep_df, name, measure, x, y, currency)
 
             # Add error bars
             # Reset indicies
             x = x.reset_index(drop=True)
             y = y.reset_index(drop=True)
+
+			# Set hover template for error bars based on currency
+            if currency == 'Birr':
+                hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} Birr <extra></extra>'
+            elif currency == 'USD':
+                hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} USD <extra></extra>'
+            else:
+                hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} <extra></extra>'
 
             # Scale standard deviation to achieve 95% confidence
             stdev = 1.96 * stdev    # Simulation results are Normally distributed
@@ -4233,13 +4228,15 @@ def update_ahle_chart_ecs(
                      x=x,
                      y=y_error_sum,
                      marker=dict(color='black'),
-                     customdata=np.stack((y, prep_df['item']), axis=-1),
+                     customdata=np.stack((y, prep_df['item'], stdev), axis=-1),
                      error_y=dict(
                         type='data',
                         array=stdev
                         ),
                      mode="markers",
-                     name='95% Confidence'
+					 hoverinfo='none',
+                     name='95% Confidence',
+					 hovertemplate=hovertemplate_error
                 ),
             )
             # Add title
@@ -4259,11 +4256,19 @@ def update_ahle_chart_ecs(
                 x_len = np.arange(1,len(x)+1,1)
 
                 # Create graph
-                ecs_waterfall_fig = create_ahle_waterfall_ecs(prep_df, name, measure, x_len-.3, y)
+                ecs_waterfall_fig = create_ahle_waterfall_ecs(prep_df, name, measure, x_len-.3, y, currency)
                 # Add error bars
                 # Reset indicies
                 x = x.reset_index(drop=True)
                 y = y.reset_index(drop=True)
+
+				# Set hover template for error bars based on currency
+                if currency == 'Birr':
+                    hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} Birr <extra></extra>'
+                elif currency == 'USD':
+                    hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} USD <extra></extra>'
+                else:
+                    hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} <extra></extra>'
 
                 # Scale standard deviation to achieve 95% confidence
                 stdev = 1.96 * stdev    # Simulation results are Normally distributed
@@ -4282,18 +4287,30 @@ def update_ahle_chart_ecs(
                          x=x_len-.3,
                          y=y_error_sum,
                          marker=dict(color='black'),
-                         customdata=np.stack((y, prep_df['item']), axis=-1),
+                         customdata=np.stack((y, prep_df['item'], stdev), axis=-1),
                          error_y=dict(
                             type='data',
                             array=stdev
                             ),
                          mode="markers",
-                         showlegend=False
+                         showlegend=False,
+						 hovertemplate=hovertemplate_error
                     ),
                 )
 
                 # Add current with lag
                 y = prep_df['mean_current']
+				# Set hover template for bars based on currency
+                if currency == 'Birr':
+                    hovertemplate_bar=('%{customdata[1]}' +
+                                      '<br>%{customdata[0]:,.0f} Birr<extra></extra>')
+                elif currency == 'USD':
+                    hovertemplate_bar=('%{customdata[1]}' +
+                                      '<br>%{customdata[0]:,.0f} USD<extra></extra>')
+                else:
+                    hovertemplate_bar=('%{customdata[1]}' +
+                                      '<br>%{customdata[0]:,.0f} <extra></extra>')
+
                 ecs_waterfall_fig.add_trace(go.Waterfall(
                     name = 'Current (outline)',
                     measure = measure,
@@ -4304,6 +4321,7 @@ def update_ahle_chart_ecs(
                     totals = {"marker":{"color":"white", "line":{"color":"#F7931D", "width":3}}},
                     connector = {"line":{"dash":"dot"}},
                     customdata=np.stack((y, prep_df['item']), axis=-1),
+					hovertemplate=hovertemplate_bar
                     ))
                 # Add error bars
                 # Reset indicies
@@ -4325,13 +4343,14 @@ def update_ahle_chart_ecs(
                          x=x_len+.3,
                          y=y_error_sum,
                          marker=dict(color='black'),
-                         customdata=np.stack((y, prep_df['item']), axis=-1),
+                         customdata=np.stack((y, prep_df['item'], prep_df['stdev_current']), axis=-1),
                          error_y=dict(
                              type='data',
                              array=prep_df['stdev_current']
                              ),
                          mode="markers",
-                         name='95% Confidence'
+                         name='95% Confidence',
+						 hovertemplate=hovertemplate_error
                     ),
                 )
                 ecs_waterfall_fig.update_layout(
@@ -4342,12 +4361,6 @@ def update_ahle_chart_ecs(
                     )
                 )
 
-                # ecs_waterfall_fig.update_layout(
-                #     waterfallgroupgap = 0.5,
-                #     # scattermode="group",
-                #     # scattergap=0.75
-                #     )
-
             # elif compare == 'Zero Mortality':
             #     y = prep_df['mean_mortality_zero']
             #     stdev = prep_df['stdev_mortality_zero']
@@ -4356,7 +4369,7 @@ def update_ahle_chart_ecs(
             #     x_len = np.arange(1,len(x)+1,1)
 
             #     # Create graph
-            #     ecs_waterfall_fig = create_ahle_waterfall_ecs(prep_df, name, measure, x_len-.3, y)
+            #     ecs_waterfall_fig = create_ahle_waterfall_ecs(prep_df, name, measure, x_len-.3, y, currency)
             #     # Add error bars
             #     # Reset indicies
             #     x = x.reset_index(drop=True)
@@ -4439,9 +4452,6 @@ def update_ahle_chart_ecs(
             #         )
             #     )
 
-            #     # ecs_waterfall_fig.update_layout(
-            #     #     waterfallgroupgap = 0.5,
-            #     #     )
 
             else:
                 if impvmnt_factor == 'Mortality' and impvmnt_value == '25%':
@@ -4470,11 +4480,19 @@ def update_ahle_chart_ecs(
                 x_len = np.arange(1,len(x)+1,1)
 
                 # Create graph
-                ecs_waterfall_fig = create_ahle_waterfall_ecs(prep_df, name, measure, x_len-.3, y)
+                ecs_waterfall_fig = create_ahle_waterfall_ecs(prep_df, name, measure, x_len-.3, y, currency)
                 # Add error bars
                 # Reset indicies
                 x = x.reset_index(drop=True)
                 y = y.reset_index(drop=True)
+
+				# Set hover template for error bars based on currency
+                if currency == 'Birr':
+                    hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} Birr <extra></extra>'
+                elif currency == 'USD':
+                    hovertemplate_error='95% CI: +- %customdata[2]:,.0f} USD <extra></extra>'
+                else:
+                    hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} <extra></extra>'
 
                 # Scale standard deviation to achieve 95% confidence
                 stdev = 1.96 * stdev    # Simulation results are Normally distributed
@@ -4493,13 +4511,14 @@ def update_ahle_chart_ecs(
                          x=x_len-.3,
                          y=y_error_sum,
                          marker=dict(color='black'),
-                         customdata=np.stack((y, prep_df['item']), axis=-1),
+                         customdata=np.stack((y, prep_df['item'], stdev), axis=-1),
                          error_y=dict(
                             type='data',
                             array=stdev
                             ),
                          mode="markers",
-                         showlegend=False
+                         showlegend=False,
+						 hovertemplate=hovertemplate_error
                     ),
                 )
 
@@ -4535,13 +4554,14 @@ def update_ahle_chart_ecs(
                          x=x_len+.3,
                          y=y_error_sum,
                          marker=dict(color='black'),
-                         customdata=np.stack((y, prep_df['item']), axis=-1),
+                         customdata=np.stack((y, prep_df['item'], prep_df['stdev_current']), axis=-1),
                          error_y=dict(
                             type='data',
                             array=prep_df['stdev_current']
                             ),
                          mode="markers",
-                         name='95% Confidence'
+                         name='95% Confidence',
+						 hovertemplate=hovertemplate_error
                     ),
                 )
 
@@ -4553,10 +4573,6 @@ def update_ahle_chart_ecs(
                     )
                 )
 
-                # ecs_waterfall_fig.update_layout(
-                #     waterfallgroupgap = 0.5,
-                #     )
-
             # Add title
             ecs_waterfall_fig.update_layout(
                 # title_text=f'{reg_title} Values and Costs | {species}, {prodsys} <br><sup>Current vs. {compare} scenario for {agesex}, {selected_year}</sup><br>',
@@ -4564,29 +4580,7 @@ def update_ahle_chart_ecs(
                 yaxis_title=display_currency,
                 font_size=15,
                 margin=dict(t=100),
-                # legend=dict(orientation="v",
-                #             xanchor="right",
-                #             x=1,
-                #             yanchor="bottom",
-                #             y=1.02,)
                 )
-
-        # Add tooltip
-        if currency == 'Birr':
-            ecs_waterfall_fig.update_traces(hovertemplate='Category: %{customdata[1]}'+
-                                            '<br>Value: %{customdata[0]:,.0f} Birr<extra></extra>'+
-                                            '<br>Cumulative Value: %{y:,.0f} Birr'
-                                            )
-        elif currency == 'USD':
-            ecs_waterfall_fig.update_traces(hovertemplate='Category: %{customdata[1]}'+
-                                            '<br>Value: %{customdata[0]:,.0f} USD<extra></extra>'+
-                                            '<br>Cumulative Value: %{y:,.0f} USD'
-                                            )
-        else:
-            ecs_waterfall_fig.update_traces(hovertemplate='Category: %{customdata[1]}'+
-                                            '<br>Value: %{customdata[0]:,.0f} <extra></extra>'+
-                                            '<br>Cumulative Value: %{y:,.0f} '
-                                            )
 
     return ecs_waterfall_fig
 
