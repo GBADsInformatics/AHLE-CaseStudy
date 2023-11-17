@@ -2035,7 +2035,7 @@ def update_year_select_ecs(graph, species):
         value = year_options.min()
     # Other years only available for Cattle
     # UPDATE: Have placeholder values for all species and years
-    elif graph == 'Single Year':
+    elif graph == 'Bar' or graph == 'Cumulative':
         dropdown_title = 'Year'
         value = year_options.max()
     else:
@@ -2064,7 +2064,7 @@ def update_end_year_select_ecs(graph, species):
         title_display_style = {'display': 'block'}
         dropdown_display_style = {'display': 'block'}
     # Hide controls if Single Year selected
-    elif graph == 'Single Year':
+    elif graph == 'Bar' or graph == 'Cumulative':
         dropdown_title = ''
         value = None
         for d in year_options_str:
