@@ -1956,10 +1956,7 @@ gbadsDash.layout = html.Div([
         ### END OF TABS ###
         ],style={'margin-right':'10px',
                  'margin-left': '10px'}, )
-
-        ])
-
-
+    ])
 
 #%% 5. CALLBACKS
 # This section does the interactivity work with the web page
@@ -1981,7 +1978,7 @@ gbadsDash.layout = html.Div([
     )
 def update_dashboard_country_title(country):
 
-    return f'Burden of Disease in {country}'
+    return f'Burden of Animal Disease in {country}'
 
 # Update production system options based on species
 @gbadsDash.callback(
@@ -2049,11 +2046,13 @@ def update_year_select_ecs(graph, species):
     Output('select-end-year-ecs','options'),
     Output('select-end-year-ecs','value'),
     Output('select-end-year-ecs','style'),
+    Input('select-year-ecs','value'),
     Input('select-graph-ahle-ecs','value'),
     Input('select-species-ecs','value'),
     )
-def update_end_year_select_ecs(graph, species):
-    year_options = ecs_ahle_summary['year'].unique()
+def update_end_year_select_ecs(start_year, graph, species):
+    # Must be greater than or equal to start_year
+    year_options = ecs_ahle_summary.query(f'year >= {start_year}')['year'].unique()
     year_options_str = []
     for i in np.sort(year_options):
         str(year_options_str.append({'label':i,'value':(i)}))
