@@ -354,8 +354,9 @@ for i in ecs_ahle_summary.query("region != 'National'").region.unique():
 
 # Display
 ecs_display_options = [{'label': i, 'value': i, 'disabled': False} for i in ["Side by Side",
-                                                                             "Difference",
+                                                                              "Difference",
                                                                             ]]
+
 # Item
 
 # Compare
@@ -1236,6 +1237,19 @@ gbadsDash.layout = html.Div([
         #     ### END OF AHLE
         #     ]),
 
+        #### USER GUIDE TAB
+        dbc.Tab(label="User Guide & References",
+                tabClassName="flex-grow-1 text-center",
+                    tab_style = tab_style,
+                    style = {"height":"100vh",
+                        },
+                children =[
+            html.Iframe(src="assets/GBADs_Documentation/_build/html/index.html", # this is for the jupyter books
+                        style={"width":"100%",
+                                "height":"3600px",   # Set large enough for your largest page and guide will use browser scroll bar. Otherwise, longer pages will get their own scroll bars.
+                                },)
+        ### END OF USER GUIDE TAB
+            ]),
 
         #### AHLE V2
         dbc.Tab(label="AHLE",
@@ -1343,79 +1357,6 @@ gbadsDash.layout = html.Div([
 
                 html.Hr(style={'margin-right':'10px'}),
 
-                dbc.Row([
-                    # #### -- AHLE Specific Controls
-                    # dbc.Col([
-                    #     dbc.Card([
-                    #         dbc.CardBody([
-                    #             html.H5("Animal Health Loss Envelope (AHLE)",
-                    #                     className="card-title",
-                    #                     style={"font-weight": "bold"}
-                    #                     ),
-                    #             html.Label(["Comparing current values, expenditures, and gross margin to the ideal. Note that the ideal values and expenditures describe the system in an ideal state (for example, zero health expenditure); they do not describe what is required to achieve that state."]),
-                    #             dbc.Row([
-                    #                 # Switch between side by side and difference
-                    #                 dbc.Col([
-                    #                     html.H6("Show current and ideal as..."),
-                    #                     dcc.RadioItems(id='select-display-ecs',
-                    #                                   options=ecs_display_options,
-                    #                                   value='Side by Side',
-                    #                                   labelStyle={'display': 'block'},
-                    #                                   inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
-                    #                                   ),
-                    #                     html.Label(["Difference: show a single bar for each item representing the difference between the current and ideal values"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
-                    #                     html.Label(["Side by Side: show two bars for each item, one for current and another for the ideal value"] ,style={'font-style':'italic'}),
-                    #                     ]),
-
-                    #                 # Compare
-                    #                 dbc.Col([
-                    #                     html.H6("Compare current to...", id='select-compare-ecs-title'),
-                    #                     dcc.RadioItems(id='select-compare-ecs',
-                    #                                   options=ecs_compare_options_limited,
-                    #                                   value='Ideal',
-                    #                                   labelStyle={'display': 'block'},
-                    #                                   inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
-                    #                                   ),
-                    #                     html.Label(["Ideal: zero mortality and ideal growth and production rates"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
-                    #                     # html.Label(["Zero Mortality: zero mortality but growth and production rates at current levels"] ,style={'font-style':'italic'}),
-                    #                     ]),
-
-                    #             ]), # END OF ROW
-                    #             dbc.Row([
-                    #                 dbc.Col([
-                    #                     html.H6("Item", id='select-item-ecs-title'),
-                    #                     dcc.Dropdown(id='select-item-ecs',
-                    #                                 value='Gross Margin',
-                    #                                 clearable = False,
-                    #                                 ),
-                    #                     ]),
-
-                    #                 # Factor dropdown
-                    #                 dbc.Col([
-                    #                     html.H6("Improvement Factor", id='select-factor-ecs-title'),
-                    #                     dcc.Dropdown(id='select-factor-ecs',
-                    #                                   options=ecs_factor_options,
-                    #                                   value='Mortality',
-                    #                                   clearable = True,
-                    #                                   ),
-                    #                       ],width=4,
-                    #                     ),
-
-                    #                 # Reduction
-                    #                 dbc.Col([
-                    #                     html.H6("Improvement Amount", id='select-improve-ecs-title'),
-                    #                     dcc.RadioItems(id='select-improve-ecs',
-                    #                                   options=ecs_improve_options,
-                    #                                   value= "25%",
-                    #                                   inputStyle=Radio_input_style
-                    #                                   ),
-                    #                     ]),
-                    #                 ]),     ## END OF ROW ##
-                    #             ]),    # END OF CARD BODY
-                    #         ], color='#F2F2F2'),    # END OF CARD
-                    #     ]),
-
-                    ], justify='evenly'),   # END OF Controls Row
                 html.Br(),
 
                 #### -- BAR CHART AND CONTROLS
@@ -1432,7 +1373,7 @@ gbadsDash.layout = html.Div([
                                  dbc.Row([
                                      # Switch between side by side and difference
                                      dbc.Col([
-                                         html.H6("Show current and ideal as...", style=control_heading_style),
+                                         html.H6(id='select-display-ecs-title', style=control_heading_style),
                                          dcc.RadioItems(id='select-display-ecs',
                                                        options=ecs_display_options,
                                                        value='Side by Side',
@@ -1938,20 +1879,6 @@ gbadsDash.layout = html.Div([
         # ### END OF TEST
         # ]),
 
-        #### USER GUIDE TAB
-        dbc.Tab(label="User Guide & References",
-                tabClassName="flex-grow-1 text-center",
-                    tab_style = tab_style,
-                    style = {"height":"100vh",
-                        },
-                children =[
-            html.Iframe(src="assets/GBADs_Documentation/_build/html/index.html", # this is for the jupyter books
-                        style={"width":"100%",
-                                "height":"3600px",   # Set large enough for your largest page and guide will use browser scroll bar. Otherwise, longer pages will get their own scroll bars.
-                                },)
-        ### END OF USER GUIDE TAB
-            ]),
-
 
         ### END OF TABS ###
         ],style={'margin-right':'10px',
@@ -1981,7 +1908,7 @@ gbadsDash.layout = html.Div([
     )
 def update_dashboard_country_title(country):
 
-    return f'Burden of Disease in {country}'
+    return f'Burden of Animal Disease in {country}'
 
 # Update production system options based on species
 @gbadsDash.callback(
@@ -2286,6 +2213,15 @@ def update_dd4_options_ecs(graph, top_lvl_hierarchy, dd1_hierarchy, dd2_hierarch
 
     return options, display_val_style, display_title_style
 
+
+# Update AHLE control title based on selected comparison value
+@gbadsDash.callback(
+    Output('select-display-ecs-title', 'children'),
+    Input('select-compare-ecs', 'value'),
+    )
+def update_ahle_control_title(compare):
+
+    return f'Show current and {compare.lower()} as...'
 
 @gbadsDash.callback(
     Output('select-region-ecs','style'),
