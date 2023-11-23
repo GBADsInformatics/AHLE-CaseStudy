@@ -1,7 +1,7 @@
 # Ethiopia Case Study
 
 <p>
-Population parameters for the Ethiopia case study are derived from CSA data. The data can be accessed at the following locations.
+Population parameters for the Ethiopia case study are derived from CSA data. These data can be accessed at the following locations.
 </p>
 
 | Species | URL |

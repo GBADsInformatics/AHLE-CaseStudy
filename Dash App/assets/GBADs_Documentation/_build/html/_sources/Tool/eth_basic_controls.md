@@ -18,6 +18,7 @@ Determines the species or species group to display.
 <p><b>Production System</b><br />
 Determines the production system to display. Options are dependent on the selected species:
 </p>
+
 | Species or group | Production Systems |
 | --- | --- |
 | Cattle | Crop livestock mixed, Pastoral, Periurban dairy |

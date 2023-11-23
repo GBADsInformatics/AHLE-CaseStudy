@@ -389,10 +389,10 @@ ecs_map_denominator_options = [{'label': i, 'value': i, 'disabled': False} for i
                                                                                      ]]
 
 # Attribution display options
-esc_attr_display_options = [{'label': i, 'value': i, 'disabled': False} for i in ['Tree Map',
-                                                                                 'Bar',
-                                                                                 ]]
-
+esc_attr_display_options = [
+    {'label': 'Single year (Tree Map)', 'value': 'Tree Map'}
+    ,{'label': 'Over time (Bar)', 'value': 'Bar'}
+    ]
 
 # =============================================================================
 #### Prep data for plots
@@ -906,8 +906,11 @@ gbadsDash.layout = html.Div([
                             the outputs, and the scenarios that allow us to aid decision makers with regard to \
                             animal health and production.'],
                            style={'textAlign': 'center'}
-                           )
-                    ],xs =12, sm=12, md=12, lg=9, xl=9)
+                           ),
+                    html.Label(id='population-dashboard-heading',
+                               style={'textAlign': 'center', 'font-style':'italic'}    # Centering not working?
+                               ),
+                    ], xs=12, sm=12, md=12, lg=9, xl=9)
         ### END OF LANDING PAGE TAB
          ], justify='center'),
 
@@ -1301,7 +1304,6 @@ gbadsDash.layout = html.Div([
 
                     # Year selector
                     dbc.Col([
-                        # html.H5("Year"),
                         html.H5(id='select-year-ecs-title'),
                         dcc.Dropdown(id='select-year-ecs',
                                      clearable = False,
@@ -1587,15 +1589,33 @@ gbadsDash.layout = html.Div([
                         dbc.Col([
                             dbc.Card([
                                 dbc.CardBody([
-                                    # Graph Display
-                                    html.H5("Visualization", style=control_heading_style),
-                                    dcc.RadioItems(id='select-attr-display-ecs',
-                                                   options=esc_attr_display_options,
-                                                   value='Tree Map',
-                                                   inputStyle=Radio_input_style,
-                                                   ),
+                                    dbc.Row([
+                                        dbc.Col([   # Graph Display
+                                            html.H5("Show attribution as...", style=control_heading_style),
+                                            dcc.RadioItems(id='select-attr-display-ecs',
+                                                           options=esc_attr_display_options,
+                                                           value='Tree Map',
+                                                           inline=True,                  # True: arrange buttons horizontally
+                                                           inputStyle=Radio_input_style,
+                                                           ),
+                                            ], width=3),
+                                        # Year selector
+                                        dbc.Col([
+                                            html.H5(id='select-year-ecs-attr-title'),
+                                            dcc.Dropdown(id='select-year-ecs-attr',
+                                                         clearable = False,
+                                                         ),
+                                            ], width=1),
 
-                                    html.Label(["NOTE: this is shown for species groups (cattle, all small ruminants, or all poultry) rather than for individual species."] ,style={"font-style":"italic"}),
+                                        # End year selector (only visible for over time display)
+                                        dbc.Col([
+                                            html.H5(id='select-end-year-ecs-attr-title'),
+                                            dcc.Dropdown(id='select-end-year-ecs-attr',
+                                                          clearable = False,
+                                                          ),
+                                            ], width=1),
+                                        ]),
+
                                     html.H5("Segment by...", style={'font-weight':"bold"}),
                                     dbc.Row([
                                         # Top Level
@@ -1941,17 +1961,17 @@ gbadsDash.layout = html.Div([
         #### USER GUIDE TAB
         dbc.Tab(label="User Guide & References",
                 tabClassName="flex-grow-1 text-center",
-                    tab_style = tab_style,
-                    style = {"height":"100vh",
+                tab_style = tab_style,
+                style = {"height":"100vh",
                         },
                 children =[
-            html.Iframe(src="assets/GBADs_Documentation/_build/html/index.html", # this is for the jupyter books
-                        style={"width":"100%",
-                                "height":"3600px",   # Set large enough for your largest page and guide will use browser scroll bar. Otherwise, longer pages will get their own scroll bars.
-                                },)
-        ### END OF USER GUIDE TAB
-            ]),
-
+                    html.Iframe(src="assets/GBADs_Documentation/_build/html/index.html", # this is for the jupyter books
+                                style={"width":"100%",
+                                       "height":"3600px",   # Set large enough for your largest page and guide will use browser scroll bar. Otherwise, longer pages will get their own scroll bars.
+                                       }
+                                    )
+                    ]
+            ), ### END OF USER GUIDE TAB
 
         ### END OF TABS ###
         ],style={'margin-right':'10px',
@@ -1977,8 +1997,25 @@ gbadsDash.layout = html.Div([
     Input('select-country-ahle', 'value'),
     )
 def update_dashboard_country_title(country):
-
     return f'Burden of Animal Disease in {country}'
+
+# Update population dashboard link based on selected country
+@gbadsDash.callback(
+    Output('population-dashboard-heading', 'children'),
+    Input('select-country-ahle', 'value'),
+    )
+def update_popln_dashboard_title(country):
+    text = [
+        "To view livestock populations by country, see the GBADs ",
+        html.A("population dashboard.", href='https://gbadske.org/dashboards/population/', target='_blank'),  # target='_blank' to open in a new tab
+        ]
+    if country == 'Ethiopia':
+        ethiopia_text = [
+            " To view by region within Ethiopia, see the GBADs ",
+            html.A("Ethiopia subnational population dashboard.", href='https://gbadske.org/dashboards/ethiopia-population/', target='_blank'),  # target='_blank' to open in a new tab
+            ]
+        text = text + ethiopia_text
+    return text
 
 # Update production system options based on species
 @gbadsDash.callback(
@@ -2037,6 +2074,7 @@ def update_year_select_ecs(graph, species):
         value = year_options.max()
     else:
         None
+
     return dropdown_title, year_options_str, value
 
 # End year selector (only available if over time display)
@@ -2064,6 +2102,65 @@ def update_end_year_select_ecs(start_year, graph, species):
         dropdown_display_style = {'display': 'block'}
     # Hide controls if Single Year selected
     elif graph == 'Bar' or graph == 'Cumulative':
+        dropdown_title = ''
+        value = None
+        for d in year_options_str:
+            d['disabled']=True
+        title_display_style = {'display': 'none'}
+        dropdown_display_style = {'display': 'none'}
+    else:
+        None
+
+    return dropdown_title, title_display_style, year_options_str, value, dropdown_display_style
+
+# Attribution year selector
+@gbadsDash.callback(
+    Output('select-year-ecs-attr-title','children'),
+    Output('select-year-ecs-attr','options'),
+    Output('select-year-ecs-attr','value'),
+    Input('select-attr-display-ecs','value'),
+    )
+def update_year_select_attr_ecs(graph):
+    year_options = ecs_ahle_summary['year'].unique()
+    year_options_str = []
+    for i in np.sort(year_options):
+        str(year_options_str.append({'label':i,'value':(i)}))
+
+    if graph == 'Bar':
+        dropdown_title = 'Start year'
+        value = year_options.min()
+    elif graph == 'Tree Map':
+        dropdown_title = 'Year'
+        value = year_options.max()
+    else:
+        None
+
+    return dropdown_title, year_options_str, value
+
+# End year selector (only available if over time display)
+@gbadsDash.callback(
+    Output('select-end-year-ecs-attr-title','children'),
+    Output('select-end-year-ecs-attr-title','style'),
+    Output('select-end-year-ecs-attr','options'),
+    Output('select-end-year-ecs-attr','value'),
+    Output('select-end-year-ecs-attr','style'),
+    Input('select-year-ecs-attr','value'),
+    Input('select-attr-display-ecs','value'),
+    )
+def update_end_year_select_attr_ecs(start_year, graph):
+    # Must be greater than or equal to start_year
+    year_options = ecs_ahle_summary.query(f'year >= {start_year}')['year'].unique()
+    year_options_str = []
+    for i in np.sort(year_options):
+        str(year_options_str.append({'label':i,'value':(i)}))
+
+    if graph == 'Bar':
+        dropdown_title = 'End year'
+        value = year_options.max()
+        title_display_style = {'display': 'block'}
+        dropdown_display_style = {'display': 'block'}
+    # Hide controls if Single Year selected
+    elif graph == 'Tree Map':
         dropdown_title = ''
         value = None
         for d in year_options_str:
@@ -4637,7 +4734,8 @@ def update_ahle_chart_ecs(
     Input('select-dd-3-attr-ecs','value'),
     Input('select-dd-4-attr-ecs','value'),
     Input('select-attr-display-ecs', 'value'),
-    Input('select-year-ecs', 'value'),
+    Input('select-year-ecs-attr', 'value'),
+    Input('select-end-year-ecs-attr', 'value'),
     Input('select-item-ecs', 'value'),
     Input('select-geo-view-ecs','value'),
     Input('select-region-ecs','value'),
@@ -4653,6 +4751,7 @@ def update_attr_treemap_ecs(
         dd4_hierarchy,
         graph_options,
         selected_year,
+        selected_end_year,
         selected_item,
         geo_view,
         region,
@@ -4667,7 +4766,7 @@ def update_attr_treemap_ecs(
     # else:
     #     input_df = input_df.query("region == @region")
     #     reg_title = region
-    # Nov. 2023: only showing national attribution results as regional results are out of date and cause missing values
+    # Nov. 2023: only showing national attribution results because regional results are out of date and cause missing values
     input_df = input_df.query("region == 'National'")
     reg_title = 'National'
 
@@ -4747,6 +4846,9 @@ def update_attr_treemap_ecs(
     # Create view over time
     # A stacked bar for each year, segmented by one of the hierarchy factors
     elif graph_options == "Bar":
+        # Year filter
+        input_df = input_df.query(f'year >= {selected_year}').query(f'year <= {selected_end_year}')
+
         segment_by = top_lvl_hierarchy   # For now, segment bars by selected top level component
 
         # Aggregate data to year and segment
@@ -4764,7 +4866,7 @@ def update_attr_treemap_ecs(
             font_size=15,
             margin=dict(t=100)
             )
-        ecs_treemap_fig.update_xaxes(title_text='')
+        ecs_treemap_fig.update_xaxes(title_text='', type='category')    # type='category' to avoid displaying decimal points
         if currency == 'Birr':
             ecs_treemap_fig.update_yaxes(title_text='Ethiopian Birr')
         elif currency == 'USD':
