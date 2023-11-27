@@ -1,4 +1,4 @@
-#%% About
+#%% ABOUT
 '''
 The University of Liverpool (UoL) has built R code to run the simulation
 compartmental model to estimate the production values and costs for different
@@ -12,7 +12,7 @@ This code does not need to be run if UoL has already run the simulations.
 IMPORTANT: before running this, set Python's working directory to the folder
 where this code is stored.
 '''
-#%% Packages and functions
+#%% PACKAGES AND FUNCTIONS
 
 import os                        # Operating system functions
 import subprocess                # For running command prompt or other programs
@@ -87,7 +87,7 @@ def timerstop():
       print(f"<{funcname}> Error: no start time defined. Call timerstart() first.")
    return None
 
-#%% Paths and variables
+#%% PATHS AND VARIABLES
 
 CURRENT_FOLDER = os.getcwd()
 PARENT_FOLDER = os.path.dirname(CURRENT_FOLDER)
@@ -107,7 +107,7 @@ r_executable = 'C:\\Program Files\\R\\R-4.3.1\\bin\\x64\\Rscript.exe'
 
 N_RUNS = '10000'   # String: number of simulation runs for each scenario
 
-#%% Small ruminants
+#%% SMALL RUMINANTS
 
 # Full path to the AHLE function in R
 r_script = os.path.join(ETHIOPIA_CODE_FOLDER ,'Run AHLE with control table_SMALLRUMINANTS.R')
@@ -195,7 +195,7 @@ timerstart()
 returncode_smallrum_bruc = run_cmd([r_executable ,r_script] + r_args ,SHOW_MAXLINES=999)
 timerstop()
 
-#%% Small Ruminants using Murdoch's updated function
+#%% SMALL RUMINANTS USING MURDOCH'S UPDATED FUNCTION
 '''
 August 2023: this is not needed because Murdoch is running the model with their
 updated function and uploading the outputs to Github.
@@ -206,7 +206,7 @@ run_cmd([r_executable ,r_script] ,SHOW_MAXLINES=999)
 
 # Now call the function and pass arguments
 
-#%% Cattle
+#%% CATTLE
 
 # Full path to the AHLE function in R
 r_script = os.path.join(ETHIOPIA_CODE_FOLDER ,'Run AHLE with control table_CATTLE.R')
@@ -383,7 +383,7 @@ for REGION in list_eth_regions:
 
     print(f"> Finished compartmental model for region {REGION}.")
 
-#%% Poultry
+#%% POULTRY
 
 # Full path to the AHLE function in R
 r_script = os.path.join(ETHIOPIA_CODE_FOLDER ,'Run AHLE with control table _ POULTRY.R')

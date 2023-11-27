@@ -134,7 +134,7 @@ ETHIOPIA_CODE_FOLDER = CURRENT_FOLDER
 ETHIOPIA_OUTPUT_FOLDER = os.path.join(PARENT_FOLDER ,'Program outputs')
 ETHIOPIA_DATA_FOLDER = os.path.join(PARENT_FOLDER ,'Data')
 
-DASH_DATA_FOLDER = os.path.join(GRANDPARENT_FOLDER, 'AHLE Dashboard' ,'Dash App' ,'data')
+DASH_DATA_FOLDER = os.path.join(GRANDPARENT_FOLDER ,'Dash App' ,'data')
 
 #%% READ DATA
 

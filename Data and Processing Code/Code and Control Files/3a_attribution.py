@@ -247,7 +247,7 @@ ETHIOPIA_CODE_FOLDER = CURRENT_FOLDER
 ETHIOPIA_OUTPUT_FOLDER = os.path.join(PARENT_FOLDER ,'Program outputs')
 ETHIOPIA_DATA_FOLDER = os.path.join(PARENT_FOLDER ,'Data')
 
-DASH_DATA_FOLDER = os.path.join(GRANDPARENT_FOLDER, 'AHLE Dashboard' ,'Dash App' ,'data')
+DASH_DATA_FOLDER = os.path.join(GRANDPARENT_FOLDER ,'Dash App' ,'data')
 
 # Full path to rscript.exe
 r_executable = 'C:\\Program Files\\R\\R-4.3.1\\bin\\x64\\Rscript.exe'
@@ -761,7 +761,7 @@ ahle_combo_forattr_tomerge.loc[_row_selection ,'group'] = \
 del ahle_combo_forattr_tomerge['age_group'] ,ahle_combo_forattr_tomerge['sex']
 
 # -----------------------------------------------------------------------------
-# Merge AHLE columns onto ahle_combo_withattr
+# Merge
 # -----------------------------------------------------------------------------
 merge_on = list(attr_byvars)
 merge_on.remove('age_group')
@@ -1024,13 +1024,57 @@ ahle_combo_attrmerged_stdev = ahle_combo_attrmerged_stdev.drop(columns=['attr_co
 # -----------------------------------------------------------------------------
 # Merge
 # -----------------------------------------------------------------------------
+merge_byvars = list(attr_byvars) + ['ahle_component' ,'cause' ,'disease']
 ahle_combo_attrmerged_m = pd.merge(
     left=ahle_combo_attrmerged_means
     ,right=ahle_combo_attrmerged_stdev
-    ,on=list(attr_byvars) + ['ahle_component' ,'cause' ,'disease']
+    ,on=merge_byvars
     ,how='left'
 )
 del ahle_combo_attrmerged_means ,ahle_combo_attrmerged_stdev
+
+ahle_combo_attrmerged_m['lower95'] = ahle_combo_attrmerged_m['mean'] - 1.96 * ahle_combo_attrmerged_m['sd']
+ahle_combo_attrmerged_m['upper95'] = ahle_combo_attrmerged_m['mean'] + 1.96 * ahle_combo_attrmerged_m['sd']
+
+# =============================================================================
+#### Add aggregate rows
+# =============================================================================
+agg_byvars = merge_byvars.copy()
+agg_byvars.remove('species')
+
+# Add variance column
+ahle_combo_attrmerged_m['var'] = ahle_combo_attrmerged_m['sd']**2
+
+# Create aggregate species rows
+ahle_combo_sum_species = ahle_combo_attrmerged_m.pivot_table(
+   index=agg_byvars
+   ,values=['mean' ,'var']
+   ,aggfunc=lambda x: x.mean() * x.count()  # Hack: sum is equal to zero if all values are missing. This will cause all missings to produce missing.
+).reset_index()
+ahle_combo_sum_species['species'] = 'All'
+
+# Concatenate onto original
+ahle_combo_attrmerged_m = pd.concat(
+    [ahle_combo_attrmerged_m ,ahle_combo_sum_species]
+    ,axis=0              # axis=0: concatenate rows (stack), axis=1: concatenate columns (merge)
+    ,join='outer'        # 'outer': keep all columns
+    ,ignore_index=True   # True: do not keep index values on concatenation axis
+)
+del ahle_combo_sum_species
+
+# De-Dup
+dupflag = ahle_combo_attrmerged_m.duplicated(
+	subset=merge_byvars
+	,keep='first'
+)
+print(f"> Dropping {dupflag.sum() :,} duplicate rows.")
+ahle_combo_attrmerged_m = ahle_combo_attrmerged_m[~ dupflag]
+
+# -----------------------------------------------------------------------------
+# Calculate SD and confidence intervals
+# -----------------------------------------------------------------------------
+ahle_combo_attrmerged_m['sd'] = np.sqrt(ahle_combo_attrmerged_m['var'])
+del ahle_combo_attrmerged_m['var']
 
 ahle_combo_attrmerged_m['lower95'] = ahle_combo_attrmerged_m['mean'] - 1.96 * ahle_combo_attrmerged_m['sd']
 ahle_combo_attrmerged_m['upper95'] = ahle_combo_attrmerged_m['mean'] + 1.96 * ahle_combo_attrmerged_m['sd']

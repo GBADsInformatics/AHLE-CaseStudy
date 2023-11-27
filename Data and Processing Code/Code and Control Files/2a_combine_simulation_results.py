@@ -115,7 +115,7 @@ MURDOCH_BASE_FOLDER = os.path.join(CURRENT_FOLDER ,'Disease specific attribution
 MURDOCH_SCENARIO_FOLDER = os.path.join(MURDOCH_BASE_FOLDER ,'scenarios')
 MURDOCH_OUTPUT_FOLDER = os.path.join(MURDOCH_BASE_FOLDER ,'output')
 
-DASH_DATA_FOLDER = os.path.join(GRANDPARENT_FOLDER, 'AHLE Dashboard' ,'Dash App' ,'data')
+DASH_DATA_FOLDER = os.path.join(GRANDPARENT_FOLDER ,'Dash App' ,'data')
 
 #%% COMBINE SCENARIO RESULT FILES
 '''

@@ -103,7 +103,7 @@ ETHIOPIA_CODE_FOLDER = CURRENT_FOLDER
 ETHIOPIA_OUTPUT_FOLDER = os.path.join(PARENT_FOLDER ,'Program outputs')
 ETHIOPIA_DATA_FOLDER = os.path.join(PARENT_FOLDER ,'Data')
 
-DASH_DATA_FOLDER = os.path.join(GRANDPARENT_FOLDER, 'AHLE Dashboard' ,'Dash App' ,'data')
+DASH_DATA_FOLDER = os.path.join(GRANDPARENT_FOLDER ,'Dash App' ,'data')
 
 #%% EXTERNAL DATA
 
@@ -321,7 +321,12 @@ ahle_combo_withagg = pd.concat(
 del ahle_combo_indiv ,ahle_combo_sum_groups ,ahle_combo_sum_sexes ,ahle_combo_sum_ages ,ahle_combo_overall
 
 # De-Dup
-ahle_combo_withagg = ahle_combo_withagg.drop_duplicates(subset=all_byvars ,keep='first')
+dupflag = ahle_combo_withagg.duplicated(
+	subset=all_byvars
+	,keep='first'
+)
+print(f"> Dropping {dupflag.sum() :,} duplicate rows.")
+ahle_combo_withagg = ahle_combo_withagg[~ dupflag]
 
 # =============================================================================
 #### Build aggregate species and production system groups
@@ -361,29 +366,45 @@ summarize_byvars = list(all_byvars)
 for i in agg_vars:
     summarize_byvars.remove(i)
 
-# All Small Ruminants
-ahle_combo_sum_species = ahle_combo_withagg.query("species.str.upper().isin(['SHEEP' ,'GOAT'])").pivot_table(
+# All species
+ahle_combo_sum_species = ahle_combo_withagg.pivot_table(
    index=summarize_byvars
    ,values=mean_cols + var_cols
    ,aggfunc=lambda x: x.mean() * x.count()  # Hack: sum is equal to zero if all values are missing. This will cause all missings to produce missing.
 ).reset_index()
-ahle_combo_sum_species['species'] = 'All Small Ruminants'
+ahle_combo_sum_species['species'] = 'All'
+
+# All Small Ruminants
+ahle_combo_sum_species2 = ahle_combo_withagg.query("species.str.upper().isin(['SHEEP' ,'GOAT'])").pivot_table(
+   index=summarize_byvars
+   ,values=mean_cols + var_cols
+   ,aggfunc=lambda x: x.mean() * x.count()  # Hack: sum is equal to zero if all values are missing. This will cause all missings to produce missing.
+).reset_index()
+ahle_combo_sum_species2['species'] = 'All Small Ruminants'
 
 # All poultry
-ahle_combo_sum_species2 = ahle_combo_withagg.query("species.str.contains('poultry' ,case=False ,na=False)").pivot_table(
+ahle_combo_sum_species3 = ahle_combo_withagg.query("species.str.contains('poultry' ,case=False ,na=False)").pivot_table(
    index=summarize_byvars
    ,values=mean_cols + var_cols
    ,aggfunc=lambda x: x.mean() * x.count()  # Hack: sum is equal to zero if all values are missing. This will cause all missings to produce missing.
 ).reset_index()
-ahle_combo_sum_species2['species'] = 'All Poultry'
+ahle_combo_sum_species3['species'] = 'All Poultry'
 
 ahle_combo_withagg = pd.concat(
-    [ahle_combo_withagg ,ahle_combo_sum_species ,ahle_combo_sum_species2]
+    [ahle_combo_withagg ,ahle_combo_sum_species ,ahle_combo_sum_species2 ,ahle_combo_sum_species3]
     ,axis=0              # axis=0: concatenate rows (stack), axis=1: concatenate columns (merge)
     ,join='outer'        # 'outer': keep all columns
     ,ignore_index=True   # True: do not keep index values on concatenation axis
 )
-del ahle_combo_sum_species ,ahle_combo_sum_species2
+del ahle_combo_sum_species ,ahle_combo_sum_species2 ,ahle_combo_sum_species3
+
+# De-Dup
+dupflag = ahle_combo_withagg.duplicated(
+	subset=all_byvars
+	,keep='first'
+)
+print(f"> Dropping {dupflag.sum() :,} duplicate rows.")
+ahle_combo_withagg = ahle_combo_withagg[~ dupflag]
 
 # =============================================================================
 #### Calculate standard deviations

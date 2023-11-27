@@ -301,13 +301,14 @@ ahle_case_study_country_options += [{'label': i, 'value': i, 'disabled': True} f
 # for i in np.sort(ecs_ahle_summary['species'].unique()):
 #     str(ecs_species_options.append({'label':i,'value':(i)}))
 # Specify the order of the species
-ecs_species_options = [{'label': i, 'value': i, 'disabled': False} for i in ["Cattle",
-                                                                             "All Small Ruminants",
+ecs_species_options = [{'label': i, 'value': i, 'disabled': False} for i in ["All",
+                                                                             "Cattle",
                                                                              "Goat",
                                                                              "Sheep",
-                                                                             "All Poultry",
+                                                                             "All Small Ruminants",
                                                                              "Poultry hybrid",
                                                                              "Poultry indigenous",
+                                                                             "All Poultry",
                                                                              ]]
 
 # Production system
@@ -1266,7 +1267,7 @@ gbadsDash.layout = html.Div([
                         html.H5("Species", style=control_heading_style),
                         dcc.Dropdown(id='select-species-ecs',
                                     options=ecs_species_options,
-                                    value='Cattle',
+                                    value='All',
                                     clearable = False,
                                     ),
                         ]),
@@ -1975,7 +1976,7 @@ gbadsDash.layout = html.Div([
 
         ### END OF TABS ###
         ],style={'margin-right':'10px',
-                 'margin-left': '10px'}, )
+                 'margin-left': '10px'})
     ])
 
 #%% 5. CALLBACKS
@@ -2427,7 +2428,7 @@ def update_ahle_graph_controls(graph, geo_view):
     )
 def update_item_dropdown_ecs(graph, species):
     # Filters Items to display based on species selected
-    if species == "Cattle":     # Cattle have draught
+    if species.upper() == "CATTLE":     # Cattle have draught
         item_options = ('Gross Margin',
                         'Value of Offtake',
                         'Value of Herd Increase',
@@ -2455,7 +2456,7 @@ def update_item_dropdown_ecs(graph, species):
                         # 'Expenditure on Housing',
                         # 'Expenditure on Capital',
                         )
-    else:
+    elif species.upper() in ['GOAT', 'SHEEP', 'ALL SMALL RUMINANTS']:   # Small Ruminants
         item_options = ('Gross Margin',
                         'Value of Offtake',
                         'Value of Herd Increase',
@@ -2469,6 +2470,24 @@ def update_item_dropdown_ecs(graph, species):
                         # 'Expenditure on Housing',
                         # 'Expenditure on Capital',
                         )
+    else:   # All species
+        item_options = ('Gross Margin',
+                        'Value of Offtake',
+                        'Value of Herd Increase',
+                        'Value of Draught',
+                        'Value of Milk',
+                        'Value of Manure',
+                        'Value of Hides',
+                        'Value of Eggs consumed',
+                        'Value of Eggs sold',
+                        'Expenditure on Feed',
+                        'Expenditure on Labour',
+                        'Expenditure on Health',
+                        # May 2023: Wudu does not want housing and captial expenses in waterfall chart
+                        # 'Expenditure on Housing',
+                        # 'Expenditure on Capital',
+                        )
+
     # Build dictionary
     options=[]
     for i in item_options:
@@ -2535,12 +2554,22 @@ def update_map_display_options_ecs(species):
                         'Value of Eggs consumed',
                         'Value of Eggs sold',
                         )
-    else:
+    elif species.upper() in ['GOAT', 'SHEEP', 'ALL SMALL RUMINANTS']:   # Small Ruminants
         item_options = ('Value of Offtake',
                         'Value of Herd Increase',
                         'Value of Milk',
                         'Value of Manure',
                         'Value of Hides',
+                        )
+    else:   # All species
+        item_options = ('Value of Offtake',
+                        'Value of Herd Increase',
+                        'Value of draught',
+                        'Value of Milk',
+                        'Value of Manure',
+                        'Value of Hides',
+                        'Value of Eggs consumed',
+                        'Value of Eggs sold',
                         )
     # Build dictionary
     options=[]
@@ -2810,6 +2839,9 @@ def update_ecs_attr_expert_data(species):
     elif species in ["All Poultry", "Poultry hybrid", "Poultry indigenous"]:
         input_df = ecs_expertattr_poultry
         spec_label = "Poultry"
+    else:   # All species does not have a dedicated expert opinion file. Pick one.
+        input_df = ecs_expertattr_smallrum
+        spec_label = "Small Ruminants"
 
     # Format numbers
     for COL in ['min' ,'avg' ,'max']:
@@ -2890,6 +2922,12 @@ def update_ahle_value_and_cost_viz_ecs(
 
     # Species filter
     input_df = input_df.loc[(input_df['species'] == species)]
+
+    # Species label
+    if species == 'All':
+        species_label = 'All species'
+    else:
+        species_label = species
 
     # Production System filter
     input_df=input_df.loc[(input_df['production_system'] == prodsys)]
@@ -3036,7 +3074,7 @@ def update_ahle_value_and_cost_viz_ecs(
                 )
             ecs_waterfall_fig = make_subplots()
             ecs_waterfall_fig.add_trace(plot_ahle_value)
-            ecs_waterfall_fig.update_layout(title=f'{reg_title} {selected_item} Over Time | {species}, {prodsys} <br><sup>Difference between Current and {compare} scenario</sup><br>',
+            ecs_waterfall_fig.update_layout(title=f'{reg_title} {selected_item} Over Time | {species_label}, {prodsys} <br><sup>Difference between Current and {compare} scenario</sup><br>',
                                             yaxis_title=display_currency,
                                             font_size=15,
                                             plot_bgcolor="#ededed",)
@@ -3105,7 +3143,7 @@ def update_ahle_value_and_cost_viz_ecs(
             ecs_waterfall_fig = make_subplots()
             ecs_waterfall_fig.add_trace(plot_compare_value)
             ecs_waterfall_fig.add_trace(plot_current_value)
-            ecs_waterfall_fig.update_layout(title=f'{reg_title} {selected_item} Over Time | {species}, {prodsys} <br><sup>Current and {compare} scenario</sup><br>',
+            ecs_waterfall_fig.update_layout(title=f'{reg_title} {selected_item} Over Time | {species_label}, {prodsys} <br><sup>Current and {compare} scenario</sup><br>',
                                             yaxis_title=display_currency,
                                             font_size=15,
                                             plot_bgcolor="#ededed",)
@@ -3143,7 +3181,7 @@ def update_ahle_value_and_cost_viz_ecs(
                                      # 'Expenditure on Housing',
                                      # 'Expenditure on Capital',
                                      'Gross Margin')
-        else:   # Goats, Sheep, All Small Ruminants
+        elif species.upper() in ['GOAT', 'SHEEP', 'ALL SMALL RUMINANTS']:   # Small Ruminants
             waterfall_plot_items = ('Value of Offtake',
                                      'Value of Herd Increase',
                                      'Value of Milk',
@@ -3156,6 +3194,23 @@ def update_ahle_value_and_cost_viz_ecs(
                                      # 'Expenditure on Housing',
                                      # 'Expenditure on Capital',
                                      'Gross Margin')
+        else:   # All species
+            waterfall_plot_items = ('Value of Offtake',
+                                     'Value of Herd Increase',
+                                     'Value of Draught',
+                                     'Value of Milk',
+                                     'Value of Manure',
+                                     'Value of Hides',
+                                     'Value of Eggs consumed',
+                                     'Value of Eggs sold',
+                                     'Expenditure on Feed',
+                                     'Expenditure on Labour',
+                                     'Expenditure on Health',
+                                     # May 2023: Wudu does not want housing and captial expenses in waterfall chart
+                                     # 'Expenditure on Housing',
+                                     # 'Expenditure on Capital',
+                                     'Gross Margin')
+
         waterfall_plot_items_upper = [i.upper() for i in waterfall_plot_items]
         prep_df = prep_df.loc[prep_df['item'].str.upper().isin(waterfall_plot_items_upper)]
 
@@ -3236,8 +3291,8 @@ def update_ahle_value_and_cost_viz_ecs(
             )
             # Add title
             ecs_waterfall_fig.update_layout(
-                # title_text=f'{reg_title} Animal Health Loss Envelope | {species}, {prodsys} <br><sup>Difference between current and {compare} values for {agesex}, {selected_year}</sup><br>',
-                title_text=f'{reg_title} Animal Health Loss Envelope | {species}, {prodsys} <br><sup>Difference between current and {compare}, {selected_year}</sup><br>',
+                # title_text=f'{reg_title} Animal Health Loss Envelope | {species_label}, {prodsys} <br><sup>Difference between current and {compare} values for {agesex}, {selected_year}</sup><br>',
+                title_text=f'{reg_title} Animal Health Loss Envelope | {species_label}, {prodsys} <br><sup>Difference between current and {compare}, {selected_year}</sup><br>',
                 yaxis_title=display_currency,
                 font_size=15,
                 margin=dict(t=100)
@@ -3542,8 +3597,8 @@ def update_ahle_value_and_cost_viz_ecs(
 
             # Add title
             ecs_waterfall_fig.update_layout(
-                # title_text=f'{reg_title} Values and Costs | {species}, {prodsys} <br><sup>Current vs. {compare} scenario for {agesex}, {selected_year}</sup><br>',
-                title_text=f'{reg_title} Values and Costs | {species}, {prodsys} <br><sup>Current vs. {compare} scenario, {selected_year}</sup><br>',
+                # title_text=f'{reg_title} Values and Costs | {species_label}, {prodsys} <br><sup>Current vs. {compare} scenario for {agesex}, {selected_year}</sup><br>',
+                title_text=f'{reg_title} Values and Costs | {species_label}, {prodsys} <br><sup>Current vs. {compare} scenario, {selected_year}</sup><br>',
                 yaxis_title=display_currency,
                 font_size=15,
                 margin=dict(t=100),
@@ -3608,6 +3663,12 @@ def update_ahle_chart_ecs(
 
     # Species filter
     input_df = input_df.loc[(input_df['species'] == species)]
+
+    # Species label
+    if species == 'All':
+        species_label = 'All species'
+    else:
+        species_label = species
 
     # Production System filter
     input_df=input_df.loc[(input_df['production_system'] == prodsys)]
@@ -3754,7 +3815,7 @@ def update_ahle_chart_ecs(
                 )
             ecs_waterfall_fig = make_subplots()
             ecs_waterfall_fig.add_trace(plot_ahle_value)
-            ecs_waterfall_fig.update_layout(title=f'{reg_title} {selected_item} Over Time | {species}, {prodsys} <br><sup>Difference between Current and {compare} scenario</sup><br>',
+            ecs_waterfall_fig.update_layout(title=f'{reg_title} {selected_item} Over Time | {species_label}, {prodsys} <br><sup>Difference between Current and {compare} scenario</sup><br>',
                                             yaxis_title=display_currency,
                                             font_size=15,
                                             plot_bgcolor="#ededed",)
@@ -3823,7 +3884,7 @@ def update_ahle_chart_ecs(
             ecs_waterfall_fig = make_subplots()
             ecs_waterfall_fig.add_trace(plot_compare_value)
             ecs_waterfall_fig.add_trace(plot_current_value)
-            ecs_waterfall_fig.update_layout(title=f'{reg_title} {selected_item} Over Time | {species}, {prodsys} <br><sup>Current and {compare} scenario</sup><br>',
+            ecs_waterfall_fig.update_layout(title=f'{reg_title} {selected_item} Over Time | {species_label}, {prodsys} <br><sup>Current and {compare} scenario</sup><br>',
                                             yaxis_title=display_currency,
                                             font_size=15,
                                             plot_bgcolor="#ededed",)
@@ -3861,12 +3922,28 @@ def update_ahle_chart_ecs(
                                      # 'Expenditure on Housing',
                                      # 'Expenditure on Capital',
                                      'Gross Margin')
-        else:   # Goats, Sheep, All Small Ruminants
+        elif species.upper() in ['GOAT', 'SHEEP', 'ALL SMALL RUMINANTS']:   # Small Ruminants
             bar_chart_plot_items = ('Value of Offtake',
                                      'Value of Herd Increase',
                                      'Value of Milk',
                                      'Value of Manure',
                                      'Value of Hides',
+                                     'Expenditure on Feed',
+                                     'Expenditure on Labour',
+                                     'Expenditure on Health',
+                                     # May 2023: Wudu does not want housing and captial expenses in waterfall chart
+                                     # 'Expenditure on Housing',
+                                     # 'Expenditure on Capital',
+                                     'Gross Margin')
+        else:   # All species
+            bar_chart_plot_items = ('Value of Offtake',
+                                     'Value of Herd Increase',
+                                     'Value of Draught',
+                                     'Value of Milk',
+                                     'Value of Manure',
+                                     'Value of Hides',
+                                     'Value of Eggs consumed',
+                                     'Value of Eggs sold',
                                      'Expenditure on Feed',
                                      'Expenditure on Labour',
                                      'Expenditure on Health',
@@ -3952,8 +4029,8 @@ def update_ahle_chart_ecs(
 
             # Add title
             ecs_waterfall_fig.update_layout(
-                # title_text=f'{reg_title} Animal Health Loss Envelope | {species}, {prodsys} <br><sup>Difference between current and {compare} values for {agesex}, {selected_year}</sup><br>',
-                title_text=f'{reg_title} Animal Health Loss Envelope | {species}, {prodsys} <br><sup>Difference between current and {compare}, {selected_year}</sup><br>',
+                # title_text=f'{reg_title} Animal Health Loss Envelope | {species_label}, {prodsys} <br><sup>Difference between current and {compare} values for {agesex}, {selected_year}</sup><br>',
+                title_text=f'{reg_title} Animal Health Loss Envelope | {species_label}, {prodsys} <br><sup>Difference between current and {compare}, {selected_year}</sup><br>',
                 yaxis_title=display_currency,
                 font_size=15,
                 margin=dict(t=100)
@@ -4237,8 +4314,8 @@ def update_ahle_chart_ecs(
 
             # Add title
             ecs_waterfall_fig.update_layout(
-                # title_text=f'{reg_title} Values and Costs | {species}, {prodsys} <br><sup>Current vs. {compare} scenario for {agesex}, {selected_year}</sup><br>',
-                title_text=f'{reg_title} Values and Costs | {species}, {prodsys} <br><sup>Current vs. {compare} scenario, {selected_year}</sup><br>',
+                # title_text=f'{reg_title} Values and Costs | {species_label}, {prodsys} <br><sup>Current vs. {compare} scenario for {agesex}, {selected_year}</sup><br>',
+                title_text=f'{reg_title} Values and Costs | {species_label}, {prodsys} <br><sup>Current vs. {compare} scenario, {selected_year}</sup><br>',
                 yaxis_title=display_currency,
                 font_size=15,
                 margin=dict(t=100),
@@ -4275,12 +4352,28 @@ def update_ahle_chart_ecs(
                                      # 'Expenditure on Housing',
                                      # 'Expenditure on Capital',
                                      'Gross Margin')
-        else:   # Goats, Sheep, All Small Ruminants
+        elif species.upper() in ['GOAT', 'SHEEP', 'ALL SMALL RUMINANTS']:   # Small Ruminants
             waterfall_plot_items = ('Value of Offtake',
                                      'Value of Herd Increase',
                                      'Value of Milk',
                                      'Value of Manure',
                                      'Value of Hides',
+                                     'Expenditure on Feed',
+                                     'Expenditure on Labour',
+                                     'Expenditure on Health',
+                                     # May 2023: Wudu does not want housing and captial expenses in waterfall chart
+                                     # 'Expenditure on Housing',
+                                     # 'Expenditure on Capital',
+                                     'Gross Margin')
+        else:   # All species
+            waterfall_plot_items = ('Value of Offtake',
+                                     'Value of Herd Increase',
+                                     'Value of Draught',
+                                     'Value of Milk',
+                                     'Value of Manure',
+                                     'Value of Hides',
+                                     'Value of Eggs consumed',
+                                     'Value of Eggs sold',
                                      'Expenditure on Feed',
                                      'Expenditure on Labour',
                                      'Expenditure on Health',
@@ -4378,8 +4471,8 @@ def update_ahle_chart_ecs(
             )
             # Add title
             ecs_waterfall_fig.update_layout(
-                # title_text=f'{reg_title} Animal Health Loss Envelope | {species}, {prodsys} <br><sup>Difference between current and {compare} values for {agesex}, {selected_year}</sup><br>',
-                title_text=f'{reg_title} Animal Health Loss Envelope | {species}, {prodsys} <br><sup>Difference between current and {compare}, {selected_year}</sup><br>',
+                # title_text=f'{reg_title} Animal Health Loss Envelope | {species_label}, {prodsys} <br><sup>Difference between current and {compare} values for {agesex}, {selected_year}</sup><br>',
+                title_text=f'{reg_title} Animal Health Loss Envelope | {species_label}, {prodsys} <br><sup>Difference between current and {compare}, {selected_year}</sup><br>',
                 yaxis_title=display_currency,
                 font_size=15,
                 margin=dict(t=100)
@@ -4712,8 +4805,8 @@ def update_ahle_chart_ecs(
 
             # Add title
             ecs_waterfall_fig.update_layout(
-                # title_text=f'{reg_title} Values and Costs | {species}, {prodsys} <br><sup>Current vs. {compare} scenario for {agesex}, {selected_year}</sup><br>',
-                title_text=f'{reg_title} Values and Costs | {species}, {prodsys} <br><sup>Current vs. {compare} scenario, {selected_year}</sup><br>',
+                # title_text=f'{reg_title} Values and Costs | {species_label}, {prodsys} <br><sup>Current vs. {compare} scenario for {agesex}, {selected_year}</sup><br>',
+                title_text=f'{reg_title} Values and Costs | {species_label}, {prodsys} <br><sup>Current vs. {compare} scenario, {selected_year}</sup><br>',
                 yaxis_title=display_currency,
                 font_size=15,
                 margin=dict(t=100),
@@ -4787,6 +4880,13 @@ def update_attr_treemap_ecs(
     elif species == 'Poultry hybrid' or species == "Poultry indigenous":
         input_df=input_df.loc[(input_df['species'] == 'All Poultry')]
         species_label = 'All Poultry'
+
+    # Aggregate species
+    elif species == 'All':
+        input_df=input_df.loc[(input_df['species'] == species)]
+        species_label = 'All species'
+
+    # Cattle
     else:
         input_df=input_df.loc[(input_df['species'] == species)]
         species_label = species
