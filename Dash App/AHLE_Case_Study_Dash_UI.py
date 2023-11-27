@@ -27,7 +27,8 @@ print(f"[{dt.datetime.now().strftime('%Y%m%d_%H%M%S.%f')[:19]}] {sys.version = }
 # NO NEED to import Dash or JupyterDash here.  That is done within fa.instantiate_app
 
 from dash import html, dcc, Input, Output, State, dash_table, ctx, ClientsideFunction, clientside_callback
-import dash_bootstrap_components as dbc  # Allows easy access to all bootstrap themes
+import dash_bootstrap_components as dbc  # Allows easy access to all bootstrap
+# from dash_bootstrap_templates import load_figure_template # boostrap templates
 import dash_daq as daq
 import dash_auth
 import numpy as np
@@ -1246,12 +1247,12 @@ gbadsDash.layout = html.Div([
                 children =[
             html.Iframe(src="assets/GBADs_Documentation/_build/html/index.html", # this is for the jupyter books
                         style={"width":"100%",
-                                "height":"3600px",   # Set large enough for your largest page and guide will use browser scroll bar. Otherwise, longer pages will get their own scroll bars.
+                            "height":"3600px",   # Set large enough for your largest page and guide will use browser scroll bar. Otherwise, longer pages will get their own scroll bars.
                                 },)
         ### END OF USER GUIDE TAB
             ]),
 
-        #### AHLE V2
+        #### AHLE
         dbc.Tab(label="AHLE",
                 tabClassName="flex-grow-1 text-center",
                     tab_style = tab_style,
@@ -1519,100 +1520,179 @@ gbadsDash.layout = html.Div([
                         style = {"height":"100vh",
                             },
                     children =[
-
-                        #### -- Attribution Specific Controls
                         html.Label(["Showing how each component contributes to the total animal health loss envelope, \
                                     including attribution to infectious, non-infectious, and external causes. \
                                     Attribution is based on the results of expert elicitation."]),
-                        html.Label(["NOTE: this is shown for species groups (cattle, all small ruminants, or all poultry) rather than for individual species."] ,style={"font-style":"italic"}),
-                        dbc.Col([
-                            dbc.Card([
-                                dbc.CardBody([
-                                    # Graph Display
-                                    html.H5("Visualization", style=control_heading_style),
-                                    dcc.RadioItems(id='select-attr-display-ecs',
-                                                   options=esc_attr_display_options,
-                                                   value='Tree Map',
-                                                   inputStyle=Radio_input_style,
-                                                   ),
+                        #### -- DROPDOWNS CONTROLS
+                        dbc.Row([
+                            dbc.Col([
+                                html.H5("Species", style=control_heading_style),
+                                dcc.Dropdown(id='select-species-ecs2',
+                                            options=ecs_species_options,
+                                            value='Cattle',
+                                            clearable = False,
+                                            ),
+                                html.Label(["NOTE: this is shown for species groups (cattle, all small ruminants, or all poultry) rather than for individual species."] ,style={"font-style":"italic"}),
+                                ]),
+                            dbc.Col([
+                                html.H5("Production System", style=control_heading_style),
+                                dcc.Dropdown(id='select-prodsys-ecs2',
+                                            # Options and value are now defined in a callback based on selected species
+                                            clearable = False,
+                                            ),
+                                ]),
+                            dbc.Col([
+                                html.H5("Currency", style=control_heading_style),
+                                dcc.Dropdown(id='select-currency-ecs2',
+                                            options=ecs_currency_options,
+                                            value='Birr',
+                                            clearable = False,
+                                            ),
+                                ]),
 
-                                    html.Label(["NOTE: this is shown for species groups (cattle, all small ruminants, or all poultry) rather than for individual species."] ,style={"font-style":"italic"}),
-                                    html.H5("Segment by...", style={'font-weight':"bold"}),
-                                    dbc.Row([
-                                        # Top Level
-                                        dbc.Col([
-                                            html.H6("Top Level", id="select-top-lvl-attr-ecs-title", style=control_heading_style),
-                                            dcc.Dropdown(id='select-top-lvl-attr-ecs',
-                                                          options=ecs_hierarchy_attr_options,
-                                                          value='cause',
-                                                          clearable = False,
-                                                          ),
-                                            ], style={
-                                                "margin-bottom":"30px", # Adding this to account for the additional space created by the radio buttons
-                                                },
+                            # END OF FIRST CONTROL ROW
+                            ],style={"margin-bottom":"30px"}),
+
+                        # SECOND CONTROL ROW
+                        dbc.Row([
+                            dbc.Col([
+                                # Graph Display
+                                html.H5("Visualization", style=control_heading_style),
+                                dcc.RadioItems(id='select-attr-display-ecs',
+                                               options=esc_attr_display_options,
+                                               value='Tree Map',
+                                               inputStyle=Radio_input_style,
+                                               ),
+                                ]),
+
+                            # Year selector
+                            dbc.Col([
+                                # html.H5("Year"),
+                                html.H5(id='select-year-ecs-title2'),
+                                dcc.Dropdown(id='select-year-ecs2',
+                                             clearable = False,
+                                             ),
+                                ]),
+
+                            # End year selector (only visible for over time display)
+                            dbc.Col([
+                                html.H5(id='select-end-year-ecs-title2'),
+                                dcc.Dropdown(id='select-end-year-ecs2',
+                                             clearable = False,
+                                             ),
+                                ]),
+
+                            # Geographical breakdown options
+                            dbc.Col([
+                                html.H5("AHLE Geographic Scope", style=control_heading_style),
+                                dcc.RadioItems(id='select-geo-view-ecs2',
+                                              inline=True,                  # True: arrange buttons horizontally
+                                              inputStyle=Radio_input_style,
+                                              ),
+                                # Text underneath
+                                html.P("Subnational estimates are currently only available for cattle for 2021" ,style={'font-style':'italic'}),
+                                ]),
+
+                            # Subnational dropdwon
+                            dbc.Col([
+                                html.H5("Subnational state", id='select-region-ecs-title2'),
+                                dcc.Dropdown(id='select-region-ecs2',
+                                            options=ecs_region_options,
+                                            placeholder='Select Subnational...',
+                                            clearable = False,
                                             ),
-                                        # Drilldown 1
-                                        dbc.Col([
-                                            html.H6("Drilldown 1", id="select-dd-1-attr-ecs-title", style=control_heading_style),
-                                            dcc.Dropdown(id='select-dd-1-attr-ecs',
-                                                           clearable = False,
-                                                          ),
-                                            ], style={
-                                                "margin-bottom":"30px", # Adding this to account for the additional space created by the radio buttons
-                                                },
-                                            ),
-                                        # Drilldown 2
-                                        dbc.Col([
-                                            html.H6("Drilldown 2", id="select-dd-2-attr-ecs-title", style=control_heading_style),
-                                            dcc.Dropdown(id='select-dd-2-attr-ecs',
-                                                          options=ecs_hierarchy_dd_attr_options,
-                                                          value='age_group',
-                                                          clearable = False,
-                                                          ),
-                                            ], style={
-                                                "margin-bottom":"30px", # Adding this to account for the additional space created by the radio buttons
-                                                },
-                                            ),
-                                        ]), # END OF ROW
-                                    dbc.Row([
-                                        # Drilldown 3
-                                        dbc.Col([
-                                            html.H6("Drilldown 3", id="select-dd-3-attr-ecs-title", style=control_heading_style),
-                                            dcc.Dropdown(id='select-dd-3-attr-ecs',
-                                                          options=ecs_hierarchy_dd_attr_options,
-                                                          value='disease',
-                                                          clearable = False,
-                                                          ),
-                                            ]),
-                                        # Drilldown 4
-                                        dbc.Col([
-                                            html.H6("Drilldown 4", id="select-dd-4-attr-ecs-title", style=control_heading_style),
-                                            dcc.Dropdown(id='select-dd-4-attr-ecs',
-                                                          options=ecs_hierarchy_dd_attr_options,
-                                                          value='ahle_component',
-                                                          clearable = False,
-                                                          ),
-                                            ]),
-                                        ]), # END OF ROW
-                                    html.Label([
-                                        "Disease drilldown shows infectious AHLE broken out as follows depending on species:"
-                                        ,html.Br()
-                                        ,"- Cattle: Brucellosis | FMD | Other Infectious"
-                                        ,html.Br()
-                                        ,"- Small ruminants: Brucellosis | PPR | Other Infectious"
-                                        ,html.Br()
-                                        ,html.Br()
-                                        ,"Set any drill down to None to segment by fewer factors"
-                                        ] ,style={"font-style":"italic" ,"margin-top":"10px"}
-                                        ),
-                                    ]),     # END OF CARD BODY
-                                ], color='#F2F2F2'),    # END OF CARD
-                        ]),
+                                ]),
+
+                            # END OF SECOND CONTROL ROW
+                            ], justify='evenly'),
+
 
                         html.Br(),
 
                         #### -- GRAPHICS
-                        dbc.Row([  # Row with GRAPHICS
+                        dbc.Row([  # Row
+
+                            # CONTROLS
+                             #### -- Attribution Specific Controls
+                             dbc.Col([
+                                 dbc.Card([
+                                     dbc.CardBody([
+                                         html.H5("Segment by...", style={'font-weight':"bold"}),
+                                         dbc.Row([
+                                             # Top Level
+                                             dbc.Col([
+                                                 html.H6("Top Level", id="select-top-lvl-attr-ecs-title", style=control_heading_style),
+                                                 dcc.Dropdown(id='select-top-lvl-attr-ecs',
+                                                               options=ecs_hierarchy_attr_options,
+                                                               value='cause',
+                                                               clearable = False,
+                                                               ),
+                                                 ], style={
+                                                     "margin-bottom":"30px", # Adding this to account for the additional space created by the radio buttons
+                                                     },
+                                                 ),
+                                        ]), # END OF ROW
+                                        dbc.Row([
+                                             # Drilldown 1
+                                             dbc.Col([
+                                                 html.H6("Drilldown 1", id="select-dd-1-attr-ecs-title", style=control_heading_style),
+                                                 dcc.Dropdown(id='select-dd-1-attr-ecs',
+                                                                clearable = False,
+                                                               ),
+                                                 ], style={
+                                                     "margin-bottom":"30px", # Adding this to account for the additional space created by the radio buttons
+                                                     },
+                                                 ),
+                                            # Drilldown 2
+                                            dbc.Col([
+                                                html.H6("Drilldown 2", id="select-dd-2-attr-ecs-title", style=control_heading_style),
+                                                dcc.Dropdown(id='select-dd-2-attr-ecs',
+                                                              options=ecs_hierarchy_dd_attr_options,
+                                                              value='age_group',
+                                                              clearable = False,
+                                                              ),
+                                                ], style={
+                                                    "margin-bottom":"30px", # Adding this to account for the additional space created by the radio buttons
+                                                    },
+                                                ),
+                                         ]), # END OF ROW
+                                         dbc.Row([
+                                             # Drilldown 3
+                                             dbc.Col([
+                                                 html.H6("Drilldown 3", id="select-dd-3-attr-ecs-title", style=control_heading_style),
+                                                 dcc.Dropdown(id='select-dd-3-attr-ecs',
+                                                               options=ecs_hierarchy_dd_attr_options,
+                                                               value='disease',
+                                                               clearable = False,
+                                                               ),
+                                                 ]),
+                                             # Drilldown 4
+                                             dbc.Col([
+                                                 html.H6("Drilldown 4", id="select-dd-4-attr-ecs-title", style=control_heading_style),
+                                                 dcc.Dropdown(id='select-dd-4-attr-ecs',
+                                                               options=ecs_hierarchy_dd_attr_options,
+                                                               value='ahle_component',
+                                                               clearable = False,
+                                                               ),
+                                                 ]),
+                                             ]), # END OF ROW
+                                         html.Label([
+                                             "Disease drilldown shows infectious AHLE broken out as follows depending on species:"
+                                             ,html.Br()
+                                             ,"- Cattle: Brucellosis | FMD | Other Infectious"
+                                             ,html.Br()
+                                             ,"- Small ruminants: Brucellosis | PPR | Other Infectious"
+                                             ,html.Br()
+                                             ,html.Br()
+                                             ,"Set any drill down to None to segment by fewer factors"
+                                             ] ,style={"font-style":"italic" ,"margin-top":"10px"}
+                                             ),
+                                         ]),     # END OF CARD BODY
+                                     ], color='#F2F2F2'),    # END OF CARD
+                                # End of CONTROLS COL
+                                 ],  width=4),
+
+
                             # Attribution Treemap
                             dbc.Col(
                                 dbc.Spinner(children=[
@@ -1798,6 +1878,22 @@ gbadsDash.layout = html.Div([
         ### END OF WEI TAB
         ]),
 
+
+        #### INFORMATICS ETHIOPIA LIVESTOCK POPULATION DASHBOARD
+        dbc.Tab(label="Population",
+                tabClassName="flex-grow-1 text-center",
+                    tab_style = tab_style,
+                    style = {"height":"100vh",
+                        },
+                children =[
+            html.Iframe(src="https://gbadske.org/dashboards/population/",
+                        style={"width":"100%",
+                            "height":"1000px",
+                                },)
+        ### END OF INFORMATICS ETHIOPIA LIVESTOCK POPULATION DASHBOARD TAB
+            ]),
+
+
         #### DATATABLES
         dbc.Tab(label="Data Viewer",
                 tabClassName="flex-grow-1 text-center",
@@ -1914,6 +2010,8 @@ def update_dashboard_country_title(country):
 @gbadsDash.callback(
     Output('select-prodsys-ecs', 'options'),
     Output('select-prodsys-ecs', 'value'),
+    Output('select-prodsys-ecs2', 'options'), # duplicating for options on attribution tab
+    Output('select-prodsys-ecs2', 'value'), # duplicating for options on attribution tab
     Input('select-species-ecs', 'value'),
     )
 def update_prodsys_options_ecs(species):
@@ -1921,7 +2019,7 @@ def update_prodsys_options_ecs(species):
     unique_prodsys = np.sort(ecs_ahle_summary.loc[ecs_ahle_summary['species'] == species ,'production_system'].unique())
     options = [{'label': i, 'value': i} for i in unique_prodsys]
     value = options[0]['value']  # Default is first one
-    return options, value
+    return options, value, options, value
 
 # Longitudinal options
 @gbadsDash.callback(
@@ -1969,7 +2067,67 @@ def update_year_select_ecs(graph, species):
         None
     return dropdown_title, year_options_str, value
 
-# End year selector (only available if over time display)
+# Year selector for attribution
+@gbadsDash.callback(
+    Output('select-year-ecs-title2','children'),
+    Output('select-year-ecs2','options'),
+    Output('select-year-ecs2','value'),
+    Input('select-attr-display-ecs','value'),
+    Input('select-species-ecs','value'),
+    )
+def update_year_select_attr_ecs(attr_viz, species):
+    year_options = ecs_ahle_summary['year'].unique()
+    year_options_str = []
+    for i in np.sort(year_options):
+        str(year_options_str.append({'label':i,'value':(i)}))
+
+    if attr_viz == 'Bar':
+        dropdown_title = 'Start year'
+        value = year_options.min()
+    # Other years only available for Cattle
+    # UPDATE: Have placeholder values for all species and years
+    elif attr_viz == 'Tree Map':
+        dropdown_title = 'Year'
+        value = year_options.max()
+    else:
+        None
+    return dropdown_title, year_options_str, value
+
+# End year selector (only available if over time display on AHLE and Attribution tabs)
+@gbadsDash.callback(
+    Output('select-end-year-ecs-title2','children'),
+    Output('select-end-year-ecs-title2','style'),
+    Output('select-end-year-ecs2','options'),
+    Output('select-end-year-ecs2','value'),
+    Output('select-end-year-ecs2','style'),
+    Input('select-attr-display-ecs','value'),
+    Input('select-species-ecs','value'),
+    )
+def update_end_year_select_ecs(attr_viz, species):
+    year_options = ecs_ahle_summary['year'].unique()
+    year_options_str = []
+    for i in np.sort(year_options):
+        str(year_options_str.append({'label':i,'value':(i)}))
+
+    if attr_viz == 'Bar':
+        dropdown_title = 'End year'
+        value = year_options.max()
+        title_display_style = {'display': 'block'}
+        dropdown_display_style = {'display': 'block'}
+    # Hide controls if Single Year selected
+    elif attr_viz == 'Tree Map':
+        dropdown_title = ''
+        value = None
+        for d in year_options_str:
+            d['disabled']=True
+        title_display_style = {'display': 'none'}
+        dropdown_display_style = {'display': 'none'}
+    else:
+        None
+
+    return dropdown_title, title_display_style, year_options_str, value, dropdown_display_style
+
+# End year selector (only available if over time display on AHLE and Attribution tabs)
 @gbadsDash.callback(
     Output('select-end-year-ecs-title','children'),
     Output('select-end-year-ecs-title','style'),
@@ -1979,7 +2137,7 @@ def update_year_select_ecs(graph, species):
     Input('select-graph-ahle-ecs','value'),
     Input('select-species-ecs','value'),
     )
-def update_end_year_select_ecs(graph, species):
+def update_end_year_select_attr_ecs(graph, species):
     year_options = ecs_ahle_summary['year'].unique()
     year_options_str = []
     for i in np.sort(year_options):
@@ -2693,720 +2851,720 @@ def update_ecs_attr_expert_data(species):
 # ------------------------------------------------------------------------------
 #### -- Figures
 # ------------------------------------------------------------------------------
-# AHLE Waterfall or Longitudinal Graph
-@gbadsDash.callback(
-    Output('ecs-ahle-waterfall','figure'),
-    Input('select-graph-ahle-ecs', 'value'),
-    # Input('select-agesex-ecs', 'value'),
-    Input('select-species-ecs','value'),
-    Input('select-display-ecs','value'),
-    Input('select-compare-ecs','value'),
-    Input('select-prodsys-ecs','value'),
-    Input('select-currency-ecs','value'),
-    Input('select-factor-ecs','value'),
-    Input('select-improve-ecs','value'),
-    Input('select-year-ecs', 'value'),
-    Input('select-item-ecs', 'value'),
-    Input('select-geo-view-ecs','value'),
-    Input('select-region-ecs','value'),
-    )
-def update_ahle_value_and_cost_viz_ecs(
-        graph_options,
-        # agesex,
-        species,
-        display,
-        compare,
-        prodsys,
-        currency,
-        impvmnt_factor,
-        impvmnt_value,
-        selected_year,
-        selected_item,
-        geo_view,
-        region,
-    ):
-    # Read in data and apply filters
-    input_df = ecs_ahle_summary
+# # AHLE Waterfall or Longitudinal Graph
+# @gbadsDash.callback(
+#     Output('ecs-ahle-waterfall','figure'),
+#     Input('select-graph-ahle-ecs', 'value'),
+#     # Input('select-agesex-ecs', 'value'),
+#     Input('select-species-ecs','value'),
+#     Input('select-display-ecs','value'),
+#     Input('select-compare-ecs','value'),
+#     Input('select-prodsys-ecs','value'),
+#     Input('select-currency-ecs','value'),
+#     Input('select-factor-ecs','value'),
+#     Input('select-improve-ecs','value'),
+#     Input('select-year-ecs', 'value'),
+#     Input('select-item-ecs', 'value'),
+#     Input('select-geo-view-ecs','value'),
+#     Input('select-region-ecs','value'),
+#     )
+# def update_ahle_value_and_cost_viz_ecs(
+#         graph_options,
+#         # agesex,
+#         species,
+#         display,
+#         compare,
+#         prodsys,
+#         currency,
+#         impvmnt_factor,
+#         impvmnt_value,
+#         selected_year,
+#         selected_item,
+#         geo_view,
+#         region,
+#     ):
+#     # Read in data and apply filters
+#     input_df = ecs_ahle_summary
 
-    # Species filter
-    input_df = input_df.loc[(input_df['species'] == species)]
+#     # Species filter
+#     input_df = input_df.loc[(input_df['species'] == species)]
 
-    # Production System filter
-    input_df=input_df.loc[(input_df['production_system'] == prodsys)]
+#     # Production System filter
+#     input_df=input_df.loc[(input_df['production_system'] == prodsys)]
 
-    # # Age/sex filter
-    # input_df=input_df.loc[(input_df['group'] == agesex)]
-    input_df=input_df.loc[(input_df['group'] == 'Overall')]
+#     # # Age/sex filter
+#     # input_df=input_df.loc[(input_df['group'] == agesex)]
+#     input_df=input_df.loc[(input_df['group'] == 'Overall')]
 
-    # Geographic filter
-    if geo_view.upper() == "NATIONAL":
-        input_df = input_df.query("region == 'National'")
-        reg_title = 'National'
-    else:
-        input_df = input_df.query("region == @region")
-        reg_title = region
+#     # Geographic filter
+#     if geo_view.upper() == "NATIONAL":
+#         input_df = input_df.query("region == 'National'")
+#         reg_title = 'National'
+#     else:
+#         input_df = input_df.query("region == @region")
+#         reg_title = region
 
-    # Prep the data
-    prep_df = prep_ahle_forwaterfall_ecs(input_df)
+#     # Prep the data
+#     prep_df = prep_ahle_forwaterfall_ecs(input_df)
 
-    # If currency is USD, use USD columns
-    display_currency = 'Ethiopian Birr'
-    if currency == 'USD':
-        display_currency = 'USD'
+#     # If currency is USD, use USD columns
+#     display_currency = 'Ethiopian Birr'
+#     if currency == 'USD':
+#         display_currency = 'USD'
 
-        prep_df['mean_current']                     = prep_df['mean_current_usd']
-        # prep_df['mean_mortality_zero']              = prep_df['mean_mortality_zero_usd']
-        prep_df['mean_ideal']                       = prep_df['mean_ideal_usd']
-        prep_df['mean_diff_ideal']                  = prep_df['mean_diff_ideal_usd']
-        # prep_df['mean_diff_mortzero']               = prep_df['mean_diff_mortzero_usd']
-        # prep_df['mean_all_mort_25_imp']             = prep_df['mean_all_mort_25_imp_usd']
-        # prep_df['mean_all_mort_50_imp']             = prep_df['mean_all_mort_50_imp_usd']
-        # prep_df['mean_all_mort_75_imp']             = prep_df['mean_all_mort_75_imp_usd']
-        # prep_df['mean_diff_mortimp25']              = prep_df['mean_diff_mortimp25_usd']
-        # prep_df['mean_diff_mortimp50']              = prep_df['mean_diff_mortimp50_usd']
-        # prep_df['mean_diff_mortimp75']              = prep_df['mean_diff_mortimp75_usd']
-        # prep_df['mean_current_repro_25_imp']        = prep_df['mean_current_repro_25_imp_usd']
-        # prep_df['mean_current_repro_50_imp']        = prep_df['mean_current_repro_50_imp_usd']
-        # prep_df['mean_current_repro_75_imp']        = prep_df['mean_current_repro_75_imp_usd']
-        # prep_df['mean_current_repro_100_imp']       = prep_df['mean_current_repro_100_imp_usd']
-        # prep_df['mean_diff_reprimp25']              = prep_df['mean_diff_reprimp25_usd']
-        # prep_df['mean_diff_reprimp50']              = prep_df['mean_diff_reprimp50_usd']
-        # prep_df['mean_diff_reprimp75']              = prep_df['mean_diff_reprimp75_usd']
-        # prep_df['mean_diff_reprimp100']             = prep_df['mean_diff_reprimp100_usd']
-        # prep_df['mean_current_growth_25_imp_all']   = prep_df['mean_current_growth_25_imp_all_usd']
-        # prep_df['mean_current_growth_50_imp_all']   = prep_df['mean_current_growth_50_imp_all_usd']
-        # prep_df['mean_current_growth_75_imp_all']   = prep_df['mean_current_growth_75_imp_all_usd']
-        # prep_df['mean_current_growth_100_imp_all']  = prep_df['mean_current_growth_100_imp_all_usd']
-        # prep_df['mean_diff_growimp25']              = prep_df['mean_diff_growimp25_usd']
-        # prep_df['mean_diff_growimp50']              = prep_df['mean_diff_growimp50_usd']
-        # prep_df['mean_diff_growimp75']              = prep_df['mean_diff_growimp75_usd']
-        # prep_df['mean_diff_growimp100']             = prep_df['mean_diff_growimp100_usd']
+#         prep_df['mean_current']                     = prep_df['mean_current_usd']
+#         # prep_df['mean_mortality_zero']              = prep_df['mean_mortality_zero_usd']
+#         prep_df['mean_ideal']                       = prep_df['mean_ideal_usd']
+#         prep_df['mean_diff_ideal']                  = prep_df['mean_diff_ideal_usd']
+#         # prep_df['mean_diff_mortzero']               = prep_df['mean_diff_mortzero_usd']
+#         # prep_df['mean_all_mort_25_imp']             = prep_df['mean_all_mort_25_imp_usd']
+#         # prep_df['mean_all_mort_50_imp']             = prep_df['mean_all_mort_50_imp_usd']
+#         # prep_df['mean_all_mort_75_imp']             = prep_df['mean_all_mort_75_imp_usd']
+#         # prep_df['mean_diff_mortimp25']              = prep_df['mean_diff_mortimp25_usd']
+#         # prep_df['mean_diff_mortimp50']              = prep_df['mean_diff_mortimp50_usd']
+#         # prep_df['mean_diff_mortimp75']              = prep_df['mean_diff_mortimp75_usd']
+#         # prep_df['mean_current_repro_25_imp']        = prep_df['mean_current_repro_25_imp_usd']
+#         # prep_df['mean_current_repro_50_imp']        = prep_df['mean_current_repro_50_imp_usd']
+#         # prep_df['mean_current_repro_75_imp']        = prep_df['mean_current_repro_75_imp_usd']
+#         # prep_df['mean_current_repro_100_imp']       = prep_df['mean_current_repro_100_imp_usd']
+#         # prep_df['mean_diff_reprimp25']              = prep_df['mean_diff_reprimp25_usd']
+#         # prep_df['mean_diff_reprimp50']              = prep_df['mean_diff_reprimp50_usd']
+#         # prep_df['mean_diff_reprimp75']              = prep_df['mean_diff_reprimp75_usd']
+#         # prep_df['mean_diff_reprimp100']             = prep_df['mean_diff_reprimp100_usd']
+#         # prep_df['mean_current_growth_25_imp_all']   = prep_df['mean_current_growth_25_imp_all_usd']
+#         # prep_df['mean_current_growth_50_imp_all']   = prep_df['mean_current_growth_50_imp_all_usd']
+#         # prep_df['mean_current_growth_75_imp_all']   = prep_df['mean_current_growth_75_imp_all_usd']
+#         # prep_df['mean_current_growth_100_imp_all']  = prep_df['mean_current_growth_100_imp_all_usd']
+#         # prep_df['mean_diff_growimp25']              = prep_df['mean_diff_growimp25_usd']
+#         # prep_df['mean_diff_growimp50']              = prep_df['mean_diff_growimp50_usd']
+#         # prep_df['mean_diff_growimp75']              = prep_df['mean_diff_growimp75_usd']
+#         # prep_df['mean_diff_growimp100']             = prep_df['mean_diff_growimp100_usd']
 
-        prep_df['stdev_current']                     = prep_df['stdev_current_usd']
-        # prep_df['stdev_mortality_zero']              = prep_df['stdev_mortality_zero_usd']
-        prep_df['stdev_ideal']                       = prep_df['stdev_ideal_usd']
-        prep_df['stdev_diff_ideal']                  = prep_df['stdev_diff_ideal_usd']
-        # prep_df['stdev_diff_mortzero']               = prep_df['stdev_diff_mortzero_usd']
-        # prep_df['stdev_all_mort_25_imp']             = prep_df['stdev_all_mort_25_imp_usd']
-        # prep_df['stdev_all_mort_50_imp']             = prep_df['stdev_all_mort_50_imp_usd']
-        # prep_df['stdev_all_mort_75_imp']             = prep_df['stdev_all_mort_75_imp_usd']
-        # prep_df['stdev_diff_mortimp25']              = prep_df['stdev_diff_mortimp25_usd']
-        # prep_df['stdev_diff_mortimp50']              = prep_df['stdev_diff_mortimp50_usd']
-        # prep_df['stdev_diff_mortimp75']              = prep_df['stdev_diff_mortimp75_usd']
-        # prep_df['stdev_current_repro_25_imp']        = prep_df['stdev_current_repro_25_imp_usd']
-        # prep_df['stdev_current_repro_50_imp']        = prep_df['stdev_current_repro_50_imp_usd']
-        # prep_df['stdev_current_repro_75_imp']        = prep_df['stdev_current_repro_75_imp_usd']
-        # prep_df['stdev_current_repro_100_imp']       = prep_df['stdev_current_repro_100_imp_usd']
-        # prep_df['stdev_diff_reprimp25']              = prep_df['stdev_diff_reprimp25_usd']
-        # prep_df['stdev_diff_reprimp50']              = prep_df['stdev_diff_reprimp50_usd']
-        # prep_df['stdev_diff_reprimp75']              = prep_df['stdev_diff_reprimp75_usd']
-        # prep_df['stdev_diff_reprimp100']             = prep_df['stdev_diff_reprimp100_usd']
-        # prep_df['stdev_current_growth_25_imp_all']   = prep_df['stdev_current_growth_25_imp_all_usd']
-        # prep_df['stdev_current_growth_50_imp_all']   = prep_df['stdev_current_growth_50_imp_all_usd']
-        # prep_df['stdev_current_growth_75_imp_all']   = prep_df['stdev_current_growth_75_imp_all_usd']
-        # prep_df['stdev_current_growth_100_imp_all']  = prep_df['stdev_current_growth_100_imp_all_usd']
-        # prep_df['stdev_all_current_growth_25_AHLE']  = prep_df['stdev_all_current_growth_25_AHLE_usd']
-        # prep_df['stdev_all_current_growth_50_AHLE']  = prep_df['stdev_all_current_growth_50_AHLE_usd']
-        # prep_df['stdev_all_current_growth_75_AHLE']  = prep_df['stdev_all_current_growth_75_AHLE_usd']
-        # prep_df['stdev_all_current_growth_100_AHLE'] = prep_df['stdev_all_current_growth_100_AHLE_usd']
+#         prep_df['stdev_current']                     = prep_df['stdev_current_usd']
+#         # prep_df['stdev_mortality_zero']              = prep_df['stdev_mortality_zero_usd']
+#         prep_df['stdev_ideal']                       = prep_df['stdev_ideal_usd']
+#         prep_df['stdev_diff_ideal']                  = prep_df['stdev_diff_ideal_usd']
+#         # prep_df['stdev_diff_mortzero']               = prep_df['stdev_diff_mortzero_usd']
+#         # prep_df['stdev_all_mort_25_imp']             = prep_df['stdev_all_mort_25_imp_usd']
+#         # prep_df['stdev_all_mort_50_imp']             = prep_df['stdev_all_mort_50_imp_usd']
+#         # prep_df['stdev_all_mort_75_imp']             = prep_df['stdev_all_mort_75_imp_usd']
+#         # prep_df['stdev_diff_mortimp25']              = prep_df['stdev_diff_mortimp25_usd']
+#         # prep_df['stdev_diff_mortimp50']              = prep_df['stdev_diff_mortimp50_usd']
+#         # prep_df['stdev_diff_mortimp75']              = prep_df['stdev_diff_mortimp75_usd']
+#         # prep_df['stdev_current_repro_25_imp']        = prep_df['stdev_current_repro_25_imp_usd']
+#         # prep_df['stdev_current_repro_50_imp']        = prep_df['stdev_current_repro_50_imp_usd']
+#         # prep_df['stdev_current_repro_75_imp']        = prep_df['stdev_current_repro_75_imp_usd']
+#         # prep_df['stdev_current_repro_100_imp']       = prep_df['stdev_current_repro_100_imp_usd']
+#         # prep_df['stdev_diff_reprimp25']              = prep_df['stdev_diff_reprimp25_usd']
+#         # prep_df['stdev_diff_reprimp50']              = prep_df['stdev_diff_reprimp50_usd']
+#         # prep_df['stdev_diff_reprimp75']              = prep_df['stdev_diff_reprimp75_usd']
+#         # prep_df['stdev_diff_reprimp100']             = prep_df['stdev_diff_reprimp100_usd']
+#         # prep_df['stdev_current_growth_25_imp_all']   = prep_df['stdev_current_growth_25_imp_all_usd']
+#         # prep_df['stdev_current_growth_50_imp_all']   = prep_df['stdev_current_growth_50_imp_all_usd']
+#         # prep_df['stdev_current_growth_75_imp_all']   = prep_df['stdev_current_growth_75_imp_all_usd']
+#         # prep_df['stdev_current_growth_100_imp_all']  = prep_df['stdev_current_growth_100_imp_all_usd']
+#         # prep_df['stdev_all_current_growth_25_AHLE']  = prep_df['stdev_all_current_growth_25_AHLE_usd']
+#         # prep_df['stdev_all_current_growth_50_AHLE']  = prep_df['stdev_all_current_growth_50_AHLE_usd']
+#         # prep_df['stdev_all_current_growth_75_AHLE']  = prep_df['stdev_all_current_growth_75_AHLE_usd']
+#         # prep_df['stdev_all_current_growth_100_AHLE'] = prep_df['stdev_all_current_growth_100_AHLE_usd']
 
-    # Create longitudinal chart
-    if graph_options == "Over Time":
-        # Apply user filters
-        # Filter based on selected item
-        prep_df = prep_df.query('item in @selected_item')
+#     # Create longitudinal chart
+#     if graph_options == "Over Time":
+#         # Apply user filters
+#         # Filter based on selected item
+#         prep_df = prep_df.query('item in @selected_item')
 
-        # Sort data by year
-        prep_df = prep_df.sort_values('year')
+#         # Sort data by year
+#         prep_df = prep_df.sort_values('year')
 
-        # Filter to selected year or later
-        prep_df = prep_df.query('year >= @selected_year')
+#         # Filter to selected year or later
+#         prep_df = prep_df.query('year >= @selected_year')
 
-        # Establish x
-        x = prep_df['year']
+#         # Establish x
+#         x = prep_df['year']
 
-        # Match colors to waterfall values
-        cost  = 'Expenditure'
-        if 'Gross Margin' in selected_item:
-            color = '#F7931D'
-        elif cost in selected_item:
-            color = '#E84C3D'
-        else:
-            color = '#3598DB'
+#         # Match colors to waterfall values
+#         cost  = 'Expenditure'
+#         if 'Gross Margin' in selected_item:
+#             color = '#F7931D'
+#         elif cost in selected_item:
+#             color = '#E84C3D'
+#         else:
+#             color = '#3598DB'
 
-        # Create AHLE (difference) value
-        if display == "Difference":
-            if compare == 'Ideal':
-                y = prep_df['mean_diff_ideal']
-                stdev = prep_df['stdev_diff_ideal']
-            # elif compare == 'Zero Mortality':
-            #     y = prep_df['mean_diff_mortzero']
-            #     stdev = prep_df['stdev_diff_mortzero']
-            else:
-                compare = impvmnt_factor + "- " + impvmnt_value
-                if impvmnt_factor == 'Mortality' and impvmnt_value == '25%':
-                    y = prep_df['mean_diff_mortimp25']
-                    stdev = prep_df['stdev_diff_mortimp25']
-                elif impvmnt_factor == 'Mortality' and impvmnt_value == '50%':
-                    y = prep_df['mean_diff_mortimp50']
-                    stdev = prep_df['stdev_diff_mortimp50']
-                elif impvmnt_factor == 'Mortality' and impvmnt_value == '75%':
-                    y = prep_df['mean_diff_mortimp75']
-                    stdev = prep_df['stdev_diff_mortimp75']
-                elif impvmnt_factor == 'Mortality' and impvmnt_value == '100%':
-                    y = prep_df['mean_diff_mortzero']
-                    stdev = prep_df['stdev_diff_mortzero']
-                elif impvmnt_factor == 'Parturition Rate':
-                    number_split = impvmnt_value.split('%')[0]
-                    y = prep_df[f'mean_diff_reprimp{number_split}']
-                    stdev = prep_df[f'stdev_diff_reprimp{number_split}']
-                elif impvmnt_factor == 'Live Weight':
-                    number_split = impvmnt_value.split('%')[0]
-                    y = prep_df[f'mean_diff_growimp{number_split}']
-                    stdev = prep_df[f'stdev_diff_growimp{number_split}']
+#         # Create AHLE (difference) value
+#         if display == "Difference":
+#             if compare == 'Ideal':
+#                 y = prep_df['mean_diff_ideal']
+#                 stdev = prep_df['stdev_diff_ideal']
+#             # elif compare == 'Zero Mortality':
+#             #     y = prep_df['mean_diff_mortzero']
+#             #     stdev = prep_df['stdev_diff_mortzero']
+#             else:
+#                 compare = impvmnt_factor + "- " + impvmnt_value
+#                 if impvmnt_factor == 'Mortality' and impvmnt_value == '25%':
+#                     y = prep_df['mean_diff_mortimp25']
+#                     stdev = prep_df['stdev_diff_mortimp25']
+#                 elif impvmnt_factor == 'Mortality' and impvmnt_value == '50%':
+#                     y = prep_df['mean_diff_mortimp50']
+#                     stdev = prep_df['stdev_diff_mortimp50']
+#                 elif impvmnt_factor == 'Mortality' and impvmnt_value == '75%':
+#                     y = prep_df['mean_diff_mortimp75']
+#                     stdev = prep_df['stdev_diff_mortimp75']
+#                 elif impvmnt_factor == 'Mortality' and impvmnt_value == '100%':
+#                     y = prep_df['mean_diff_mortzero']
+#                     stdev = prep_df['stdev_diff_mortzero']
+#                 elif impvmnt_factor == 'Parturition Rate':
+#                     number_split = impvmnt_value.split('%')[0]
+#                     y = prep_df[f'mean_diff_reprimp{number_split}']
+#                     stdev = prep_df[f'stdev_diff_reprimp{number_split}']
+#                 elif impvmnt_factor == 'Live Weight':
+#                     number_split = impvmnt_value.split('%')[0]
+#                     y = prep_df[f'mean_diff_growimp{number_split}']
+#                     stdev = prep_df[f'stdev_diff_growimp{number_split}']
 
-            # AHLE graph
-            stdev = 1.96 * stdev    # Scale stdev to create 95% confidence
-            plot_ahle_value = go.Scatter(
-                x=x
-                ,y=y
-                ,error_y=dict(type='data' ,array=stdev)
-                ,name='AHLE'
-                ,line=dict(color=color)
-                )
-            ecs_waterfall_fig = make_subplots()
-            ecs_waterfall_fig.add_trace(plot_ahle_value)
-            ecs_waterfall_fig.update_layout(title=f'{reg_title} {selected_item} Over Time | {species}, {prodsys} <br><sup>Difference between Current and {compare} scenario</sup><br>',
-                                            yaxis_title=display_currency,
-                                            font_size=15,
-                                            plot_bgcolor="#ededed",)
-            ecs_waterfall_fig.update_xaxes(ticklabelmode="period", dtick = 1)
+#             # AHLE graph
+#             stdev = 1.96 * stdev    # Scale stdev to create 95% confidence
+#             plot_ahle_value = go.Scatter(
+#                 x=x
+#                 ,y=y
+#                 ,error_y=dict(type='data' ,array=stdev)
+#                 ,name='AHLE'
+#                 ,line=dict(color=color)
+#                 )
+#             ecs_waterfall_fig = make_subplots()
+#             ecs_waterfall_fig.add_trace(plot_ahle_value)
+#             ecs_waterfall_fig.update_layout(title=f'{reg_title} {selected_item} Over Time | {species}, {prodsys} <br><sup>Difference between Current and {compare} scenario</sup><br>',
+#                                             yaxis_title=display_currency,
+#                                             font_size=15,
+#                                             plot_bgcolor="#ededed",)
+#             ecs_waterfall_fig.update_xaxes(ticklabelmode="period", dtick = 1)
 
-        elif display == "Side by Side":
-            # Plot current value
-            plot_current_value = go.Scatter(
-                x=x
-                ,y=prep_df['mean_current']
-                ,error_y=dict(type='data' ,array=prep_df['stdev_current']*1.96)
-                ,name='Current'
-                ,line=dict(color=color)
-                )
-            if compare == 'Ideal':
-                # Overlay ideal value
-                plot_compare_value = go.Scatter(
-                    x=x
-                    ,y=prep_df['mean_ideal']
-                    ,error_y=dict(type='data' ,array=prep_df['stdev_ideal']*1.96)
-                    ,name=compare
-                    ,line=dict(color='#00CA0F')
-                    )
-            # elif compare == 'Zero Mortality':
-            #     # Overlay zero mortality value
-            #     plot_compare_value = go.Scatter(
-            #         x=x
-            #         ,y = prep_df['mean_mortality_zero']
-            #         ,error_y=dict(type='data' ,array=prep_df['stdev_mortality_zero']*1.96)
-            #         ,name=compare
-            #         ,line=dict(color='#00CA0F')
-            #         )
-            else:
-                if impvmnt_factor == 'Mortality' and impvmnt_value == '25%':
-                    y = prep_df['mean_all_mort_25_imp']
-                    stdev = prep_df['stdev_all_mort_25_imp']
-                elif impvmnt_factor == 'Mortality' and impvmnt_value == '50%':
-                    y = prep_df['mean_all_mort_50_imp']
-                    stdev = prep_df['stdev_all_mort_50_imp']
-                elif impvmnt_factor == 'Mortality' and impvmnt_value == '75%':
-                    y = prep_df['mean_all_mort_75_imp']
-                    stdev = prep_df['stdev_all_mort_75_imp']
-                elif impvmnt_factor == 'Mortality' and impvmnt_value == '100%':
-                    y = prep_df['mean_mortality_zero']
-                    stdev = prep_df['stdev_mortality_zero']
-                elif impvmnt_factor == 'Parturition Rate':
-                    number_split = impvmnt_value.split('%')[0]
-                    y = prep_df[f'mean_current_repro_{number_split}_imp']
-                    stdev = prep_df[f'stdev_current_repro_{number_split}_imp']
-                elif impvmnt_factor == 'Live Weight':
-                    number_split = impvmnt_value.split('%')[0]
-                    y = prep_df[f'mean_current_growth_{number_split}_imp_all']
-                    stdev = prep_df[f'stdev_current_growth_{number_split}_imp_all']
+#         elif display == "Side by Side":
+#             # Plot current value
+#             plot_current_value = go.Scatter(
+#                 x=x
+#                 ,y=prep_df['mean_current']
+#                 ,error_y=dict(type='data' ,array=prep_df['stdev_current']*1.96)
+#                 ,name='Current'
+#                 ,line=dict(color=color)
+#                 )
+#             if compare == 'Ideal':
+#                 # Overlay ideal value
+#                 plot_compare_value = go.Scatter(
+#                     x=x
+#                     ,y=prep_df['mean_ideal']
+#                     ,error_y=dict(type='data' ,array=prep_df['stdev_ideal']*1.96)
+#                     ,name=compare
+#                     ,line=dict(color='#00CA0F')
+#                     )
+#             # elif compare == 'Zero Mortality':
+#             #     # Overlay zero mortality value
+#             #     plot_compare_value = go.Scatter(
+#             #         x=x
+#             #         ,y = prep_df['mean_mortality_zero']
+#             #         ,error_y=dict(type='data' ,array=prep_df['stdev_mortality_zero']*1.96)
+#             #         ,name=compare
+#             #         ,line=dict(color='#00CA0F')
+#             #         )
+#             else:
+#                 if impvmnt_factor == 'Mortality' and impvmnt_value == '25%':
+#                     y = prep_df['mean_all_mort_25_imp']
+#                     stdev = prep_df['stdev_all_mort_25_imp']
+#                 elif impvmnt_factor == 'Mortality' and impvmnt_value == '50%':
+#                     y = prep_df['mean_all_mort_50_imp']
+#                     stdev = prep_df['stdev_all_mort_50_imp']
+#                 elif impvmnt_factor == 'Mortality' and impvmnt_value == '75%':
+#                     y = prep_df['mean_all_mort_75_imp']
+#                     stdev = prep_df['stdev_all_mort_75_imp']
+#                 elif impvmnt_factor == 'Mortality' and impvmnt_value == '100%':
+#                     y = prep_df['mean_mortality_zero']
+#                     stdev = prep_df['stdev_mortality_zero']
+#                 elif impvmnt_factor == 'Parturition Rate':
+#                     number_split = impvmnt_value.split('%')[0]
+#                     y = prep_df[f'mean_current_repro_{number_split}_imp']
+#                     stdev = prep_df[f'stdev_current_repro_{number_split}_imp']
+#                 elif impvmnt_factor == 'Live Weight':
+#                     number_split = impvmnt_value.split('%')[0]
+#                     y = prep_df[f'mean_current_growth_{number_split}_imp_all']
+#                     stdev = prep_df[f'stdev_current_growth_{number_split}_imp_all']
 
-                name = impvmnt_factor + "- " + impvmnt_value
-                # Overlay zero mortality value
-                stdev = 1.96 * stdev    # Scale stdev to create 95% confidence
-                plot_compare_value = go.Scatter(
-                    x=x
-                    ,y=y
-                    ,error_y=dict(type='data' ,array=stdev)
-                    ,name=name
-                    ,line=dict(color='#00CA0F')
-                    )
+#                 name = impvmnt_factor + "- " + impvmnt_value
+#                 # Overlay zero mortality value
+#                 stdev = 1.96 * stdev    # Scale stdev to create 95% confidence
+#                 plot_compare_value = go.Scatter(
+#                     x=x
+#                     ,y=y
+#                     ,error_y=dict(type='data' ,array=stdev)
+#                     ,name=name
+#                     ,line=dict(color='#00CA0F')
+#                     )
 
-            ecs_waterfall_fig = make_subplots()
-            ecs_waterfall_fig.add_trace(plot_compare_value)
-            ecs_waterfall_fig.add_trace(plot_current_value)
-            ecs_waterfall_fig.update_layout(title=f'{reg_title} {selected_item} Over Time | {species}, {prodsys} <br><sup>Current and {compare} scenario</sup><br>',
-                                            yaxis_title=display_currency,
-                                            font_size=15,
-                                            plot_bgcolor="#ededed",)
-            ecs_waterfall_fig.update_xaxes(ticklabelmode="period", dtick = 1)
+#             ecs_waterfall_fig = make_subplots()
+#             ecs_waterfall_fig.add_trace(plot_compare_value)
+#             ecs_waterfall_fig.add_trace(plot_current_value)
+#             ecs_waterfall_fig.update_layout(title=f'{reg_title} {selected_item} Over Time | {species}, {prodsys} <br><sup>Current and {compare} scenario</sup><br>',
+#                                             yaxis_title=display_currency,
+#                                             font_size=15,
+#                                             plot_bgcolor="#ededed",)
+#             ecs_waterfall_fig.update_xaxes(ticklabelmode="period", dtick = 1)
 
-    # Create waterfall chart
-    if graph_options == "Single Year":
-        # Filter to a specific year
-        prep_df = prep_df.query('year == @selected_year')
+#     # Create waterfall chart
+#     if graph_options == "Single Year":
+#         # Filter to a specific year
+#         prep_df = prep_df.query('year == @selected_year')
 
-        # Select items to show - depends on species
-        if species.upper() == "CATTLE":     # Cattle have draught
-            waterfall_plot_items = ('Value of Offtake',
-                                     'Value of Herd Increase',
-                                     'Value of Draught',
-                                     'Value of Milk',
-                                     'Value of Manure',
-                                     'Value of Hides',
-                                     'Expenditure on Feed',
-                                     'Expenditure on Labour',
-                                     'Expenditure on Health',
-                                     # May 2023: Wudu does not want housing and captial expenses in waterfall chart
-                                     # 'Expenditure on Housing',
-                                     # 'Expenditure on Capital',
-                                     'Gross Margin')
-        elif 'POULTRY' in species.upper():   # Poultry have value of eggs, do not have manure or hides
-            waterfall_plot_items = ('Value of Offtake',
-                                     'Value of Herd Increase',
-                                     'Value of Eggs consumed',
-                                     'Value of Eggs sold',
-                                     'Expenditure on Feed',
-                                     'Expenditure on Labour',
-                                     'Expenditure on Health',
-                                     # May 2023: Wudu does not want housing and captial expenses in waterfall chart
-                                     # 'Expenditure on Housing',
-                                     # 'Expenditure on Capital',
-                                     'Gross Margin')
-        else:   # Goats, Sheep, All Small Ruminants
-            waterfall_plot_items = ('Value of Offtake',
-                                     'Value of Herd Increase',
-                                     'Value of Milk',
-                                     'Value of Manure',
-                                     'Value of Hides',
-                                     'Expenditure on Feed',
-                                     'Expenditure on Labour',
-                                     'Expenditure on Health',
-                                     # May 2023: Wudu does not want housing and captial expenses in waterfall chart
-                                     # 'Expenditure on Housing',
-                                     # 'Expenditure on Capital',
-                                     'Gross Margin')
-        waterfall_plot_items_upper = [i.upper() for i in waterfall_plot_items]
-        prep_df = prep_df.loc[prep_df['item'].str.upper().isin(waterfall_plot_items_upper)]
+#         # Select items to show - depends on species
+#         if species.upper() == "CATTLE":     # Cattle have draught
+#             waterfall_plot_items = ('Value of Offtake',
+#                                      'Value of Herd Increase',
+#                                      'Value of Draught',
+#                                      'Value of Milk',
+#                                      'Value of Manure',
+#                                      'Value of Hides',
+#                                      'Expenditure on Feed',
+#                                      'Expenditure on Labour',
+#                                      'Expenditure on Health',
+#                                      # May 2023: Wudu does not want housing and captial expenses in waterfall chart
+#                                      # 'Expenditure on Housing',
+#                                      # 'Expenditure on Capital',
+#                                      'Gross Margin')
+#         elif 'POULTRY' in species.upper():   # Poultry have value of eggs, do not have manure or hides
+#             waterfall_plot_items = ('Value of Offtake',
+#                                      'Value of Herd Increase',
+#                                      'Value of Eggs consumed',
+#                                      'Value of Eggs sold',
+#                                      'Expenditure on Feed',
+#                                      'Expenditure on Labour',
+#                                      'Expenditure on Health',
+#                                      # May 2023: Wudu does not want housing and captial expenses in waterfall chart
+#                                      # 'Expenditure on Housing',
+#                                      # 'Expenditure on Capital',
+#                                      'Gross Margin')
+#         else:   # Goats, Sheep, All Small Ruminants
+#             waterfall_plot_items = ('Value of Offtake',
+#                                      'Value of Herd Increase',
+#                                      'Value of Milk',
+#                                      'Value of Manure',
+#                                      'Value of Hides',
+#                                      'Expenditure on Feed',
+#                                      'Expenditure on Labour',
+#                                      'Expenditure on Health',
+#                                      # May 2023: Wudu does not want housing and captial expenses in waterfall chart
+#                                      # 'Expenditure on Housing',
+#                                      # 'Expenditure on Capital',
+#                                      'Gross Margin')
+#         waterfall_plot_items_upper = [i.upper() for i in waterfall_plot_items]
+#         prep_df = prep_df.loc[prep_df['item'].str.upper().isin(waterfall_plot_items_upper)]
 
-        # Get list of items from data - may differ from list specified because not all items appear for all age/sex groups
-        waterfall_plot_items_indata = list(prep_df['item'].unique())
+#         # Get list of items from data - may differ from list specified because not all items appear for all age/sex groups
+#         waterfall_plot_items_indata = list(prep_df['item'].unique())
 
-        measure = ['relative'] * (len(waterfall_plot_items_indata) - 1) + ['total']
-        x = prep_df['item']
+#         measure = ['relative'] * (len(waterfall_plot_items_indata) - 1) + ['total']
+#         x = prep_df['item']
 
-        # Display and Compare filters
-        if display == "Difference":
-            # Applying the condition
-            prep_df["item"] = np.where(prep_df["item"] == "Gross Margin", "Gross Margin (AHLE)", prep_df["item"])
-            x = prep_df['item']
-            if compare == 'Ideal':
-                y = prep_df['mean_diff_ideal']
-                stdev = prep_df['stdev_diff_ideal']
-            # elif compare == 'Zero Mortality':
-            #     y = prep_df['mean_diff_mortzero']
-            #     stdev = prep_df['stdev_diff_mortzero']
-            else:
-                compare = impvmnt_factor + "- " + impvmnt_value
-                if impvmnt_factor == 'Mortality' and impvmnt_value == '25%':
-                    y = prep_df['mean_diff_mortimp25']
-                    stdev = prep_df['stdev_diff_mortimp25']
-                elif impvmnt_factor == 'Mortality' and impvmnt_value == '50%':
-                    y = prep_df['mean_diff_mortimp50']
-                    stdev = prep_df['stdev_diff_mortimp50']
-                elif impvmnt_factor == 'Mortality' and impvmnt_value == '75%':
-                    y = prep_df['mean_diff_mortimp75']
-                    stdev = prep_df['stdev_diff_mortimp75']
-                elif impvmnt_factor == 'Mortality' and impvmnt_value == '100%':
-                    y = prep_df['mean_diff_mortzero']
-                    stdev = prep_df['stdev_diff_mortzero']
-                elif impvmnt_factor == 'Parturition Rate':
-                    number_split = impvmnt_value.split('%')[0]
-                    y = prep_df[f'mean_diff_reprimp{number_split}']
-                    stdev = prep_df[f'stdev_diff_reprimp{number_split}']
-                elif impvmnt_factor == 'Live Weight':
-                    number_split = impvmnt_value.split('%')[0]
-                    y = prep_df[f'mean_diff_growimp{number_split}']
-                    stdev = prep_df[f'stdev_diff_growimp{number_split}']
+#         # Display and Compare filters
+#         if display == "Difference":
+#             # Applying the condition
+#             prep_df["item"] = np.where(prep_df["item"] == "Gross Margin", "Gross Margin (AHLE)", prep_df["item"])
+#             x = prep_df['item']
+#             if compare == 'Ideal':
+#                 y = prep_df['mean_diff_ideal']
+#                 stdev = prep_df['stdev_diff_ideal']
+#             # elif compare == 'Zero Mortality':
+#             #     y = prep_df['mean_diff_mortzero']
+#             #     stdev = prep_df['stdev_diff_mortzero']
+#             else:
+#                 compare = impvmnt_factor + "- " + impvmnt_value
+#                 if impvmnt_factor == 'Mortality' and impvmnt_value == '25%':
+#                     y = prep_df['mean_diff_mortimp25']
+#                     stdev = prep_df['stdev_diff_mortimp25']
+#                 elif impvmnt_factor == 'Mortality' and impvmnt_value == '50%':
+#                     y = prep_df['mean_diff_mortimp50']
+#                     stdev = prep_df['stdev_diff_mortimp50']
+#                 elif impvmnt_factor == 'Mortality' and impvmnt_value == '75%':
+#                     y = prep_df['mean_diff_mortimp75']
+#                     stdev = prep_df['stdev_diff_mortimp75']
+#                 elif impvmnt_factor == 'Mortality' and impvmnt_value == '100%':
+#                     y = prep_df['mean_diff_mortzero']
+#                     stdev = prep_df['stdev_diff_mortzero']
+#                 elif impvmnt_factor == 'Parturition Rate':
+#                     number_split = impvmnt_value.split('%')[0]
+#                     y = prep_df[f'mean_diff_reprimp{number_split}']
+#                     stdev = prep_df[f'stdev_diff_reprimp{number_split}']
+#                 elif impvmnt_factor == 'Live Weight':
+#                     number_split = impvmnt_value.split('%')[0]
+#                     y = prep_df[f'mean_diff_growimp{number_split}']
+#                     stdev = prep_df[f'stdev_diff_growimp{number_split}']
 
-            # Create graph
-            name = 'Difference'
-            ecs_waterfall_fig = create_ahle_waterfall_ecs(prep_df, name, measure, x, y)
+#             # Create graph
+#             name = 'Difference'
+#             ecs_waterfall_fig = create_ahle_waterfall_ecs(prep_df, name, measure, x, y)
 
-            # Add error bars
-            # Reset indicies
-            x = x.reset_index(drop=True)
-            y = y.reset_index(drop=True)
+#             # Add error bars
+#             # Reset indicies
+#             x = x.reset_index(drop=True)
+#             y = y.reset_index(drop=True)
 
-            # Scale standard deviation to achieve 95% confidence
-            stdev = 1.96 * stdev    # Simulation results are Normally distributed
+#             # Scale standard deviation to achieve 95% confidence
+#             stdev = 1.96 * stdev    # Simulation results are Normally distributed
 
-            # Get cumulative sum value for Y unless Gross Margin
-            y_error_sum=[]
-            for i in x.values:
-                if i != 'Gross Margin (AHLE)':
-                    y_error_sum = np.cumsum(y)
-                elif i == 'Gross Margin (AHLE)':
-                    GM_index = x[x == 'Gross Margin (AHLE)'].index[0]
-                    y_error_sum[GM_index] = y[GM_index]
-            # Add trace for error
-            ecs_waterfall_fig.add_trace(
-                go.Scatter(
-                     x=x,
-                     y=y_error_sum,
-                     marker=dict(color='black'),
-                     customdata=np.stack((y, prep_df['item']), axis=-1),
-                     error_y=dict(
-                        type='data',
-                        array=stdev
-                        ),
-                     mode="markers",
-                     name='95% Confidence'
-                ),
-            )
-            # Add title
-            ecs_waterfall_fig.update_layout(
-                # title_text=f'{reg_title} Animal Health Loss Envelope | {species}, {prodsys} <br><sup>Difference between current and {compare} values for {agesex}, {selected_year}</sup><br>',
-                title_text=f'{reg_title} Animal Health Loss Envelope | {species}, {prodsys} <br><sup>Difference between current and {compare}, {selected_year}</sup><br>',
-                yaxis_title=display_currency,
-                font_size=15,
-                margin=dict(t=100)
-                )
-        else:
-            if compare == 'Ideal':
-                y = prep_df['mean_ideal']
-                stdev = prep_df['stdev_ideal']
-                name = "Ideal (solid)"
-                # Create numeric, dynamic x axis based off of items
-                x_len = np.arange(1,len(x)+1,1)
+#             # Get cumulative sum value for Y unless Gross Margin
+#             y_error_sum=[]
+#             for i in x.values:
+#                 if i != 'Gross Margin (AHLE)':
+#                     y_error_sum = np.cumsum(y)
+#                 elif i == 'Gross Margin (AHLE)':
+#                     GM_index = x[x == 'Gross Margin (AHLE)'].index[0]
+#                     y_error_sum[GM_index] = y[GM_index]
+#             # Add trace for error
+#             ecs_waterfall_fig.add_trace(
+#                 go.Scatter(
+#                      x=x,
+#                      y=y_error_sum,
+#                      marker=dict(color='black'),
+#                      customdata=np.stack((y, prep_df['item']), axis=-1),
+#                      error_y=dict(
+#                         type='data',
+#                         array=stdev
+#                         ),
+#                      mode="markers",
+#                      name='95% Confidence'
+#                 ),
+#             )
+#             # Add title
+#             ecs_waterfall_fig.update_layout(
+#                 # title_text=f'{reg_title} Animal Health Loss Envelope | {species}, {prodsys} <br><sup>Difference between current and {compare} values for {agesex}, {selected_year}</sup><br>',
+#                 title_text=f'{reg_title} Animal Health Loss Envelope | {species}, {prodsys} <br><sup>Difference between current and {compare}, {selected_year}</sup><br>',
+#                 yaxis_title=display_currency,
+#                 font_size=15,
+#                 margin=dict(t=100)
+#                 )
+#         else:
+#             if compare == 'Ideal':
+#                 y = prep_df['mean_ideal']
+#                 stdev = prep_df['stdev_ideal']
+#                 name = "Ideal (solid)"
+#                 # Create numeric, dynamic x axis based off of items
+#                 x_len = np.arange(1,len(x)+1,1)
 
-                # Create graph
-                ecs_waterfall_fig = create_ahle_waterfall_ecs(prep_df, name, measure, x_len-.3, y)
-                # Add error bars
-                # Reset indicies
-                x = x.reset_index(drop=True)
-                y = y.reset_index(drop=True)
+#                 # Create graph
+#                 ecs_waterfall_fig = create_ahle_waterfall_ecs(prep_df, name, measure, x_len-.3, y)
+#                 # Add error bars
+#                 # Reset indicies
+#                 x = x.reset_index(drop=True)
+#                 y = y.reset_index(drop=True)
 
-                # Scale standard deviation to achieve 95% confidence
-                stdev = 1.96 * stdev    # Simulation results are Normally distributed
+#                 # Scale standard deviation to achieve 95% confidence
+#                 stdev = 1.96 * stdev    # Simulation results are Normally distributed
 
-                # Get cumulative sum value for Y unless Gross Margin
-                y_error_sum=[]
-                for i in x.values:
-                    if i != 'Gross Margin':
-                        y_error_sum = np.cumsum(y)
-                    elif i == 'Gross Margin':
-                        GM_index = x[x == 'Gross Margin'].index[0]
-                        y_error_sum[GM_index] = y[GM_index]
-                # Add trace for error
-                ecs_waterfall_fig.add_trace(
-                    go.Scatter(
-                         x=x_len-.3,
-                         y=y_error_sum,
-                         marker=dict(color='black'),
-                         customdata=np.stack((y, prep_df['item']), axis=-1),
-                         error_y=dict(
-                            type='data',
-                            array=stdev
-                            ),
-                         mode="markers",
-                         showlegend=False
-                    ),
-                )
+#                 # Get cumulative sum value for Y unless Gross Margin
+#                 y_error_sum=[]
+#                 for i in x.values:
+#                     if i != 'Gross Margin':
+#                         y_error_sum = np.cumsum(y)
+#                     elif i == 'Gross Margin':
+#                         GM_index = x[x == 'Gross Margin'].index[0]
+#                         y_error_sum[GM_index] = y[GM_index]
+#                 # Add trace for error
+#                 ecs_waterfall_fig.add_trace(
+#                     go.Scatter(
+#                          x=x_len-.3,
+#                          y=y_error_sum,
+#                          marker=dict(color='black'),
+#                          customdata=np.stack((y, prep_df['item']), axis=-1),
+#                          error_y=dict(
+#                             type='data',
+#                             array=stdev
+#                             ),
+#                          mode="markers",
+#                          showlegend=False
+#                     ),
+#                 )
 
-                # Add current with lag
-                y = prep_df['mean_current']
-                ecs_waterfall_fig.add_trace(go.Waterfall(
-                    name = 'Current (outline)',
-                    measure = measure,
-                    x = x_len+.3,
-                    y = y,
-                    decreasing = {"marker":{"color":"white", "line":{"color":"#E84C3D", "width":3}}},
-                    increasing = {"marker":{"color":"white", "line":{"color":"#3598DB", "width":3}}},
-                    totals = {"marker":{"color":"white", "line":{"color":"#F7931D", "width":3}}},
-                    connector = {"line":{"dash":"dot"}},
-                    customdata=np.stack((y, prep_df['item']), axis=-1),
-                    ))
-                # Add error bars
-                # Reset indicies
-                y = prep_df['mean_current']
-                x = x.reset_index(drop=True)
-                y = y.reset_index(drop=True)
-                # Get cumulative sum value for Y unless Gross Margin
-                y_error_sum=[]
-                for i in x.values:
-                    if i != 'Gross Margin':
-                        y_error_sum = np.cumsum(y)
-                    elif i == 'Gross Margin':
-                        GM_index = x[x == 'Gross Margin'].index[0]
-                        y_error_sum[GM_index] = y[GM_index]
+#                 # Add current with lag
+#                 y = prep_df['mean_current']
+#                 ecs_waterfall_fig.add_trace(go.Waterfall(
+#                     name = 'Current (outline)',
+#                     measure = measure,
+#                     x = x_len+.3,
+#                     y = y,
+#                     decreasing = {"marker":{"color":"white", "line":{"color":"#E84C3D", "width":3}}},
+#                     increasing = {"marker":{"color":"white", "line":{"color":"#3598DB", "width":3}}},
+#                     totals = {"marker":{"color":"white", "line":{"color":"#F7931D", "width":3}}},
+#                     connector = {"line":{"dash":"dot"}},
+#                     customdata=np.stack((y, prep_df['item']), axis=-1),
+#                     ))
+#                 # Add error bars
+#                 # Reset indicies
+#                 y = prep_df['mean_current']
+#                 x = x.reset_index(drop=True)
+#                 y = y.reset_index(drop=True)
+#                 # Get cumulative sum value for Y unless Gross Margin
+#                 y_error_sum=[]
+#                 for i in x.values:
+#                     if i != 'Gross Margin':
+#                         y_error_sum = np.cumsum(y)
+#                     elif i == 'Gross Margin':
+#                         GM_index = x[x == 'Gross Margin'].index[0]
+#                         y_error_sum[GM_index] = y[GM_index]
 
-                # Add trace for error
-                ecs_waterfall_fig.add_trace(
-                    go.Scatter(
-                         x=x_len+.3,
-                         y=y_error_sum,
-                         marker=dict(color='black'),
-                         customdata=np.stack((y, prep_df['item']), axis=-1),
-                         error_y=dict(
-                             type='data',
-                             array=prep_df['stdev_current']
-                             ),
-                         mode="markers",
-                         name='95% Confidence'
-                    ),
-                )
-                ecs_waterfall_fig.update_layout(
-                    xaxis = dict(
-                        tickmode = 'array',
-                        tickvals = x_len,
-                        ticktext = waterfall_plot_items
-                    )
-                )
+#                 # Add trace for error
+#                 ecs_waterfall_fig.add_trace(
+#                     go.Scatter(
+#                          x=x_len+.3,
+#                          y=y_error_sum,
+#                          marker=dict(color='black'),
+#                          customdata=np.stack((y, prep_df['item']), axis=-1),
+#                          error_y=dict(
+#                              type='data',
+#                              array=prep_df['stdev_current']
+#                              ),
+#                          mode="markers",
+#                          name='95% Confidence'
+#                     ),
+#                 )
+#                 ecs_waterfall_fig.update_layout(
+#                     xaxis = dict(
+#                         tickmode = 'array',
+#                         tickvals = x_len,
+#                         ticktext = waterfall_plot_items
+#                     )
+#                 )
 
 
-            # elif compare == 'Zero Mortality':
-            #     y = prep_df['mean_mortality_zero']
-            #     stdev = prep_df['stdev_mortality_zero']
-            #     name = 'Zero Mortality (solid)'
-            #     # Create numeric, dynamic x axis based off of items
-            #     x_len = np.arange(1,len(x)+1,1)
+#             # elif compare == 'Zero Mortality':
+#             #     y = prep_df['mean_mortality_zero']
+#             #     stdev = prep_df['stdev_mortality_zero']
+#             #     name = 'Zero Mortality (solid)'
+#             #     # Create numeric, dynamic x axis based off of items
+#             #     x_len = np.arange(1,len(x)+1,1)
 
-            #     # Create graph
-            #     ecs_waterfall_fig = create_ahle_waterfall_ecs(prep_df, name, measure, x_len-.3, y)
-            #     # Add error bars
-            #     # Reset indicies
-            #     x = x.reset_index(drop=True)
-            #     y = y.reset_index(drop=True)
+#             #     # Create graph
+#             #     ecs_waterfall_fig = create_ahle_waterfall_ecs(prep_df, name, measure, x_len-.3, y)
+#             #     # Add error bars
+#             #     # Reset indicies
+#             #     x = x.reset_index(drop=True)
+#             #     y = y.reset_index(drop=True)
 
-            #     # Scale standard deviation to achieve 95% confidence
-            #     stdev = 1.96 * stdev    # Simulation results are Normally distributed
+#             #     # Scale standard deviation to achieve 95% confidence
+#             #     stdev = 1.96 * stdev    # Simulation results are Normally distributed
 
-            #     # Get cumulative sum value for Y unless Gross Margin
-            #     y_error_sum=[]
-            #     for i in x.values:
-            #         if i != 'Gross Margin':
-            #             y_error_sum = np.cumsum(y)
-            #         elif i == 'Gross Margin':
-            #             GM_index = x[x == 'Gross Margin'].index[0]
-            #             y_error_sum[GM_index] = y[GM_index]
-            #     # Add trace for error
-            #     ecs_waterfall_fig.add_trace(
-            #         go.Scatter(
-            #             x=x_len-.3,
-            #             y=y_error_sum,
-            #             marker=dict(color='black'),
-            #             customdata=np.stack((y, prep_df['item']), axis=-1),
-            #             error_y=dict(
-            #                 type='data',
-            #                 array=stdev
-            #             ),
-            #             mode="markers",
-            #             showlegend=False
-            #         ),
-            #     )
+#             #     # Get cumulative sum value for Y unless Gross Margin
+#             #     y_error_sum=[]
+#             #     for i in x.values:
+#             #         if i != 'Gross Margin':
+#             #             y_error_sum = np.cumsum(y)
+#             #         elif i == 'Gross Margin':
+#             #             GM_index = x[x == 'Gross Margin'].index[0]
+#             #             y_error_sum[GM_index] = y[GM_index]
+#             #     # Add trace for error
+#             #     ecs_waterfall_fig.add_trace(
+#             #         go.Scatter(
+#             #             x=x_len-.3,
+#             #             y=y_error_sum,
+#             #             marker=dict(color='black'),
+#             #             customdata=np.stack((y, prep_df['item']), axis=-1),
+#             #             error_y=dict(
+#             #                 type='data',
+#             #                 array=stdev
+#             #             ),
+#             #             mode="markers",
+#             #             showlegend=False
+#             #         ),
+#             #     )
 
-            #     # Add current with lag
-            #     ecs_waterfall_fig.add_trace(go.Waterfall(
-            #         name = 'Current (outline)',
-            #         measure = measure,
-            #         x = x_len+.3,
-            #         y = prep_df['mean_current'],
-            #         decreasing = {"marker":{"color":"white", "line":{"color":"#E84C3D", "width":3}}},
-            #         increasing = {"marker":{"color":"white", "line":{"color":"#3598DB", "width":3}}},
-            #         totals = {"marker":{"color":"white", "line":{"color":"#F7931D", "width":3}}},
-            #         connector = {"line":{"dash":"dot"}},
-            #         customdata=np.stack((prep_df['mean_current'], prep_df['item']), axis=-1),
-            #         ))
-            #     # Add error bars
-            #     # Reset indicies
-            #     y = prep_df['mean_current']
-            #     x = x.reset_index(drop=True)
-            #     y = y.reset_index(drop=True)
-            #     # Get cumulative sum value for Y unless Gross Margin
-            #     y_error_sum=[]
-            #     for i in x.values:
-            #         if i != 'Gross Margin':
-            #             y_error_sum = np.cumsum(y)
-            #         elif i == 'Gross Margin':
-            #             GM_index = x[x == 'Gross Margin'].index[0]
-            #             y_error_sum[GM_index] = y[GM_index]
+#             #     # Add current with lag
+#             #     ecs_waterfall_fig.add_trace(go.Waterfall(
+#             #         name = 'Current (outline)',
+#             #         measure = measure,
+#             #         x = x_len+.3,
+#             #         y = prep_df['mean_current'],
+#             #         decreasing = {"marker":{"color":"white", "line":{"color":"#E84C3D", "width":3}}},
+#             #         increasing = {"marker":{"color":"white", "line":{"color":"#3598DB", "width":3}}},
+#             #         totals = {"marker":{"color":"white", "line":{"color":"#F7931D", "width":3}}},
+#             #         connector = {"line":{"dash":"dot"}},
+#             #         customdata=np.stack((prep_df['mean_current'], prep_df['item']), axis=-1),
+#             #         ))
+#             #     # Add error bars
+#             #     # Reset indicies
+#             #     y = prep_df['mean_current']
+#             #     x = x.reset_index(drop=True)
+#             #     y = y.reset_index(drop=True)
+#             #     # Get cumulative sum value for Y unless Gross Margin
+#             #     y_error_sum=[]
+#             #     for i in x.values:
+#             #         if i != 'Gross Margin':
+#             #             y_error_sum = np.cumsum(y)
+#             #         elif i == 'Gross Margin':
+#             #             GM_index = x[x == 'Gross Margin'].index[0]
+#             #             y_error_sum[GM_index] = y[GM_index]
 
-            #     # Add trace for error
-            #     ecs_waterfall_fig.add_trace(
-            #         go.Scatter(
-            #              x=x_len+.3,
-            #              y=y_error_sum,
-            #              marker=dict(color='black'),
-            #              customdata=np.stack((y, prep_df['item']), axis=-1),
-            #              error_y=dict(
-            #                 type='data',
-            #                 array=prep_df['stdev_current']
-            #             ),
-            #             mode="markers",
-            #             name='95% Confidence'
-            #         ),
-            #     )
+#             #     # Add trace for error
+#             #     ecs_waterfall_fig.add_trace(
+#             #         go.Scatter(
+#             #              x=x_len+.3,
+#             #              y=y_error_sum,
+#             #              marker=dict(color='black'),
+#             #              customdata=np.stack((y, prep_df['item']), axis=-1),
+#             #              error_y=dict(
+#             #                 type='data',
+#             #                 array=prep_df['stdev_current']
+#             #             ),
+#             #             mode="markers",
+#             #             name='95% Confidence'
+#             #         ),
+#             #     )
 
-            #     ecs_waterfall_fig.update_layout(
-            #         xaxis = dict(
-            #             tickmode = 'array',
-            #             tickvals = x_len,
-            #             ticktext = waterfall_plot_items
-            #         )
-            #     )
+#             #     ecs_waterfall_fig.update_layout(
+#             #         xaxis = dict(
+#             #             tickmode = 'array',
+#             #             tickvals = x_len,
+#             #             ticktext = waterfall_plot_items
+#             #         )
+#             #     )
 
-            #     # ecs_waterfall_fig.update_layout(
-            #     #     waterfallgroupgap = 0.5,
-            #     #     )
+#             #     # ecs_waterfall_fig.update_layout(
+#             #     #     waterfallgroupgap = 0.5,
+#             #     #     )
 
-            else:
-                if impvmnt_factor == 'Mortality' and impvmnt_value == '25%':
-                    y = prep_df['mean_all_mort_25_imp']
-                    stdev = prep_df['stdev_all_mort_25_imp']
-                elif impvmnt_factor == 'Mortality' and impvmnt_value == '50%':
-                    y = prep_df['mean_all_mort_50_imp']
-                    stdev = prep_df['stdev_all_mort_50_imp']
-                elif impvmnt_factor == 'Mortality' and impvmnt_value == '75%':
-                    y = prep_df['mean_all_mort_75_imp']
-                    stdev = prep_df['stdev_all_mort_75_imp']
-                elif impvmnt_factor == 'Mortality' and impvmnt_value == '100%':
-                    y = prep_df['mean_mortality_zero']
-                    y = prep_df['stdev_mortality_zero']
-                elif impvmnt_factor == 'Parturition Rate':
-                    number_split = impvmnt_value.split('%')[0]
-                    y = prep_df[f'mean_current_repro_{number_split}_imp']
-                    stdev = prep_df[f'stdev_current_repro_{number_split}_imp']
-                elif impvmnt_factor == 'Live Weight':
-                    number_split = impvmnt_value.split('%')[0]
-                    y = prep_df[f'mean_current_growth_{number_split}_imp_all']
-                    stdev = prep_df[f'stdev_current_growth_{number_split}_imp_all']
+#             else:
+#                 if impvmnt_factor == 'Mortality' and impvmnt_value == '25%':
+#                     y = prep_df['mean_all_mort_25_imp']
+#                     stdev = prep_df['stdev_all_mort_25_imp']
+#                 elif impvmnt_factor == 'Mortality' and impvmnt_value == '50%':
+#                     y = prep_df['mean_all_mort_50_imp']
+#                     stdev = prep_df['stdev_all_mort_50_imp']
+#                 elif impvmnt_factor == 'Mortality' and impvmnt_value == '75%':
+#                     y = prep_df['mean_all_mort_75_imp']
+#                     stdev = prep_df['stdev_all_mort_75_imp']
+#                 elif impvmnt_factor == 'Mortality' and impvmnt_value == '100%':
+#                     y = prep_df['mean_mortality_zero']
+#                     y = prep_df['stdev_mortality_zero']
+#                 elif impvmnt_factor == 'Parturition Rate':
+#                     number_split = impvmnt_value.split('%')[0]
+#                     y = prep_df[f'mean_current_repro_{number_split}_imp']
+#                     stdev = prep_df[f'stdev_current_repro_{number_split}_imp']
+#                 elif impvmnt_factor == 'Live Weight':
+#                     number_split = impvmnt_value.split('%')[0]
+#                     y = prep_df[f'mean_current_growth_{number_split}_imp_all']
+#                     stdev = prep_df[f'stdev_current_growth_{number_split}_imp_all']
 
-                name = impvmnt_factor + "- " + impvmnt_value + " (solid)"
-                # Create numeric, dynamic x axis based off of items
-                x_len = np.arange(1,len(x)+1,1)
+#                 name = impvmnt_factor + "- " + impvmnt_value + " (solid)"
+#                 # Create numeric, dynamic x axis based off of items
+#                 x_len = np.arange(1,len(x)+1,1)
 
-                # Create graph
-                ecs_waterfall_fig = create_ahle_waterfall_ecs(prep_df, name, measure, x_len-.3, y)
-                # Add error bars
-                # Reset indicies
-                x = x.reset_index(drop=True)
-                y = y.reset_index(drop=True)
+#                 # Create graph
+#                 ecs_waterfall_fig = create_ahle_waterfall_ecs(prep_df, name, measure, x_len-.3, y)
+#                 # Add error bars
+#                 # Reset indicies
+#                 x = x.reset_index(drop=True)
+#                 y = y.reset_index(drop=True)
 
-                # Scale standard deviation to achieve 95% confidence
-                stdev = 1.96 * stdev    # Simulation results are Normally distributed
+#                 # Scale standard deviation to achieve 95% confidence
+#                 stdev = 1.96 * stdev    # Simulation results are Normally distributed
 
-                # Get cumulative sum value for Y unless Gross Margin
-                y_error_sum=[]
-                for i in x.values:
-                    if i != 'Gross Margin':
-                        y_error_sum = np.cumsum(y)
-                    elif i == 'Gross Margin':
-                        GM_index = x[x == 'Gross Margin'].index[0]
-                        y_error_sum[GM_index] = y[GM_index]
-                # Add trace for error
-                ecs_waterfall_fig.add_trace(
-                    go.Scatter(
-                         x=x_len-.3,
-                         y=y_error_sum,
-                         marker=dict(color='black'),
-                         customdata=np.stack((y, prep_df['item']), axis=-1),
-                         error_y=dict(
-                            type='data',
-                            array=stdev
-                            ),
-                         mode="markers",
-                         showlegend=False
-                    ),
-                )
+#                 # Get cumulative sum value for Y unless Gross Margin
+#                 y_error_sum=[]
+#                 for i in x.values:
+#                     if i != 'Gross Margin':
+#                         y_error_sum = np.cumsum(y)
+#                     elif i == 'Gross Margin':
+#                         GM_index = x[x == 'Gross Margin'].index[0]
+#                         y_error_sum[GM_index] = y[GM_index]
+#                 # Add trace for error
+#                 ecs_waterfall_fig.add_trace(
+#                     go.Scatter(
+#                          x=x_len-.3,
+#                          y=y_error_sum,
+#                          marker=dict(color='black'),
+#                          customdata=np.stack((y, prep_df['item']), axis=-1),
+#                          error_y=dict(
+#                             type='data',
+#                             array=stdev
+#                             ),
+#                          mode="markers",
+#                          showlegend=False
+#                     ),
+#                 )
 
-                # Add current with lag
-                ecs_waterfall_fig.add_trace(go.Waterfall(
-                    name = 'Current (outline)',
-                    measure = measure,
-                    x = x_len+.3,
-                    y = prep_df['mean_current'],
-                    decreasing = {"marker":{"color":"white", "line":{"color":"#E84C3D", "width":3}}},
-                    increasing = {"marker":{"color":"white", "line":{"color":"#3598DB", "width":3}}},
-                    totals = {"marker":{"color":"white", "line":{"color":"#F7931D", "width":3}}},
-                    connector = {"line":{"dash":"dot"}},
-                    customdata=np.stack((prep_df['mean_current'], prep_df['item']), axis=-1),
-                    ))
-                # Add error bars
-                # Reset indicies
-                y = prep_df['mean_current']
-                x = x.reset_index(drop=True)
-                y = y.reset_index(drop=True)
-                # Get cumulative sum value for Y unless Gross Margin
-                y_error_sum=[]
-                for i in x.values:
-                    if i != 'Gross Margin':
-                        y_error_sum = np.cumsum(y)
-                    elif i == 'Gross Margin':
-                        GM_index = x[x == 'Gross Margin'].index[0]
-                        y_error_sum[GM_index] = y[GM_index]
+#                 # Add current with lag
+#                 ecs_waterfall_fig.add_trace(go.Waterfall(
+#                     name = 'Current (outline)',
+#                     measure = measure,
+#                     x = x_len+.3,
+#                     y = prep_df['mean_current'],
+#                     decreasing = {"marker":{"color":"white", "line":{"color":"#E84C3D", "width":3}}},
+#                     increasing = {"marker":{"color":"white", "line":{"color":"#3598DB", "width":3}}},
+#                     totals = {"marker":{"color":"white", "line":{"color":"#F7931D", "width":3}}},
+#                     connector = {"line":{"dash":"dot"}},
+#                     customdata=np.stack((prep_df['mean_current'], prep_df['item']), axis=-1),
+#                     ))
+#                 # Add error bars
+#                 # Reset indicies
+#                 y = prep_df['mean_current']
+#                 x = x.reset_index(drop=True)
+#                 y = y.reset_index(drop=True)
+#                 # Get cumulative sum value for Y unless Gross Margin
+#                 y_error_sum=[]
+#                 for i in x.values:
+#                     if i != 'Gross Margin':
+#                         y_error_sum = np.cumsum(y)
+#                     elif i == 'Gross Margin':
+#                         GM_index = x[x == 'Gross Margin'].index[0]
+#                         y_error_sum[GM_index] = y[GM_index]
 
-                # Add trace for error
-                ecs_waterfall_fig.add_trace(
-                    go.Scatter(
-                         x=x_len+.3,
-                         y=y_error_sum,
-                         marker=dict(color='black'),
-                         customdata=np.stack((y, prep_df['item']), axis=-1),
-                         error_y=dict(
-                            type='data',
-                            array=prep_df['stdev_current']
-                            ),
-                         mode="markers",
-                         name='95% Confidence'
-                    ),
-                )
+#                 # Add trace for error
+#                 ecs_waterfall_fig.add_trace(
+#                     go.Scatter(
+#                          x=x_len+.3,
+#                          y=y_error_sum,
+#                          marker=dict(color='black'),
+#                          customdata=np.stack((y, prep_df['item']), axis=-1),
+#                          error_y=dict(
+#                             type='data',
+#                             array=prep_df['stdev_current']
+#                             ),
+#                          mode="markers",
+#                          name='95% Confidence'
+#                     ),
+#                 )
 
-                ecs_waterfall_fig.update_layout(
-                    xaxis = dict(
-                        tickmode = 'array',
-                        tickvals = x_len,
-                        ticktext = waterfall_plot_items
-                    )
-                )
+#                 ecs_waterfall_fig.update_layout(
+#                     xaxis = dict(
+#                         tickmode = 'array',
+#                         tickvals = x_len,
+#                         ticktext = waterfall_plot_items
+#                     )
+#                 )
 
-            # Add title
-            ecs_waterfall_fig.update_layout(
-                # title_text=f'{reg_title} Values and Costs | {species}, {prodsys} <br><sup>Current vs. {compare} scenario for {agesex}, {selected_year}</sup><br>',
-                title_text=f'{reg_title} Values and Costs | {species}, {prodsys} <br><sup>Current vs. {compare} scenario, {selected_year}</sup><br>',
-                yaxis_title=display_currency,
-                font_size=15,
-                margin=dict(t=100),
-                )
+#             # Add title
+#             ecs_waterfall_fig.update_layout(
+#                 # title_text=f'{reg_title} Values and Costs | {species}, {prodsys} <br><sup>Current vs. {compare} scenario for {agesex}, {selected_year}</sup><br>',
+#                 title_text=f'{reg_title} Values and Costs | {species}, {prodsys} <br><sup>Current vs. {compare} scenario, {selected_year}</sup><br>',
+#                 yaxis_title=display_currency,
+#                 font_size=15,
+#                 margin=dict(t=100),
+#                 )
 
-        # Add tooltip
-        if currency == 'Birr':
-            ecs_waterfall_fig.update_traces(hovertemplate='Category: %{customdata[1]}'+
-                                            '<br>Value: %{customdata[0]:,.0f} Birr<extra></extra>'+
-                                            '<br>Cumulative Value: %{y:,.0f} Birr'
-                                            )
-        elif currency == 'USD':
-            ecs_waterfall_fig.update_traces(hovertemplate='Category: %{customdata[1]}'+
-                                            '<br>Value: %{customdata[0]:,.0f} USD<extra></extra>'+
-                                            '<br>Cumulative Value: %{y:,.0f} USD'
-                                            )
-        else:
-            ecs_waterfall_fig.update_traces(hovertemplate='Category: %{customdata[1]}'+
-                                            '<br>Value: %{customdata[0]:,.0f} <extra></extra>'+
-                                            '<br>Cumulative Value: %{y:,.0f} '
-                                            )
+#         # Add tooltip
+#         if currency == 'Birr':
+#             ecs_waterfall_fig.update_traces(hovertemplate='Category: %{customdata[1]}'+
+#                                             '<br>Value: %{customdata[0]:,.0f} Birr<extra></extra>'+
+#                                             '<br>Cumulative Value: %{y:,.0f} Birr'
+#                                             )
+#         elif currency == 'USD':
+#             ecs_waterfall_fig.update_traces(hovertemplate='Category: %{customdata[1]}'+
+#                                             '<br>Value: %{customdata[0]:,.0f} USD<extra></extra>'+
+#                                             '<br>Cumulative Value: %{y:,.0f} USD'
+#                                             )
+#         else:
+#             ecs_waterfall_fig.update_traces(hovertemplate='Category: %{customdata[1]}'+
+#                                             '<br>Value: %{customdata[0]:,.0f} <extra></extra>'+
+#                                             '<br>Cumulative Value: %{y:,.0f} '
+#                                             )
 
-    return ecs_waterfall_fig
+#     return ecs_waterfall_fig
 
 
 # AHLE Bar chart or Longitudinal Graph
@@ -4083,6 +4241,7 @@ def update_ahle_chart_ecs(
                 font_size=15,
                 margin=dict(t=100),
                 )
+
     # Create waterfall chart
     if graph_options == "Cumulative":
         # Filter to a specific year
@@ -4565,19 +4724,18 @@ def update_ahle_chart_ecs(
 # Attribution Treemap
 @gbadsDash.callback(
     Output('ecs-attr-treemap','figure'),
-    Input('select-prodsys-ecs','value'),
-    Input('select-species-ecs','value'),
-    Input('select-currency-ecs','value'),
+    Input('select-prodsys-ecs2','value'),
+    Input('select-species-ecs2','value'),
+    Input('select-currency-ecs2','value'),
     Input('select-top-lvl-attr-ecs','value'),
     Input('select-dd-1-attr-ecs','value'),
     Input('select-dd-2-attr-ecs','value'),
     Input('select-dd-3-attr-ecs','value'),
     Input('select-dd-4-attr-ecs','value'),
     Input('select-attr-display-ecs', 'value'),
-    Input('select-year-ecs', 'value'),
-    Input('select-item-ecs', 'value'),
-    Input('select-geo-view-ecs','value'),
-    Input('select-region-ecs','value'),
+    Input('select-year-ecs2', 'value'),
+    Input('select-geo-view-ecs2','value'),
+    Input('select-region-ecs2','value'),
 )
 def update_attr_treemap_ecs(
         prodsys,
@@ -4590,7 +4748,6 @@ def update_attr_treemap_ecs(
         dd4_hierarchy,
         graph_options,
         selected_year,
-        selected_item,
         geo_view,
         region,
     ):
