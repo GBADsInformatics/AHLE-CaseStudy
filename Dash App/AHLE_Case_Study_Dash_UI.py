@@ -311,6 +311,12 @@ ecs_species_options = [{'label': i, 'value': i, 'disabled': False} for i in ["Ca
                                                                              "Poultry indigenous",
                                                                              ]]
 
+# Specify species for attribution page
+ecs_species_options2 = [{'label': i, 'value': i, 'disabled': False} for i in ["Cattle",
+                                                                             "All Small Ruminants",
+                                                                             "All Poultry",
+                                                                             ]]
+
 # Production system
 # Rename Overall to more descriptive
 ecs_ahle_summary['production_system'] = ecs_ahle_summary['production_system'].replace({'Overall': 'All Production Systems'})
@@ -863,7 +869,7 @@ gbadsDash.layout = html.Div([
                 html.A(href="https://animalhealthmetrics.org/",
                        target='_blank',
                        children=[
-                       html.Img(title="Link to GBADS site",
+                       html.Img(title="Link to GBADs site",
                                 src=os.environ.get("BASE_URL", "") + '/assets/GBADs-LOGO-Black-sm.png')
 
                        ]
@@ -1305,14 +1311,18 @@ gbadsDash.layout = html.Div([
                 dbc.Row([
                     dbc.Col([
                         # Switch between single year and over time
-                        html.H5("View AHLE as...", style=control_heading_style),
+                        html.Abbr("View AHLE as...",
+                                className="Species_attr_title",
+                                title="Estimates for any year other than 2021 are currently placeholders",
+                                style={"font-weight": "bold",
+                                       "color": "#555555",
+                                       "font-size": "var(--pst-font-size-h5)",
+                                       }),
                         dcc.RadioItems(id='select-graph-ahle-ecs',
                                       inline=True,                  # True: arrange buttons horizontally
                                       inputStyle=Radio_input_style,
                                       ),
-                        # Text underneath
-                        html.P("Estimates for any year other than 2021 are currently placeholders" ,style={'font-style':'italic'}),
-                        ]),
+                       ]),
 
                     # Year selector
                     dbc.Col([
@@ -1333,14 +1343,18 @@ gbadsDash.layout = html.Div([
 
                     # Geographical breakdown options
                     dbc.Col([
-                        html.H5("AHLE Geographic Scope", style=control_heading_style),
+                        html.Abbr("AHLE Geographic Scope",
+                                className="Species_attr_title",
+                                title="Subnational estimates are currently only available for cattle for 2021",
+                                style={"font-weight": "bold",
+                                       "color": "#555555",
+                                       "font-size": "var(--pst-font-size-h5)",
+                                       }),
                         dcc.RadioItems(id='select-geo-view-ecs',
 
                                       inline=True,                  # True: arrange buttons horizontally
                                       inputStyle=Radio_input_style,
                                       ),
-                        # Text underneath
-                        html.P("Subnational estimates are currently only available for cattle for 2021" ,style={'font-style':'italic'}),
                         ]),
 
                     # Subnational dropdwon
@@ -1523,16 +1537,28 @@ gbadsDash.layout = html.Div([
                         html.Label(["Showing how each component contributes to the total animal health loss envelope, \
                                     including attribution to infectious, non-infectious, and external causes. \
                                     Attribution is based on the results of expert elicitation."]),
+
+                     html.Br(),
+                     html.Hr(style={'margin-right':'10px',
+                                   'margin-top':'0px',
+                                   'margin-bottom':'5px'}),
+
                         #### -- DROPDOWNS CONTROLS
                         dbc.Row([
                             dbc.Col([
-                                html.H5("Species", style=control_heading_style),
+                                html.Abbr("Species",
+                                        className="Species_attr_title",
+                                        title="NOTE: Attribution is shown for species groups rather than for individual species.",
+                                        style={"font-weight": "bold",
+                                               "color": "#555555",
+                                               "font-size": "var(--pst-font-size-h5)",
+                                               }),
                                 dcc.Dropdown(id='select-species-ecs2',
-                                            options=ecs_species_options,
+                                            options=ecs_species_options2,
                                             value='Cattle',
                                             clearable = False,
                                             ),
-                                html.Label(["NOTE: this is shown for species groups (cattle, all small ruminants, or all poultry) rather than for individual species."] ,style={"font-style":"italic"}),
+                                # html.Label(["NOTE: this is shown for species groups (cattle, all small ruminants, or all poultry) rather than for individual species."] ,style={"font-style":"italic"}),
                                 ]),
                             dbc.Col([
                                 html.H5("Production System", style=control_heading_style),
@@ -1568,7 +1594,7 @@ gbadsDash.layout = html.Div([
                             # Year selector
                             dbc.Col([
                                 # html.H5("Year"),
-                                html.H5(id='select-year-ecs-title2'),
+                                html.H5(id='select-year-ecs-title2', style=control_heading_style),
                                 dcc.Dropdown(id='select-year-ecs2',
                                              clearable = False,
                                              ),
@@ -1576,36 +1602,38 @@ gbadsDash.layout = html.Div([
 
                             # End year selector (only visible for over time display)
                             dbc.Col([
-                                html.H5(id='select-end-year-ecs-title2'),
+                                html.H5(id='select-end-year-ecs-title2', style=control_heading_style),
                                 dcc.Dropdown(id='select-end-year-ecs2',
                                              clearable = False,
                                              ),
                                 ]),
 
-                            # Geographical breakdown options
-                            dbc.Col([
-                                html.H5("AHLE Geographic Scope", style=control_heading_style),
-                                dcc.RadioItems(id='select-geo-view-ecs2',
-                                              inline=True,                  # True: arrange buttons horizontally
-                                              inputStyle=Radio_input_style,
-                                              ),
-                                # Text underneath
-                                html.P("Subnational estimates are currently only available for cattle for 2021" ,style={'font-style':'italic'}),
-                                ]),
+                            # # Geographical breakdown options
+                            # dbc.Col([
+                            #     html.H5("AHLE Geographic Scope", style=control_heading_style),
+                            #     dcc.RadioItems(id='select-geo-view-ecs2',
+                            #                   inline=True,                  # True: arrange buttons horizontally
+                            #                   inputStyle=Radio_input_style,
+                            #                   ),
+                            #     # Text underneath
+                            #     html.P("Subnational estimates are currently only available for cattle for 2021" ,style={'font-style':'italic'}),
+                            #     ]),
 
-                            # Subnational dropdwon
-                            dbc.Col([
-                                html.H5("Subnational state", id='select-region-ecs-title2'),
-                                dcc.Dropdown(id='select-region-ecs2',
-                                            options=ecs_region_options,
-                                            placeholder='Select Subnational...',
-                                            clearable = False,
-                                            ),
-                                ]),
+                            # # Subnational dropdwon
+                            # dbc.Col([
+                            #     html.H5("Subnational state", id='select-region-ecs-title2'),
+                            #     dcc.Dropdown(id='select-region-ecs2',
+                            #                 options=ecs_region_options,
+                            #                 placeholder='Select Subnational...',
+                            #                 clearable = False,
+                            #                 ),
+                            #     ]),
 
                             # END OF SECOND CONTROL ROW
                             ], justify='evenly'),
 
+
+                        html.Hr(style={'margin-right':'10px'}),
 
                         html.Br(),
 
@@ -1741,12 +1769,22 @@ gbadsDash.layout = html.Div([
                     style = {"height":"100vh",
                         },
                 children =[
+                    html.Label(["Showing the animal health loss envelope for each subnational state. Use the dropdown to view an individual item of revenue, expenditure, or gross margin instead."]),
+
+                    html.Br(),
+                    html.Hr(style={'margin-right':'10px',
+                                  'margin-top':'0px',
+                                  'margin-bottom':'5px'}),
+
             #### -- CONTROLS
             dbc.Card([
                 dbc.CardBody([
-                    html.H3("Subnational AHLE", style={'font-weight':"bold"}),
-                    html.Label(["Showing the animal health loss envelope for each subnational state. Use the dropdown to view an individual item of revenue, expenditure, or gross margin instead."]),
-                    html.Label(["Note: a subnational state will appear blank if there is no data for the selected production system there"] ,style={"font-style":"italic"}),
+                    html.Abbr("Subnational AHLE",
+                            className="Species_attr_title",
+                            title="NOTE: a subnational state will appear blank if there is no data for the selected production system there",
+                            style={"font-weight": "bold",
+                                   "font-size": "var(--pst-font-size-h3)",
+                                   }),
                     dbc.Row([
                         # Map Display
                         dbc.Col([
@@ -1812,6 +1850,12 @@ gbadsDash.layout = html.Div([
                 html.Label(["Estimating the total economic impact of each scenario for cattle and small ruminants using the ",
                             html.A('GTAP model.', href='https://www.gtap.agecon.purdue.edu/' ,target='_blank')  # target='_blank' to open in a new tab
                             ]),
+
+            html.Br(),
+            html.Hr(style={'margin-right':'10px',
+                          'margin-top':'0px',
+                          'margin-bottom':'5px'}),
+
             #### -- GRAPHICS
                 dbc.Col([
                     dbc.Spinner(children=[
@@ -4734,8 +4778,9 @@ def update_ahle_chart_ecs(
     Input('select-dd-4-attr-ecs','value'),
     Input('select-attr-display-ecs', 'value'),
     Input('select-year-ecs2', 'value'),
-    Input('select-geo-view-ecs2','value'),
-    Input('select-region-ecs2','value'),
+    Input('select-end-year-ecs2', 'value'),
+    # Input('select-geo-view-ecs2','value'),
+    # Input('select-region-ecs2','value'),
 )
 def update_attr_treemap_ecs(
         prodsys,
@@ -4748,8 +4793,9 @@ def update_attr_treemap_ecs(
         dd4_hierarchy,
         graph_options,
         selected_year,
-        geo_view,
-        region,
+        selected_end_year,
+        # geo_view,
+        # region,
     ):
     # Data
     input_df = ecs_ahle_all_withattr
@@ -4773,18 +4819,8 @@ def update_attr_treemap_ecs(
         input_df=input_df.loc[(input_df['production_system'] == prodsys)]
 
     # Species filter
-    # Goat and Sheep do not appear separately. These get all small ruminants results.
-    if species == 'Goat' or species == "Sheep":
-        input_df=input_df.loc[(input_df['species'] == 'All Small Ruminants')]
-        species_label = 'All Small Ruminants'
-
-    # Poultry subspecies do not appear separately. These get all poultry results.
-    elif species == 'Poultry hybrid' or species == "Poultry indigenous":
-        input_df=input_df.loc[(input_df['species'] == 'All Poultry')]
-        species_label = 'All Poultry'
-    else:
-        input_df=input_df.loc[(input_df['species'] == species)]
-        species_label = species
+    input_df=input_df.loc[(input_df['species'] == species)]
+    species_label = species
 
     # If currency is USD, use USD columns
     if currency == 'USD':
@@ -4843,6 +4879,9 @@ def update_attr_treemap_ecs(
     elif graph_options == "Bar":
         segment_by = top_lvl_hierarchy   # For now, segment bars by selected top level component
 
+        # Filter to selected start and end years
+        input_df = input_df.query('year >= @selected_year').query('year <= @selected_end_year')
+
         # Aggregate data to year and segment
         stackedbar_df = input_df.groupby(['year' ,segment_by])['mean'].sum().reset_index()
 
@@ -4853,12 +4892,16 @@ def update_attr_treemap_ecs(
             ,color=segment_by
             ,barmode='relative'
             )
+
         ecs_treemap_fig.update_layout(
             title_text=f'{reg_title} AHLE Attribution over time | {species_label}, {prodsys}<br><sup>by {segment_by}',
             font_size=15,
-            margin=dict(t=100)
+            margin=dict(t=100),
             )
-        ecs_treemap_fig.update_xaxes(title_text='')
+        ecs_treemap_fig.update_xaxes(title_text='',
+                                     ticklabelmode="period",
+                                     dtick = 1)
+
         if currency == 'Birr':
             ecs_treemap_fig.update_yaxes(title_text='Ethiopian Birr')
         elif currency == 'USD':

@@ -223,6 +223,13 @@ button{
 	border-bottom-color: transparent !important;
 }
 
+/* STILL TESTING TO REMOVE THE SPACES IN THE DATA VIER SUBTEXT*/
+.p {
+	margin-bottom: 0 !important;
+}
+
+
+
 /*------------------------------------------------------------------------------------------------------------------------------*/
 
 
