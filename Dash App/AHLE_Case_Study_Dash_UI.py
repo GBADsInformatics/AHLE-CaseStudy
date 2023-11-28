@@ -1323,7 +1323,6 @@ gbadsDash.layout = html.Div([
                     dbc.Col([
                         html.H5("AHLE Geographic Scope", style=control_heading_style),
                         dcc.RadioItems(id='select-geo-view-ecs',
-
                                       inline=True,                  # True: arrange buttons horizontally
                                       inputStyle=Radio_input_style,
                                       ),
@@ -2177,31 +2176,34 @@ def update_end_year_select_attr_ecs(start_year, graph):
 @gbadsDash.callback(
     Output('select-geo-view-ecs','options'),
     Output('select-geo-view-ecs','value'),
-    Input('select-graph-ahle-ecs','value'),
     Input('select-species-ecs','value'),
-    Input('select-year-ecs', 'value'),
+    # Input('select-graph-ahle-ecs','value'),
+    # Input('select-year-ecs', 'value'),
     )
-def update_geo_view_options_ecs(graph, species, year):
+def update_geo_view_options_ecs(species):#, graph, year):
     options = [
         {'label': "National", 'value': "National", 'disabled': False},
         {'label': "Subnational", 'value': "Subnational", 'disabled': False}  # Update Aug 2023: disabling subnational views as these scenarios are incomplete and cause missing values in attribution
         ]
     value='National'
 
-    # Disable controls if Over Time selected
-    if graph.upper() == 'OVER TIME':
-        for d in options:
-            d['disabled']=True
-
-    # Disable if any year outside 2021 is selected
-    if year != 2021:
-        for d in options:
-            d['disabled']=True
-
     # Disable if any species other than cattle is selected
     if species.upper() != 'CATTLE':
         for d in options:
             d['disabled']=True
+
+    # Disable controls if Over Time selected
+    # UPDATE: we now have placeholder values for subnational regions over time
+    # if graph.upper() == 'OVER TIME':
+    #     for d in options:
+    #         d['disabled']=True
+
+    # Disable if any year outside 2021 is selected
+    # UPDATE: we now have placeholder values for subnational regions over time
+    # if year != 2021:
+    #     for d in options:
+    #         d['disabled']=True
+
     return options, value
 
 # # Update agesex group options based on species
@@ -2396,15 +2398,16 @@ def update_ahle_graph_controls(graph, geo_view):
     options2 = ecs_region_options.copy()
 
     for d in options2:
-        if graph == 'Over Time':
-            block_vals = {'display': 'none'} # hide
-            block_title = {'display': 'none',
-                           "font-weight": "bold",
-                           "color": "#555555"}
-            value = ''
-            d['disabled']=True
+        # UPDATE: we now have placeholder values for subnational regions over time
+        # if graph == 'Over Time':
+        #     block_vals = {'display': 'none'} # hide
+        #     block_title = {'display': 'none',
+        #                    "font-weight": "bold",
+        #                    "color": "#555555"}
+        #     value = ''
+        #     d['disabled']=True
 
-        else:
+        # else:
             block_vals = {'display': 'block'}
             block_title = {'display': 'block',
                            "font-weight": "bold",

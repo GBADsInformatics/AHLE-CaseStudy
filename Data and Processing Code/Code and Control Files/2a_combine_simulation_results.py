@@ -940,7 +940,8 @@ yearly_adjustment = 1.05    # Desired yearly change in values
 vary_by_year = list(ahle_combo_adj.select_dtypes(include='float'))  # All columns of type Float
 
 # Turn data into list
-ahle_combo_adj_plhdyear = ahle_combo_adj.loc[ahle_combo_adj['region'] == 'National']    # Only creating yearly placeholders for national results, not regional
+# ahle_combo_adj_plhdyear = ahle_combo_adj.loc[ahle_combo_adj['region'] == 'National']    # Only creating yearly placeholders for national results, not regional
+ahle_combo_adj_plhdyear = ahle_combo_adj.copy()
 ahle_combo_adj_plhdyear_aslist = ahle_combo_adj_plhdyear.to_dict(orient='records')
 
 base_year = 2021
