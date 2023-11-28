@@ -1592,7 +1592,7 @@ gbadsDash.layout = html.Div([
                                                value='Tree Map',
                                                inputStyle=Radio_input_style,
                                                ),
-                                ]),
+                                ], width=4),
 
                             # Year selector
                             dbc.Col([
@@ -1601,7 +1601,7 @@ gbadsDash.layout = html.Div([
                                 dcc.Dropdown(id='select-year-ecs2',
                                              clearable = False,
                                              ),
-                                ]),
+                                ], width=2),
 
                             # End year selector (only visible for over time display)
                             dbc.Col([
@@ -1609,7 +1609,7 @@ gbadsDash.layout = html.Div([
                                 dcc.Dropdown(id='select-end-year-ecs2',
                                              clearable = False,
                                              ),
-                                ]),
+                                ], width=2),
 
                             # # Geographical breakdown options
                             # dbc.Col([
@@ -1633,7 +1633,7 @@ gbadsDash.layout = html.Div([
                             #     ]),
 
                             # END OF SECOND CONTROL ROW
-                            ], justify='evenly'),
+                            ], ),
 
 
                         html.Hr(style={'margin-right':'10px'}),
