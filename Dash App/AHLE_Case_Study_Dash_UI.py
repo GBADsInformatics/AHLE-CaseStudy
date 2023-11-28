@@ -894,26 +894,26 @@ gbadsDash.layout = html.Div([
 
     #### LANDING INTRO
     dbc.Row([
-                dbc.Col([
-                    # Dashboard title
-                    html.H1(id='bod-select-country-ecs-title',
-                            style={'color': '#F7931D',
-                                   "font-weight": "bold"}
-                            ),
-                    # Dashboard description
-                    html.P(['This interactive dashboard uses publicly available data in consultation with \
-                            experts to create models that provide a country-specific estimate of the \
-                            animal health loss envelope (AHLE). The tool will guide you through the calculations, \
-                            the outputs, and the scenarios that allow us to aid decision makers with regard to \
-                            animal health and production.'],
-                           style={'textAlign': 'center'}
-                           ),
-                    html.Label(id='population-dashboard-heading',
-                               style={'textAlign': 'center', 'font-style':'italic'}    # Centering not working?
-                               ),
-                    ], xs=12, sm=12, md=12, lg=9, xl=9)
-        ### END OF LANDING PAGE TAB
-         ], justify='center'),
+        dbc.Col([
+            # Dashboard title
+            html.H1(id='bod-select-country-ecs-title',
+                    style={'color': '#F7931D',
+                           "font-weight": "bold"}
+                    ),
+            # Dashboard description
+            html.P(['This interactive dashboard uses publicly available data in consultation with \
+                    experts to create models that provide a country-specific estimate of the \
+                    animal health loss envelope (AHLE). The tool will guide you through the calculations, \
+                    the outputs, and the scenarios that allow us to aid decision makers with regard to \
+                    animal health and production.'],
+                   style={'textAlign': 'center'}
+                   ),
+            html.Label(id='population-dashboard-heading',
+                       style={'textAlign': 'center', 'font-style':'italic'}    # Centering not working?
+                       ),
+            ], xs=12, sm=12, md=12, lg=9, xl=9)
+        ### END OF LANDING INTRO
+        ], justify='center'),
 
     #### TABS
     dbc.Tabs([
@@ -1300,7 +1300,7 @@ gbadsDash.layout = html.Div([
                                       inputStyle=Radio_input_style,
                                       ),
                         # Text underneath
-                        html.P("Estimates for any year other than 2021 are currently placeholders" ,style={'font-style':'italic'}),
+                        html.P("Estimates for any year other than 2021 are currently placeholders." ,style={'font-style':'italic'}),
                         ]),
 
                     # Year selector
@@ -1309,7 +1309,7 @@ gbadsDash.layout = html.Div([
                         dcc.Dropdown(id='select-year-ecs',
                                      clearable = False,
                                      ),
-                        ]),
+                        ], width=2),
 
                     # End year selector (only visible for over time display)
                     dbc.Col([
@@ -1317,7 +1317,7 @@ gbadsDash.layout = html.Div([
                         dcc.Dropdown(id='select-end-year-ecs',
                                      clearable = False,
                                      ),
-                        ]),
+                        ], width=2),
 
                     # Geographical breakdown options
                     dbc.Col([
@@ -1327,7 +1327,7 @@ gbadsDash.layout = html.Div([
                                       inputStyle=Radio_input_style,
                                       ),
                         # Text underneath
-                        html.P("Subnational estimates are currently only available for cattle for 2021" ,style={'font-style':'italic'}),
+                        html.P("Subnational estimates are currently only available for cattle." ,style={'font-style':'italic'}),
                         ]),
 
                     # Subnational dropdwon
@@ -1605,7 +1605,7 @@ gbadsDash.layout = html.Div([
                                             dcc.Dropdown(id='select-year-ecs-attr',
                                                          clearable = False,
                                                          ),
-                                            ], width=1),
+                                            ], width=2),
 
                                         # End year selector (only visible for over time display)
                                         dbc.Col([
@@ -1613,7 +1613,7 @@ gbadsDash.layout = html.Div([
                                             dcc.Dropdown(id='select-end-year-ecs-attr',
                                                           clearable = False,
                                                           ),
-                                            ], width=1),
+                                            ], width=2),
                                         ]),
 
                                     html.H5("Segment by...", style={'font-weight':"bold"}),
