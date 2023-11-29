@@ -95,7 +95,7 @@ Radio_input_style = {"margin-right":"2px",     # This pulls the words off of the
                      }
 
 # =============================================================================
-#### Read data
+#### Folder locations
 # =============================================================================
 # Define folder location
 CWD = os.getcwd()
@@ -113,9 +113,9 @@ else:
     # Output folders:
     ECS_PROGRAM_OUTPUT_FOLDER = os.path.join(GBADsLiverpool, Data_and_Processing_Code, "Program outputs")
 
-# -----------------------------------------------------------------------------
-# Ethiopia Case Study
-# -----------------------------------------------------------------------------
+# =============================================================================
+#### Read data
+# =============================================================================
 # Compartmental model results summary
 ecs_ahle_summary = pd.read_csv(os.path.join(DASH_DATA_FOLDER ,'ahle_all_summary.csv'))
 
@@ -366,14 +366,80 @@ ecs_display_options = [{'label': i, 'value': i, 'disabled': False} for i in ["Si
                                                                               "Difference",
                                                                             ]]
 
-# Item
+# Select items to show for gross margin - depends on species
+# All species
+grossmargin_components_all = (
+    'Value of Offtake',
+    'Value of Herd Increase',
+    'Value of Draught',
+    'Value of Milk',
+    'Value of Manure',
+    'Value of Hides',
+    'Value of Eggs consumed',
+    'Value of Eggs sold',
+    'Expenditure on Feed',
+    'Expenditure on Labour',
+    'Expenditure on Health',
+    # May 2023: Wudu does not want housing and captial expenses in waterfall chart
+    # 'Expenditure on Housing',
+    # 'Expenditure on Capital',
+    'Gross Margin'
+)
+
+# Cattle have draught, do not have eggs
+grossmargin_components_cattle = (
+    'Value of Offtake',
+    'Value of Herd Increase',
+    'Value of Draught',
+    'Value of Milk',
+    'Value of Manure',
+    'Value of Hides',
+    'Expenditure on Feed',
+    'Expenditure on Labour',
+    'Expenditure on Health',
+    # May 2023: Wudu does not want housing and captial expenses in waterfall chart
+    # 'Expenditure on Housing',
+    # 'Expenditure on Capital',
+    'Gross Margin'
+)
+
+# Poultry have value of eggs, do not have manure or hides
+grossmargin_components_poultry = (
+    'Value of Offtake',
+    'Value of Herd Increase',
+    'Value of Eggs consumed',
+    'Value of Eggs sold',
+    'Expenditure on Feed',
+    'Expenditure on Labour',
+    'Expenditure on Health',
+    # May 2023: Wudu does not want housing and captial expenses in waterfall chart
+    # 'Expenditure on Housing',
+    # 'Expenditure on Capital',
+    'Gross Margin'
+)
+
+# Small Ruminants do not have draught or eggs
+grossmargin_components_smallrum = (
+    'Value of Offtake',
+    'Value of Herd Increase',
+    'Value of Milk',
+    'Value of Manure',
+    'Value of Hides',
+    'Expenditure on Feed',
+    'Expenditure on Labour',
+    'Expenditure on Health',
+    # May 2023: Wudu does not want housing and captial expenses in waterfall chart
+    # 'Expenditure on Housing',
+    # 'Expenditure on Capital',
+    'Gross Margin'
+)
 
 # Compare
 ecs_compare_options = [{'label': i, 'value': i, 'disabled': False} for i in ["Ideal",
                                                                              "Zero Mortality",
                                                                              "Improvement"
                                                                              ]]
-# August 2023: updated scenarios do not include zero mortality or improvement
+# August 2023: updated scenarios do not include zero mortality
 ecs_compare_options_limited = [
     {'label': "Ideal", 'value': "Ideal", 'disabled': False}
     # ,{'label': "Zero Mortality", 'value': "Zero Mortality", 'disabled': True}
@@ -1349,7 +1415,7 @@ gbadsDash.layout = html.Div([
                     dbc.Col([
                         html.Abbr("AHLE Geographic Scope",
                                 className="Species_attr_title",
-                                title="Subnational estimates are currently only available for cattle. Estimates for any year other than 2021 are currently placeholders.",
+                                title="Subnational estimates are currently only available for cattle",
                                 style={"font-weight": "bold",
                                        "color": "#555555",
                                        "font-size": "var(--pst-font-size-h5)",
@@ -2556,64 +2622,13 @@ def update_ahle_graph_controls(graph, geo_view):
 def update_item_dropdown_ecs(graph, species):
     # Filters Items to display based on species selected
     if species.upper() == "CATTLE":     # Cattle have draught
-        item_options = ('Gross Margin',
-                        'Value of Offtake',
-                        'Value of Herd Increase',
-                        'Value of Draught',
-                        'Value of Milk',
-                        'Value of Manure',
-                        'Value of Hides',
-                        'Expenditure on Feed',
-                        'Expenditure on Labour',
-                        'Expenditure on Health',
-                        # May 2023: Wudu does not want housing and captial expenses in waterfall chart
-                        # 'Expenditure on Housing',
-                        # 'Expenditure on Capital',
-                        )
+        item_options = grossmargin_components_cattle
     elif 'POULTRY' in species.upper():   # Poultry have value of eggs, do not have manure or hides
-        item_options = ('Gross Margin',
-                        'Value of Offtake',
-                        'Value of Herd Increase',
-                        'Value of Eggs consumed',
-                        'Value of Eggs sold',
-                        'Expenditure on Feed',
-                        'Expenditure on Labour',
-                        'Expenditure on Health',
-                        # May 2023: Wudu does not want housing and captial expenses in waterfall chart
-                        # 'Expenditure on Housing',
-                        # 'Expenditure on Capital',
-                        )
+        item_options = grossmargin_components_poultry
     elif species.upper() in ['GOAT', 'SHEEP', 'ALL SMALL RUMINANTS']:   # Small Ruminants
-        item_options = ('Gross Margin',
-                        'Value of Offtake',
-                        'Value of Herd Increase',
-                        'Value of Milk',
-                        'Value of Manure',
-                        'Value of Hides',
-                        'Expenditure on Feed',
-                        'Expenditure on Labour',
-                        'Expenditure on Health',
-                        # May 2023: Wudu does not want housing and captial expenses in waterfall chart
-                        # 'Expenditure on Housing',
-                        # 'Expenditure on Capital',
-                        )
+        item_options = grossmargin_components_smallrum
     else:   # All species
-        item_options = ('Gross Margin',
-                        'Value of Offtake',
-                        'Value of Herd Increase',
-                        'Value of Draught',
-                        'Value of Milk',
-                        'Value of Manure',
-                        'Value of Hides',
-                        'Value of Eggs consumed',
-                        'Value of Eggs sold',
-                        'Expenditure on Feed',
-                        'Expenditure on Labour',
-                        'Expenditure on Health',
-                        # May 2023: Wudu does not want housing and captial expenses in waterfall chart
-                        # 'Expenditure on Housing',
-                        # 'Expenditure on Capital',
-                        )
+        item_options = grossmargin_components_all
 
     # Build dictionary
     options=[]
@@ -3274,60 +3289,13 @@ def update_ecs_attr_expert_data(species):
 
     # # Select items to show - depends on species
     # if species.upper() == "CATTLE":     # Cattle have draught
-    #     waterfall_plot_items = ('Value of Offtake',
-    #                              'Value of Herd Increase',
-    #                              'Value of Draught',
-    #                              'Value of Milk',
-    #                              'Value of Manure',
-    #                              'Value of Hides',
-    #                              'Expenditure on Feed',
-    #                              'Expenditure on Labour',
-    #                              'Expenditure on Health',
-    #                              # May 2023: Wudu does not want housing and captial expenses in waterfall chart
-    #                              # 'Expenditure on Housing',
-    #                              # 'Expenditure on Capital',
-    #                              'Gross Margin')
+    #     waterfall_plot_items = grossmargin_components_cattle
     # elif 'POULTRY' in species.upper():   # Poultry have value of eggs, do not have manure or hides
-    #     waterfall_plot_items = ('Value of Offtake',
-    #                              'Value of Herd Increase',
-    #                              'Value of Eggs consumed',
-    #                              'Value of Eggs sold',
-    #                              'Expenditure on Feed',
-    #                              'Expenditure on Labour',
-    #                              'Expenditure on Health',
-    #                              # May 2023: Wudu does not want housing and captial expenses in waterfall chart
-    #                              # 'Expenditure on Housing',
-    #                              # 'Expenditure on Capital',
-    #                              'Gross Margin')
+    #     waterfall_plot_items = grossmargin_components_poultry
     # elif species.upper() in ['GOAT', 'SHEEP', 'ALL SMALL RUMINANTS']:   # Small Ruminants
-    #     waterfall_plot_items = ('Value of Offtake',
-    #                              'Value of Herd Increase',
-    #                              'Value of Milk',
-    #                              'Value of Manure',
-    #                              'Value of Hides',
-    #                              'Expenditure on Feed',
-    #                              'Expenditure on Labour',
-    #                              'Expenditure on Health',
-    #                              # May 2023: Wudu does not want housing and captial expenses in waterfall chart
-    #                              # 'Expenditure on Housing',
-    #                              # 'Expenditure on Capital',
-    #                              'Gross Margin')
+    #     waterfall_plot_items = grossmargin_components_smallrum
     # else:   # All species
-    #     waterfall_plot_items = ('Value of Offtake',
-    #                              'Value of Herd Increase',
-    #                              'Value of Draught',
-    #                              'Value of Milk',
-    #                              'Value of Manure',
-    #                              'Value of Hides',
-    #                              'Value of Eggs consumed',
-    #                              'Value of Eggs sold',
-    #                              'Expenditure on Feed',
-    #                              'Expenditure on Labour',
-    #                              'Expenditure on Health',
-    #                              # May 2023: Wudu does not want housing and captial expenses in waterfall chart
-    #                              # 'Expenditure on Housing',
-    #                              # 'Expenditure on Capital',
-    #                              'Gross Margin')
+    #     waterfall_plot_items = grossmargin_components_all
 
     # waterfall_plot_items_upper = [i.upper() for i in waterfall_plot_items]
     # prep_df = prep_df.loc[prep_df['item'].str.upper().isin(waterfall_plot_items_upper)]
@@ -4015,60 +3983,13 @@ def update_ahle_chart_ecs(
 
         # Select items to show - depends on species
         if species.upper() == "CATTLE":     # Cattle have draught
-            bar_chart_plot_items = ('Value of Offtake',
-                                     'Value of Herd Increase',
-                                     'Value of Draught',
-                                     'Value of Milk',
-                                     'Value of Manure',
-                                     'Value of Hides',
-                                     'Expenditure on Feed',
-                                     'Expenditure on Labour',
-                                     'Expenditure on Health',
-                                     # May 2023: Wudu does not want housing and captial expenses in waterfall chart
-                                     # 'Expenditure on Housing',
-                                     # 'Expenditure on Capital',
-                                     'Gross Margin')
-        elif 'POULTRY' in species.upper():   # Poultry have value of eggs, do not have manure or hides
-            bar_chart_plot_items = ('Value of Offtake',
-                                     'Value of Herd Increase',
-                                     'Value of Eggs consumed',
-                                     'Value of Eggs sold',
-                                     'Expenditure on Feed',
-                                     'Expenditure on Labour',
-                                     'Expenditure on Health',
-                                     # May 2023: Wudu does not want housing and captial expenses in waterfall chart
-                                     # 'Expenditure on Housing',
-                                     # 'Expenditure on Capital',
-                                     'Gross Margin')
+            bar_chart_plot_items = grossmargin_components_cattle
+        elif 'POULTRY' in species.upper():  # Poultry have value of eggs, do not have manure or hides
+            bar_chart_plot_items = grossmargin_components_poultry
         elif species.upper() in ['GOAT', 'SHEEP', 'ALL SMALL RUMINANTS']:   # Small Ruminants
-            bar_chart_plot_items = ('Value of Offtake',
-                                     'Value of Herd Increase',
-                                     'Value of Milk',
-                                     'Value of Manure',
-                                     'Value of Hides',
-                                     'Expenditure on Feed',
-                                     'Expenditure on Labour',
-                                     'Expenditure on Health',
-                                     # May 2023: Wudu does not want housing and captial expenses in waterfall chart
-                                     # 'Expenditure on Housing',
-                                     # 'Expenditure on Capital',
-                                     'Gross Margin')
+            bar_chart_plot_items = grossmargin_components_smallrum
         else:   # All species
-            bar_chart_plot_items = ('Value of Offtake',
-                                     'Value of Herd Increase',
-                                     'Value of Draught',
-                                     'Value of Milk',
-                                     'Value of Manure',
-                                     'Value of Hides',
-                                     'Value of Eggs consumed',
-                                     'Value of Eggs sold',
-                                     'Expenditure on Feed',
-                                     'Expenditure on Labour',
-                                     'Expenditure on Health',
-                                     # May 2023: Wudu does not want housing and captial expenses in waterfall chart
-                                     # 'Expenditure on Housing',
-                                     # 'Expenditure on Capital',
-                                     'Gross Margin')
+            bar_chart_plot_items = grossmargin_components_all
 
         bar_chart_plot_items_upper = [i.upper() for i in bar_chart_plot_items]
         prep_df = prep_df.loc[prep_df['item'].str.upper().isin(bar_chart_plot_items_upper)]
@@ -4197,9 +4118,9 @@ def update_ahle_chart_ecs(
                     ),
                 )
 
+                # Add current with lag
                 y = prep_df['mean_current']
 
-                # Add current with lag
                 prep_df["Color"] = np.where(y<0, '#E88A81', '#77B3DB')
                 prep_df["Color"] = np.where((x=='Gross Margin (AHLE)') | (x=='Gross Margin'), '#F7931D', prep_df["Color"])
 
@@ -4447,60 +4368,13 @@ def update_ahle_chart_ecs(
 
         # Select items to show - depends on species
         if species.upper() == "CATTLE":     # Cattle have draught
-            waterfall_plot_items = ('Value of Offtake',
-                                     'Value of Herd Increase',
-                                     'Value of Draught',
-                                     'Value of Milk',
-                                     'Value of Manure',
-                                     'Value of Hides',
-                                     'Expenditure on Feed',
-                                     'Expenditure on Labour',
-                                     'Expenditure on Health',
-                                     # May 2023: Wudu does not want housing and captial expenses in waterfall chart
-                                     # 'Expenditure on Housing',
-                                     # 'Expenditure on Capital',
-                                     'Gross Margin')
-        elif 'POULTRY' in species.upper():   # Poultry have value of eggs, do not have manure or hides
-            waterfall_plot_items = ('Value of Offtake',
-                                     'Value of Herd Increase',
-                                     'Value of Eggs consumed',
-                                     'Value of Eggs sold',
-                                     'Expenditure on Feed',
-                                     'Expenditure on Labour',
-                                     'Expenditure on Health',
-                                     # May 2023: Wudu does not want housing and captial expenses in waterfall chart
-                                     # 'Expenditure on Housing',
-                                     # 'Expenditure on Capital',
-                                     'Gross Margin')
+            waterfall_plot_items = grossmargin_components_cattle
+        elif 'POULTRY' in species.upper():  # Poultry have value of eggs, do not have manure or hides
+            waterfall_plot_items = grossmargin_components_poultry
         elif species.upper() in ['GOAT', 'SHEEP', 'ALL SMALL RUMINANTS']:   # Small Ruminants
-            waterfall_plot_items = ('Value of Offtake',
-                                     'Value of Herd Increase',
-                                     'Value of Milk',
-                                     'Value of Manure',
-                                     'Value of Hides',
-                                     'Expenditure on Feed',
-                                     'Expenditure on Labour',
-                                     'Expenditure on Health',
-                                     # May 2023: Wudu does not want housing and captial expenses in waterfall chart
-                                     # 'Expenditure on Housing',
-                                     # 'Expenditure on Capital',
-                                     'Gross Margin')
+            waterfall_plot_items = grossmargin_components_smallrum
         else:   # All species
-            waterfall_plot_items = ('Value of Offtake',
-                                     'Value of Herd Increase',
-                                     'Value of Draught',
-                                     'Value of Milk',
-                                     'Value of Manure',
-                                     'Value of Hides',
-                                     'Value of Eggs consumed',
-                                     'Value of Eggs sold',
-                                     'Expenditure on Feed',
-                                     'Expenditure on Labour',
-                                     'Expenditure on Health',
-                                     # May 2023: Wudu does not want housing and captial expenses in waterfall chart
-                                     # 'Expenditure on Housing',
-                                     # 'Expenditure on Capital',
-                                     'Gross Margin')
+            waterfall_plot_items = grossmargin_components_all
 
         waterfall_plot_items_upper = [i.upper() for i in waterfall_plot_items]
         prep_df = prep_df.loc[prep_df['item'].str.upper().isin(waterfall_plot_items_upper)]
