@@ -1377,83 +1377,98 @@ gbadsDash.layout = html.Div([
 
                 html.Br(),
 
-                #### -- BAR CHART AND CONTROLS
+                #### -- AHLE CHART AND CONTROLS
                 dbc.Row([  # Row with GRAPHICS
                     # CONTROLS
-                     dbc.Col([
-                         dbc.Card([
-                             dbc.CardBody([
-                                 html.H5("Animal Health Loss Envelope (AHLE)",
-                                         className="card-title",
-                                         style={"font-weight": "bold"}
-                                         ),
-                                 html.Label(["Comparing current values, expenditures, and gross margin to the ideal. Note that the ideal values and expenditures describe the system in an ideal state (for example, zero health expenditure); they do not describe what is required to achieve that state."]),
-                                 dbc.Row([
-                                     # Switch between side by side and difference
-                                     dbc.Col([
-                                         html.H6(id='select-display-ecs-title', style=control_heading_style),
-                                         dcc.RadioItems(id='select-display-ecs',
-                                                       options=ecs_display_options,
-                                                       value='Side by Side',
-                                                       labelStyle={'display': 'block'},
-                                                       inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
-                                                       ),
-                                         html.Label(["Side by Side: show two bars for each item, one for current and another for the ideal value"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
-                                         html.Label(["Difference: show a single bar for each item representing the difference between the current and ideal values"] ,style={'font-style':'italic'}),
-                                         ]),
+                      dbc.Col([
+                     #     dbc.Button(
+                     #        "Open collapse",
+                     #        id="collapse-button",
+                     #        className="mb-3",
+                     #        color="primary",
+                     #        n_clicks=0,
+                     #    ),
+                     #     # Collapse card info
+                     #     dbc.Collapse(
+                             dbc.Card([
+                                 dbc.CardBody([
+                                     html.H5("Animal Health Loss Envelope (AHLE)",
+                                             className="card-title",
+                                             style={"font-weight": "bold"}
+                                             ),
+                                     html.Label(["Comparing current values, expenditures, and gross margin to the ideal. Note that the ideal values and expenditures describe the system in an ideal state (for example, zero health expenditure); they do not describe what is required to achieve that state."]),
+                                     dbc.Row([
+                                         # Switch between side by side and difference
+                                         dbc.Col([
+                                             html.H6(id='select-display-ecs-title', style=control_heading_style),
+                                             dcc.RadioItems(id='select-display-ecs',
+                                                           options=ecs_display_options,
+                                                           value='Side by Side',
+                                                           labelStyle={'display': 'block'},
+                                                           inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
+                                                           ),
+                                             html.Label(["Side by Side: show two bars for each item, one for current and another for the ideal value"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
+                                             html.Label(["Difference: show a single bar for each item representing the difference between the current and ideal values"] ,style={'font-style':'italic'}),
+                                             ]),
 
-                                     # Compare
-                                     dbc.Col([
-                                         html.H6("Compare current to...", id='select-compare-ecs-title', style=control_heading_style),
-                                         dcc.RadioItems(id='select-compare-ecs',
-                                                       options=ecs_compare_options_limited,
-                                                       value='Ideal',
-                                                       labelStyle={'display': 'block'},
-                                                       inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
-                                                       ),
-                                         html.Label(["Ideal: zero mortality and ideal growth and production rates"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
-                                         # html.Label(["Zero Mortality: zero mortality but growth and production rates at current levels"] ,style={'font-style':'italic'}),
-                                         html.Label(["Improvement: marginal improvement in mortality, growth, or production rates"] ,style={'font-style':'italic'}),
-                                         ]),
+                                         # Compare
+                                         dbc.Col([
+                                             html.H6("Compare current to...", id='select-compare-ecs-title', style=control_heading_style),
+                                             dcc.RadioItems(id='select-compare-ecs',
+                                                           options=ecs_compare_options_limited,
+                                                           value='Ideal',
+                                                           labelStyle={'display': 'block'},
+                                                           inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
+                                                           ),
+                                             html.Label(["Ideal: zero mortality and ideal growth and production rates"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
+                                             # html.Label(["Zero Mortality: zero mortality but growth and production rates at current levels"] ,style={'font-style':'italic'}),
+                                             html.Label(["Improvement: marginal improvement in mortality, growth, or production rates"] ,style={'font-style':'italic'}),
+                                             ]),
 
-                                 ]), # END OF ROW
-                                 dbc.Row([
-                                     dbc.Col([
-                                         html.H6("Item", id='select-item-ecs-title', style=control_heading_style),
-                                         dcc.Dropdown(id='select-item-ecs',
-                                                     value='Gross Margin',
-                                                     clearable = False,
-                                                     ),
-                                         ]),
+                                     ]), # END OF ROW
+                                     dbc.Row([
+                                         dbc.Col([
+                                             html.H6("Item", id='select-item-ecs-title', style=control_heading_style),
+                                             dcc.Dropdown(id='select-item-ecs',
+                                                         value='Gross Margin',
+                                                         clearable = False,
+                                                         ),
+                                             ]),
 
-                                     # Factor dropdown
-                                     dbc.Col([
-                                         html.H6("Improvement Factor", id='select-factor-ecs-title', style=control_heading_style),
-                                         dcc.Dropdown(id='select-factor-ecs',
-                                                       options=ecs_factor_options,
-                                                       value='Mortality',
-                                                       clearable = True,
-                                                       ),
-                                           ],width=4,
-                                         ),
+                                         # Factor dropdown
+                                         dbc.Col([
+                                             html.H6("Improvement Factor", id='select-factor-ecs-title', style=control_heading_style),
+                                             dcc.Dropdown(id='select-factor-ecs',
+                                                           options=ecs_factor_options,
+                                                           value='Mortality',
+                                                           clearable = True,
+                                                           ),
+                                               ],width=4,
+                                             ),
 
-                                     # Reduction
-                                     dbc.Col([
-                                         html.H6("Improvement Amount", id='select-improve-ecs-title', style=control_heading_style),
-                                         dcc.RadioItems(id='select-improve-ecs',
-                                                       options=ecs_improve_options,
-                                                       value= "25%",
-                                                       inputStyle=Radio_input_style,
-                                                       ),
-                                         ]),
-                                     ]),     ## END OF ROW ##
-                                 ]),    # END OF CARD BODY
-                             ], color='#F2F2F2'),    # END OF CARD
+                                         # Reduction
+                                         dbc.Col([
+                                             html.H6("Improvement Amount", id='select-improve-ecs-title', style=control_heading_style),
+                                             dcc.RadioItems(id='select-improve-ecs',
+                                                           options=ecs_improve_options,
+                                                           value= "25%",
+                                                           inputStyle=Radio_input_style,
+                                                           ),
+                                             ]),
+                                         ]),     ## END OF ROW ##
+                                     ]),    # END OF CARD BODY
+                                 ], color='#F2F2F2'),    # END OF CARD
 
-                             dbc.Col([   # Waterfall footnote
-                                 html.P("Blue indicates an increase, red indicates a decrease for each item. Orange is the net value of all of them.", id="waterfall-footnote-ecs"),
-                                 html.P("Error bars show 95% confidence interval for each item based on simulation results. These reflect uncertainty in the input parameters and natural variation in the population."),
-                             ]),
+                             # id="collapse",
+                             # is_open=False,
+                             # # dimension="width", # horizontal collapse
+                             # ), # END OF COLLAPSE
+
+                                dbc.Col([   # Waterfall footnote
+                                    html.P("Blue indicates an increase, red indicates a decrease for each item. Orange is the net value of all of them.", id="waterfall-footnote-ecs"),
+                                    html.P("Error bars show 95% confidence interval for each item based on simulation results. These reflect uncertainty in the input parameters and natural variation in the population."),
+                                ]),
+
                         # End of CONTROLS COL
                          ],  width=4),
 
@@ -2735,6 +2750,17 @@ def update_footnote(graph):
         block = {'display': 'none'} # hide
 
     return block
+
+# Collapse AHLE graph controls
+@app.callback(
+    Output("collapse", "is_open"),
+    [Input("collapse-button", "n_clicks")],
+    [State("collapse", "is_open")],
+)
+def toggle_collapse(n, is_open):
+    if n:
+        return not is_open
+    return is_open
 
 # # TEST callback for drag and drop option
 # clientside_callback(
