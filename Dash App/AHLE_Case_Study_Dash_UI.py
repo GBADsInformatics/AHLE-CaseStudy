@@ -4047,18 +4047,18 @@ def update_ahle_chart_ecs(
             else:
                 hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} <extra></extra>'
 
-            # Scale standard deviation to achieve 95% confidence
-            stdev = 1.96 * stdev    # Simulation results are Normally distributed
             # Add trace for error
+            # Scale standard deviation to achieve 95% confidence
+            scaled_stdev = 1.96 * stdev    # Simulation results are Normally distributed
             ecs_waterfall_fig.add_trace(
                 go.Scatter(
                      x=x,
                      y=y,
                      marker=dict(color='black'),
-                     customdata=np.stack((y, prep_df['item'], stdev), axis=-1),
+                     customdata=np.stack((y, prep_df['item'], scaled_stdev), axis=-1),
                      error_y=dict(
                         type='data',
-                        array=stdev
+                        array=scaled_stdev
                         ),
                      mode="markers",
                      hoverinfo='none',
@@ -4098,18 +4098,18 @@ def update_ahle_chart_ecs(
                 else:
                     hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} <extra></extra>'
 
-                # Scale standard deviation to achieve 95% confidence
-                stdev = 1.96 * stdev    # Simulation results are Normally distributed
                 # Add trace for error
+                # Scale standard deviation to achieve 95% confidence
+                scaled_stdev = 1.96 * stdev    # Simulation results are Normally distributed
                 ecs_waterfall_fig.add_trace(
                     go.Scatter(
                          x=x_len-.2,
                          y=y,
                          marker=dict(color='black'),
-                         customdata=np.stack((y, prep_df['item'], stdev), axis=-1),
+                         customdata=np.stack((y, prep_df['item'], scaled_stdev), axis=-1),
                          error_y=dict(
                             type='data',
-                            array=stdev
+                            array=scaled_stdev
                             ),
                          mode="markers",
                          showlegend=False,
@@ -4120,6 +4120,7 @@ def update_ahle_chart_ecs(
 
                 # Add current with lag
                 y = prep_df['mean_current']
+                stdev = prep_df['stdev_current']
 
                 prep_df["Color"] = np.where(y<0, '#E88A81', '#77B3DB')
                 prep_df["Color"] = np.where((x=='Gross Margin (AHLE)') | (x=='Gross Margin'), '#F7931D', prep_df["Color"])
@@ -4135,7 +4136,6 @@ def update_ahle_chart_ecs(
                     hovertemplate_bar=('%{customdata[1]}' +
                                       '<br>%{customdata[0]:,.0f} <extra></extra>')
 
-                # y = prep_df['mean_current']
                 ecs_waterfall_fig.add_trace(go.Bar(
                     name = 'Current (x)',
                     x = x_len,
@@ -4148,20 +4148,21 @@ def update_ahle_chart_ecs(
 
                 # Add error bars
                 # Reset indicies
-                y = prep_df['mean_current']
                 x = x.reset_index(drop=True)
                 y = y.reset_index(drop=True)
 
                 # Add trace for error
+                # Scale standard deviation to achieve 95% confidence
+                scaled_stdev = 1.96 * stdev    # Simulation results are Normally distributed
                 ecs_waterfall_fig.add_trace(
                     go.Scatter(
                          x=x_len+.2,
                          y=y,
                          marker=dict(color='black'),
-                         customdata=np.stack((y, prep_df['item'], prep_df['stdev_current']), axis=-1),
+                         customdata=np.stack((y, prep_df['item'], scaled_stdev), axis=-1),
                          error_y=dict(
                              type='data',
-                             array=prep_df['stdev_current']
+                             array=scaled_stdev
                              ),
                          mode="markers",
                          name='95% Confidence',
@@ -4191,7 +4192,7 @@ def update_ahle_chart_ecs(
             #     y = y.reset_index(drop=True)
 
             #     # Scale standard deviation to achieve 95% confidence
-            #     stdev = 1.96 * stdev    # Simulation results are Normally distributed
+            #     scaled_stdev = 1.96 * stdev    # Simulation results are Normally distributed
             #     # Add trace for error
             #     ecs_waterfall_fig.add_trace(
             #         go.Scatter(
@@ -4201,7 +4202,7 @@ def update_ahle_chart_ecs(
             #             customdata=np.stack((y, prep_df['item']), axis=-1),
             #             error_y=dict(
             #                 type='data',
-            #                 array=stdev
+            #                 array=scaled_stdev
             #             ),
             #             mode="markers",
             #             showlegend=False
@@ -4222,10 +4223,13 @@ def update_ahle_chart_ecs(
             #     # Add error bars
             #     # Reset indicies
             #     y = prep_df['mean_current']
+            #     stdev = prep_df['stdev_current']
             #     x = x.reset_index(drop=True)
             #     y = y.reset_index(drop=True)
 
             #     # Add trace for error
+            #     # Scale standard deviation to achieve 95% confidence
+            #     scaled_stdev = 1.96 * stdev    # Simulation results are Normally distributed
             #     ecs_waterfall_fig.add_trace(
             #         go.Scatter(
             #              x=x_len+.2,
@@ -4234,7 +4238,7 @@ def update_ahle_chart_ecs(
             #             customdata=np.stack((y, prep_df['item']), axis=-1),
             #              error_y=dict(
             #                 type='data',
-            #                 array=prep_df['stdev_current']
+            #                 array=scaled_stdev
             #             ),
             #             mode="markers",
             #             name='95% Confidence'
@@ -4290,18 +4294,18 @@ def update_ahle_chart_ecs(
                 else:
                     hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} <extra></extra>'
 
-                # Scale standard deviation to achieve 95% confidence
-                stdev = 1.96 * stdev    # Simulation results are Normally distributed
                 # Add trace for error
+                # Scale standard deviation to achieve 95% confidence
+                scaled_stdev = 1.96 * stdev    # Simulation results are Normally distributed
                 ecs_waterfall_fig.add_trace(
                     go.Scatter(
                          x=x_len-.2,
                          y=y,
                         marker=dict(color='black'),
-                        customdata=np.stack((y, prep_df['item'], stdev), axis=-1),
+                        customdata=np.stack((y, prep_df['item'], scaled_stdev), axis=-1),
                          error_y=dict(
                             type='data',
-                            array=stdev
+                            array=scaled_stdev
                         ),
                         mode="markers",
                         showlegend=False,
@@ -4324,19 +4328,22 @@ def update_ahle_chart_ecs(
                 # Add error bars
                 # Reset indicies
                 y = prep_df['mean_current']
+                stdev = prep_df['stdev_current']
                 x = x.reset_index(drop=True)
                 y = y.reset_index(drop=True)
 
                 # Add trace for error
+                # Scale standard deviation to achieve 95% confidence
+                scaled_stdev = 1.96 * stdev    # Simulation results are Normally distributed
                 ecs_waterfall_fig.add_trace(
                     go.Scatter(
                          x=x_len+.2,
                          y=y,
                         marker=dict(color='black'),
-                        customdata=np.stack((y, prep_df['item'], prep_df['stdev_current']), axis=-1),
+                        customdata=np.stack((y, prep_df['item'], scaled_stdev), axis=-1),
                          error_y=dict(
                             type='data',
-                            array=prep_df['stdev_current']
+                            array=scaled_stdev
                         ),
                         mode="markers",
                         name='95% Confidence',
@@ -4437,7 +4444,7 @@ def update_ahle_chart_ecs(
                 hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} <extra></extra>'
 
             # Scale standard deviation to achieve 95% confidence
-            stdev = 1.96 * stdev    # Simulation results are Normally distributed
+            scaled_stdev = 1.96 * stdev    # Simulation results are Normally distributed
 
             # Get cumulative sum value for Y unless Gross Margin
             y_error_sum=[]
@@ -4453,10 +4460,10 @@ def update_ahle_chart_ecs(
                      x=x,
                      y=y_error_sum,
                      marker=dict(color='black'),
-                     customdata=np.stack((y, prep_df['item'], stdev), axis=-1),
+                     customdata=np.stack((y, prep_df['item'], scaled_stdev), axis=-1),
                      error_y=dict(
                         type='data',
-                        array=stdev
+                        array=scaled_stdev
                         ),
                      mode="markers",
 					 hoverinfo='none',
@@ -4496,7 +4503,7 @@ def update_ahle_chart_ecs(
                     hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} <extra></extra>'
 
                 # Scale standard deviation to achieve 95% confidence
-                stdev = 1.96 * stdev    # Simulation results are Normally distributed
+                scaled_stdev = 1.96 * stdev    # Simulation results are Normally distributed
 
                 # Get cumulative sum value for Y unless Gross Margin
                 y_error_sum=[]
@@ -4512,10 +4519,10 @@ def update_ahle_chart_ecs(
                          x=x_len-.3,
                          y=y_error_sum,
                          marker=dict(color='black'),
-                         customdata=np.stack((y, prep_df['item'], stdev), axis=-1),
+                         customdata=np.stack((y, prep_df['item'], scaled_stdev), axis=-1),
                          error_y=dict(
                             type='data',
-                            array=stdev
+                            array=scaled_stdev
                             ),
                          mode="markers",
                          showlegend=False,
@@ -4551,6 +4558,7 @@ def update_ahle_chart_ecs(
                 # Add error bars
                 # Reset indicies
                 y = prep_df['mean_current']
+                stdev = prep_df['stdev_current']
                 x = x.reset_index(drop=True)
                 y = y.reset_index(drop=True)
                 # Get cumulative sum value for Y unless Gross Margin
@@ -4563,15 +4571,17 @@ def update_ahle_chart_ecs(
                         y_error_sum[GM_index] = y[GM_index]
 
                 # Add trace for error
+                # Scale standard deviation to achieve 95% confidence
+                scaled_stdev = 1.96 * stdev    # Simulation results are Normally distributed
                 ecs_waterfall_fig.add_trace(
                     go.Scatter(
                          x=x_len+.3,
                          y=y_error_sum,
                          marker=dict(color='black'),
-                         customdata=np.stack((y, prep_df['item'], prep_df['stdev_current']), axis=-1),
+                         customdata=np.stack((y, prep_df['item'], scaled_stdev), axis=-1),
                          error_y=dict(
                              type='data',
-                             array=prep_df['stdev_current']
+                             array=scaled_stdev
                              ),
                          mode="markers",
                          name='95% Confidence',
@@ -4601,7 +4611,7 @@ def update_ahle_chart_ecs(
             #     y = y.reset_index(drop=True)
 
             #     # Scale standard deviation to achieve 95% confidence
-            #     stdev = 1.96 * stdev    # Simulation results are Normally distributed
+            #     scaled_stdev = 1.96 * stdev    # Simulation results are Normally distributed
 
             #     # Get cumulative sum value for Y unless Gross Margin
             #     y_error_sum=[]
@@ -4620,7 +4630,7 @@ def update_ahle_chart_ecs(
             #             customdata=np.stack((y, prep_df['item']), axis=-1),
             #             error_y=dict(
             #                 type='data',
-            #                 array=stdev
+            #                 array=scaled_stdev
             #             ),
             #             mode="markers",
             #             showlegend=False
@@ -4642,6 +4652,8 @@ def update_ahle_chart_ecs(
             #     # Add error bars
             #     # Reset indicies
             #     y = prep_df['mean_current']
+            #     stdev = prep_df['stdev_current']
+
             #     x = x.reset_index(drop=True)
             #     y = y.reset_index(drop=True)
             #     # Get cumulative sum value for Y unless Gross Margin
@@ -4654,6 +4666,8 @@ def update_ahle_chart_ecs(
             #             y_error_sum[GM_index] = y[GM_index]
 
             #     # Add trace for error
+            #     # Scale standard deviation to achieve 95% confidence
+            #     scaled_stdev = 1.96 * stdev    # Simulation results are Normally distributed
             #     ecs_waterfall_fig.add_trace(
             #         go.Scatter(
             #              x=x_len+.3,
@@ -4662,7 +4676,7 @@ def update_ahle_chart_ecs(
             #              customdata=np.stack((y, prep_df['item']), axis=-1),
             #              error_y=dict(
             #                 type='data',
-            #                 array=prep_df['stdev_current']
+            #                 array=scaled_stdev
             #             ),
             #             mode="markers",
             #             name='95% Confidence'
@@ -4720,7 +4734,7 @@ def update_ahle_chart_ecs(
                     hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} <extra></extra>'
 
                 # Scale standard deviation to achieve 95% confidence
-                stdev = 1.96 * stdev    # Simulation results are Normally distributed
+                scaled_stdev = 1.96 * stdev    # Simulation results are Normally distributed
 
                 # Get cumulative sum value for Y unless Gross Margin
                 y_error_sum=[]
@@ -4736,10 +4750,10 @@ def update_ahle_chart_ecs(
                          x=x_len-.3,
                          y=y_error_sum,
                          marker=dict(color='black'),
-                         customdata=np.stack((y, prep_df['item'], stdev), axis=-1),
+                         customdata=np.stack((y, prep_df['item'], scaled_stdev), axis=-1),
                          error_y=dict(
                             type='data',
-                            array=stdev
+                            array=scaled_stdev
                             ),
                          mode="markers",
                          showlegend=False,
@@ -4762,6 +4776,7 @@ def update_ahle_chart_ecs(
                 # Add error bars
                 # Reset indicies
                 y = prep_df['mean_current']
+                stdev = prep_df['stdev_current']
                 x = x.reset_index(drop=True)
                 y = y.reset_index(drop=True)
                 # Get cumulative sum value for Y unless Gross Margin
@@ -4774,15 +4789,17 @@ def update_ahle_chart_ecs(
                         y_error_sum[GM_index] = y[GM_index]
 
                 # Add trace for error
+                # Scale standard deviation to achieve 95% confidence
+                scaled_stdev = 1.96 * stdev    # Simulation results are Normally distributed
                 ecs_waterfall_fig.add_trace(
                     go.Scatter(
                          x=x_len+.3,
                          y=y_error_sum,
                          marker=dict(color='black'),
-                         customdata=np.stack((y, prep_df['item'], prep_df['stdev_current']), axis=-1),
+                         customdata=np.stack((y, prep_df['item'], scaled_stdev), axis=-1),
                          error_y=dict(
                             type='data',
-                            array=prep_df['stdev_current']
+                            array=scaled_stdev
                             ),
                          mode="markers",
                          name='95% Confidence',
