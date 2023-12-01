@@ -26,6 +26,11 @@ div.tab--selected {
 	border-top: 3px solid #F7931D !important;
 }
 
+/* Set default color of tabs to black*/
+.nav-link {
+	color: #000000 !important;
+}
+
 /* Changes selected tab to highlight tab text and border in orange*/
 .nav-link.active {
     background-color: #f2f2f2 !important;
