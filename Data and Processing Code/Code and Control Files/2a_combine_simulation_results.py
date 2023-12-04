@@ -23,6 +23,7 @@ import io
 import time
 import numpy as np
 import pandas as pd
+import scipy.stats as sps
 import pickle            # To save objects to disk
 
 # To clean up column names in a dataframe
@@ -107,15 +108,15 @@ GRANDPARENT_FOLDER = os.path.dirname(PARENT_FOLDER)
 
 # Folder for shared code with Liverpool
 ETHIOPIA_CODE_FOLDER = CURRENT_FOLDER
-ETHIOPIA_OUTPUT_FOLDER = os.path.join(PARENT_FOLDER ,'Program outputs')
-ETHIOPIA_DATA_FOLDER = os.path.join(PARENT_FOLDER ,'Data')
+ETHIOPIA_OUTPUT_FOLDER = os.path.join(CURRENT_FOLDER ,'Data and Processing Code' ,'Program outputs')
+ETHIOPIA_DATA_FOLDER = os.path.join(CURRENT_FOLDER ,'Data and Processing Code' ,'Data')
 
 # Folder managed by Murdoch University with disease-specific parameters and other updates
-MURDOCH_BASE_FOLDER = os.path.join(CURRENT_FOLDER ,'Disease specific attribution')
+MURDOCH_BASE_FOLDER = os.path.join('Data and Processing Code' ,'Code and Control Files' ,'Disease specific attribution')
 MURDOCH_SCENARIO_FOLDER = os.path.join(MURDOCH_BASE_FOLDER ,'scenarios')
 MURDOCH_OUTPUT_FOLDER = os.path.join(MURDOCH_BASE_FOLDER ,'output')
 
-DASH_DATA_FOLDER = os.path.join(GRANDPARENT_FOLDER ,'Dash App' ,'data')
+DASH_DATA_FOLDER = os.path.join(CURRENT_FOLDER ,'Dash App' ,'data')
 
 #%% COMBINE SCENARIO RESULT FILES
 '''
@@ -852,6 +853,17 @@ print('\nMaximum ratio \n-------------')
 print(check_agesex_sums.groupby(list(summarize_byvars))['check_ratio'].max())
 print('\nMinimum ratio \n-------------')
 print(check_agesex_sums.groupby(list(summarize_byvars))['check_ratio'].min())
+
+# =============================================================================
+#### Distributions
+# =============================================================================
+check_ahle_combo['expected_min_current'] = sps.norm.ppf(.01 ,loc=check_ahle_combo['mean_current'] ,scale=check_ahle_combo['stdev_current'])
+check_ahle_combo['expected_q1_current'] = sps.norm.ppf(.25 ,loc=check_ahle_combo['mean_current'] ,scale=check_ahle_combo['stdev_current'])
+check_ahle_combo['expected_median_current'] = sps.norm.ppf(.50 ,loc=check_ahle_combo['mean_current'] ,scale=check_ahle_combo['stdev_current'])
+check_ahle_combo['expected_q3_current'] = sps.norm.ppf(.75 ,loc=check_ahle_combo['mean_current'] ,scale=check_ahle_combo['stdev_current'])
+check_ahle_combo['expected_max_current'] = sps.norm.ppf(.99 ,loc=check_ahle_combo['mean_current'] ,scale=check_ahle_combo['stdev_current'])
+
+datainfo(check_ahle_combo ,200)
 
 #%% BASIC ADJUSTMENTS
 

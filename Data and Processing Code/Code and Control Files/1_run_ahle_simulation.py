@@ -94,11 +94,11 @@ PARENT_FOLDER = os.path.dirname(CURRENT_FOLDER)
 
 # Folder for shared code with Liverpool
 ETHIOPIA_CODE_FOLDER = CURRENT_FOLDER
-ETHIOPIA_OUTPUT_FOLDER = os.path.join(PARENT_FOLDER ,'Program outputs')
-ETHIOPIA_DATA_FOLDER = os.path.join(PARENT_FOLDER ,'Data')
+ETHIOPIA_OUTPUT_FOLDER = os.path.join(CURRENT_FOLDER ,'Data and Processing Code' ,'Program outputs')
+ETHIOPIA_DATA_FOLDER = os.path.join(CURRENT_FOLDER ,'Data and Processing Code' ,'Data')
 
 # Folder managed by Murdoch University with disease-specific parameters and other updates
-MURDOCH_BASE_FOLDER = os.path.join(CURRENT_FOLDER ,'Disease specific attribution')
+MURDOCH_BASE_FOLDER = os.path.join('Data and Processing Code' ,'Code and Control Files' ,'Disease specific attribution')
 MURDOCH_SCENARIO_FOLDER = os.path.join(MURDOCH_BASE_FOLDER ,'scenarios')
 MURDOCH_OUTPUT_FOLDER = os.path.join(MURDOCH_BASE_FOLDER ,'output')
 
