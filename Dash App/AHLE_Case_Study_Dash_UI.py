@@ -1821,8 +1821,9 @@ gbadsDash.layout = html.Div([
 
                         #### -- FOOTNOTES
                         dbc.Col([   # Treemap footnote
-                            html.P("Attribution to infectious, non-infectious, and external causes is based on expert opinion. See the expert opinion attribution proportions in the table below."),
                             html.P("AHLE Components are production loss, mortality loss, and health cost. Health cost makes up the smallest proportion and may not be visible in this view."),
+                            html.P("Attribution to infectious, non-infectious, and external causes is based on expert opinion. See the expert opinion attribution proportions in the table below."),
+                            html.P("We do not currently attribute animal health expenditures separately from animal health losses. The amounts shown here include both."),
                         ], style={'font-style': 'italic'}),
 
             html.Br(),
@@ -2956,7 +2957,7 @@ def update_ecs_attr_data(currency, prodsys, species, year, geo_view, region):
                 '''
                 #### Attribution Data
 
-                Attributing the AHLE components to infectious, non-infectious, and external causes
+                Attributing animal health loss to infectious, non-infectious, and external causes.
 
                 *Based on expert opinion attribution proportions*
                 '''
@@ -3232,11 +3233,11 @@ def update_ahle_chart_ecs(
                     stdev = prep_df[f'stdev_diff_growimp{number_split}']
 
             # AHLE graph
-            stdev = 1.96 * stdev    # Scale stdev to create 95% confidence
+            scaled_stdev = 1.96 * stdev    # Scale stdev to create 95% confidence
             plot_ahle_value = go.Scatter(
                 x=x
                 ,y=y
-                ,error_y=dict(type='data' ,array=stdev)
+                ,error_y=dict(type='data' ,array=scaled_stdev)
                 ,name='AHLE'
                 ,line=dict(color=color)
                 )
@@ -3299,11 +3300,11 @@ def update_ahle_chart_ecs(
 
                 name = impvmnt_factor + "- " + impvmnt_value
                 # Overlay zero mortality value
-                stdev = 1.96 * stdev    # Scale stdev to create 95% confidence
+                scaled_stdev = 1.96 * stdev    # Scale stdev to create 95% confidence
                 plot_compare_value = go.Scatter(
                     x=x
                     ,y=y
-                    ,error_y=dict(type='data' ,array=stdev)
+                    ,error_y=dict(type='data' ,array=scaled_stdev)
                     ,name=name
                     ,line=dict(color='#00CA0F')
                     )

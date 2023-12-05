@@ -112,7 +112,7 @@ ETHIOPIA_OUTPUT_FOLDER = os.path.join(PARENT_FOLDER ,'Program outputs')
 ETHIOPIA_DATA_FOLDER = os.path.join(PARENT_FOLDER ,'Data')
 
 # Folder managed by Murdoch University with disease-specific parameters and other updates
-MURDOCH_BASE_FOLDER = os.path.join('Data and Processing Code' ,'Code and Control Files' ,'Disease specific attribution')
+MURDOCH_BASE_FOLDER = os.path.join(CURRENT_FOLDER ,'Disease specific attribution')
 MURDOCH_SCENARIO_FOLDER = os.path.join(MURDOCH_BASE_FOLDER ,'scenarios')
 MURDOCH_OUTPUT_FOLDER = os.path.join(MURDOCH_BASE_FOLDER ,'output')
 
@@ -120,7 +120,7 @@ DASH_DATA_FOLDER = os.path.join(GRANDPARENT_FOLDER ,'Dash App' ,'data')
 
 #%% COMBINE SCENARIO RESULT FILES
 '''
-This imports CSV files that are output from the compartmental model.
+This imports and combines CSV files that are output from the compartmental model.
 '''
 # This function reads all CSV files with the given prefix_suffix pattern in the given folder
 # and merges them into a single dataframe. It also adds labels for species, production system,
@@ -128,10 +128,10 @@ This imports CSV files that are output from the compartmental model.
 def combine_ahle_scenarios(
         input_folder
         ,input_file_prefix      # String
-        ,input_file_suffixes    # List of strings. Each one combined with input_file_prefix uniquely identifies a file to be read
+        ,input_file_suffixes    # List of strings. Each one combined with input_file_prefix uniquely identifies a file to be read.
         ,label_species          # String: add column 'species' with this label
         ,label_prodsys          # String: add column 'production_system' with this label
-        ,label_year             # Numeric: add column 'year' with this value
+        ,label_year             # Integer: add column 'year' with this value
         ,label_region           # String: add column 'region' with this value
     ):
     funcname = inspect.currentframe().f_code.co_name
@@ -399,7 +399,7 @@ ahle_cattle_clm = combine_ahle_scenarios(
     ,label_year=2021
     ,label_region='National'
     )
-datainfo(ahle_cattle_clm ,120)
+datainfo(ahle_cattle_clm ,130)
 
 # Import pastoral
 ahle_cattle_past = combine_ahle_scenarios(
@@ -411,7 +411,7 @@ ahle_cattle_past = combine_ahle_scenarios(
     ,label_year=2021
     ,label_region='National'
     )
-datainfo(ahle_cattle_past ,120)
+datainfo(ahle_cattle_past ,130)
 
 # Import periurban dairy
 ahle_cattle_peri = combine_ahle_scenarios(
@@ -423,15 +423,14 @@ ahle_cattle_peri = combine_ahle_scenarios(
     ,label_year=2021
     ,label_region='National'
     )
-datainfo(ahle_cattle_peri ,120)
+datainfo(ahle_cattle_peri ,130)
 
 # =============================================================================
 #### Cattle Yearly
 # =============================================================================
 '''
 August 2023: Yearly scenarios have not been updated, so may be inconsistent with
-the single-year results. I am excluding these for now, and will rely on the yearly
-placeholder values calculated later in this program.
+the single-year results.
 
 This includes a loop to import each year and append to a master cattle dataframe.
 '''
@@ -459,63 +458,63 @@ cattle_suffixes_yearlyandregional = [
     ,'Bruc'
 ]
 
-# ahle_cattle_yearly_aslist = []         # Initialize
-# for YEAR in range(2017 ,2022):
-#     # Import CLM
-#     ahle_cattle_clm = combine_ahle_scenarios(
-#         input_folder=os.path.join(ETHIOPIA_OUTPUT_FOLDER ,'ahle CATTLE' ,'Yearly results' ,f"{YEAR}")
-#         ,input_file_prefix='ahle_cattle_trial_CLM'
-#         ,input_file_suffixes=cattle_suffixes_yearlyandregional
-#         ,label_species='Cattle'
-#         ,label_prodsys='Crop livestock mixed'
-#         ,label_year=YEAR
-#         ,label_region='National'
-#         )
-#     datainfo(ahle_cattle_clm ,120)
+ahle_cattle_yearly_aslist = []         # Initialize
+for YEAR in range(2017 ,2022):
+    # Import CLM
+    ahle_cattle_clm_yearly = combine_ahle_scenarios(
+        input_folder=os.path.join(ETHIOPIA_OUTPUT_FOLDER ,'ahle CATTLE' ,'Yearly results' ,f"{YEAR}")
+        ,input_file_prefix='ahle_cattle_trial_CLM'
+        ,input_file_suffixes=cattle_suffixes_yearlyandregional
+        ,label_species='Cattle'
+        ,label_prodsys='Crop livestock mixed'
+        ,label_year=YEAR
+        ,label_region='National'
+        )
+    datainfo(ahle_cattle_clm_yearly ,120)
 
-# 	# Turn into list and append to master
-#     ahle_cattle_clm_aslist = ahle_cattle_clm.to_dict(orient='records')
-#     ahle_cattle_yearly_aslist.extend(ahle_cattle_clm_aslist)
-#     del ahle_cattle_clm_aslist
+ 	# Turn into list and append to master
+    ahle_cattle_clm_yearly_aslist = ahle_cattle_clm_yearly.to_dict(orient='records')
+    ahle_cattle_yearly_aslist.extend(ahle_cattle_clm_yearly_aslist)
+    del ahle_cattle_clm_yearly_aslist
 
-#     # Import pastoral
-#     ahle_cattle_past = combine_ahle_scenarios(
-#         input_folder=os.path.join(ETHIOPIA_OUTPUT_FOLDER ,'ahle CATTLE' ,'Yearly results' ,f"{YEAR}")
-#         ,input_file_prefix='ahle_cattle_trial_past'
-#         ,input_file_suffixes=cattle_suffixes_yearlyandregional
-#         ,label_species='Cattle'
-#         ,label_prodsys='Pastoral'
-#         ,label_year=YEAR
-#         ,label_region='National'
-#         )
-#     datainfo(ahle_cattle_past ,120)
+    # Import pastoral
+    ahle_cattle_past_yearly = combine_ahle_scenarios(
+        input_folder=os.path.join(ETHIOPIA_OUTPUT_FOLDER ,'ahle CATTLE' ,'Yearly results' ,f"{YEAR}")
+        ,input_file_prefix='ahle_cattle_trial_past'
+        ,input_file_suffixes=cattle_suffixes_yearlyandregional
+        ,label_species='Cattle'
+        ,label_prodsys='Pastoral'
+        ,label_year=YEAR
+        ,label_region='National'
+        )
+    datainfo(ahle_cattle_past_yearly ,120)
 
-# 	# Turn into list and append to master
-#     ahle_cattle_past_aslist = ahle_cattle_past.to_dict(orient='records')
-#     ahle_cattle_yearly_aslist.extend(ahle_cattle_past_aslist)
-#     del ahle_cattle_past_aslist
+ 	# Turn into list and append to master
+    ahle_cattle_past_yearly_aslist = ahle_cattle_past_yearly.to_dict(orient='records')
+    ahle_cattle_yearly_aslist.extend(ahle_cattle_past_yearly_aslist)
+    del ahle_cattle_past_yearly_aslist
 
-#     # Import periurban dairy
-#     ahle_cattle_peri = combine_ahle_scenarios(
-#         input_folder=os.path.join(ETHIOPIA_OUTPUT_FOLDER ,'ahle CATTLE' ,'Yearly results' ,f"{YEAR}")
-#         ,input_file_prefix='ahle_cattle_trial_periurban_dairy'
-#         ,input_file_suffixes=cattle_suffixes_yearlyandregional
-#         ,label_species='Cattle'
-#         ,label_prodsys='Periurban dairy'
-#         ,label_year=YEAR
-#         ,label_region='National'
-#         )
-#     datainfo(ahle_cattle_peri ,120)
+    # Import periurban dairy
+    ahle_cattle_peri_yearly = combine_ahle_scenarios(
+        input_folder=os.path.join(ETHIOPIA_OUTPUT_FOLDER ,'ahle CATTLE' ,'Yearly results' ,f"{YEAR}")
+        ,input_file_prefix='ahle_cattle_trial_periurban_dairy'
+        ,input_file_suffixes=cattle_suffixes_yearlyandregional
+        ,label_species='Cattle'
+        ,label_prodsys='Periurban dairy'
+        ,label_year=YEAR
+        ,label_region='National'
+        )
+    datainfo(ahle_cattle_peri_yearly ,120)
 
-# 	# Turn into list and append to master
-#     ahle_cattle_peri_aslist = ahle_cattle_peri.to_dict(orient='records')
-#     ahle_cattle_yearly_aslist.extend(ahle_cattle_peri_aslist)
-#     del ahle_cattle_peri_aslist
+ 	# Turn into list and append to master
+    ahle_cattle_peri_yearly_aslist = ahle_cattle_peri_yearly.to_dict(orient='records')
+    ahle_cattle_yearly_aslist.extend(ahle_cattle_peri_yearly_aslist)
+    del ahle_cattle_peri_yearly_aslist
 
-# # Convert master list into data frame
-# ahle_cattle_yearly = pd.DataFrame.from_dict(ahle_cattle_yearly_aslist ,orient='columns')
-# del ahle_cattle_yearly_aslist
-# datainfo(ahle_cattle_yearly ,120)
+# Convert master list into data frame
+ahle_cattle_yearly = pd.DataFrame.from_dict(ahle_cattle_yearly_aslist ,orient='columns')
+del ahle_cattle_yearly_aslist
+datainfo(ahle_cattle_yearly ,120)
 
 # =============================================================================
 #### Cattle Regional
@@ -690,7 +689,7 @@ concat_list = [
     ,ahle_cattle_peri
 
     # Cattle Yearly
-    # ,ahle_cattle_yearly
+    ,ahle_cattle_yearly
 
     # Cattle Regional
     ,ahle_cattle_regional
@@ -865,14 +864,17 @@ check_ahle_combo['expected_max_current'] = sps.norm.ppf(.99 ,loc=check_ahle_comb
 
 datainfo(check_ahle_combo ,200)
 
-#%% BASIC ADJUSTMENTS
+#%% ADJUSTMENTS & PLACEHOLDERS
 
 ahle_combo_adj = ahle_combo.copy()
 
+# Define full set of key variables
+# Make tuple so immutable
+all_byvars = ('species' ,'region' ,'production_system' ,'item' ,'item_type_code' ,'group' ,'age_group' ,'sex' ,'year')
+
 # =============================================================================
-#### Adjustments
+#### Add item type code
 # =============================================================================
-# Add item type code
 # pq = physical quantity, mv = monetary value, mc = monetary cost
 item_type_code = {
     'Num Offtake':'pq'
@@ -924,7 +926,9 @@ item_type_code = {
 }
 ahle_combo_adj['item_type_code'] = ahle_combo_adj['item'].replace(item_type_code)
 
-# Make all monetary cost items negative
+# =============================================================================
+#### Make all monetary cost items negative
+# =============================================================================
 float_cols = list(ahle_combo_adj.select_dtypes(include='float'))
 for COL in float_cols:
     ahle_combo_adj[COL] = np.where(
@@ -934,7 +938,7 @@ for COL in float_cols:
     )
 
 # Reorder columns
-cols_first = ['species' ,'region' ,'production_system' ,'item' ,'item_type_code' ,'group' ,'age_group' ,'sex' ,'year']
+cols_first = list(all_byvars)
 cols_other = [i for i in list(ahle_combo_adj) if i not in cols_first]
 ahle_combo_adj = ahle_combo_adj.reindex(columns=cols_first + cols_other)
 
@@ -982,7 +986,7 @@ del ahle_combo_adj_plhdyear
 
 # Remove duplicate values, keeping the first (the first is the actual value for that year if it exists)
 ahle_combo_adj = ahle_combo_adj.drop_duplicates(
-    subset=['species' ,'region' ,'production_system' ,'item' ,'item_type_code' ,'group' ,'age_group' ,'sex' ,'year']
+    subset=all_byvars
     ,keep='first'
 ).reset_index(drop=True)
 

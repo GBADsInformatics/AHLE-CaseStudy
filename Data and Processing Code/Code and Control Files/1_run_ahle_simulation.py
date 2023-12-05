@@ -98,7 +98,7 @@ ETHIOPIA_OUTPUT_FOLDER = os.path.join(PARENT_FOLDER ,'Program outputs')
 ETHIOPIA_DATA_FOLDER = os.path.join(PARENT_FOLDER ,'Data')
 
 # Folder managed by Murdoch University with disease-specific parameters and other updates
-MURDOCH_BASE_FOLDER = os.path.join('Data and Processing Code' ,'Code and Control Files' ,'Disease specific attribution')
+MURDOCH_BASE_FOLDER = os.path.join(CURRENT_FOLDER ,'Disease specific attribution')
 MURDOCH_SCENARIO_FOLDER = os.path.join(MURDOCH_BASE_FOLDER ,'scenarios')
 MURDOCH_OUTPUT_FOLDER = os.path.join(MURDOCH_BASE_FOLDER ,'output')
 
