@@ -231,10 +231,10 @@ GRANDPARENT_FOLDER = os.path.dirname(PARENT_FOLDER)
 
 # Folder for shared code with Liverpool
 ETHIOPIA_CODE_FOLDER = CURRENT_FOLDER
-ETHIOPIA_OUTPUT_FOLDER = os.path.join(CURRENT_FOLDER ,'Data and Processing Code' ,'Program outputs')
-ETHIOPIA_DATA_FOLDER = os.path.join(CURRENT_FOLDER ,'Data and Processing Code' ,'Data')
+ETHIOPIA_OUTPUT_FOLDER = os.path.join(PARENT_FOLDER ,'Program outputs')
+ETHIOPIA_DATA_FOLDER = os.path.join(PARENT_FOLDER ,'Data')
 
-DASH_DATA_FOLDER = os.path.join(CURRENT_FOLDER ,'Dash App' ,'data')
+DASH_DATA_FOLDER = os.path.join(GRANDPARENT_FOLDER ,'Dash App' ,'data')
 
 # Full path to rscript.exe
 r_executable = 'C:\\Program Files\\R\\R-4.3.1\\bin\\x64\\Rscript.exe'

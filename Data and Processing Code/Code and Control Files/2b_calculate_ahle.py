@@ -100,10 +100,10 @@ GRANDPARENT_FOLDER = os.path.dirname(PARENT_FOLDER)
 
 # Folder for shared code with Liverpool
 ETHIOPIA_CODE_FOLDER = CURRENT_FOLDER
-ETHIOPIA_OUTPUT_FOLDER = os.path.join(CURRENT_FOLDER ,'Data and Processing Code' ,'Program outputs')
-ETHIOPIA_DATA_FOLDER = os.path.join(CURRENT_FOLDER ,'Data and Processing Code' ,'Data')
+ETHIOPIA_OUTPUT_FOLDER = os.path.join(PARENT_FOLDER ,'Program outputs')
+ETHIOPIA_DATA_FOLDER = os.path.join(PARENT_FOLDER ,'Data')
 
-DASH_DATA_FOLDER = os.path.join(CURRENT_FOLDER ,'Dash App' ,'data')
+DASH_DATA_FOLDER = os.path.join(GRANDPARENT_FOLDER ,'Dash App' ,'data')
 
 #%% EXTERNAL DATA
 
@@ -153,64 +153,195 @@ datainfo(ahle_combo_adj)
 '''
 Creating aggregate groups for filtering in the dashboard.
 
-Note: many aggregate groups are already created in the compartmental model,
-but not all. For simplicity, and to ensure consistency, I'm recalculating
-all aggregate groups.
+Aggregate age and sex groups are created inside the compartmental model.
+Furthermore, results for different age and sex groups within a species will be
+correlated, so their aggregate variances cannot be calculated by summing.
+I have commented-out this part of the code. I still calculate aggregate species
+and production systems as those are not created inside the compartmental model
+and should be uncorrelated, allowing the variance to be calculated by summing.
 '''
+# =============================================================================
+#### Preliminaries
+# =============================================================================
 mean_cols = [i for i in list(ahle_combo_adj) if 'mean' in i]
 sd_cols = [i for i in list(ahle_combo_adj) if 'stdev' in i]
 
-# =============================================================================
-#### Drop aggregate groups
-# =============================================================================
-# Separate all existing overall or combined groups
-_combined_rows = (ahle_combo_adj['group'].str.contains('OVERALL' ,case=False ,na=False))\
-    | (ahle_combo_adj['group'].str.contains('COMBINED' ,case=False ,na=False))
-ahle_combo_overall = ahle_combo_adj.loc[_combined_rows].copy()
-
-# Create version without any aggregate groups
-ahle_combo_indiv = ahle_combo_adj.loc[~ _combined_rows].copy()
-
-# Get distinct values for ages and sexes without aggregates
-age_group_values = list(ahle_combo_indiv['age_group'].unique())
-sex_values = list(ahle_combo_indiv['sex'].unique())
-
-# =============================================================================
-#### Add placeholder items
-# =============================================================================
-'''
-This is no longer needed because infrastructure cost is estimated inside the
-compartmental model. I'm keeping the code in case we want to add any other item
-placeholders.
-'''
-# # Get all combinations of key variables without item
-# item_placeholder = ahle_combo_indiv[['region' ,'species' ,'production_system' ,'group' ,'age_group' ,'sex' ,'year']].drop_duplicates()
-# item_placeholder['item'] = 'Cost of Infrastructure'
-
-# # Stack placeholder item(s) with individual data
-# ahle_combo_withplaceholders = pd.concat(
-#     [ahle_combo_indiv ,item_placeholder]
-#     ,axis=0              # axis=0: concatenate rows (stack), axis=1: concatenate columns (merge)
-#     ,join='outer'        # 'outer': keep all index values from all data frames
-#     ,ignore_index=True   # True: do not keep index values on concatenation axis
-# )
-
-# # Placeholder items get mean and SD zero
-# for COL in [mean_cols + sd_cols]:
-#     ahle_combo_withplaceholders[COL] = ahle_combo_withplaceholders[COL].replace(np.nan ,0)
-
-# =============================================================================
-#### Build aggregate age/sex groups
-# =============================================================================
 # Define full set of key variables
 # Make tuple so immutable
 all_byvars = ('species' ,'region' ,'production_system' ,'item' ,'item_type_code' ,'group' ,'age_group' ,'sex' ,'year')
 
-# Only using mean and standard deviaion of each item, as the other statistics
-# cannot be summed.
-keepcols = list(all_byvars) + mean_cols + sd_cols
-ahle_combo_indiv = ahle_combo_indiv[keepcols].copy()
-datainfo(ahle_combo_indiv)
+# # =============================================================================
+# #### Drop aggregate groups
+# # =============================================================================
+# # Separate all existing overall or combined groups
+# _combined_rows = (ahle_combo_adj['group'].str.contains('OVERALL' ,case=False ,na=False))\
+#     | (ahle_combo_adj['group'].str.contains('COMBINED' ,case=False ,na=False))
+# ahle_combo_overall = ahle_combo_adj.loc[_combined_rows].copy()
+
+# # Create version without any aggregate groups
+# ahle_combo_indiv = ahle_combo_adj.loc[~ _combined_rows].copy()
+
+# # Get distinct values for ages and sexes without aggregates
+# age_group_values = list(ahle_combo_indiv['age_group'].unique())
+# sex_values = list(ahle_combo_indiv['sex'].unique())
+
+# # Only using mean and standard deviaion of each item, as the other statistics
+# # cannot be summed.
+# keepcols = list(all_byvars) + mean_cols + sd_cols
+# ahle_combo_indiv = ahle_combo_indiv[keepcols].copy()
+# datainfo(ahle_combo_indiv)
+
+# # =============================================================================
+# #### Add placeholder items
+# # =============================================================================
+# '''
+# This is no longer needed because infrastructure cost is estimated inside the
+# compartmental model. I'm keeping the code in case we want to add any other item
+# placeholders.
+# '''
+# # # Get all combinations of key variables without item
+# # item_placeholder = ahle_combo_indiv[['region' ,'species' ,'production_system' ,'group' ,'age_group' ,'sex' ,'year']].drop_duplicates()
+# # item_placeholder['item'] = 'Cost of Infrastructure'
+
+# # # Stack placeholder item(s) with individual data
+# # ahle_combo_withplaceholders = pd.concat(
+# #     [ahle_combo_indiv ,item_placeholder]
+# #     ,axis=0              # axis=0: concatenate rows (stack), axis=1: concatenate columns (merge)
+# #     ,join='outer'        # 'outer': keep all index values from all data frames
+# #     ,ignore_index=True   # True: do not keep index values on concatenation axis
+# # )
+
+# # # Placeholder items get mean and SD zero
+# # for COL in [mean_cols + sd_cols]:
+# #     ahle_combo_withplaceholders[COL] = ahle_combo_withplaceholders[COL].replace(np.nan ,0)
+
+# # =============================================================================
+# #### Build aggregate age/sex groups
+# # =============================================================================
+# # -----------------------------------------------------------------------------
+# # Create variance columns
+# # -----------------------------------------------------------------------------
+# # Relying on the following properties of sums of random variables:
+# #    mean(aX + bY) = a*mean(X) + b*mean(Y), regardless of correlation
+# #    var(aX + bY) = a^2*var(X) + b^2*var(Y), assuming X and Y are uncorrelated
+# var_cols = ['sqrd_' + COLNAME for COLNAME in sd_cols]
+# for i ,VARCOL in enumerate(var_cols):
+#    SDCOL = sd_cols[i]
+#    ahle_combo_indiv[VARCOL] = ahle_combo_indiv[SDCOL]**2
+
+# datainfo(ahle_combo_indiv)
+
+# # -----------------------------------------------------------------------------
+# # Create Overall age/sex group
+# # -----------------------------------------------------------------------------
+# agg_vars = ['group' ,'age_group' ,'sex']
+# summarize_byvars = list(all_byvars)
+# for i in agg_vars:
+#     summarize_byvars.remove(i)
+
+# ahle_combo_sum_groups = ahle_combo_indiv.pivot_table(
+#     index=summarize_byvars
+#     ,values=mean_cols + var_cols
+#     ,aggfunc=lambda x: x.mean() * x.count()  # Hack: sum is equal to zero if all values are missing. This will cause all missings to produce missing.
+# ).reset_index()
+# ahle_combo_sum_groups['group'] = 'Overall'
+# ahle_combo_sum_groups['age_group'] = 'Overall'
+# ahle_combo_sum_groups['sex'] = 'Overall'
+
+# # -----------------------------------------------------------------------------
+# # Create Overall sex for each age group
+# # -----------------------------------------------------------------------------
+# agg_vars = ['group' ,'sex']
+# summarize_byvars = list(all_byvars)
+# for i in agg_vars:
+#     summarize_byvars.remove(i)
+
+# ahle_combo_sum_sexes = pd.DataFrame()    # Initialize
+# for AGE_GRP in age_group_values:
+#     ahle_combo_sum_sexes_oneage = ahle_combo_indiv.query(f"age_group == '{AGE_GRP}'").pivot_table(
+#         index=summarize_byvars
+#         ,values=mean_cols + var_cols
+#         ,aggfunc=lambda x: x.mean() * x.count()  # Hack: sum is equal to zero if all values are missing. This will cause all missings to produce missing.
+#     ).reset_index()
+#     ahle_combo_sum_sexes_oneage['group'] = f'{AGE_GRP} Combined'
+#     ahle_combo_sum_sexes_oneage['sex'] = 'Overall'
+
+#     # Stack
+#     ahle_combo_sum_sexes = pd.concat(
+#         [ahle_combo_sum_sexes ,ahle_combo_sum_sexes_oneage]
+#         ,axis=0              # axis=0: concatenate rows (stack), axis=1: concatenate columns (merge)
+#         ,join='outer'        # 'outer': keep all index values from all data frames
+#         ,ignore_index=True   # True: do not keep index values on concatenation axis
+#     )
+#     del ahle_combo_sum_sexes_oneage
+
+# # Oxen are a special age group which is only male. Drop "combined" sex.
+# _oxen_combined = (ahle_combo_sum_sexes['group'].str.upper() == 'OXEN COMBINED')
+# ahle_combo_sum_sexes = ahle_combo_sum_sexes.loc[~ _oxen_combined].reset_index(drop=True)
+
+# # -----------------------------------------------------------------------------
+# # Create Overall age group for each sex
+# # -----------------------------------------------------------------------------
+# agg_vars = ['group' ,'age_group']
+# summarize_byvars = list(all_byvars)
+# for i in agg_vars:
+#     summarize_byvars.remove(i)
+
+# ahle_combo_sum_ages = pd.DataFrame()     # Initialize
+# for SEX_GRP in sex_values:
+#     ahle_combo_sum_ages_onesex = ahle_combo_indiv.query(f"sex == '{SEX_GRP}'").pivot_table(
+#         index=summarize_byvars
+#         ,values=mean_cols + var_cols
+#         ,aggfunc=lambda x: x.mean() * x.count()  # Hack: sum is equal to zero if all values are missing. This will cause all missings to produce missing.
+#     ).reset_index()
+#     ahle_combo_sum_ages_onesex['group'] = f'Overall {SEX_GRP}'
+#     ahle_combo_sum_ages_onesex['age_group'] = 'Overall'
+
+#     # Stack
+#     ahle_combo_sum_ages = pd.concat(
+#         [ahle_combo_sum_ages ,ahle_combo_sum_ages_onesex]
+#         ,axis=0              # axis=0: concatenate rows (stack), axis=1: concatenate columns (merge)
+#         ,join='outer'        # 'outer': keep all index values from all data frames
+#         ,ignore_index=True   # True: do not keep index values on concatenation axis
+#     )
+#     del ahle_combo_sum_ages_onesex
+
+# # -----------------------------------------------------------------------------
+# # Concatenate all and de-dup
+# # -----------------------------------------------------------------------------
+# concat_dataframes = [
+#     ahle_combo_indiv
+#     ,ahle_combo_sum_groups
+#     ,ahle_combo_sum_sexes
+#     ,ahle_combo_sum_ages
+
+#     # Original overall group rows
+#     ,ahle_combo_overall     # Set at end so de-dup keeps newer groups if they exist
+# ]
+# ahle_combo_withagg = pd.concat(
+#    concat_dataframes
+#    ,axis=0              # axis=0: concatenate rows (stack), axis=1: concatenate columns (merge)
+#    ,join='outer'        # 'outer': keep all columns
+#    ,ignore_index=True   # True: do not keep index values on concatenation axis
+# )
+# del ahle_combo_indiv ,ahle_combo_sum_groups ,ahle_combo_sum_sexes ,ahle_combo_sum_ages ,ahle_combo_overall
+
+# # De-Dup
+# dupflag = ahle_combo_withagg.duplicated(
+# 	subset=all_byvars
+# 	,keep='first'
+# )
+# print(f"> Dropping {dupflag.sum() :,} duplicate rows.")
+# ahle_combo_withagg = ahle_combo_withagg[~ dupflag]
+
+# =============================================================================
+#### Build aggregate species and production system groups
+# =============================================================================
+'''
+These must be done after concatenating combined age/sex groups so that they are
+calculated for the combined groups as well.
+'''
+ahle_combo_withagg = ahle_combo_adj.copy()
 
 # -----------------------------------------------------------------------------
 # Create variance columns
@@ -220,121 +351,11 @@ datainfo(ahle_combo_indiv)
 #    var(aX + bY) = a^2*var(X) + b^2*var(Y), assuming X and Y are uncorrelated
 var_cols = ['sqrd_' + COLNAME for COLNAME in sd_cols]
 for i ,VARCOL in enumerate(var_cols):
-   SDCOL = sd_cols[i]
-   ahle_combo_indiv[VARCOL] = ahle_combo_indiv[SDCOL]**2
+    SDCOL = sd_cols[i]
+    ahle_combo_withagg[VARCOL] = ahle_combo_withagg[SDCOL]**2
 
-datainfo(ahle_combo_indiv)
+datainfo(ahle_combo_withagg)
 
-# -----------------------------------------------------------------------------
-# Create Overall age/sex group
-# -----------------------------------------------------------------------------
-agg_vars = ['group' ,'age_group' ,'sex']
-summarize_byvars = list(all_byvars)
-for i in agg_vars:
-    summarize_byvars.remove(i)
-
-ahle_combo_sum_groups = ahle_combo_indiv.pivot_table(
-    index=summarize_byvars
-    ,values=mean_cols + var_cols
-    ,aggfunc=lambda x: x.mean() * x.count()  # Hack: sum is equal to zero if all values are missing. This will cause all missings to produce missing.
-).reset_index()
-ahle_combo_sum_groups['group'] = 'Overall'
-ahle_combo_sum_groups['age_group'] = 'Overall'
-ahle_combo_sum_groups['sex'] = 'Overall'
-
-# -----------------------------------------------------------------------------
-# Create Overall sex for each age group
-# -----------------------------------------------------------------------------
-agg_vars = ['group' ,'sex']
-summarize_byvars = list(all_byvars)
-for i in agg_vars:
-    summarize_byvars.remove(i)
-
-ahle_combo_sum_sexes = pd.DataFrame()    # Initialize
-for AGE_GRP in age_group_values:
-    ahle_combo_sum_sexes_oneage = ahle_combo_indiv.query(f"age_group == '{AGE_GRP}'").pivot_table(
-        index=summarize_byvars
-        ,values=mean_cols + var_cols
-        ,aggfunc=lambda x: x.mean() * x.count()  # Hack: sum is equal to zero if all values are missing. This will cause all missings to produce missing.
-    ).reset_index()
-    ahle_combo_sum_sexes_oneage['group'] = f'{AGE_GRP} Combined'
-    ahle_combo_sum_sexes_oneage['sex'] = 'Overall'
-
-    # Stack
-    ahle_combo_sum_sexes = pd.concat(
-        [ahle_combo_sum_sexes ,ahle_combo_sum_sexes_oneage]
-        ,axis=0              # axis=0: concatenate rows (stack), axis=1: concatenate columns (merge)
-        ,join='outer'        # 'outer': keep all index values from all data frames
-        ,ignore_index=True   # True: do not keep index values on concatenation axis
-    )
-    del ahle_combo_sum_sexes_oneage
-
-# Oxen are a special age group which is only male. Drop "combined" sex.
-_oxen_combined = (ahle_combo_sum_sexes['group'].str.upper() == 'OXEN COMBINED')
-ahle_combo_sum_sexes = ahle_combo_sum_sexes.loc[~ _oxen_combined].reset_index(drop=True)
-
-# -----------------------------------------------------------------------------
-# Create Overall age group for each sex
-# -----------------------------------------------------------------------------
-agg_vars = ['group' ,'age_group']
-summarize_byvars = list(all_byvars)
-for i in agg_vars:
-    summarize_byvars.remove(i)
-
-ahle_combo_sum_ages = pd.DataFrame()     # Initialize
-for SEX_GRP in sex_values:
-    ahle_combo_sum_ages_onesex = ahle_combo_indiv.query(f"sex == '{SEX_GRP}'").pivot_table(
-        index=summarize_byvars
-        ,values=mean_cols + var_cols
-        ,aggfunc=lambda x: x.mean() * x.count()  # Hack: sum is equal to zero if all values are missing. This will cause all missings to produce missing.
-    ).reset_index()
-    ahle_combo_sum_ages_onesex['group'] = f'Overall {SEX_GRP}'
-    ahle_combo_sum_ages_onesex['age_group'] = 'Overall'
-
-    # Stack
-    ahle_combo_sum_ages = pd.concat(
-        [ahle_combo_sum_ages ,ahle_combo_sum_ages_onesex]
-        ,axis=0              # axis=0: concatenate rows (stack), axis=1: concatenate columns (merge)
-        ,join='outer'        # 'outer': keep all index values from all data frames
-        ,ignore_index=True   # True: do not keep index values on concatenation axis
-    )
-    del ahle_combo_sum_ages_onesex
-
-# -----------------------------------------------------------------------------
-# Concatenate all and de-dup
-# -----------------------------------------------------------------------------
-concat_dataframes = [
-    ahle_combo_indiv
-    ,ahle_combo_sum_groups
-    ,ahle_combo_sum_sexes
-    ,ahle_combo_sum_ages
-
-    # Original overall group rows
-    ,ahle_combo_overall     # Set at end so de-dup keeps newer groups if they exist
-]
-ahle_combo_withagg = pd.concat(
-   concat_dataframes
-   ,axis=0              # axis=0: concatenate rows (stack), axis=1: concatenate columns (merge)
-   ,join='outer'        # 'outer': keep all columns
-   ,ignore_index=True   # True: do not keep index values on concatenation axis
-)
-del ahle_combo_indiv ,ahle_combo_sum_groups ,ahle_combo_sum_sexes ,ahle_combo_sum_ages ,ahle_combo_overall
-
-# De-Dup
-dupflag = ahle_combo_withagg.duplicated(
-	subset=all_byvars
-	,keep='first'
-)
-print(f"> Dropping {dupflag.sum() :,} duplicate rows.")
-ahle_combo_withagg = ahle_combo_withagg[~ dupflag]
-
-# =============================================================================
-#### Build aggregate species and production system groups
-# =============================================================================
-'''
-These must be done after concatenating combined age/sex groups so that they are
-calculated for the combined groups as well.
-'''
 # -----------------------------------------------------------------------------
 # Create overall production system
 # -----------------------------------------------------------------------------
