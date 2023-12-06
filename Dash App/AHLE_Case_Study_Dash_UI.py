@@ -466,8 +466,8 @@ ecs_map_denominator_options = [{'label': i, 'value': i, 'disabled': False} for i
 
 # Attribution display options
 esc_attr_display_options = [
-    {'label': 'Single year (Tree Map)', 'value': 'Tree Map'}
-    ,{'label': 'Over time (Bar)', 'value': 'Bar'}
+    {'label': 'Single year', 'value': 'Tree Map'}
+    ,{'label': 'Over time', 'value': 'Bar'}
     ]
 
 # =============================================================================
@@ -1655,6 +1655,7 @@ gbadsDash.layout = html.Div([
                                 html.H5("Visualization", style=control_heading_style),
                                 dcc.RadioItems(id='select-attr-display-ecs',
                                                options=esc_attr_display_options,
+                                               inline=True,                  # True: arrange buttons horizontally
                                                value='Tree Map',
                                                inputStyle=Radio_input_style,
                                                ),

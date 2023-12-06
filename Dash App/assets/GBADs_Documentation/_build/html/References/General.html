@@ -63,8 +63,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'References/General';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Ethiopia Case Study" href="Ethiopia.html" />
-    <link rel="prev" title="Subnational map" href="../Tool/eth_subnational_map.html" />
+    <link rel="next" title="Ethiopia" href="Ethiopia.html" />
+    <link rel="prev" title="How is the impact of each disease changing over time?" href="../Analysis/walkthrough_diseases_over_time.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -155,26 +155,35 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Navigating the Dashboard</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Tool/Overview%20of%20the%20tabs.html">Overview of the tabs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tool/Tabs.html">Tabs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tool/eth_basic_controls.html">Page display options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tool/Downloading%20results.html">Downloading results</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ethiopia Case Study</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Estimating AHLE</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Analysis/Overview%20of%20the%20approach_Ethiopia.html">Overview of the approach</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Tool/eth_basic_controls.html">Page display options</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Tool/Reading%20the%20charts_Ethiopia.html">Reading the charts</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Tool/eth_value_cost_chart.html">Value and cost chart</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Tool/eth_attribution_chart.html">Attribution chart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Tool/eth_value_cost_chart.html">Values and Costs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Tool/eth_subnational_map.html">Subnational map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Tool/eth_attribution_chart.html">Attribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Tool/eth_wei_chart.html">Wider economic impact</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Analysis/decision_walkthrough_Ethiopia.html">Example walkthrough of decisions</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/walkthrough_overall_impact.html">What is the impact of disease overall?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/walkthrough_which_products.html">Which livestock products are most impacted by disease?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/walkthrough_which_regions.html">Which regions of the country are most impacted by disease?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/walkthrough_specific_diseases.html">Which diseases have the largest impact on animal health loss?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/walkthrough_diseases_over_time.html">How is the impact of each disease changing over time?</a></li>
 </ul>
 </li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">General</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Ethiopia.html">Ethiopia Case Study</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ethiopia.html">Ethiopia</a></li>
 </ul>
 
     </div>
@@ -335,35 +344,23 @@ document.write(`
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>FAO</p></td>
-<td><p>Food and Agriculture Organization of the United Nations</p></td>
-<td><p>Crops and livestock products</p></td>
-<td><p><a class="reference external" href="https://www.fao.org/faostat/en/#data/QCL">https://www.fao.org/faostat/en/#data/QCL</a></p></td>
-<td><p>Feb. 1, 2022</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p></p></td>
-<td><p>Producer prices</p></td>
-<td><p><a class="reference external" href="https://www.fao.org/faostat/en/#data/PP">https://www.fao.org/faostat/en/#data/PP</a></p></td>
-<td><p>Feb. 16, 2022</p></td>
-</tr>
-<tr class="row-even"><td><p>Eurostat</p></td>
-<td><p>European Commission</p></td>
-<td><p>Eurostat meat production data</p></td>
-<td><p><a class="reference external" href="https://ec.europa.eu/eurostat/databrowser/view/APRO_MT_PANN__custom_2005150/">https://ec.europa.eu/eurostat/databrowser/view/APRO_MT_PANN__custom_2005150/</a></p></td>
-<td><p>Feb. 1, 2022</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p></p></td>
-<td><p>Eurostat selling prices of animal products</p></td>
-<td><p><a class="reference external" href="https://ec.europa.eu/eurostat/databrowser/view/APRI_AP_ANOUTA__custom_2155948/">https://ec.europa.eu/eurostat/databrowser/view/APRI_AP_ANOUTA__custom_2155948/</a></p></td>
-<td><p>Feb. 23, 2022</p></td>
-</tr>
 <tr class="row-even"><td><p>World Bank</p></td>
 <td><p>World Bank</p></td>
 <td><p>World development indicators</p></td>
 <td><p><a class="reference external" href="https://databank.worldbank.org/source/world-development-indicators">https://databank.worldbank.org/source/world-development-indicators</a></p></td>
 <td><p>May 1, 2022</p></td>
+</tr>
+<tr class="row-odd"><td><p>FAO</p></td>
+<td><p>Food and Agriculture Organization of the United Nations</p></td>
+<td><p>Crops and livestock products</p></td>
+<td><p><a class="reference external" href="https://www.fao.org/faostat/en/#data/QCL">https://www.fao.org/faostat/en/#data/QCL</a></p></td>
+<td><p>Feb. 1, 2022</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p></p></td>
+<td><p>Producer prices</p></td>
+<td><p><a class="reference external" href="https://www.fao.org/faostat/en/#data/PP">https://www.fao.org/faostat/en/#data/PP</a></p></td>
+<td><p>Feb. 16, 2022</p></td>
 </tr>
 <tr class="row-odd"><td><p>UN Comtrade</p></td>
 <td><p>United Nations</p></td>
@@ -371,26 +368,8 @@ document.write(`
 <td><p><a class="reference external" href="https://comtrade.un.org/data/">https://comtrade.un.org/data/</a></p></td>
 <td><p>May 1, 2022</p></td>
 </tr>
-<tr class="row-even"><td><p>UK Gov</p></td>
-<td><p>United Kingdom Government</p></td>
-<td><p>Compound feed prices</p></td>
-<td><p><a class="reference external" href="https://www.gov.uk/government/statistical-data-sets/animal-feed-prices">https://www.gov.uk/government/statistical-data-sets/animal-feed-prices</a></p></td>
-<td><p>Feb. 7, 2022</p></td>
-</tr>
-<tr class="row-odd"><td><p>AHDB</p></td>
-<td><p>United Kingdom Agriculture and Horticulture Development Board</p></td>
-<td><p>GB animal feed production</p></td>
-<td><p><a class="reference external" href="https://ahdb.org.uk/cereals-oilseeds/cereal-use-in-gb-animal-feed-production">https://ahdb.org.uk/cereals-oilseeds/cereal-use-in-gb-animal-feed-production</a></p></td>
-<td><p>Feb. 17, 2022</p></td>
-</tr>
 <tr class="row-even"><td><p>USDA</p></td>
 <td><p>United States Department of Agriculture</p></td>
-<td><p>National Agricultural Statistics Service</p></td>
-<td><p><a class="reference external" href="https://quickstats.nass.usda.gov/">https://quickstats.nass.usda.gov/</a></p></td>
-<td><p>Feb. 7, 2022</p></td>
-</tr>
-<tr class="row-odd"><td><p></p></td>
-<td><p></p></td>
 <td><p>Foreign Agricultural Service</p></td>
 <td><p><a class="reference external" href="https://apps.fas.usda.gov/gats/ExpressQuery1.aspx">https://apps.fas.usda.gov/gats/ExpressQuery1.aspx</a></p></td>
 <td><p>Mar. 23, 2022</p></td>
@@ -431,12 +410,12 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../Tool/eth_subnational_map.html"
+       href="../Analysis/walkthrough_diseases_over_time.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Subnational map</p>
+        <p class="prev-next-title">How is the impact of each disease changing over time?</p>
       </div>
     </a>
     <a class="right-next"
@@ -444,7 +423,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Ethiopia Case Study</p>
+        <p class="prev-next-title">Ethiopia</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Value and cost chart &#8212; AHLE Interactive Dashboard</title>
+    <title>Values and Costs &#8212; AHLE Interactive Dashboard</title>
   
   
   
@@ -63,7 +63,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Tool/eth_value_cost_chart';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Attribution chart" href="eth_attribution_chart.html" />
+    <link rel="next" title="Subnational map" href="eth_subnational_map.html" />
     <link rel="prev" title="Reading the charts" href="Reading%20the%20charts_Ethiopia.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -155,26 +155,35 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Navigating the Dashboard</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Overview%20of%20the%20tabs.html">Overview of the tabs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tabs.html">Tabs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eth_basic_controls.html">Page display options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Downloading%20results.html">Downloading results</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ethiopia Case Study</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Estimating AHLE</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Analysis/Overview%20of%20the%20approach_Ethiopia.html">Overview of the approach</a></li>
-<li class="toctree-l1"><a class="reference internal" href="eth_basic_controls.html">Page display options</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="Reading%20the%20charts_Ethiopia.html">Reading the charts</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Value and cost chart</a></li>
-<li class="toctree-l2"><a class="reference internal" href="eth_attribution_chart.html">Attribution chart</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Values and Costs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="eth_subnational_map.html">Subnational map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eth_attribution_chart.html">Attribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eth_wei_chart.html">Wider economic impact</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Analysis/decision_walkthrough_Ethiopia.html">Example walkthrough of decisions</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/walkthrough_overall_impact.html">What is the impact of disease overall?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/walkthrough_which_products.html">Which livestock products are most impacted by disease?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/walkthrough_which_regions.html">Which regions of the country are most impacted by disease?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/walkthrough_specific_diseases.html">Which diseases have the largest impact on animal health loss?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/walkthrough_diseases_over_time.html">How is the impact of each disease changing over time?</a></li>
 </ul>
 </li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../References/General.html">General</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../References/Ethiopia.html">Ethiopia Case Study</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../References/Ethiopia.html">Ethiopia</a></li>
 </ul>
 
     </div>
@@ -309,7 +318,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Value and cost chart</h1>
+    <h1>Values and Costs</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -323,43 +332,50 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="tex2jax_ignore mathjax_ignore section" id="value-and-cost-chart">
-<h1>Value and cost chart<a class="headerlink" href="#value-and-cost-chart" title="Permalink to this heading">#</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="values-and-costs">
+<h1>Values and Costs<a class="headerlink" href="#values-and-costs" title="Permalink to this heading">#</a></h1>
 <p>
 The value and cost chart shows the major components of value and cost under current conditions and compares them to an ideal scenario for the selected species, production system, and year. Blue bars indicate a positive monetary value and red bars indicate a negative value (cost). The orange bar is the gross margin, calculated as the sum of all values minus costs. The value components displayed depend on the selected species because some, such as milk and hides, are not produced for all species.
 </p>
 <p>
 The controls for the value and cost chart are:
 </p>
-<p><b>Display</b><br />
+<p>
+<b>Display</b><br />
 This sets the value and cost chart to display either side-by-side bars for the current and ideal scenarios or the difference between them.
 </p>
-<div class="figure align-default" id="ethiopia-values-and-costs-sidebyside">
-<img alt="../_images/ethiopia_values_and_costs_sidebyside.png" src="../_images/ethiopia_values_and_costs_sidebyside.png" />
-<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Showing values and costs for the current and ideal scenarios side by side</span><a class="headerlink" href="#ethiopia-values-and-costs-sidebyside" title="Permalink to this image">#</a></p>
+<div class="figure align-default" id="ahle-sidebyside-or-diff">
+<img alt="../_images/ahle_sidebyside_or_diff.png" src="../_images/ahle_sidebyside_or_diff.png" />
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Display options for AHLE values and costs</span><a class="headerlink" href="#ahle-sidebyside-or-diff" title="Permalink to this image">#</a></p>
 </div>
-<div class="figure align-default" id="ethiopia-values-and-costs-difference">
-<img alt="../_images/ethiopia_values_and_costs_difference.png" src="../_images/ethiopia_values_and_costs_difference.png" />
-<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Showing the change in each value and cost when moving from the current to the ideal scenario</span><a class="headerlink" href="#ethiopia-values-and-costs-difference" title="Permalink to this image">#</a></p>
+<div class="figure align-default" id="ethiopia-values-and-costs-sidebyside-bars">
+<img alt="../_images/ethiopia_values_and_costs_sidebyside_bars.png" src="../_images/ethiopia_values_and_costs_sidebyside_bars.png" />
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Showing values and costs for the current and ideal scenarios side by side</span><a class="headerlink" href="#ethiopia-values-and-costs-sidebyside-bars" title="Permalink to this image">#</a></p>
 </div>
-<p><b>Compare current scenario to</b><br />
+<div class="figure align-default" id="ethiopia-values-and-costs-difference-bars">
+<img alt="../_images/ethiopia_values_and_costs_difference_bars.png" src="../_images/ethiopia_values_and_costs_difference_bars.png" />
+<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Showing the change in each value and cost when moving from the current to the ideal scenario</span><a class="headerlink" href="#ethiopia-values-and-costs-difference-bars" title="Permalink to this image">#</a></p>
+</div>
+<p>
+<b>Comparison</b><br />
 This selects the scenario to compare to. Scenarios are:
-<ul>
-	<li>Ideal: reflecting an ideal scenario with zero mortality and improved fertility and live weight.</li>
-	<li>Zero Mortality: reflecting a scenario with zero mortality but fertility and live weight equal to current values.</li>
-	<li>Improvement: allows a selection of other scenarios with partial improvement to mortality, fertility, or live weight.</li>
+<ul class="simple">
+<li><p>Ideal: reflecting an ideal scenario with zero mortality and improved fertility and live weight.</p></li>
+<li><p>Improvement: allows a selection of other scenarios with partial improvement to mortality, fertility, or live weight.</p></li>
 </ul>
 </p>
-<p><b>Improvement Factor</b><br />
+<div class="figure align-default" id="ahle-scenario-select">
+<img alt="../_images/ahle_scenario_select.png" src="../_images/ahle_scenario_select.png" />
+<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">Comparison options for AHLE values and costs</span><a class="headerlink" href="#ahle-scenario-select" title="Permalink to this image">#</a></p>
+</div>
+<p>
+<b>Improvement Factor</b><br />
 If <i>Improvement</i> is selected, use this dropdown to select a factor to define a partial-improvement scenario.
-<ul>
-	<li>Mortality</li>
-	<li>Live Weight </li>
-	<li>Parturition Rate</li>
+<ul class="simple">
+<li><p>Mortality</p></li>
+<li><p>Live Weight</p></li>
+<li><p>Parturition Rate</p></li>
 </ul>
-</p>
-<p><b>Scenario applies to group</b><br />
-Allows the user to view the impact on values and costs if the improvement scenario is applied to different age/sex groups.
 </p>
 </div>
 
@@ -404,11 +420,11 @@ Allows the user to view the impact on values and costs if the improvement scenar
       </div>
     </a>
     <a class="right-next"
-       href="eth_attribution_chart.html"
+       href="eth_subnational_map.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Attribution chart</p>
+        <p class="prev-next-title">Subnational map</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

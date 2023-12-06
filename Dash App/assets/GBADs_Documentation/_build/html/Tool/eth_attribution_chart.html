@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Attribution chart &#8212; AHLE Interactive Dashboard</title>
+    <title>Attribution &#8212; AHLE Interactive Dashboard</title>
   
   
   
@@ -63,8 +63,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Tool/eth_attribution_chart';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Subnational map" href="eth_subnational_map.html" />
-    <link rel="prev" title="Value and cost chart" href="eth_value_cost_chart.html" />
+    <link rel="next" title="Wider economic impact" href="eth_wei_chart.html" />
+    <link rel="prev" title="Subnational map" href="eth_subnational_map.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -155,26 +155,35 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Navigating the Dashboard</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Overview%20of%20the%20tabs.html">Overview of the tabs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tabs.html">Tabs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eth_basic_controls.html">Page display options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Downloading%20results.html">Downloading results</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ethiopia Case Study</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Estimating AHLE</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Analysis/Overview%20of%20the%20approach_Ethiopia.html">Overview of the approach</a></li>
-<li class="toctree-l1"><a class="reference internal" href="eth_basic_controls.html">Page display options</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="Reading%20the%20charts_Ethiopia.html">Reading the charts</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="eth_value_cost_chart.html">Value and cost chart</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Attribution chart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eth_value_cost_chart.html">Values and Costs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="eth_subnational_map.html">Subnational map</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Attribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eth_wei_chart.html">Wider economic impact</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Analysis/decision_walkthrough_Ethiopia.html">Example walkthrough of decisions</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/walkthrough_overall_impact.html">What is the impact of disease overall?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/walkthrough_which_products.html">Which livestock products are most impacted by disease?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/walkthrough_which_regions.html">Which regions of the country are most impacted by disease?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/walkthrough_specific_diseases.html">Which diseases have the largest impact on animal health loss?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/walkthrough_diseases_over_time.html">How is the impact of each disease changing over time?</a></li>
 </ul>
 </li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../References/General.html">General</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../References/Ethiopia.html">Ethiopia Case Study</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../References/Ethiopia.html">Ethiopia</a></li>
 </ul>
 
     </div>
@@ -309,7 +318,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Attribution chart</h1>
+    <h1>Attribution</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -323,14 +332,14 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="tex2jax_ignore mathjax_ignore section" id="attribution-chart">
-<h1>Attribution chart<a class="headerlink" href="#attribution-chart" title="Permalink to this heading">#</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="attribution">
+<h1>Attribution<a class="headerlink" href="#attribution" title="Permalink to this heading">#</a></h1>
 <p>
 The attribution chart is a tree map showing the estimated attribution of the AHLE to infectious, non-infectious, and external factors.
 </p>
 <div class="figure align-default" id="ethiopia-attribution">
 <img alt="../_images/ethiopia_attribution.png" src="../_images/ethiopia_attribution.png" />
-<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Example attribution chart</span><a class="headerlink" href="#ethiopia-attribution" title="Permalink to this image">#</a></p>
+<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Example attribution chart</span><a class="headerlink" href="#ethiopia-attribution" title="Permalink to this image">#</a></p>
 </div>
 <p>
 Important note: attribution is estimated for species groups rather than for individual species.
@@ -384,20 +393,20 @@ All grouping variables except for the first can also be set to None.
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="eth_value_cost_chart.html"
+       href="eth_subnational_map.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Value and cost chart</p>
+        <p class="prev-next-title">Subnational map</p>
       </div>
     </a>
     <a class="right-next"
-       href="eth_subnational_map.html"
+       href="eth_wei_chart.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Subnational map</p>
+        <p class="prev-next-title">Wider economic impact</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

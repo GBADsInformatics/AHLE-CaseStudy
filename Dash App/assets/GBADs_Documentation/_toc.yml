@@ -4,21 +4,27 @@
 format: jb-book
 root: intro
 parts:
-  - caption: Overview
+  - caption: Navigating the Dashboard
     chapters:
-    - file: Tool/Overview of the tabs
+    - file: Tool/Tabs
+    - file: Tool/eth_basic_controls
     - file: Tool/Downloading results
-  - caption: Ethiopia Case Study
+  - caption: Estimating AHLE
     chapters:
     - file: Analysis/Overview of the approach_Ethiopia
-    - file: Tool/eth_basic_controls
     - file: Tool/Reading the charts_Ethiopia
       sections:
       - file: Tool/eth_value_cost_chart
-      - file: Tool/eth_attribution_chart
-      #- file: Tool/eth_ahle_contrib_chart
       - file: Tool/eth_subnational_map
-    #- file: Analysis/Compartmental population model
+      - file: Tool/eth_attribution_chart
+      - file: Tool/eth_wei_chart
+    - file: Analysis/decision_walkthrough_Ethiopia
+      sections:
+      - file: Analysis/walkthrough_overall_impact
+      - file: Analysis/walkthrough_which_products
+      - file: Analysis/walkthrough_which_regions
+      - file: Analysis/walkthrough_specific_diseases
+      - file: Analysis/walkthrough_diseases_over_time
   - caption: References
     chapters:
     - file: References/General

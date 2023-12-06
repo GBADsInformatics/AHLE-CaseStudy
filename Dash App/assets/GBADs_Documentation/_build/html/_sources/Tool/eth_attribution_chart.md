@@ -1,4 +1,4 @@
-# Attribution chart
+# Attribution
 <p>
 The attribution chart is a tree map showing the estimated attribution of the AHLE to infectious, non-infectious, and external factors.
 </p>

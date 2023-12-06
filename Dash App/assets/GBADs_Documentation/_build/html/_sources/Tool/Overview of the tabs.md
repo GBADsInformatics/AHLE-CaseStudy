@@ -1,4 +1,4 @@
-# Overview of the tabs
+# Navigating the dashboard
 
 <p>
 High level description of the tabs.
