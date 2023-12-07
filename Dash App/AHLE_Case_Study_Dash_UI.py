@@ -1428,10 +1428,27 @@ gbadsDash.layout = html.Div([
 
                 html.Br(),
 
+                # dbc.Row([  # Row with GRAPHICS
+                #     # CONTROLS
+                #     html.Div(
+                #         dbc.Button(
+                #                 "Open collapse",
+                #                 id="tbl-btn-chevron",
+                #                 className="mb-3",
+                #                 color="primary",
+                #                 n_clicks=0,
+                #             ),
+                #         # html.I(className="bi bi-chevron-up",id='tbl-btn-chevron'),
+                #         id='table-collapse-button',
+                #         className='tab-section table-collapse-button',
+                #         ),
+                # ]),
+
                 #### -- AHLE CHART AND CONTROLS
                 dbc.Row([  # Row with GRAPHICS
                     # CONTROLS
                       dbc.Col([
+
                      #     dbc.Button(
                      #        "Open collapse",
                      #        id="collapse-button",
@@ -1441,6 +1458,9 @@ gbadsDash.layout = html.Div([
                      #    ),
                      #     # Collapse card info
                      #     dbc.Collapse(
+                           html.Div(className='tab-section tab-section-table',
+                                            id='tab-section-table',
+                                            children=[
                              dbc.Card([
                                  dbc.CardBody([
                                      html.H5("Animal Health Loss Envelope (AHLE)",
@@ -1520,6 +1540,8 @@ gbadsDash.layout = html.Div([
                                     html.P("Error bars show 95% confidence interval for each item based on simulation results. These reflect uncertainty in the input parameters and natural variation in the population."),
                                 ]),
 
+                            ],), # END OF COLLAPSE
+
                         # End of CONTROLS COL
                          ],  width=4),
 
@@ -1550,6 +1572,11 @@ gbadsDash.layout = html.Div([
                         ],size="md", color="#393375", fullscreen=False),
                     # End of AHLE Bar Chart Column
                     style={"width":5}),
+
+                    html.Br(),
+                    html.Hr(style={'margin-right':'10px',
+                                  'margin-top':'0px',
+                                  'margin-bottom':'5px'}),
 
                     # # Values and Costs Waterfall
                     # dbc.Col([
@@ -1592,6 +1619,76 @@ gbadsDash.layout = html.Div([
                 # ### END OF FOOTNOTES
 
                 # html.Hr(style={'margin-right':'10px',}),
+
+            #### -- SUBNATIONAL MAP
+            html.Label(["Showing the animal health loss envelope for each subnational state. Use the dropdown to view an individual item of revenue, expenditure, or gross margin instead."]),
+
+            html.Br(),
+            html.Hr(style={'margin-right':'10px',
+                          'margin-top':'0px',
+                          'margin-bottom':'5px'}),
+
+            # CONTROLS
+            dbc.Card([
+                dbc.CardBody([
+                    html.Abbr("Subnational AHLE",
+                            className="Species_attr_title",
+                            title="NOTE: a subnational state will appear blank if there is no data for the selected production system there",
+                            style={"font-weight": "bold",
+                                   "font-size": "var(--pst-font-size-h3)",
+                                   }),
+                    dbc.Row([
+                        # Map Display
+                        dbc.Col([
+                            html.H5("Item", style=control_heading_style),
+                            dcc.Dropdown(id='select-map-display-ecs',
+                                         value='Animal Health Loss Envelope',
+                                         clearable=False,
+                                         ),
+                            ],width=3),
+
+                        # Denominator
+                        dbc.Col([
+                            html.H5("Show values as...", style=control_heading_style),
+                            dcc.RadioItems(id='select-map-denominator-ecs',
+                                          options=ecs_map_denominator_options,
+                                          value= "Per kg biomass",
+                                          inputStyle=Radio_input_style,
+                                          ),
+                            ]),
+                        ]), # END OF MAP CONTROLS ROW
+                    ]),     # END OF CARD BODY
+                ], color='#F2F2F2', style={"margin-right": "10px"}),    # END OF CARD
+
+            html.Br(),
+
+            # MAP GRAPHIC
+            dbc.Row([
+                dbc.Col([ # Ethiopian subnational level
+                    dbc.Spinner(children=[
+                    dcc.Graph(id='ecs-map',
+                                style = {"height":"650px"},
+                              config = {
+                                  "displayModeBar" : True,
+                                  "displaylogo": False,
+                                  'toImageButtonOptions': {
+                                      'format': 'png', # one of png, svg, jpeg, webp
+                                      'filename': 'GBADs_Ethiopia_Subnational_Viz'
+                                      },
+                                  }
+                              )
+                        ],size="md", color="#393375", fullscreen=False),    # End of Spinner
+                    ]),     # End of COL
+                ]),     # END OF MAP GRAPHIC ROW
+
+            # MAP FOOTNOTES
+            dbc.Row([
+                html.P("Livestock data is not shown for city regions (Addis Ababa, Dire Dawa, and Harari)"),
+                html.P("South West Ethiopia did not have data available at the time of analysis. It is showing the same values as SNNP."),
+                ], style={'font-style': 'italic'}
+                ),
+
+
             ### END OF AHLE V2 TAB
                 ]),
 
@@ -1833,81 +1930,81 @@ gbadsDash.layout = html.Div([
         ]),
 
 
-        #### SUBNATIONAL AHLE MAP
-        dbc.Tab(label="Map",
-                tabClassName="flex-grow-1 text-center",
-                    tab_style = tab_style,
-                    style = {"height":"100vh",
-                        },
-                children =[
-                    html.Label(["Showing the animal health loss envelope for each subnational state. Use the dropdown to view an individual item of revenue, expenditure, or gross margin instead."]),
+        # #### SUBNATIONAL AHLE MAP
+        # dbc.Tab(label="Map",
+        #         tabClassName="flex-grow-1 text-center",
+        #             tab_style = tab_style,
+        #             style = {"height":"100vh",
+        #                 },
+        #         children =[
+        #             html.Label(["Showing the animal health loss envelope for each subnational state. Use the dropdown to view an individual item of revenue, expenditure, or gross margin instead."]),
 
-                    html.Br(),
-                    html.Hr(style={'margin-right':'10px',
-                                  'margin-top':'0px',
-                                  'margin-bottom':'5px'}),
+        #             html.Br(),
+        #             html.Hr(style={'margin-right':'10px',
+        #                           'margin-top':'0px',
+        #                           'margin-bottom':'5px'}),
 
-            #### -- CONTROLS
-            dbc.Card([
-                dbc.CardBody([
-                    html.Abbr("Subnational AHLE",
-                            className="Species_attr_title",
-                            title="NOTE: a subnational state will appear blank if there is no data for the selected production system there",
-                            style={"font-weight": "bold",
-                                   "font-size": "var(--pst-font-size-h3)",
-                                   }),
-                    dbc.Row([
-                        # Map Display
-                        dbc.Col([
-                            html.H5("Item", style=control_heading_style),
-                            dcc.Dropdown(id='select-map-display-ecs',
-                                         value='Animal Health Loss Envelope',
-                                         clearable=False,
-                                         ),
-                            ],width=3),
+        #     #### -- CONTROLS
+        #     dbc.Card([
+        #         dbc.CardBody([
+        #             html.Abbr("Subnational AHLE",
+        #                     className="Species_attr_title",
+        #                     title="NOTE: a subnational state will appear blank if there is no data for the selected production system there",
+        #                     style={"font-weight": "bold",
+        #                            "font-size": "var(--pst-font-size-h3)",
+        #                            }),
+        #             dbc.Row([
+        #                 # Map Display
+        #                 dbc.Col([
+        #                     html.H5("Item", style=control_heading_style),
+        #                     dcc.Dropdown(id='select-map-display-ecs',
+        #                                  value='Animal Health Loss Envelope',
+        #                                  clearable=False,
+        #                                  ),
+        #                     ],width=3),
 
-                        # Denominator
-                        dbc.Col([
-                            html.H5("Show values as...", style=control_heading_style),
-                            dcc.RadioItems(id='select-map-denominator-ecs',
-                                          options=ecs_map_denominator_options,
-                                          value= "Per kg biomass",
-                                          inputStyle=Radio_input_style,
-                                          ),
-                            ]),
-                        ]), # END OF MAP CONTROLS ROW
-                    ]),     # END OF CARD BODY
-                ], color='#F2F2F2', style={"margin-right": "10px"}),    # END OF CARD
+        #                 # Denominator
+        #                 dbc.Col([
+        #                     html.H5("Show values as...", style=control_heading_style),
+        #                     dcc.RadioItems(id='select-map-denominator-ecs',
+        #                                   options=ecs_map_denominator_options,
+        #                                   value= "Per kg biomass",
+        #                                   inputStyle=Radio_input_style,
+        #                                   ),
+        #                     ]),
+        #                 ]), # END OF MAP CONTROLS ROW
+        #             ]),     # END OF CARD BODY
+        #         ], color='#F2F2F2', style={"margin-right": "10px"}),    # END OF CARD
 
-            html.Br(),
+        #     html.Br(),
 
-            #### -- MAP GRAPHIC
-            dbc.Row([
-                dbc.Col([ # Ethiopian subnational level
-                    dbc.Spinner(children=[
-                    dcc.Graph(id='ecs-map',
-                                style = {"height":"650px"},
-                              config = {
-                                  "displayModeBar" : True,
-                                  "displaylogo": False,
-                                  'toImageButtonOptions': {
-                                      'format': 'png', # one of png, svg, jpeg, webp
-                                      'filename': 'GBADs_Ethiopia_Subnational_Viz'
-                                      },
-                                  }
-                              )
-                        ],size="md", color="#393375", fullscreen=False),    # End of Spinner
-                    ]),     # End of COL
-                ]),     # END OF MAP GRAPHIC ROW
+        #     #### -- MAP GRAPHIC
+        #     dbc.Row([
+        #         dbc.Col([ # Ethiopian subnational level
+        #             dbc.Spinner(children=[
+        #             dcc.Graph(id='ecs-map',
+        #                         style = {"height":"650px"},
+        #                       config = {
+        #                           "displayModeBar" : True,
+        #                           "displaylogo": False,
+        #                           'toImageButtonOptions': {
+        #                               'format': 'png', # one of png, svg, jpeg, webp
+        #                               'filename': 'GBADs_Ethiopia_Subnational_Viz'
+        #                               },
+        #                           }
+        #                       )
+        #                 ],size="md", color="#393375", fullscreen=False),    # End of Spinner
+        #             ]),     # End of COL
+        #         ]),     # END OF MAP GRAPHIC ROW
 
-            #### -- MAP FOOTNOTES
-            dbc.Row([
-                html.P("Livestock data is not shown for city regions (Addis Ababa, Dire Dawa, and Harari)"),
-                html.P("South West Ethiopia did not have data available at the time of analysis. It is showing the same values as SNNP."),
-                ], style={'font-style': 'italic'}
-                ),
-        ### END OF SUBNATIONAL AHLE MAP TAB
-            ]),
+        #     #### -- MAP FOOTNOTES
+        #     dbc.Row([
+        #         html.P("Livestock data is not shown for city regions (Addis Ababa, Dire Dawa, and Harari)"),
+        #         html.P("South West Ethiopia did not have data available at the time of analysis. It is showing the same values as SNNP."),
+        #         ], style={'font-style': 'italic'}
+        #         ),
+        # ### END OF SUBNATIONAL AHLE MAP TAB
+        #     ]),
 
 
         #### WEI
@@ -2110,6 +2207,63 @@ gbadsDash.layout = html.Div([
 # ------------------------------------------------------------------------------
 #### -- Controls
 # ------------------------------------------------------------------------------
+
+@gbadsDash.callback(
+        Output('tab-section-table','style'),
+        Output('tbl-btn-chevron','children'),
+        Output('tab-section-table','children'),
+        Input('table-collapse-button','n_clicks'),
+        State('tab-section-table','children'),
+    )
+def collapse_table(_a, collapsed):
+    tabstyle = None
+    # chevronstyle = None
+    open_collapse = 'Collapse'
+
+    if _a is None:
+        return tabstyle, open_collapse, collapsed
+
+    if not collapsed:
+        tabstyle = {'flex':'0',
+                    'display': 'block'}
+        # chevronstyle = {'transform': 'rotate3d(1, 0, 0, 180deg)'}
+        open_collapse ='Open'
+
+    # if not collapsed:
+    #     tabstyle = {'display': 'block'}
+    #     # chevronstyle = {'transform': 'rotate3d(1, 0, 0, 180deg)'}
+    #     open_collapse ='Collapse'
+    #     return tabstyle, open_collapse, collapsed
+
+    # else:
+    #     tabstyle = {'display': 'none'}
+    #     # chevronstyle = {'transform': 'rotate3d(1, 0, 0, 180deg)'}
+    #     open_collapse ='Open'
+    #     return tabstyle, open_collapse, not collapsed
+
+    # if _a:
+    #    if collapsed == "Open":
+    #        tabstyle = {'display': 'Block'}
+    #        content_style = CONTENT_STYLE1
+    #        open_collapse = "Collapse"
+    #        return tabstyle, open_collapse, not collapsed
+
+    #    else:
+    #        sidebar_style = SIDEBAR_STYLE
+    #        content_style = CONTENT_STYLE
+    #        open_collapse = "Open"
+    # else:
+    #    sidebar_style = SIDEBAR_STYLE
+    #    content_style = CONTENT_STYLE
+    #    open_collapse = 'Open'
+
+    # return sidebar_style, content_style, open_collapse
+
+    return tabstyle, open_collapse, not collapsed
+
+
+
+
 # Update dashboard title based on selected country
 @gbadsDash.callback(
     Output('bod-select-country-ecs-title', 'children'),
