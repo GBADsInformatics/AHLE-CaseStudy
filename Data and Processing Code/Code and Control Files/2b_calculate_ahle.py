@@ -157,8 +157,8 @@ Aggregate age and sex groups are created inside the compartmental model.
 Furthermore, results for different age and sex groups within a species will be
 correlated, so their aggregate variances cannot be calculated by summing.
 I have commented-out this part of the code. I still calculate aggregate species
-and production systems as those are not created inside the compartmental model
-and should be uncorrelated, allowing the variance to be calculated by summing.
+and production systems (which are not created inside the compartmental model)
+as those should be uncorrelated, allowing the variance to be calculated by summing.
 '''
 # =============================================================================
 #### Preliminaries
@@ -338,8 +338,8 @@ all_byvars = ('species' ,'region' ,'production_system' ,'item' ,'item_type_code'
 #### Build aggregate species and production system groups
 # =============================================================================
 '''
-These must be done after concatenating combined age/sex groups so that they are
-calculated for the combined groups as well.
+These must be done after combining age/sex groups so that they are calculated
+for the combined groups as well.
 '''
 ahle_combo_withagg = ahle_combo_adj.copy()
 
