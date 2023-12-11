@@ -131,3 +131,17 @@ def make_dropdowns(dropdown_tbl, df):
         values = [k.strip() for k in row.split('|')]
         ddt.append(Dict(zip(keys,values)))
     return [dbc.Col(make_dropdown_item(row, df)) for row in ddt]
+
+# To reorder columns in a dataframe
+# Usage: df = reorder_columns(df ,[ordered_column_list])
+def reorder_columns(
+		INPUT_DF 			# Dataframe to modify
+		,COLS_IN_ORDER 		# List: columns you want first, in this order. All other columns in dataframe will come after these columns.
+		,SORT=True 			# True: sort dataframe by COLS_IN_ORDER
+	):
+	dfmod = INPUT_DF.copy()
+	cols_other = [i for i in list(INPUT_DF) if i not in COLS_IN_ORDER]
+	dfmod = dfmod.reindex(columns=COLS_IN_ORDER + cols_other)
+	if SORT==True:
+		dfmod = dfmod.sort_values(by=COLS_IN_ORDER ,ignore_index=True)
+	return dfmod

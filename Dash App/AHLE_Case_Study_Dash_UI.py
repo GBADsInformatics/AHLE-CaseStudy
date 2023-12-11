@@ -140,12 +140,31 @@ geojson_ecs = r.json()
 # Alternative: read from local copy
 # geojson_ecs = gpd.read_file(os.path.join(DASH_DATA_FOLDER ,'eth_admbnda_adm1_csa_bofedb_2021.geojson'))
 
+# -----------------------------------------------------------------------------
 # Expert opinion files
+# -----------------------------------------------------------------------------
 ecs_expertattr_smallrum = pd.read_csv(os.path.join(DASH_DATA_FOLDER ,'attribution_experts_smallruminants.csv'))
-ecs_expertattr_cattle = pd.read_csv(os.path.join(DASH_DATA_FOLDER ,'attribution_experts_cattle.csv'))
-ecs_expertattr_poultry = pd.read_csv(os.path.join(DASH_DATA_FOLDER ,'attribution_experts_chickens.csv'))
+ecs_expertattr_smallrum['species'] = 'All Small Ruminants'
+ecs_expertattr_smallrum = fa.reorder_columns(ecs_expertattr_smallrum, ['species'], SORT=False)
 
-# Economic data is very simple. From Dashboard WEI 08082023.xlsx shared by Tom Marsh
+ecs_expertattr_cattle = pd.read_csv(os.path.join(DASH_DATA_FOLDER ,'attribution_experts_cattle.csv'))
+ecs_expertattr_cattle['species'] = 'Cattle'
+ecs_expertattr_cattle = fa.reorder_columns(ecs_expertattr_cattle, ['species'], SORT=False)
+
+ecs_expertattr_poultry = pd.read_csv(os.path.join(DASH_DATA_FOLDER ,'attribution_experts_chickens.csv'))
+ecs_expertattr_poultry['species'] = 'All Poultry'
+ecs_expertattr_poultry = fa.reorder_columns(ecs_expertattr_poultry, ['species'], SORT=False)
+
+# Format numbers
+for DF in [ecs_expertattr_smallrum, ecs_expertattr_cattle, ecs_expertattr_poultry]:
+    for COL in ['min' ,'avg' ,'max']:
+        DF[COL] = pd.to_numeric(DF[COL] ,errors='coerce')  # Ensure numeric
+    DF[['min' ,'avg' ,'max']] = DF[['min' ,'avg' ,'max']] / 100     # Convert to proportions
+    DF.update(DF[['min', 'avg', 'max']].applymap('{:.0%}'.format))
+
+# -----------------------------------------------------------------------------
+# Economic data from Dashboard WEI 08082023.xlsx shared by Tom Marsh.
+# -----------------------------------------------------------------------------
 wei_ethiopia_raw = pd.DataFrame({
     'species':'Cattle and Small Ruminants'
     ,'scenario':['Current' ,'Zero Mortality' ,'Ideal']
@@ -3055,10 +3074,10 @@ def update_ecs_attr_data(currency, prodsys, species, year, geo_view, region):
 
     # Species filter
     # Goat and Sheep do not appear separately. These get all small ruminants results.
-    if species == 'Goat' or species == "Sheep":
+    if species.upper() in ['GOAT', 'SHEEP']:
         input_df=input_df.loc[(input_df['species'] == 'All Small Ruminants')]
     # Poultry subspecies do not appear separately. These get all poultry results.
-    elif species == 'Poultry hybrid' or species == "Poultry indigenous":
+    elif species.upper() in ['POULTRY HYBRID', 'POULTRY INDIGENOUS']:
         input_df=input_df.loc[(input_df['species'] == 'All Poultry')]
     else:
         input_df=input_df.loc[(input_df['species'] == species)]
@@ -3139,27 +3158,22 @@ def update_ecs_attr_data(currency, prodsys, species, year, geo_view, region):
     )
 def update_ecs_attr_expert_data(species):
     # Read in data depending on species selected
-    if species in ["All Small Ruminants", "Goat", "Sheep"]:
+    if species.upper() in ["ALL SMALL RUMINANTS", "GOAT", "SHEEP"]:
         input_df = ecs_expertattr_smallrum
-        spec_label = "Small Ruminants"
-    elif species == "Cattle":
+    elif species.upper() == "CATTLE":
         input_df = ecs_expertattr_cattle
-        spec_label = "Cattle"
-    elif species in ["All Poultry", "Poultry hybrid", "Poultry indigenous"]:
+    elif species.upper() in ["ALL POULTRY", "POULTRY HYBRID", "POULTRY INDIGENOUS"]:
         input_df = ecs_expertattr_poultry
-        spec_label = "Poultry"
-    else:   # All species does not have a dedicated expert opinion file. Pick one.
-        input_df = ecs_expertattr_smallrum
-        spec_label = "Small Ruminants"
-
-    # Format numbers
-    for COL in ['min' ,'avg' ,'max']:
-        input_df[COL] = pd.to_numeric(input_df[COL] ,errors='coerce')  # Ensure numeric
-    input_df[['min' ,'avg' ,'max']] = input_df[['min' ,'avg' ,'max']] / 100     # Convert to proportions
-    input_df.update(input_df[['min', 'avg', 'max']].applymap('{:.0%}'.format))
+    else:       # For "All Species", concatenate all.
+        input_df = pd.concat(
+            [ecs_expertattr_smallrum, ecs_expertattr_cattle, ecs_expertattr_poultry]
+            ,axis=0
+            ,ignore_index=True
+        )
 
     columns_to_display_with_labels = {
-        'Expert':'Expert'
+        'species':'Species'
+        ,'Expert':'Expert'
         ,'AHLE':'AHLE Component'
         ,'Production system':'Production system'
         ,'Age class':'Age class'
@@ -3172,8 +3186,6 @@ def update_ecs_attr_expert_data(species):
             dcc.Markdown(
                 f'''
                 #### Expert Opinion Attribution Proportions
-
-                {spec_label}
                 '''
                 ),
             dash_table.DataTable(
