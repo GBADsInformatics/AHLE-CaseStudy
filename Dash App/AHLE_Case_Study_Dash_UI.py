@@ -1428,39 +1428,28 @@ gbadsDash.layout = html.Div([
 
                 html.Br(),
 
-                # dbc.Row([  # Row with GRAPHICS
-                #     # CONTROLS
-                #     html.Div(
-                #         dbc.Button(
-                #                 "Open collapse",
-                #                 id="tbl-btn-chevron",
-                #                 className="mb-3",
-                #                 color="primary",
-                #                 n_clicks=0,
-                #             ),
-                #         # html.I(className="bi bi-chevron-up",id='tbl-btn-chevron'),
-                #         id='table-collapse-button',
-                #         className='tab-section table-collapse-button',
-                #         ),
-                # ]),
+                dbc.Row([  # Row with GRAPHICS
+                    # CONTROLS
+                    html.Div(
+                        dbc.Button(
+                                id="tbl-btn-open-collapse-AHLE",
+                                className="mb-3",
+                                color="primary",
+                                n_clicks=0,
+                            ),
+                        id='table-collapse-button',
+                        className='tab-section table-collapse-button',
+                        ),
+                ]),
 
                 #### -- AHLE CHART AND CONTROLS
                 dbc.Row([  # Row with GRAPHICS
                     # CONTROLS
                       dbc.Col([
-
-                     #     dbc.Button(
-                     #        "Open collapse",
-                     #        id="collapse-button",
-                     #        className="mb-3",
-                     #        color="primary",
-                     #        n_clicks=0,
-                     #    ),
-                     #     # Collapse card info
-                     #     dbc.Collapse(
-                           html.Div(className='tab-section tab-section-table',
-                                            id='tab-section-table',
-                                            children=[
+                          # html.Div(id='AHLE-control-col',
+                          #                  children=[
+                          # Collapse
+                          dbc.Collapse(
                              dbc.Card([
                                  dbc.CardBody([
                                      html.H5("Animal Health Loss Envelope (AHLE)",
@@ -1530,20 +1519,22 @@ gbadsDash.layout = html.Div([
                                      ]),    # END OF CARD BODY
                                  ], color='#F2F2F2'),    # END OF CARD
 
-                             # id="collapse",
-                             # is_open=False,
-                             # # dimension="width", # horizontal collapse
-                             # ), # END OF COLLAPSE
+                              id="collapse-AHLE-controls",
+                              is_open=False,
+                              ), # END OF COLLAPSE
 
-                                dbc.Col([   # Waterfall footnote
-                                    html.P("Blue indicates an increase, red indicates a decrease for each item. Orange is the net value of all of them.", id="waterfall-footnote-ecs"),
-                                    html.P("Error bars show 95% confidence interval for each item based on simulation results. These reflect uncertainty in the input parameters and natural variation in the population."),
-                                ]),
+                                # dbc.Col([   # Waterfall footnote
+                                #     html.P("Blue indicates an increase, red indicates a decrease for each item. Orange is the net value of all of them.", id="waterfall-footnote-ecs"),
+                                #     html.P("Error bars show 95% confidence interval for each item based on simulation results. These reflect uncertainty in the input parameters and natural variation in the population."),
+                                # ]),
 
-                            ],), # END OF COLLAPSE
+                            # ]), # END OF html.div for column
 
                         # End of CONTROLS COL
-                         ],  width=4),
+                         ],
+                          id='AHLE-control-col',
+                          # width=4
+                          ),
 
                     # AHLE Bar Chart
                     dbc.Col(
@@ -1571,7 +1562,8 @@ gbadsDash.layout = html.Div([
                         # End of Spinner
                         ],size="md", color="#393375", fullscreen=False),
                     # End of AHLE Bar Chart Column
-                    style={"width":5}),
+                    # style={"width":5}
+                    ),
 
                     html.Br(),
                     html.Hr(style={'margin-right':'10px',
@@ -2208,58 +2200,80 @@ gbadsDash.layout = html.Div([
 #### -- Controls
 # ------------------------------------------------------------------------------
 
-@gbadsDash.callback(
-        Output('tab-section-table','style'),
-        Output('tbl-btn-chevron','children'),
-        Output('tab-section-table','children'),
-        Input('table-collapse-button','n_clicks'),
-        State('tab-section-table','children'),
-    )
-def collapse_table(_a, collapsed):
-    tabstyle = None
-    # chevronstyle = None
-    open_collapse = 'Collapse'
+# Collapse AHLE graph controls
+@app.callback(
+    Output("collapse-AHLE-controls", "is_open"),
+    Output('tbl-btn-open-collapse-AHLE','children'),
+    Output('AHLE-control-col','width'),
+    [Input("tbl-btn-open-collapse-AHLE", "n_clicks")],
+    [State("collapse-AHLE-controls", "is_open")],
+)
+def toggle_collapse(n, is_open):
+    open_collapse = 'Open'
+    control_width = 1
 
-    if _a is None:
-        return tabstyle, open_collapse, collapsed
+    if n is None:
+        return is_open, open_collapse, control_width
 
-    if not collapsed:
-        tabstyle = {'flex':'0',
-                    'display': 'block'}
-        # chevronstyle = {'transform': 'rotate3d(1, 0, 0, 180deg)'}
-        open_collapse ='Open'
+    if not is_open:
+        open_collapse ='Collapse'
+        control_width = 4
 
-    # if not collapsed:
-    #     tabstyle = {'display': 'block'}
-    #     # chevronstyle = {'transform': 'rotate3d(1, 0, 0, 180deg)'}
-    #     open_collapse ='Collapse'
-    #     return tabstyle, open_collapse, collapsed
+    return not is_open, open_collapse, control_width
 
-    # else:
-    #     tabstyle = {'display': 'none'}
-    #     # chevronstyle = {'transform': 'rotate3d(1, 0, 0, 180deg)'}
-    #     open_collapse ='Open'
-    #     return tabstyle, open_collapse, not collapsed
 
-    # if _a:
-    #    if collapsed == "Open":
-    #        tabstyle = {'display': 'Block'}
-    #        content_style = CONTENT_STYLE1
-    #        open_collapse = "Collapse"
-    #        return tabstyle, open_collapse, not collapsed
+# @gbadsDash.callback(
+#         Output('tab-section-table','style'),
+#         Output('tbl-btn-open-collapse-AHLE','children'),
+#         Output('tab-section-table','children'),
+#         Input('table-collapse-button','n_clicks'),
+#         State('tab-section-table','children'),
+#     )
+# def collapse_table(_a, collapsed):
+#     tabstyle = None
+#     # chevronstyle = None
+#     open_collapse = 'Collapse'
 
-    #    else:
-    #        sidebar_style = SIDEBAR_STYLE
-    #        content_style = CONTENT_STYLE
-    #        open_collapse = "Open"
-    # else:
-    #    sidebar_style = SIDEBAR_STYLE
-    #    content_style = CONTENT_STYLE
-    #    open_collapse = 'Open'
+#     if _a is None:
+#         return tabstyle, open_collapse, collapsed
 
-    # return sidebar_style, content_style, open_collapse
+#     if not collapsed:
+#         tabstyle = {'flex':'0',
+#                     'display': 'block'}
+#         # chevronstyle = {'transform': 'rotate3d(1, 0, 0, 180deg)'}
+#         open_collapse ='Open'
 
-    return tabstyle, open_collapse, not collapsed
+#     # if not collapsed:
+#     #     tabstyle = {'display': 'block'}
+#     #     # chevronstyle = {'transform': 'rotate3d(1, 0, 0, 180deg)'}
+#     #     open_collapse ='Collapse'
+#     #     return tabstyle, open_collapse, collapsed
+
+#     # else:
+#     #     tabstyle = {'display': 'none'}
+#     #     # chevronstyle = {'transform': 'rotate3d(1, 0, 0, 180deg)'}
+#     #     open_collapse ='Open'
+#     #     return tabstyle, open_collapse, not collapsed
+
+#     # if _a:
+#     #    if collapsed == "Open":
+#     #        tabstyle = {'display': 'Block'}
+#     #        content_style = CONTENT_STYLE1
+#     #        open_collapse = "Collapse"
+#     #        return tabstyle, open_collapse, not collapsed
+
+#     #    else:
+#     #        sidebar_style = SIDEBAR_STYLE
+#     #        content_style = CONTENT_STYLE
+#     #        open_collapse = "Open"
+#     # else:
+#     #    sidebar_style = SIDEBAR_STYLE
+#     #    content_style = CONTENT_STYLE
+#     #    open_collapse = 'Open'
+
+#     # return sidebar_style, content_style, open_collapse
+
+#     return tabstyle, open_collapse, not collapsed
 
 
 
@@ -2906,17 +2920,6 @@ def update_footnote(graph):
         block = {'display': 'none'} # hide
 
     return block
-
-# Collapse AHLE graph controls
-@app.callback(
-    Output("collapse", "is_open"),
-    [Input("collapse-button", "n_clicks")],
-    [State("collapse", "is_open")],
-)
-def toggle_collapse(n, is_open):
-    if n:
-        return not is_open
-    return is_open
 
 # # TEST callback for drag and drop option
 # clientside_callback(
