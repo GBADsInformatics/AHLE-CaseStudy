@@ -1386,7 +1386,7 @@ gbadsDash.layout = html.Div([
                 dbc.Row([
                     dbc.Col([
                         # Switch between single year and over time
-                        html.Abbr("View AHLE as...",
+                        html.Abbr("View as...",
                                 className="Species_attr_title",
                                 title="Estimates for any year other than 2021 are currently placeholders",
                                 style={"font-weight": "bold",
@@ -1417,7 +1417,7 @@ gbadsDash.layout = html.Div([
 
                     # Geographical breakdown options
                     dbc.Col([
-                        html.Abbr("AHLE Geographic Scope",
+                        html.Abbr("Geographic Scope",
                                 className="Species_attr_title",
                                 title="Subnational estimates are currently only available for cattle",
                                 style={"font-weight": "bold",
