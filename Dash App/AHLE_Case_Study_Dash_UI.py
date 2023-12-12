@@ -36,7 +36,6 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import pandas as pd
-import geopandas as gpd
 from flask import Flask, redirect
 # private (fa) libraries
 import lib.fa_dash_utils as fa
@@ -361,9 +360,18 @@ for i in ecs_ahle_summary.query("region != 'National'").region.unique():
     str(ecs_region_options.append({'label':i,'value':(i)}))
 
 # Display
-ecs_display_options = [{'label': i, 'value': i, 'disabled': False} for i in ["Side by Side",
-                                                                              "Difference",
-                                                                            ]]
+# Set each option to have hover over explanation
+display_option_side_by_side = html.Abbr("Side by Side",
+                                        title="show two bars for each item, one for current and another for the ideal value",
+                                        )
+
+display_option_difference = html.Abbr("Difference",
+                                      title="show a single bar for each item representing the difference between the current and ideal values",
+                                      )
+
+ecs_display_options = [{'label': display_option_side_by_side, 'value': "Side by Side", 'disabled': False},
+                       {'label': display_option_difference, 'value': "Difference", 'disabled': False},
+                       ]
 
 # Select items to show for gross margin - depends on species
 # This also specifies the ordering of the bars
@@ -440,11 +448,29 @@ ecs_compare_options = [{'label': i, 'value': i, 'disabled': False} for i in ["Id
                                                                              "Improvement"
                                                                              ]]
 # August 2023: updated scenarios do not include zero mortality
-ecs_compare_options_limited = [
-    {'label': "Ideal", 'value': "Ideal", 'disabled': False}
-    # ,{'label': "Zero Mortality", 'value': "Zero Mortality", 'disabled': True}
-    ,{'label': "Improvement", 'value': "Improvement", 'disabled': True}
-    ]
+# ecs_compare_options_limited = [
+#     {'label': "Ideal", 'value': "Ideal", 'disabled': False}
+#     # ,{'label': "Zero Mortality", 'value': "Zero Mortality", 'disabled': True}
+#     ,{'label': "Improvement", 'value': "Improvement", 'disabled': True}
+#     ]
+
+# Set each option to have hover over explanation
+compare_option_ideal = html.Abbr("Ideal",
+                                 title="zero mortality with ideal growth and production rates",
+                                 )
+
+compare_option_zero_mortality = html.Abbr("Zero Mortality",
+                                          title="zero mortality but growth and production rates at current levels",
+                                          )
+
+compare_option_improvement = html.Abbr("Improvement",
+                                       title="marginal improvement in mortality, growth, or production rates",
+                                       )
+
+ecs_compare_options_limited = [{'label': compare_option_ideal, 'value': "Ideal", 'disabled': False},
+                               # {'label': compare_option_zero_mortality, 'value': "Zero Mortality", 'disabled': False},
+                               {'label': compare_option_improvement, 'value': "Improvement", 'disabled': True},
+                               ]
 
 # Factor
 ecs_factor_options = [{'label': i, 'value': i, 'disabled': True} for i in ["Mortality",
@@ -1382,7 +1408,7 @@ gbadsDash.layout = html.Div([
 
                     # Year selector
                     dbc.Col([
-                        html.H5(id='select-year-ecs-title'),
+                        html.H5(id='select-year-ecs-title', style=control_heading_style),
                         dcc.Dropdown(id='select-year-ecs',
                                      clearable = False,
                                      ),
@@ -1390,7 +1416,7 @@ gbadsDash.layout = html.Div([
 
                     # End year selector (only visible for over time display)
                     dbc.Col([
-                        html.H5(id='select-end-year-ecs-title'),
+                        html.H5(id='select-end-year-ecs-title', style=control_heading_style),
                         dcc.Dropdown(id='select-end-year-ecs',
                                      clearable = False,
                                      ),
@@ -1446,8 +1472,6 @@ gbadsDash.layout = html.Div([
                 dbc.Row([  # Row with GRAPHICS
                     # CONTROLS
                       dbc.Col([
-                          # html.Div(id='AHLE-control-col',
-                          #                  children=[
                           # Collapse
                           dbc.Collapse(
                              dbc.Card([
@@ -1467,8 +1491,6 @@ gbadsDash.layout = html.Div([
                                                            labelStyle={'display': 'block'},
                                                            inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
                                                            ),
-                                             html.Label(["Side by Side: show two bars for each item, one for current and another for the ideal value"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
-                                             html.Label(["Difference: show a single bar for each item representing the difference between the current and ideal values"] ,style={'font-style':'italic'}),
                                              ]),
 
                                          # Compare
@@ -1480,9 +1502,6 @@ gbadsDash.layout = html.Div([
                                                            labelStyle={'display': 'block'},
                                                            inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
                                                            ),
-                                             html.Label(["Ideal: zero mortality and ideal growth and production rates"] ,style={'font-style':'italic' ,"margin-top":"20px"}),
-                                             # html.Label(["Zero Mortality: zero mortality but growth and production rates at current levels"] ,style={'font-style':'italic'}),
-                                             html.Label(["Improvement: marginal improvement in mortality, growth, or production rates"] ,style={'font-style':'italic'}),
                                              ]),
 
                                      ]), # END OF ROW
@@ -1515,26 +1534,26 @@ gbadsDash.layout = html.Div([
                                                            inputStyle=Radio_input_style,
                                                            ),
                                              ]),
-                                         ]),     ## END OF ROW ##
+                                         ]),     ## END OF ROW
+
+                                     html.Br(),
+
+                                     dbc.Row([
+                                          # dbc.Col([   # Waterfall footnote
+                                              html.P("Blue indicates an increase, red indicates a decrease for each item. Orange is the net value of all of them.", id="waterfall-footnote-ecs"),
+                                              html.P("Error bars show 95% confidence interval for each item based on simulation results. These reflect uncertainty in the input parameters and natural variation in the population."),
+                                          # ]),
+                                         ]) # END OF ROW
+
                                      ]),    # END OF CARD BODY
+
                                  ], color='#F2F2F2'),    # END OF CARD
 
                               id="collapse-AHLE-controls",
                               is_open=False,
                               ), # END OF COLLAPSE
 
-                                # dbc.Col([   # Waterfall footnote
-                                #     html.P("Blue indicates an increase, red indicates a decrease for each item. Orange is the net value of all of them.", id="waterfall-footnote-ecs"),
-                                #     html.P("Error bars show 95% confidence interval for each item based on simulation results. These reflect uncertainty in the input parameters and natural variation in the population."),
-                                # ]),
-
-                            # ]), # END OF html.div for column
-
-                        # End of CONTROLS COL
-                         ],
-                          id='AHLE-control-col',
-                          # width=4
-                          ),
+                         ], id='AHLE-control-col'), # End of CONTROLS COL
 
                     # AHLE Bar Chart
                     dbc.Col(
@@ -2375,7 +2394,7 @@ def update_year_select_ecs(graph, species):
     Input('select-attr-display-ecs','value'),
     Input('select-species-ecs','value'),
     )
-def update_year_select_attr_ecs(attr_viz, species):
+def update_year_select2_attr_ecs(attr_viz, species):
     year_options = ecs_ahle_summary['year'].unique()
     year_options_str = []
     for i in np.sort(year_options):
@@ -2403,7 +2422,7 @@ def update_year_select_attr_ecs(attr_viz, species):
     Input('select-attr-display-ecs','value'),
     Input('select-species-ecs','value'),
     )
-def update_end_year_select_ecs(attr_viz, species):
+def update_end_year_select2_ecs(attr_viz, species):
     year_options = ecs_ahle_summary['year'].unique()
     year_options_str = []
     for i in np.sort(year_options):
@@ -2412,7 +2431,9 @@ def update_end_year_select_ecs(attr_viz, species):
     if attr_viz == 'Bar':
         dropdown_title = 'End year'
         value = year_options.max()
-        title_display_style = {'display': 'block'}
+        title_display_style = {'display': 'block',
+                               "font-weight": "bold",
+                               "color": "#555555",}
         dropdown_display_style = {'display': 'block'}
     # Hide controls if Single Year selected
     elif attr_viz == 'Tree Map':
@@ -2449,7 +2470,9 @@ def update_end_year_select_ecs(start_year, graph, species):
     if graph == 'Over Time':
         dropdown_title = 'End year'
         value = year_options.max()
-        title_display_style = {'display': 'block'}
+        title_display_style = {'display': 'block',
+                               "font-weight": "bold",
+                               "color": "#555555",}
         dropdown_display_style = {'display': 'block'}
     # Hide controls if Single Year selected
     elif graph == 'Bar' or graph == 'Cumulative':
