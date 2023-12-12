@@ -94,6 +94,7 @@ PARENT_FOLDER = os.path.dirname(CURRENT_FOLDER)
 
 # Folder for shared code with Liverpool
 ETHIOPIA_CODE_FOLDER = CURRENT_FOLDER
+ETHIOPIA_SCENARIO_FOLDER = os.path.join(CURRENT_FOLDER ,'Compartmental model parameters')
 ETHIOPIA_OUTPUT_FOLDER = os.path.join(PARENT_FOLDER ,'Program outputs')
 ETHIOPIA_DATA_FOLDER = os.path.join(PARENT_FOLDER ,'Data')
 
@@ -125,8 +126,8 @@ r_args = [
     ,os.path.join(ETHIOPIA_OUTPUT_FOLDER ,'ahle SMALL RUMINANTS')
 
     # Arg 3: full path to scenario control file
-    # ,os.path.join(ETHIOPIA_CODE_FOLDER ,'AHLE scenario parameters SMALLRUMINANTS.xlsx')
-    ,os.path.join(ETHIOPIA_CODE_FOLDER ,'AHLE scenario parameters SMALLRUMINANTS_20230504.xlsx')     # Updated 5/4/2023 but does not contain marginal improvement scenarios
+    # ,os.path.join(ETHIOPIA_SCENARIO_FOLDER ,'AHLE scenario parameters SMALLRUMINANTS.xlsx')
+    ,os.path.join(ETHIOPIA_SCENARIO_FOLDER ,'AHLE scenario parameters SMALLRUMINANTS_20230504.xlsx')     # Updated 5/4/2023 but does not contain marginal improvement scenarios
 
     # Arg 4: only run the first N scenarios from the control file
     # -1: use all scenarios
@@ -155,7 +156,7 @@ r_args = [
     ,os.path.join(ETHIOPIA_OUTPUT_FOLDER ,'ahle SMALL RUMINANTS')
 
     # Arg 3: full path to scenario control file
-    ,os.path.join(ETHIOPIA_CODE_FOLDER ,'PPR_AHLE scenario parameters SMALLRUMINANTS_20230329.xlsx')
+    ,os.path.join(ETHIOPIA_SCENARIO_FOLDER ,'PPR_AHLE scenario parameters SMALLRUMINANTS_20230329.xlsx')
 
     # Arg 4: only run the first N scenarios from the control file
     # -1: use all scenarios
@@ -184,7 +185,7 @@ r_args = [
     ,os.path.join(ETHIOPIA_OUTPUT_FOLDER ,'ahle SMALL RUMINANTS')
 
     # Arg 3: full path to scenario control file
-    ,os.path.join(ETHIOPIA_CODE_FOLDER ,'Bruc_AHLE scenario parameters SMALLRUMINANTS.xlsx')
+    ,os.path.join(ETHIOPIA_SCENARIO_FOLDER ,'Bruc_AHLE scenario parameters SMALLRUMINANTS.xlsx')
 
     # Arg 4: only run the first N scenarios from the control file
     # -1: use all scenarios
@@ -227,7 +228,7 @@ r_args = [
     ,os.path.join(ETHIOPIA_OUTPUT_FOLDER ,'ahle CATTLE')
 
     # Arg 3: full path to scenario control file
-    # ,os.path.join(ETHIOPIA_CODE_FOLDER ,'AHLE scenario parameters CATTLE.xlsx')
+    # ,os.path.join(ETHIOPIA_SCENARIO_FOLDER ,'AHLE scenario parameters CATTLE.xlsx')
     ,os.path.join(MURDOCH_SCENARIO_FOLDER ,'AHLE scenario parameters CATTLE.xlsx')
 
     # Arg 4: only run the first N scenarios from the control file
@@ -260,7 +261,7 @@ r_args = [
     ,os.path.join(ETHIOPIA_OUTPUT_FOLDER ,'ahle CATTLE')
 
     # Arg 3: full path to scenario control file
-    # ,os.path.join(ETHIOPIA_CODE_FOLDER ,'Bruc_AHLE scenario parameters CATTLE.xlsx')
+    # ,os.path.join(ETHIOPIA_SCENARIO_FOLDER ,'Bruc_AHLE scenario parameters CATTLE.xlsx')
     ,os.path.join(MURDOCH_SCENARIO_FOLDER ,'cattle_disease_scenarios.xlsx')
 
     # Arg 4: only run the first N scenarios from the control file
@@ -289,8 +290,8 @@ is providing updated cattle scenarios for the base single-year.
 
 #     # Define input scenario file
 #     SCENARIO_FILE = os.path.join(
-#         ETHIOPIA_CODE_FOLDER
-#         ,'Yearly parameters'
+#         ETHIOPIA_SCENARIO_FOLDER
+#         ,'Yearly parameters CATTLE'
 #         ,f'{YEAR}_AHLE scenario parameters CATTLE_20230209 scenarios only.xlsx'
 #         )
 
@@ -350,8 +351,8 @@ for REGION in list_eth_regions:
 
     # Define input scenario file
     SCENARIO_FILE = os.path.join(
-        ETHIOPIA_CODE_FOLDER
-        ,'Subnational parameters'
+        ETHIOPIA_SCENARIO_FOLDER
+        ,'Subnational parameters CATTLE'
         ,f'{REGION} 2021_AHLE scenario parameters CATTLE scenarios only.xlsx'
         )
 
@@ -398,7 +399,7 @@ r_args = [
     ,os.path.join(ETHIOPIA_OUTPUT_FOLDER ,'ahle POULTRY')
 
     # Arg 3: full path to scenario control file
-    ,os.path.join(ETHIOPIA_CODE_FOLDER ,'AHLE scenario parameters POULTRY.xlsx')
+    ,os.path.join(ETHIOPIA_SCENARIO_FOLDER ,'AHLE scenario parameters POULTRY.xlsx')
 
     # Arg 4: only run the first N scenarios from the control file
     # -1: use all scenarios
