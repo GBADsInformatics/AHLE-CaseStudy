@@ -1,4 +1,5 @@
 # Page display options
+
 <h3>Selecting species, production system, and currency</h3>
 <p>
 The first row of controls contains dropdown menus to select the species, production system, and currency to display for all charts.

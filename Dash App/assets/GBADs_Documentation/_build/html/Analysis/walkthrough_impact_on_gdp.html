@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Overview of the approach &#8212; AHLE Interactive Dashboard</title>
+    <title>What is the impact of disease on the national GDP? &#8212; AHLE Interactive Dashboard</title>
   
   
   
@@ -60,11 +60,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Analysis/Overview of the approach_Ethiopia';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Analysis/walkthrough_impact_on_gdp';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Reading the charts" href="../Tool/Reading%20the%20charts_Ethiopia.html" />
-    <link rel="prev" title="Downloading results" href="../Tool/Downloading%20results.html" />
+    <link rel="next" title="General" href="../References/General.html" />
+    <link rel="prev" title="How is the impact of each disease changing over time?" href="walkthrough_diseases_over_time.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -163,7 +163,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Estimating AHLE</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Overview of the approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Overview%20of%20the%20approach_Ethiopia.html">Overview of the approach</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Tool/Reading%20the%20charts_Ethiopia.html">Reading the charts</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Tool/eth_value_cost_chart.html">AHLE Values and Costs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Tool/eth_subnational_map.html">AHLE Subnational map</a></li>
@@ -171,13 +171,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../Tool/eth_wei_chart.html">Wider economic impact</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="decision_walkthrough_Ethiopia.html">Example walkthrough of decisions</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="decision_walkthrough_Ethiopia.html">Example walkthrough of decisions</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="walkthrough_overall_impact.html">What is the impact of disease overall?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="walkthrough_which_products.html">Which livestock products are most impacted by disease?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="walkthrough_which_regions.html">Which regions of the country are most impacted by disease?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="walkthrough_specific_diseases.html">Which diseases have the largest impact on animal health loss?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="walkthrough_diseases_over_time.html">How is the impact of each disease changing over time?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="walkthrough_impact_on_gdp.html">What is the impact of disease on the national GDP?</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">What is the impact of disease on the national GDP?</a></li>
 </ul>
 </li>
 </ul>
@@ -239,7 +239,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/Analysis/Overview of the approach_Ethiopia.md" target="_blank"
+      <li><a href="../_sources/Analysis/walkthrough_impact_on_gdp.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -319,7 +319,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Overview of the approach</h1>
+    <h1>What is the impact of disease on the national GDP?</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -333,19 +333,13 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="tex2jax_ignore mathjax_ignore section" id="overview-of-the-approach">
-<h1>Overview of the approach<a class="headerlink" href="#overview-of-the-approach" title="Permalink to this heading">#</a></h1>
-<p>
-The Animal Health Loss Envelope (AHLE), which represents the farm level overall disease burden, is the difference in income from livestock populations under the current state of health and under an idealized perfect health situation where there are no health or nutritional problems (such as disease, predation, acute feed shortage or micronutrient deficiency). 
-<p>The flow of inputs and outputs under the current state of health and the ideal is represented in the conceptual flow below.</p>
-</p>
-<div class="figure align-default" id="fig-sankey-ethiopia-1">
-<img alt="../_images/ECS_Sanky_diagram_from_Gemma.png" src="../_images/ECS_Sanky_diagram_from_Gemma.png" />
-<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Conceptual flow of inputs, outputs, and production losses</span><a class="headerlink" href="#fig-sankey-ethiopia-1" title="Permalink to this image">#</a></p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="what-is-the-impact-of-disease-on-the-national-gdp">
+<h1>What is the impact of disease on the national GDP?<a class="headerlink" href="#what-is-the-impact-of-disease-on-the-national-gdp" title="Permalink to this heading">#</a></h1>
+<div class="figure align-default" id="walkthrough-impact-on-gdp-annotated">
+<img alt="../_images/walkthrough_impact_on_gdp_annotated.png" src="../_images/walkthrough_impact_on_gdp_annotated.png" />
+<p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text">Showing the total impact of disease on GDP</span><a class="headerlink" href="#walkthrough-impact-on-gdp-annotated" title="Permalink to this image">#</a></p>
 </div>
-<p>
-The AHLE for Ethiopia was calculated using gross margin as a measure of income, which was simulated using a herd dynamics model. This herd dynamics model is a compartmental model in which the herd (livestock population) are divided by sex and age classes. Each sex class (male and female) is classified into three age groups (neonate, juvenile and adult) resulting in six sex-age groups. The model simulates the herd dynamics based on demographic (birth and death rates) and offtake rates in a monthly time step for one year. The simulation of the model produces annual production offtakes (live animal, milk, draft power, hides, manure etc.) and their respective monetary values (revenue) based on prices for these production outputs. It also estimates the change in total expenditure on production inputs: feed, labor and animal health care. The revenue and costs from the herd model enable the calculation of gross margins for the simulated populations. The gross margin is calculated for different scenarios formed by combination of sex-age groups, production systems and incremental improvement in health statuses.
-</p></div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -379,20 +373,20 @@ The AHLE for Ethiopia was calculated using gross margin as a measure of income, 
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../Tool/Downloading%20results.html"
+       href="walkthrough_diseases_over_time.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Downloading results</p>
+        <p class="prev-next-title">How is the impact of each disease changing over time?</p>
       </div>
     </a>
     <a class="right-next"
-       href="../Tool/Reading%20the%20charts_Ethiopia.html"
+       href="../References/General.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Reading the charts</p>
+        <p class="prev-next-title">General</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

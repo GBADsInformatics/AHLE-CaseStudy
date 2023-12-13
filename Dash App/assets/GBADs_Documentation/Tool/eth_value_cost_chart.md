@@ -1,4 +1,4 @@
-# Values and Costs
+# AHLE Values and Costs
 <p>
 The value and cost chart shows the major components of value and cost under current conditions and compares them to an ideal scenario for the selected species, production system, and year. Blue bars indicate a positive monetary value and red bars indicate a negative value (cost). The orange bar is the gross margin, calculated as the sum of all values minus costs. The value components displayed depend on the selected species because some, such as milk and hides, are not produced for all species.
 </p>

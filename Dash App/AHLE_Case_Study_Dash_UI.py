@@ -980,16 +980,16 @@ gbadsDash.layout = html.Div([
                            "font-weight": "bold"}
                     ),
             # Dashboard description
-            html.P(['This interactive dashboard uses publicly available data in consultation with \
-                    experts to create models that provide a country-specific estimate of the \
-                    animal health loss envelope (AHLE). The tool will guide you through the calculations, \
-                    the outputs, and the scenarios that allow us to aid decision makers with regard to \
-                    animal health and production.'],
-                   style={'textAlign': 'center'}
-                   ),
-            html.Label(id='population-dashboard-heading',
-                       style={'textAlign': 'center', 'font-style':'italic'}    # Centering not working?
-                       ),
+            # html.P(['This interactive dashboard uses publicly available data and expert elicitation \
+            #         to create models that provide a country-specific estimate of the \
+            #         animal health loss envelope (AHLE). The tool will guide you through the calculations, \
+            #         the outputs, and the scenarios that allow us to aid decision makers with regard to \
+            #         animal health and production.'],
+            #        style={'textAlign': 'center'}
+            #        ),
+            # html.Label(id='population-dashboard-heading',
+            #            style={'textAlign': 'center', 'font-style':'italic'}    # Centering not working?
+            #            ),
             ], xs=12, sm=12, md=12, lg=9, xl=9)
         ### END OF LANDING INTRO
         ], justify='center'),
@@ -1340,8 +1340,9 @@ gbadsDash.layout = html.Div([
                     style = {"height":"100vh",
                         },
                 children =[
-                html.Label(["Displaying production values, expenditures, and gross margin under the \
-                            current and ideal scenario estimated by a compartmental herd dynamics model."]),
+                html.Label(["Displaying the animal health loss envelope in terms of production values, \
+                            expenditures, and gross margin under the current and ideal scenario estimated \
+                            by a compartmental herd dynamics model."]),
                 html.Br(),
                 # html.Label(["Results on this page are currently limited to cattle, small ruminants, and \
                 #             poultry."],

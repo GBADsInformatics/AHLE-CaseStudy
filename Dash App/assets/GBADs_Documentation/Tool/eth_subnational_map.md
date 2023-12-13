@@ -1,4 +1,4 @@
-# Subnational map
+# AHLE Subnational map
 <p>
 The map shows the animal health loss envelope for each subnational state of Ethiopia.
 </p>

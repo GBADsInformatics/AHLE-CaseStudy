@@ -1,12 +1,12 @@
 # Tabs
 
 <p>
-Each tab provides a set of charts and controls for exploring a particular aspect of the animal health loss envelope.
+Each tab provides a set of charts and controls for exploring a particular aspect of the burden of animal disease.
 </p>
 
 <h3>AHLE</h3>
 <p>
-The AHLE tab shows the total estimated animal health loss envelope for the country in terms of the major components of revenue and cost for livestock production. It provides an option to show how the AHLE is changing over time. It also provides controls to show this nationally or for regions within the country.
+The AHLE tab shows the estimated animal health loss envelope in terms of the major components of revenue and cost for livestock production. It provides an option to show how this estimate is changing over time. It also provides controls to show this nationally or for regions within the country.
 </p>
 
 <h3>Attribution</h3>
@@ -21,10 +21,10 @@ The wider economic impact tab shows the estimated impact of animal health loss o
 
 <h3>Population</h3>
 <p>
-The population tab shows the country's livestock population and how it is changing over time. It allows the user to view populations for any species. It also enables comparisons with other countries.
+The population tab shows the country's livestock population and how it is changing over time. It allows the user to view populations for any species, and enables comparisons with other countries.
 </p>
 
 <h3>Data Viewer</h3>
 <p>
-The data viewer tab shows the data tables used to create the charts and enables the user to download these tables.
+The data viewer tab shows the data tables used to create the charts in the dashboard and enables the user to download these tables.
 </p>

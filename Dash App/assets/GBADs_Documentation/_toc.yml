@@ -25,6 +25,7 @@ parts:
       - file: Analysis/walkthrough_which_regions
       - file: Analysis/walkthrough_specific_diseases
       - file: Analysis/walkthrough_diseases_over_time
+      - file: Analysis/walkthrough_impact_on_gdp
   - caption: References
     chapters:
     - file: References/General
