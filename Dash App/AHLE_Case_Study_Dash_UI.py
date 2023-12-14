@@ -84,6 +84,11 @@ tab_style = {'font-size':"1.5625rem",
              'font-weight': 'bold',
              }
 
+ahle_viz_tab_style = {'font-size':"1.25rem",
+                      'font-weight': 'bold',
+                      'background-color': 'white !important',
+                      }
+
 control_heading_style = {"font-weight": "bold",
                          "color": "#555555",
                          }
@@ -1003,38 +1008,59 @@ gbadsDash.layout = html.Div([
         ], justify='center'),
 
     #### PAGE CONTROL OPTIONS
-    dbc.Card([
-    dbc.CardBody([
-        dbc.Row([
-            dbc.Col([
-                html.H5("Species", style=control_heading_style),
-                dcc.Dropdown(id='select-species-ecs',
-                            options=ecs_species_options,
-                            value='All',
-                            clearable = False,
-                            ),
-                ]),
-            dbc.Col([
-                html.H5("Production System", style=control_heading_style),
-                dcc.Dropdown(id='select-prodsys-ecs',
-                            # Options and value are now defined in a callback based on selected species
-                            clearable = False,
-                            ),
-                ]),
-            dbc.Col([
-                html.H5("Currency", style=control_heading_style),
-                dcc.Dropdown(id='select-currency-ecs',
-                            options=ecs_currency_options,
-                            value='Birr',
-                            clearable = False,
-                            ),
+    dbc.Collapse(
+        dbc.Card([
+        dbc.CardBody([
+            dbc.Row([
+                dbc.Col([
+                    html.H5("Species", style=control_heading_style),
+                    dcc.Dropdown(id='select-species-ecs',
+                                options=ecs_species_options,
+                                value='All',
+                                clearable = False,
+                                ),
+                    ]),
+                dbc.Col([
+                    html.H5("Production System", style=control_heading_style),
+                    dcc.Dropdown(id='select-prodsys-ecs',
+                                # Options and value are now defined in a callback based on selected species
+                                clearable = False,
+                                ),
+                    ]),
+                dbc.Col([
+                    html.H5("Currency", style=control_heading_style),
+                    dcc.Dropdown(id='select-currency-ecs',
+                                options=ecs_currency_options,
+                                value='Birr',
+                                clearable = False,
+                                ),
+                    ]),
+
+                # END OF FIRST CONTROL ROW
                 ]),
 
-            # END OF FIRST CONTROL ROW
-            ],style={"margin-bottom":"30px"}),
+        ]),    # END OF CARD BODY
+        ], color='#F2F2F2'),    # END OF CARD
 
-    ]),    # END OF CARD BODY
-    ], color='#F2F2F2'),    # END OF CARD
+    id="collapse-top-controls",
+    is_open=False,
+    ), # END OF COLLAPSE
+
+    dbc.Row([  # Row with collapse button
+        # Collapse Button
+        html.Div(
+            dbc.Button(
+                    id="tbl-btn-open-collapse-top-ctrls",
+                    className="bi bi-chevron-up",
+                    color="primary",
+                    n_clicks=0,
+                    style={"margin-bottom": "0rem!important",
+                           "width":"99%",
+                           "margin-left":"10px"}
+                ),
+            id='table-collapse-top-ctrls-button',
+            ),
+    ]), #END OF COLLASPE BUTTON ROW
 
     html.Br(),
 
@@ -1105,6 +1131,8 @@ gbadsDash.layout = html.Div([
                 #     ],style={"margin-bottom":"30px"}),
 
                 # SECOND CONTROL ROW
+                dbc.Card([
+                    dbc.CardBody([
                 dbc.Row([
                     dbc.Col([
                         # Switch between single year and over time
@@ -1162,28 +1190,31 @@ gbadsDash.layout = html.Div([
                                     ),
                         ]),
 
-                    # END OF SECOND CONTROL ROW
-                    ], justify='evenly'),
+                # END OF SECOND CONTROL ROW
+                ], justify='evenly'),
+
+                ]),    # END OF CARD BODY
+                ], color='#F2F2F2'),    # END OF CARD
 
                 # html.Hr(style={'margin-right':'10px'}),
 
-                # html.Br(),
+                html.Br(),
 
-                dbc.Row([  # Row with GRAPHICS
-                    # CONTROLS
+                dbc.Row([  # Row with collapse button
+                    # Collapse Button
                     html.Div(
                         dbc.Button(
                                 id="tbl-btn-open-collapse-AHLE",
-                                className="mb-3",
                                 color="primary",
                                 n_clicks=0,
+                                style={"margin-bottom": "0rem!important"}
                             ),
                         id='table-collapse-button',
                         className='tab-section table-collapse-button',
                         ),
-                ]),
+                ]), #END OF COLLASPE BUTTON ROW
 
-                #### -- AHLE CHART AND CONTROLS
+                #### -- AHLE CONTROLS
                 dbc.Row([  # Row with GRAPHICS
                     # CONTROLS
                       dbc.Col([
@@ -1261,7 +1292,6 @@ gbadsDash.layout = html.Div([
                                          ]) # END OF ROW
 
                                      ]),    # END OF CARD BODY
-
                                  ], color='#F2F2F2'),    # END OF CARD
 
                               id="collapse-AHLE-controls",
@@ -1270,34 +1300,66 @@ gbadsDash.layout = html.Div([
 
                          ], id='AHLE-control-col'), # End of CONTROLS COL
 
-                    # AHLE Bar Chart
+                    #### -- AHLE CHARTS
                     dbc.Col(
-                        dbc.Spinner(children=[
+                        dcc.Tabs([
+                            dcc.Tab(label="Graphs",
+                                    # tabClassName="flex-grow-1 text-center",
+                                        style = {'font-size':"1.25rem",
+                                                 'font-weight': 'bold',
+                                                 'background-color': '#f2f2f2',
+                                                 },
+                                        selected_style = {'font-size':"1.25rem",
+                                                          'font-weight': 'bold',
+                                                          'background-color': 'white',
+                                                          'border-color': '#F7931D #F7931D #f2f2f2 !important',
+                                                          'color': '#000000 !important',
+                                                          'box-shadow': '2px -2px 5px #F7931D',
+                                                          },
+                                    children =[
+                                    dbc.Spinner(children=[
 
-                        dcc.Graph(id='ecs-ahle-bar-chart',
-                                  style = {"height":"650px"},
-                                  config = {
-                                      "displayModeBar" : True,
-                                      "displaylogo": False,
-                                      'toImageButtonOptions': {
-                                          'format': 'png', # one of png, svg, jpeg, webp
-                                          'filename': 'GBADs_Ethiopia_Attribution_Treemap'
-                                          },
-                                      'modeBarButtonsToRemove': ['zoom',
-                                                                  'zoomIn',
-                                                                  'zoomOut',
-                                                                  'autoScale',
-                                                                  #'resetScale',  # Removes home button
-                                                                  'pan',
-                                                                  'select2d',
-                                                                  'lasso2d']
-                                      }
-                                  )
-                        # End of Spinner
-                        ],size="md", color="#393375", fullscreen=False),
-                    # End of AHLE Bar Chart Column
-                    # style={"width":5}
-                    ),
+                                    dcc.Graph(id='ecs-ahle-bar-chart',
+                                              style = {"height":"650px"},
+                                              config = {
+                                                  "displayModeBar" : True,
+                                                  "displaylogo": False,
+                                                  'toImageButtonOptions': {
+                                                      'format': 'png', # one of png, svg, jpeg, webp
+                                                      'filename': 'GBADs_Ethiopia_Attribution_Treemap'
+                                                      },
+                                                  'modeBarButtonsToRemove': ['zoom',
+                                                                              'zoomIn',
+                                                                              'zoomOut',
+                                                                              'autoScale',
+                                                                              #'resetScale',  # Removes home button
+                                                                              'pan',
+                                                                              'select2d',
+                                                                              'lasso2d']
+                                                  }
+                                              )
+                                    # End of Spinner
+                                    ],size="md", color="#393375", fullscreen=False),
+                            ]), # END OF GRAPH TAB
+
+                            dcc.Tab(label="Map",
+                                    # tabClassName="flex-grow-1 text-center",
+                                        style = {'font-size':"1.25rem",
+                                                 'font-weight': 'bold',
+                                                 'background-color': '#f2f2f2',
+                                                 },
+                                        selected_style = {'font-size':"1.25rem",
+                                                          'font-weight': 'bold',
+                                                          'background-color': 'white',
+                                                          'border-color': '#F7931D #F7931D #f2f2f2 !important',
+                                                          'color': '#000000 !important',
+                                                          'box-shadow': '2px -2px 5px #F7931D',
+                                                          },
+                                    children =[
+                            ]), # END OF MAP TAB
+
+                        ], style={'margin-left': '20px'}), # END OF TABS
+                    ), # END OF AHLE CHARTS
 
                     html.Br(),
                     html.Hr(style={'margin-right':'10px',
@@ -1358,6 +1420,7 @@ gbadsDash.layout = html.Div([
                             style={"font-weight": "bold",
                                    "font-size": "var(--pst-font-size-h3)",
                                    }),
+
                     html.Label(["Showing the animal health loss envelope for each subnational state. Use the dropdown \
                                 to view an individual item of revenue, expenditure, or gross margin instead."]),
 
@@ -1473,59 +1536,63 @@ gbadsDash.layout = html.Div([
                         #     ],style={"margin-bottom":"30px"}),
 
                         # SECOND CONTROL ROW
-                        dbc.Row([
-                            dbc.Col([
-                                # Graph Display
-                                html.H5("Visualization", style=control_heading_style),
-                                dcc.RadioItems(id='select-attr-display-ecs',
-                                               options=esc_attr_display_options,
-                                               inline=True,                  # True: arrange buttons horizontally
-                                               value='Tree Map',
-                                               inputStyle=Radio_input_style,
-                                               ),
-                                ], width=4),
+                        dbc.Card([
+                            dbc.CardBody([
+                            dbc.Row([
+                                dbc.Col([
+                                    # Graph Display
+                                    html.H5("Visualization", style=control_heading_style),
+                                    dcc.RadioItems(id='select-attr-display-ecs',
+                                                   options=esc_attr_display_options,
+                                                   inline=True,                  # True: arrange buttons horizontally
+                                                   value='Tree Map',
+                                                   inputStyle=Radio_input_style,
+                                                   ),
+                                    ], width=4),
 
-                            # Year selector
-                            dbc.Col([
-                                # html.H5("Year"),
-                                html.H5(id='select-year-ecs-title2', style=control_heading_style),
-                                dcc.Dropdown(id='select-year-ecs2',
-                                             clearable = False,
-                                             ),
-                                ], width=2),
+                                # Year selector
+                                dbc.Col([
+                                    # html.H5("Year"),
+                                    html.H5(id='select-year-ecs-title2', style=control_heading_style),
+                                    dcc.Dropdown(id='select-year-ecs2',
+                                                 clearable = False,
+                                                 ),
+                                    ], width=2),
 
-                            # End year selector (only visible for over time display)
-                            dbc.Col([
-                                html.H5(id='select-end-year-ecs-title2', style=control_heading_style),
-                                dcc.Dropdown(id='select-end-year-ecs2',
-                                             clearable = False,
-                                             ),
-                                ], width=2),
+                                # End year selector (only visible for over time display)
+                                dbc.Col([
+                                    html.H5(id='select-end-year-ecs-title2', style=control_heading_style),
+                                    dcc.Dropdown(id='select-end-year-ecs2',
+                                                 clearable = False,
+                                                 ),
+                                    ], width=2),
 
-                            # # Geographical breakdown options
-                            # dbc.Col([
-                            #     html.H5("AHLE Geographic Scope", style=control_heading_style),
-                            #     dcc.RadioItems(id='select-geo-view-ecs2',
-                            #                   inline=True,                  # True: arrange buttons horizontally
-                            #                   inputStyle=Radio_input_style,
-                            #                   ),
-                            #     # Text underneath
-                            #     html.P("Subnational estimates are currently only available for cattle for 2021" ,style={'font-style':'italic'}),
-                            #     ]),
+                                # # Geographical breakdown options
+                                # dbc.Col([
+                                #     html.H5("AHLE Geographic Scope", style=control_heading_style),
+                                #     dcc.RadioItems(id='select-geo-view-ecs2',
+                                #                   inline=True,                  # True: arrange buttons horizontally
+                                #                   inputStyle=Radio_input_style,
+                                #                   ),
+                                #     # Text underneath
+                                #     html.P("Subnational estimates are currently only available for cattle for 2021" ,style={'font-style':'italic'}),
+                                #     ]),
 
-                            # # Subnational dropdwon
-                            # dbc.Col([
-                            #     html.H5("Subnational state", id='select-region-ecs-title2'),
-                            #     dcc.Dropdown(id='select-region-ecs2',
-                            #                 options=ecs_region_options,
-                            #                 placeholder='Select Subnational...',
-                            #                 clearable = False,
-                            #                 ),
-                            #     ]),
+                                # # Subnational dropdwon
+                                # dbc.Col([
+                                #     html.H5("Subnational state", id='select-region-ecs-title2'),
+                                #     dcc.Dropdown(id='select-region-ecs2',
+                                #                 options=ecs_region_options,
+                                #                 placeholder='Select Subnational...',
+                                #                 clearable = False,
+                                #                 ),
+                                #     ]),
 
                             # END OF SECOND CONTROL ROW
-                            ], ),
+                            ]),
 
+                            ]),    # END OF CARD BODY
+                        ], color='#F2F2F2'),    # END OF CARD
 
                         html.Hr(style={'margin-right':'10px'}),
 
@@ -1937,13 +2004,43 @@ gbadsDash.layout = html.Div([
 
 # Collapse AHLE graph controls
 @app.callback(
+    Output("collapse-top-controls", "is_open"),
+    Output('tbl-btn-open-collapse-top-ctrls','children'),
+    Output('tbl-btn-open-collapse-top-ctrls','style'),
+    [Input("tbl-btn-open-collapse-top-ctrls", "n_clicks")],
+    [State("collapse-top-controls", "is_open")],
+)
+def toggle_top_ctrls_collapse(n, is_open):
+    open_collapse = '^'
+    chevronstyle = {'transform': 'rotate3d(1, 0, 0, 180deg)',
+                    "margin-bottom": "0rem!important",
+                    "width":"99%",
+                    "margin-left":"10px",
+                    "--bs-btn-line-height": ".5"}
+
+    if n is None:
+        return is_open, open_collapse, chevronstyle
+
+    if not is_open:
+        # open_collapse ='Collapse'
+        chevronstyle = {"margin-bottom": "0rem!important",
+                        "width":"99%",
+                        "margin-left":"10px",
+                        "--bs-btn-line-height": ".5"}
+
+    return not is_open, open_collapse, chevronstyle
+
+
+
+# Collapse AHLE graph controls
+@app.callback(
     Output("collapse-AHLE-controls", "is_open"),
     Output('tbl-btn-open-collapse-AHLE','children'),
     Output('AHLE-control-col','width'),
     [Input("tbl-btn-open-collapse-AHLE", "n_clicks")],
     [State("collapse-AHLE-controls", "is_open")],
 )
-def toggle_collapse(n, is_open):
+def toggle_AHLE_ctrls_collapse(n, is_open):
     open_collapse = 'Open'
     control_width = 1
 

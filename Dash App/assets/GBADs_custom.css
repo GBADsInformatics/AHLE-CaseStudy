@@ -20,10 +20,16 @@ background-color: #F2F2F2 !important;
     margin-left: 20px;
 }
 
+/* Set tab underline color to orange*/
+.nav-tabs {
+	--bs-nav-tabs-border-color: #F7931D !important;
+}
+
 /* Changes the line that indicates which tab is selected to orange*/
 div.tab--selected {
 	border-bottom: none;
-	border-top: 3px solid #F7931D !important;
+	/*border-top: 3px solid #F7931D !important;*/
+	border-top: none !important;
 }
 
 /* Set default color of tabs to black*/
