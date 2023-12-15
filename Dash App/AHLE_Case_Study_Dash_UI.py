@@ -1222,32 +1222,20 @@ gbadsDash.layout = html.Div([
                           dbc.Collapse(
                              dbc.Card([
                                  dbc.CardBody([
-                                     html.H5("Animal Health Loss Envelope (AHLE)",
-                                             className="card-title",
-                                             style={"font-weight": "bold"}
+                                     html.Div(id='AHLE-ctrls-card-title',
                                              ),
-                                     html.Label(["Comparing current values, expenditures, and gross margin to the ideal. Note that the ideal values and expenditures describe the system in an ideal state (for example, zero health expenditure); they do not describe what is required to achieve that state."]),
+                                     html.Label(id='AHLE-ctrls-card-title-label'),
                                      dbc.Row([
                                          # Switch between side by side and difference
                                          dbc.Col([
-                                             html.H6(id='select-display-ecs-title', style=control_heading_style),
-                                             dcc.RadioItems(id='select-display-ecs',
-                                                           options=ecs_display_options,
-                                                           value='Side by Side',
-                                                           labelStyle={'display': 'block'},
-                                                           inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
-                                                           ),
+                                             html.Div(id='select-display-switch-title'),
+                                             html.Div(id='select-display-switch'),
                                              ]),
 
                                          # Compare
                                          dbc.Col([
                                              html.H6("Compare current to...", id='select-compare-ecs-title', style=control_heading_style),
-                                             dcc.RadioItems(id='select-compare-ecs',
-                                                           options=ecs_compare_options_limited,
-                                                           value='Ideal',
-                                                           labelStyle={'display': 'block'},
-                                                           inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
-                                                           ),
+                                             html.Div(id='select-compare-ctrl-ecs'),
                                              ]),
 
                                      ]), # END OF ROW
@@ -1285,10 +1273,9 @@ gbadsDash.layout = html.Div([
                                      html.Br(),
 
                                      dbc.Row([
-                                          # dbc.Col([   # Waterfall footnote
-                                              html.P("Blue indicates an increase, red indicates a decrease for each item. Orange is the net value of all of them.", id="waterfall-footnote-ecs"),
-                                              html.P("Error bars show 95% confidence interval for each item based on simulation results. These reflect uncertainty in the input parameters and natural variation in the population."),
-                                          # ]),
+                                          # Waterfall footnote
+                                              html.Div(id='AHLE-ctrls-footnote-1'),
+                                              html.Div(id='AHLE-ctrls-footnote-2'),
                                          ]) # END OF ROW
 
                                      ]),    # END OF CARD BODY
@@ -1302,20 +1289,20 @@ gbadsDash.layout = html.Div([
 
                     #### -- AHLE CHARTS
                     dbc.Col(
-                        dcc.Tabs([
+                        dcc.Tabs(id='AHLE-charts-tabs', value='tab-1', children=[
                             dcc.Tab(label="Graphs",
-                                    # tabClassName="flex-grow-1 text-center",
-                                        style = {'font-size':"1.25rem",
-                                                 'font-weight': 'bold',
-                                                 'background-color': '#f2f2f2',
-                                                 },
-                                        selected_style = {'font-size':"1.25rem",
-                                                          'font-weight': 'bold',
-                                                          'background-color': 'white',
-                                                          'border-color': '#F7931D #F7931D #f2f2f2 !important',
-                                                          'color': '#000000 !important',
-                                                          'box-shadow': '2px -2px 5px #F7931D',
-                                                          },
+                                    value='tab-1',
+                                    style = {'font-size':"1.25rem",
+                                             'font-weight': 'bold',
+                                             'background-color': '#f2f2f2',
+                                             },
+                                    selected_style = {'font-size':"1.25rem",
+                                                      'font-weight': 'bold',
+                                                      'background-color': 'white',
+                                                      'border-color': '#F7931D #F7931D #f2f2f2 !important',
+                                                      'color': '#000000 !important',
+                                                      'box-shadow': '2px -2px 5px #F7931D',
+                                                      },
                                     children =[
                                     dbc.Spinner(children=[
 
@@ -1343,18 +1330,18 @@ gbadsDash.layout = html.Div([
                             ]), # END OF GRAPH TAB
 
                             dcc.Tab(label="Map",
-                                    # tabClassName="flex-grow-1 text-center",
-                                        style = {'font-size':"1.25rem",
-                                                 'font-weight': 'bold',
-                                                 'background-color': '#f2f2f2',
-                                                 },
-                                        selected_style = {'font-size':"1.25rem",
-                                                          'font-weight': 'bold',
-                                                          'background-color': 'white',
-                                                          'border-color': '#F7931D #F7931D #f2f2f2 !important',
-                                                          'color': '#000000 !important',
-                                                          'box-shadow': '2px -2px 5px #F7931D',
-                                                          },
+                                    value='tab-2',
+                                    style = {'font-size':"1.25rem",
+                                             'font-weight': 'bold',
+                                             'background-color': '#f2f2f2',
+                                             },
+                                    selected_style = {'font-size':"1.25rem",
+                                                      'font-weight': 'bold',
+                                                      'background-color': 'white',
+                                                      'border-color': '#F7931D #F7931D #f2f2f2 !important',
+                                                      'color': '#000000 !important',
+                                                      'box-shadow': '2px -2px 5px #F7931D',
+                                                      },
                                     children =[
 
                                         # MAP GRAPHIC
@@ -1416,58 +1403,6 @@ gbadsDash.layout = html.Div([
                     ]), # END OF GRAPHICS ROW
 
                 # html.Hr(style={'margin-right':'10px',}),
-
-            html.Br(),
-
-            #### -- SUBNATIONAL MAP
-            # CONTROLS
-            dbc.Card([
-                dbc.CardBody([
-                    html.Abbr("Subnational AHLE",
-                            className="Species_attr_title",
-                            title="NOTE: a subnational state will appear blank if there is no data for the selected production system there",
-                            style={"font-weight": "bold",
-                                   "font-size": "var(--pst-font-size-h3)",
-                                   }),
-
-                    html.Br(),
-
-                    html.Label(["Showing the animal health loss envelope for each subnational state. Use the dropdown \
-                                to view an individual item of revenue, expenditure, or gross margin instead."]),
-
-                    dbc.Row([
-                        # Map Display
-                        dbc.Col([
-                            html.H5("Item", style=control_heading_style),
-                            dcc.Dropdown(id='select-map-display-ecs',
-                                         value='Animal Health Loss Envelope',
-                                         clearable=False,
-                                         ),
-                            ],width=3),
-
-                        # Denominator
-                        dbc.Col([
-                            html.H5("Show values as...", style=control_heading_style),
-                            dcc.RadioItems(id='select-map-denominator-ecs',
-                                          options=ecs_map_denominator_options,
-                                          value= "Per kg biomass",
-                                          inputStyle=Radio_input_style,
-                                          ),
-                            ]),
-                        ]), # END OF MAP CONTROLS ROW
-
-                    html.Br(),
-
-                    # MAP FOOTNOTES
-                    dbc.Row([
-                        html.P("Livestock data is not shown for city regions (Addis Ababa, Dire Dawa, and Harari)"),
-                        html.P("South West Ethiopia did not have data available at the time of analysis. It is showing the \
-                               same values as SNNP."),
-                        ], style={'font-style': 'italic'}
-                        ),
-
-                    ]),     # END OF CARD BODY
-                ], color='#F2F2F2', style={"margin-right": "10px"}),    # END OF CARD
 
             html.Br(),
 
@@ -1996,13 +1931,89 @@ gbadsDash.layout = html.Div([
 #### -- Controls
 # ------------------------------------------------------------------------------
 
+# Display AHLE or Map controls
+@app.callback(
+    Output('AHLE-ctrls-card-title','children'),
+    Output('AHLE-ctrls-card-title-label','children'),
+    Output('select-display-switch-title','children'),
+    Output('select-display-switch','children'),
+    Output('select-compare-ecs-title','children'),
+    Output('select-compare-ctrl-ecs','children'),
+    Output('AHLE-ctrls-footnote-1','children'),
+    Output('AHLE-ctrls-footnote-2','children'),
+    Input("AHLE-charts-tabs", "value"),
+)
+def toggle_AHLE_maps_ctrls(tab):
+    ahle_ctrls_card_title='incorrect'
+
+    if tab == 'tab-1':
+        ahle_ctrls_card_title=html.H5("Animal Health Loss Envelope (AHLE)",
+                                      id='AHLE-ctrls-card-title',
+                                      className="card-title",
+                                      style={"font-weight": "bold"}
+                                      )
+        ahle_ctrls_card_title_label="Comparing current values, expenditures, and gross margin to the ideal. \
+            Note that the ideal values and expenditures describe the system in an ideal state (for example, \
+           zero health expenditure); they do not describe what is required to achieve that state."
+
+        select_display_switch_title=html.H6(id='select-display-ecs-title', style=control_heading_style),
+        select_display_switch=dcc.RadioItems(id='select-display-ecs',
+                                             options=ecs_display_options,
+                                             value='Side by Side',
+                                             labelStyle={'display': 'block'},
+                                             inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
+                                             )
+
+        select_compare_ecs_title="Compare current to..."
+        select_compare_ecs=dcc.RadioItems(id='select-compare-ecs',
+                                          options=ecs_compare_options_limited,
+                                          value='Ideal',
+                                          labelStyle={'display': 'block'},
+                                          inputStyle={"margin-right": "2px"}, # This pulls the words off of the button
+                                          )
+
+        footnote_1=html.P("Blue indicates an increase, red indicates a decrease for each item. Orange is the net value of all of them.", id="waterfall-footnote-ecs"),
+        footnote_2=html.P("Error bars show 95% confidence interval for each item based on simulation results. These reflect uncertainty in the input parameters and natural variation in the population."),
+
+
+    elif tab == 'tab-2':
+        ahle_ctrls_card_title=html.Abbr("Subnational AHLE",
+                                        className="Species_attr_title",
+                                        title="NOTE: a subnational state will appear blank if there is no data for the selected production system there",
+                                        style={"font-weight": "bold",
+                                               "font-size": "var(--pst-font-size-h3)",
+                                               })
+        ahle_ctrls_card_title_label="Showing the animal health loss envelope for each subnational state. Use the dropdown \
+                    to view an individual item of revenue, expenditure, or gross margin instead."
+
+        select_display_switch_title=html.H6("Item", style=control_heading_style),
+        select_display_switch=dcc.Dropdown(id='select-map-display-ecs',
+                                           value='Animal Health Loss Envelope',
+                                           clearable=False,
+                                           )
+
+        select_compare_ecs_title="Show values as..."
+        select_compare_ecs= dcc.RadioItems(id='select-map-denominator-ecs',
+                                          options=ecs_map_denominator_options,
+                                          value= "Per kg biomass",
+                                          labelStyle={'display': 'block'},
+                                          inputStyle=Radio_input_style,
+                                          )
+
+        footnote_1=html.P("Livestock data is not shown for city regions (Addis Ababa, Dire Dawa, and Harari)")
+        footnote_2=html.P("South West Ethiopia did not have data available at the time of analysis. It is showing the \
+               same values as SNNP."),
+
+    return ahle_ctrls_card_title, ahle_ctrls_card_title_label, select_display_switch_title, select_display_switch, select_compare_ecs_title, select_compare_ecs, footnote_1, footnote_2
+
+
 # Collapse AHLE graph controls
 @app.callback(
     Output("collapse-top-controls", "is_open"),
     Output('tbl-btn-open-collapse-top-ctrls','children'),
     Output('tbl-btn-open-collapse-top-ctrls','style'),
-    [Input("tbl-btn-open-collapse-top-ctrls", "n_clicks")],
-    [State("collapse-top-controls", "is_open")],
+    Input("tbl-btn-open-collapse-top-ctrls", "n_clicks"),
+    State("collapse-top-controls", "is_open"),
 )
 def toggle_top_ctrls_collapse(n, is_open):
     open_collapse = '^'
@@ -2025,14 +2036,13 @@ def toggle_top_ctrls_collapse(n, is_open):
     return not is_open, open_collapse, chevronstyle
 
 
-
 # Collapse AHLE graph controls
 @app.callback(
     Output("collapse-AHLE-controls", "is_open"),
     Output('tbl-btn-open-collapse-AHLE','children'),
     Output('AHLE-control-col','width'),
-    [Input("tbl-btn-open-collapse-AHLE", "n_clicks")],
-    [State("collapse-AHLE-controls", "is_open")],
+    Input("tbl-btn-open-collapse-AHLE", "n_clicks"),
+    State("collapse-AHLE-controls", "is_open"),
 )
 def toggle_AHLE_ctrls_collapse(n, is_open):
     open_collapse = 'Open'
@@ -2046,62 +2056,6 @@ def toggle_AHLE_ctrls_collapse(n, is_open):
         control_width = 4
 
     return not is_open, open_collapse, control_width
-
-
-# @gbadsDash.callback(
-#         Output('tab-section-table','style'),
-#         Output('tbl-btn-open-collapse-AHLE','children'),
-#         Output('tab-section-table','children'),
-#         Input('table-collapse-button','n_clicks'),
-#         State('tab-section-table','children'),
-#     )
-# def collapse_table(_a, collapsed):
-#     tabstyle = None
-#     # chevronstyle = None
-#     open_collapse = 'Collapse'
-
-#     if _a is None:
-#         return tabstyle, open_collapse, collapsed
-
-#     if not collapsed:
-#         tabstyle = {'flex':'0',
-#                     'display': 'block'}
-#         # chevronstyle = {'transform': 'rotate3d(1, 0, 0, 180deg)'}
-#         open_collapse ='Open'
-
-#     # if not collapsed:
-#     #     tabstyle = {'display': 'block'}
-#     #     # chevronstyle = {'transform': 'rotate3d(1, 0, 0, 180deg)'}
-#     #     open_collapse ='Collapse'
-#     #     return tabstyle, open_collapse, collapsed
-
-#     # else:
-#     #     tabstyle = {'display': 'none'}
-#     #     # chevronstyle = {'transform': 'rotate3d(1, 0, 0, 180deg)'}
-#     #     open_collapse ='Open'
-#     #     return tabstyle, open_collapse, not collapsed
-
-#     # if _a:
-#     #    if collapsed == "Open":
-#     #        tabstyle = {'display': 'Block'}
-#     #        content_style = CONTENT_STYLE1
-#     #        open_collapse = "Collapse"
-#     #        return tabstyle, open_collapse, not collapsed
-
-#     #    else:
-#     #        sidebar_style = SIDEBAR_STYLE
-#     #        content_style = CONTENT_STYLE
-#     #        open_collapse = "Open"
-#     # else:
-#     #    sidebar_style = SIDEBAR_STYLE
-#     #    content_style = CONTENT_STYLE
-#     #    open_collapse = 'Open'
-
-#     # return sidebar_style, content_style, open_collapse
-
-#     return tabstyle, open_collapse, not collapsed
-
-
 
 
 # Update dashboard title based on selected country
@@ -4920,7 +4874,7 @@ def update_map_display_ecs(
         # Add title
         ecs_map_fig.update_layout(
             # title_text=f'{item} in {currency} {denominator} by subnational state | {group} Cattle, {prodsys} in 2021',
-            title_text=f'{item} in {currency} {denominator} by subnational state | Cattle, {prodsys} in 2021',
+            title_text=f'{item} in {currency} {denominator} by subnational state <br><sup> Cattle, {prodsys} in 2021</sup>',
             font_size=15
             )
 
