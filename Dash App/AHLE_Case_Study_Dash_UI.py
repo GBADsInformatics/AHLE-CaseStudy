@@ -1356,6 +1356,26 @@ gbadsDash.layout = html.Div([
                                                           'box-shadow': '2px -2px 5px #F7931D',
                                                           },
                                     children =[
+
+                                        # MAP GRAPHIC
+                                        dbc.Row([
+                                            dbc.Col([ # Ethiopian subnational level
+                                                dbc.Spinner(children=[
+                                                dcc.Graph(id='ecs-map',
+                                                            style = {"height":"650px"},
+                                                          config = {
+                                                              "displayModeBar" : True,
+                                                              "displaylogo": False,
+                                                              'toImageButtonOptions': {
+                                                                  'format': 'png', # one of png, svg, jpeg, webp
+                                                                  'filename': 'GBADs_Ethiopia_Subnational_Viz'
+                                                                  },
+                                                              }
+                                                          )
+                                                    ],size="md", color="#393375", fullscreen=False),    # End of Spinner
+                                                ]),     # End of COL
+                                            ]),     # END OF MAP GRAPHIC ROW
+
                             ]), # END OF MAP TAB
 
                         ], style={'margin-left': '20px'}), # END OF TABS
@@ -1395,17 +1415,6 @@ gbadsDash.layout = html.Div([
 
                     ]), # END OF GRAPHICS ROW
 
-                # #### -- FOOTNOTES
-                # dbc.Row([
-                #     dbc.Col([   # Waterfall footnote
-                #         html.P("Blue indicates an increase, red indicates a decrease for each item. Orange is the net value of all of them.", id="waterfall-footnote-ecs"),
-                #         html.P("Error bars show 95% confidence interval for each item based on simulation results. These reflect uncertainty in the input parameters and natural variation in the population."),
-                #     ]),
-
-                # ], style={'font-style': 'italic'}
-                # ),
-                # ### END OF FOOTNOTES
-
                 # html.Hr(style={'margin-right':'10px',}),
 
             html.Br(),
@@ -1420,6 +1429,8 @@ gbadsDash.layout = html.Div([
                             style={"font-weight": "bold",
                                    "font-size": "var(--pst-font-size-h3)",
                                    }),
+
+                    html.Br(),
 
                     html.Label(["Showing the animal health loss envelope for each subnational state. Use the dropdown \
                                 to view an individual item of revenue, expenditure, or gross margin instead."]),
@@ -1444,38 +1455,21 @@ gbadsDash.layout = html.Div([
                                           ),
                             ]),
                         ]), # END OF MAP CONTROLS ROW
+
+                    html.Br(),
+
+                    # MAP FOOTNOTES
+                    dbc.Row([
+                        html.P("Livestock data is not shown for city regions (Addis Ababa, Dire Dawa, and Harari)"),
+                        html.P("South West Ethiopia did not have data available at the time of analysis. It is showing the \
+                               same values as SNNP."),
+                        ], style={'font-style': 'italic'}
+                        ),
+
                     ]),     # END OF CARD BODY
                 ], color='#F2F2F2', style={"margin-right": "10px"}),    # END OF CARD
 
             html.Br(),
-
-            # MAP GRAPHIC
-            dbc.Row([
-                dbc.Col([ # Ethiopian subnational level
-                    dbc.Spinner(children=[
-                    dcc.Graph(id='ecs-map',
-                                style = {"height":"650px"},
-                              config = {
-                                  "displayModeBar" : True,
-                                  "displaylogo": False,
-                                  'toImageButtonOptions': {
-                                      'format': 'png', # one of png, svg, jpeg, webp
-                                      'filename': 'GBADs_Ethiopia_Subnational_Viz'
-                                      },
-                                  }
-                              )
-                        ],size="md", color="#393375", fullscreen=False),    # End of Spinner
-                    ]),     # End of COL
-                ]),     # END OF MAP GRAPHIC ROW
-
-            # MAP FOOTNOTES
-            dbc.Row([
-                html.P("Livestock data is not shown for city regions (Addis Ababa, Dire Dawa, and Harari)"),
-                html.P("South West Ethiopia did not have data available at the time of analysis. It is showing the \
-                       same values as SNNP."),
-                ], style={'font-style': 'italic'}
-                ),
-
 
             ### END OF AHLE V2 TAB
                 ]),
