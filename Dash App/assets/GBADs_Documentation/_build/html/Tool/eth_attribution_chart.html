@@ -163,15 +163,19 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Estimating AHLE</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Analysis/Overview%20of%20the%20approach_Ethiopia.html">Overview of the approach</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="Reading%20the%20charts_Ethiopia.html">Reading the charts</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Analysis/Overview%20of%20the%20approach_Ethiopia.html">Overview of the approach</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/compartmental_model_overview.html">Compartmental herd model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/attribution_overview.html">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Reading%20the%20charts_Ethiopia.html">Reading the charts</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="eth_value_cost_chart.html">AHLE Values and Costs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="eth_subnational_map.html">AHLE Subnational map</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Attribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="eth_wei_chart.html">Wider economic impact</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Analysis/decision_walkthrough_Ethiopia.html">Example walkthrough of decisions</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Analysis/decision_walkthrough_Ethiopia.html">Example walkthrough of decisions</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Analysis/walkthrough_overall_impact.html">What is the impact of disease overall?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Analysis/walkthrough_which_products.html">Which livestock products are most impacted by disease?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Analysis/walkthrough_which_regions.html">Which regions of the country are most impacted by disease?</a></li>
@@ -335,31 +339,22 @@ document.write(`
                   
   <div class="tex2jax_ignore mathjax_ignore section" id="attribution">
 <h1>Attribution<a class="headerlink" href="#attribution" title="Permalink to this heading">#</a></h1>
-<p>
-The attribution chart is a tree map showing the estimated attribution of the AHLE to infectious, non-infectious, and external factors.
-</p>
+<p>The attribution chart is a tree map showing the estimated attribution of the AHLE to infectious, non-infectious, and external factors. This can be split further to show the attribution to specific diseases and loss components (mortality, production loss, and health cost).</p>
+<p>Important note: attribution is estimated for species groups rather than for individual species.</p>
 <div class="figure align-default" id="ethiopia-attribution">
 <img alt="../_images/ethiopia_attribution.png" src="../_images/ethiopia_attribution.png" />
-<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Example attribution chart</span><a class="headerlink" href="#ethiopia-attribution" title="Permalink to this image">#</a></p>
+<p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text">Example attribution chart</span><a class="headerlink" href="#ethiopia-attribution" title="Permalink to this image">#</a></p>
 </div>
-<p>
-Important note: attribution is estimated for species groups rather than for individual species.
-</p>
-<p>
-The controls for the attribution chart allow the user to select up to 5 variables to display the results sliced by lower levels of aggregation. The available variables are:
-<ul>
-	<li>Cause: infectious, non-infectious, or external</li>
-	<li>AHLE Component: Mortality, Production Loss, or Health Costs. NOTE: Health Costs make up the smallest proportion of AHLE and may not be visible in the chart.</li>
-	<li>Production System</li>
-	<li>Age Group</li>
-	<li>Sex</li>
+<p>The controls for the attribution chart allow the user to select up to 5 variables to display the results sliced by lower levels of aggregation. By default, all 5 variable fields are populated, showing the most detail in the chart. All grouping variables except for the first can be set to None to show a simpler chart.</p>
+<p>The available variables are:</p>
+<ul class="simple">
+<li><p>Cause: show the contribution of infectious disease, non-infectious disease, and external causes.</p></li>
+<li><p>Disease: show the contribution of individual diseases. NOTE: only some diseases have been individually attributed. The rest are shown as “Other diseases”.</p></li>
+<li><p>AHLE Component: Mortality, Production Loss, or Health Costs. NOTE: Health Costs make up the smallest proportion of AHLE and may not be visible in the chart.</p></li>
+<li><p>Production System: show the impact of disease on each production system relevant to the selected species: crop livestock mixed, pastoral, periurban dairy, etc.</p></li>
+<li><p>Age Group: show the impact of disease on each age group relevant to the selected species: neonate, juvenile, adult.</p></li>
+<li><p>Sex: show the impact of disease on each sex: male or female. Oxen will also be displayed for cattle.</p></li>
 </ul>
-All grouping variables except for the first can also be set to None.
-</p>
-<h3>Attribution Methods</h3>
-	<p>
-	Attribution is estimated by combining the results of expert elicitation...
-	</p>
 </div>
 
     <script type="text/x-thebe-config">

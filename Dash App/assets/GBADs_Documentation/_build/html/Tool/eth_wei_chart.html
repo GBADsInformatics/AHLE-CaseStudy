@@ -163,15 +163,19 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Estimating AHLE</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Analysis/Overview%20of%20the%20approach_Ethiopia.html">Overview of the approach</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="Reading%20the%20charts_Ethiopia.html">Reading the charts</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Analysis/Overview%20of%20the%20approach_Ethiopia.html">Overview of the approach</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/compartmental_model_overview.html">Compartmental herd model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/attribution_overview.html">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Reading%20the%20charts_Ethiopia.html">Reading the charts</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="eth_value_cost_chart.html">AHLE Values and Costs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="eth_subnational_map.html">AHLE Subnational map</a></li>
 <li class="toctree-l2"><a class="reference internal" href="eth_attribution_chart.html">Attribution</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Wider economic impact</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Analysis/decision_walkthrough_Ethiopia.html">Example walkthrough of decisions</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Analysis/decision_walkthrough_Ethiopia.html">Example walkthrough of decisions</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Analysis/walkthrough_overall_impact.html">What is the impact of disease overall?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Analysis/walkthrough_which_products.html">Which livestock products are most impacted by disease?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Analysis/walkthrough_which_regions.html">Which regions of the country are most impacted by disease?</a></li>
@@ -335,6 +339,20 @@ document.write(`
                   
   <div class="tex2jax_ignore mathjax_ignore section" id="wider-economic-impact">
 <h1>Wider economic impact<a class="headerlink" href="#wider-economic-impact" title="Permalink to this heading">#</a></h1>
+<p>The wider economic impact charts show the change in live animal production and the estimated increases in national GDP and economic surplus for two scenarios:</p>
+<ul class="simple">
+<li><p>Zero mortality: where mortality has been eliminated</p></li>
+<li><p>Ideal: where mortality and production losses due to disease have been eliminated</p></li>
+</ul>
+<p>Note: these are currently limited to showing the impact of disease in cattle and small ruminants.</p>
+<div class="figure align-default" id="wei-chart-gdp">
+<img alt="../_images/wei_chart_gdp.png" src="../_images/wei_chart_gdp.png" />
+<p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text">Showing estimated change in national GDP</span><a class="headerlink" href="#wei-chart-gdp" title="Permalink to this image">#</a></p>
+</div>
+<div class="figure align-default" id="wei-chart-surplus">
+<img alt="../_images/wei_chart_surplus.png" src="../_images/wei_chart_surplus.png" />
+<p class="caption"><span class="caption-number">Fig. 13 </span><span class="caption-text">Showing estimated economic surplus</span><a class="headerlink" href="#wei-chart-surplus" title="Permalink to this image">#</a></p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">

@@ -12,6 +12,9 @@ parts:
   - caption: Estimating AHLE
     chapters:
     - file: Analysis/Overview of the approach_Ethiopia
+      sections:
+      - file: Analysis/compartmental_model_overview
+      - file: Analysis/attribution_overview
     - file: Tool/Reading the charts_Ethiopia
       sections:
       - file: Tool/eth_value_cost_chart

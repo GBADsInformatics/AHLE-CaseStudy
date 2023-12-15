@@ -1,8 +1,6 @@
 # Ethiopia
 
-<p>
 Population parameters for the Ethiopia case study are derived from data published by the Central Statistics Agency of Ethiopia. See below for instructions on how to access these data sets through the GBADs Informatics API.
-</p>
 
 | Species 	| URL 	|
 | --- 		| --- 	|

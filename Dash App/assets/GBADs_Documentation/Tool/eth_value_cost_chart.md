@@ -1,14 +1,11 @@
 # AHLE Values and Costs
-<p>
-The value and cost chart shows the major components of value and cost under current conditions and compares them to an ideal scenario for the selected species, production system, and year. Blue bars indicate a positive monetary value and red bars indicate a negative value (cost). The orange bar is the gross margin, calculated as the sum of all values minus costs. The value components displayed depend on the selected species because some, such as milk and hides, are not produced for all species.
-</p>
-<p>
+
+The value and cost chart shows the major components of revenue and cost under current conditions and compares them to estimates under an ideal scenario with no disease burden. Blue bars indicate a positive value (revenue) and red bars indicate a negative value (cost). The orange bar is the gross margin, calculated as the sum of all revenues minus costs. The value components displayed depend on the selected species because some, such as milk and hides, are not produced for all species.
+
 The controls for the value and cost chart are:
-</p>
-<p>
-<b>Display</b><br />
-This sets the value and cost chart to display either side-by-side bars for the current and ideal scenarios or the difference between them.
-</p>
+
+**Display**<br />
+This sets the chart to display either side-by-side bars for the current and ideal scenarios or the difference between them. Set this to difference to see the estimated additional revenue if there were no losses due to disease.
 
 ```{figure} ../Images/ahle_sidebyside_or_diff.png
 ---
@@ -34,13 +31,11 @@ name: ethiopia_values_and_costs_difference_bars
 Showing the change in each value and cost when moving from the current to the ideal scenario
 ```
 
-<p>
-<b>Comparison</b><br />
+**Comparison**<br />
 This selects the scenario to compare to. Scenarios are:
 
-- Ideal: reflecting an ideal scenario with zero mortality and improved fertility and live weight.
-- Improvement: allows a selection of other scenarios with partial improvement to mortality, fertility, or live weight.
-</p>
+- Ideal: reflecting an ideal scenario with zero mortality and improved fertility and growth rate.
+- Improvement: allows a selection of scenarios with partial improvements to mortality, fertility, or growth rate.
 
 ```{figure} ../Images/ahle_scenario_select.png
 ---
@@ -50,11 +45,9 @@ name: ahle_scenario_select
 Comparison options for AHLE values and costs
 ```
 
-<p>
-<b>Improvement Factor</b><br />
-If <i>Improvement</i> is selected, use this dropdown to select a factor to define a partial-improvement scenario.
+**Improvement Factor**<br />
+If *Improvement* is selected, use this dropdown to select a factor to define a partial-improvement scenario.
 
 - Mortality
 - Live Weight
 - Parturition Rate
-</p>

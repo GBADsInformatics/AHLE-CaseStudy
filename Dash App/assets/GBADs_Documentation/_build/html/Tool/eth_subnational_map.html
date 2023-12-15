@@ -163,15 +163,19 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Estimating AHLE</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Analysis/Overview%20of%20the%20approach_Ethiopia.html">Overview of the approach</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="Reading%20the%20charts_Ethiopia.html">Reading the charts</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Analysis/Overview%20of%20the%20approach_Ethiopia.html">Overview of the approach</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/compartmental_model_overview.html">Compartmental herd model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Analysis/attribution_overview.html">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Reading%20the%20charts_Ethiopia.html">Reading the charts</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="eth_value_cost_chart.html">AHLE Values and Costs</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">AHLE Subnational map</a></li>
 <li class="toctree-l2"><a class="reference internal" href="eth_attribution_chart.html">Attribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="eth_wei_chart.html">Wider economic impact</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Analysis/decision_walkthrough_Ethiopia.html">Example walkthrough of decisions</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Analysis/decision_walkthrough_Ethiopia.html">Example walkthrough of decisions</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Analysis/walkthrough_overall_impact.html">What is the impact of disease overall?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Analysis/walkthrough_which_products.html">Which livestock products are most impacted by disease?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Analysis/walkthrough_which_regions.html">Which regions of the country are most impacted by disease?</a></li>
@@ -335,12 +339,20 @@ document.write(`
                   
   <div class="tex2jax_ignore mathjax_ignore section" id="ahle-subnational-map">
 <h1>AHLE Subnational map<a class="headerlink" href="#ahle-subnational-map" title="Permalink to this heading">#</a></h1>
-<p>
-The map shows the animal health loss envelope for each subnational state of Ethiopia.
-</p>
+<p>The map shows the animal health loss envelope for each subnational state of Ethiopia.</p>
+<p>Use the Item dropdown to select a metric to display. Any of the revenue or cost items can be selected, and the current value will be shown for each region. The default display is the Animal Health Loss Envelope, which is the difference between current and ideal gross margin for each region.</p>
+<div class="figure align-default" id="map-item-selector">
+<a class="reference internal image-reference" href="../_images/map_item_selector.png"><img alt="../_images/map_item_selector.png" src="../_images/map_item_selector.png" style="height: 200px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">Item selection</span><a class="headerlink" href="#map-item-selector" title="Permalink to this image">#</a></p>
+</div>
+<p>Any metric can be displayed as a total or as a value per kg biomass for the region.</p>
+<div class="figure align-default" id="map-value-selector">
+<a class="reference internal image-reference" href="../_images/map_value_selector.png"><img alt="../_images/map_value_selector.png" src="../_images/map_value_selector.png" style="height: 100px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Value display</span><a class="headerlink" href="#map-value-selector" title="Permalink to this image">#</a></p>
+</div>
 <div class="figure align-default" id="eth-subnational-map">
 <img alt="../_images/eth_subnational_map.png" src="../_images/eth_subnational_map.png" />
-<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">Subnational map</span><a class="headerlink" href="#eth-subnational-map" title="Permalink to this image">#</a></p>
+<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">Subnational map</span><a class="headerlink" href="#eth-subnational-map" title="Permalink to this image">#</a></p>
 </div>
 </div>
 

@@ -1389,7 +1389,7 @@ gbadsDash.layout = html.Div([
                         # Switch between single year and over time
                         html.Abbr("View as...",
                                 className="Species_attr_title",
-                                title="Estimates for any year other than 2021 are currently placeholders",
+                                title="Estimates have been produced for all species in 2021. Estimates for other years have been produced for cattle only. Values for other species outside of 2021 are placeholders.",
                                 style={"font-weight": "bold",
                                        "color": "#555555",
                                        "font-size": "var(--pst-font-size-h5)",
@@ -1769,7 +1769,13 @@ gbadsDash.layout = html.Div([
                         dbc.Row([
                             dbc.Col([
                                 # Graph Display
-                                html.H5("Visualization", style=control_heading_style),
+                                html.Abbr("Visualization",
+                                          className="Species_attr_title",
+                                          title="Estimates have been produced for all species in 2021. Estimates for other years have been produced for cattle only. Values for other species outside of 2021 are placeholders.",
+                                          style={"font-weight": "bold",
+                                                 "color": "#555555",
+                                                 "font-size": "var(--pst-font-size-h5)",
+                                                 }),
                                 dcc.RadioItems(id='select-attr-display-ecs',
                                                options=esc_attr_display_options,
                                                inline=True,                  # True: arrange buttons horizontally
