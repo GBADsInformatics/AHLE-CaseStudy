@@ -79,7 +79,10 @@ app.config.suppress_callback_exceptions = True    # Use to remove warnings when 
 # - Global variables and functions that aren't directly involved in the UI interactivity (Callbacks)
 # - Typical example would be functions that read, store, and prep data to be used in the app
 ###############################################################################################
-# Define tab styles
+# =============================================================================
+#### Define Styles
+# =============================================================================
+# Tab styles
 tab_style = {'font-size':"1.5625rem",
              'font-weight': 'bold',
              }
@@ -89,9 +92,15 @@ ahle_viz_tab_style = {'font-size':"1.25rem",
                       'background-color': 'white !important',
                       }
 
+# Hedaing styles
 control_heading_style = {"font-weight": "bold",
                          "color": "#555555",
                          }
+
+abbr_heading_style = {"font-weight": "bold",
+                      "color": "#555555",
+                      "font-size": "var(--pst-font-size-h5)",
+                      }
 
 # Radio Item input style
 Radio_input_style = {"margin-right":"2px",     # This pulls the words off of the button
@@ -182,129 +191,6 @@ wei_ethiopia_raw = pd.DataFrame({
 # =============================================================================
 #### User options and defaults
 # =============================================================================
-# -----------------------------------------------------------------------------
-# All species
-# -----------------------------------------------------------------------------
-# Region options
-region_structure_options = [{'label': i, 'value': i, 'disabled': False} for i in ["WOAH",
-                                                                       "FAO",
-                                                                       "World Bank",]]
-
-# WOAH regions
-WOAH_region_options = [{'label': i, 'value': i, 'disabled': False} for i in ["All",
-                                                                        "Africa",
-                                                                       "Americas",
-                                                                       "Asia, Far East and Oceania",
-                                                                       "Europe"
-                                                                       ]]
-WOAH_region_options += [{'label': "Middle East", 'value': "Middle East", 'disabled': True}]  # Include, but disable, Middle East
-
-# WOAH region-country mapping
-WOAH_africa_options = [{'label': i, 'value': i, 'disabled': True} for i in ["Ethiopia"]]
-
-WOAH_americas_options = [{'label': i, 'value': i, 'disabled': False} for i in ["Brazil",
-                                                                          "United States of America"]]
-
-WOAH_asia_options = [{'label': i, 'value': i, 'disabled': False} for i in ["India",
-                                                                          "United States of America"]]
-
-WOAH_europe_options = [{'label': i, 'value': i, 'disabled': False} for i in ["France",
-                                                                        "Germany",
-                                                                       "Italy",
-                                                                       "Netherlands",
-                                                                       "Poland",
-                                                                       "United Kingdom"]]
-
-# FAO regions
-fao_region_options = [{'label': i, 'value': i, 'disabled': False} for i in ["All",
-                                                                        "Africa",
-                                                                       "Asia",
-                                                                       "Europe and Central Asia",
-                                                                       "Latin America and the Caribbean",
-                                                                       "South West Pacific"
-                                                                       ]]
-
-fao_region_options += [{'label': "Near East and North Africa", 'value': "Near East and North Africa", 'disabled': True}]  # Include, but disable, Middle East
-
-# FAO region-country mapping
-fao_africa_options = [{'label': i, 'value': i, 'disabled': True} for i in ["Ethiopia"]]
-
-fao_asia_options = [{'label': i, 'value': i, 'disabled': False} for i in ["India"]]
-
-fao_eca_options = [{'label': i, 'value': i, 'disabled': False} for i in ["France",
-                                                                        "Germany",
-                                                                       "Italy",
-                                                                       "Netherlands",
-                                                                       "Poland",
-                                                                       "United Kingdom"]]
-
-fao_lac_options = [{'label': i, 'value': i, 'disabled': False} for i in ["Brazil"]]
-
-fao_swp_options = [{'label': i, 'value': i, 'disabled': False} for i in ["France",
-                                                                          "United States of America"]]
-
-# World Bank regions
-wb_region_options = [{'label': i, 'value': i, 'disabled': False} for i in ["All",
-                                                                        "Sub-Saharan Africa",
-                                                                       "Europe & Central Asia",
-                                                                       "Latin America & the Caribbean",
-                                                                       "North America",
-                                                                       "South Asia"
-                                                                       ]]
-
-wb_region_options += [{'label': i, 'value': i, 'disabled': True} for i in ["East Asia & Pacific",
-                                                                       "Middle East & North Africa"
-                                                                       ]]
-
-# World Bank region-country mapping
-
-wb_africa_options = [{'label': i, 'value': i, 'disabled': True} for i in ["Ethiopia"]]
-
-wb_eca_options = [{'label': i, 'value': i, 'disabled': False} for i in ["France",
-                                                                        "Germany",
-                                                                       "Italy",
-                                                                       "Netherlands",
-                                                                       "Poland",
-                                                                       "United Kingdom"]]
-
-wb_lac_options = [{'label': i, 'value': i, 'disabled': False} for i in ["Brazil"]]
-
-wb_na_options = [{'label': i, 'value': i, 'disabled': False} for i in ["United States of America"]]
-
-wb_southasia_options = [{'label': i, 'value': i, 'disabled': False} for i in ["India"]]
-
-
-# Define country shortnames
-# These taken from https://en.wikipedia.org/wiki/List_of_alternative_country_names
-# Keys in this dictionary must match country names in data
-# Should include superset of countries from all species
-country_shortnames = {
-   'Brazil':'BRA'
-   ,'China':'CHN'
-   ,'Denmark':'DNK'
-   ,'France':'FRA'
-   ,'Germany':'DEU'
-   ,'India':'IND'
-   ,'Italy':'ITA'
-   ,'Netherlands':'NLD'
-   ,'Poland':'POL'
-   ,'Russia':'RUS'
-   ,'Spain':'ESP'
-   ,'United Kingdom':'GBR'
-   ,'United States of America':'USA'
-}
-
-# Metrics
-# Labels are shown in dropdown, Values are shown in plot titles
-# Values must match column names created in prep_bod_forwaterfall()
-metric_options = [
-   {'label':"Tonnes", 'value':"tonnes", 'disabled':False}
-   ,{'label':"US Dollars", 'value':"US dollars", 'disabled':False}
-   ,{'label':"Percent of GDP", 'value':"percent of GDP", 'disabled':False}
-   ,{'label':"Percent of Breed Standard", 'value':"percent of breed standard", 'disabled':False}
-   ,{'label':"Percent of Realised Production", 'value':"percent of realised production", 'disabled':False}
-]
-
 # =============================================================================
 #### Ethiopia case study options
 # =============================================================================
@@ -520,6 +406,11 @@ esc_attr_display_options = [
     {'label': 'Single year', 'value': 'Tree Map'}
     ,{'label': 'Over time', 'value': 'Bar'}
     ]
+
+ahle_graph_diaplay_options = [{'label': "Components", 'value': "Bar", 'disabled': False},
+                              {'label': "Cumulative", 'value': "Cumulative", 'disabled': False},
+                              {'label': "Over Time", 'value': "Over Time", 'disabled': False}
+                              ]
 
 # =============================================================================
 #### Prep data for plots
@@ -1109,63 +1000,23 @@ gbadsDash.layout = html.Div([
                 children =[
                 html.Label(["Displaying production values, expenditures, and gross margin under the \
                             current and ideal scenario estimated by a compartmental herd dynamics model."]),
-                # html.Br(),
-                # # html.Label(["Results on this page are currently limited to cattle, small ruminants, and \
-                # #             poultry."],
-                # #           style={"font-style":"italic"}),
-                # html.Hr(style={'margin-right':'10px',
-                #               'margin-top':'0px',
-                #               'margin-bottom':'5px'}),
-                # # html.Label(["Select a species and production system to view and the currency to display for all charts"]
-                #           ,style={"font-style":"italic"}
-                #           ),
 
-                # #### -- DROPDOWNS CONTROLS
-                # dbc.Row([
-                #     dbc.Col([
-                #         html.H5("Species", style=control_heading_style),
-                #         dcc.Dropdown(id='select-species-ecs',
-                #                     options=ecs_species_options,
-                #                     value='All',
-                #                     clearable = False,
-                #                     ),
-                #         ]),
-                #     dbc.Col([
-                #         html.H5("Production System", style=control_heading_style),
-                #         dcc.Dropdown(id='select-prodsys-ecs',
-                #                     # Options and value are now defined in a callback based on selected species
-                #                     clearable = False,
-                #                     ),
-                #         ]),
-                #     dbc.Col([
-                #         html.H5("Currency", style=control_heading_style),
-                #         dcc.Dropdown(id='select-currency-ecs',
-                #                     options=ecs_currency_options,
-                #                     value='Birr',
-                #                     clearable = False,
-                #                     ),
-                #         ]),
-
-                #     # END OF FIRST CONTROL ROW
-                #     ],style={"margin-bottom":"30px"}),
-
-                # SECOND CONTROL ROW
+                #### -- AHLE PAGE CONTROLS
                 dbc.Card([
                     dbc.CardBody([
                 dbc.Row([
                     dbc.Col([
-                        # Switch between single year and over time
+                        # Switch between bar chart, waterfall, and over time
                         html.Abbr("View as...",
-                                className="Species_attr_title",
-                                title="Estimates have been produced for all species in 2021. Estimates for other years have been produced for cattle only. Values for other species outside of 2021 are placeholders.",
-                                style={"font-weight": "bold",
-                                        "color": "#555555",
-                                        "font-size": "var(--pst-font-size-h5)",
-                                        }),
+                                  id='select-graph-ahle-ecs-title',
+                                  title="Estimates have been produced for all species in 2021. Estimates for other years have been produced for cattle only. Values for other species outside of 2021 are placeholders.",
+                                  style=abbr_heading_style),
                         dcc.RadioItems(id='select-graph-ahle-ecs',
-                                      inline=True,                  # True: arrange buttons horizontally
-                                      inputStyle=Radio_input_style,
-                                      ),
+                                       options=ahle_graph_diaplay_options,
+                                       value='Bar',
+                                       inline=True,                  # True: arrange buttons horizontally
+                                       inputStyle=Radio_input_style,
+                                       ),
                         ]),
 
                     # Year selector
@@ -1189,10 +1040,7 @@ gbadsDash.layout = html.Div([
                         html.Abbr("Geographic Scope",
                                 className="Species_attr_title",
                                 title="Subnational estimates are currently only available for cattle",
-                                style={"font-weight": "bold",
-                                        "color": "#555555",
-                                        "font-size": "var(--pst-font-size-h5)",
-                                        }),
+                                style=abbr_heading_style),
                         dcc.RadioItems(id='select-geo-view-ecs',
                                       inline=True,                  # True: arrange buttons horizontally
                                       inputStyle=Radio_input_style,
@@ -1209,13 +1057,13 @@ gbadsDash.layout = html.Div([
                                     ),
                         ]),
 
-                # END OF SECOND CONTROL ROW
+                # END OF ROW
                 ], justify='evenly'),
 
                 ]),    # END OF CARD BODY
                 ], color='#F2F2F2'),    # END OF CARD
 
-                # html.Hr(style={'margin-right':'10px'}),
+                # END OF AHLE PAGE CONTROLS
 
                 html.Br(),
 
@@ -1259,6 +1107,7 @@ gbadsDash.layout = html.Div([
 
                                      ]), # END OF ROW
                                      dbc.Row([
+                                         # Item dropdown
                                          dbc.Col([
                                              html.H6("Item", id='select-item-ecs-title', style=control_heading_style),
                                              dcc.Dropdown(id='select-item-ecs',
@@ -1453,10 +1302,7 @@ gbadsDash.layout = html.Div([
                         #         html.Abbr("Species",
                         #                 className="Species_attr_title",
                         #                 title="NOTE: Attribution is shown for species groups rather than for individual species.",
-                        #                 style={"font-weight": "bold",
-                        #                        "color": "#555555",
-                        #                        "font-size": "var(--pst-font-size-h5)",
-                        #                        }),
+                        #                 style=abbr_heading_style),
                         #         dcc.Dropdown(id='select-species-ecs2',
                         #                     options=ecs_species_options2,
                         #                     value='All',
@@ -1492,10 +1338,7 @@ gbadsDash.layout = html.Div([
                                 html.Abbr("Visualization",
                                           className="Species_attr_title",
                                           title="Estimates have been produced for all species in 2021. Estimates for other years have been produced for cattle only. Values for other species outside of 2021 are placeholders.",
-                                          style={"font-weight": "bold",
-                                                 "color": "#555555",
-                                                 "font-size": "var(--pst-font-size-h5)",
-                                                 }),
+                                          style=abbr_heading_style),
                                 dcc.RadioItems(id='select-attr-display-ecs',
                                                options=esc_attr_display_options,
                                                inline=True,                  # True: arrange buttons horizontally
@@ -1698,9 +1541,7 @@ gbadsDash.layout = html.Div([
         #             html.Abbr("Subnational AHLE",
         #                     className="Species_attr_title",
         #                     title="NOTE: a subnational state will appear blank if there is no data for the selected production system there",
-        #                     style={"font-weight": "bold",
-        #                            "font-size": "var(--pst-font-size-h3)",
-        #                            }),
+        #                     style=abbr_heading_style),
         #             dbc.Row([
         #                 # Map Display
         #                 dbc.Col([
@@ -2007,9 +1848,7 @@ def toggle_AHLE_maps_ctrls(tab):
         ahle_ctrls_card_title=html.Abbr("Subnational AHLE",
                                         className="Species_attr_title",
                                         title="NOTE: a subnational state will appear blank if there is no data for the selected production system there",
-                                        style={"font-weight": "bold",
-                                               "font-size": "var(--pst-font-size-h3)",
-                                               })
+                                        style=abbr_heading_style)
         ahle_ctrls_card_title_label="Showing the animal health loss envelope for each subnational state. Use the dropdown \
                     to view an individual item of revenue, expenditure, or gross margin instead."
 
@@ -2128,25 +1967,22 @@ def update_prodsys_options_ecs(species):
     # return options, value, options, value
     return options, value
 
-# Longitudinal options
+# hide display options when map is being shown
 @gbadsDash.callback(
-    Output('select-graph-ahle-ecs','options'),
-    Output('select-graph-ahle-ecs','value'),
-    Input('select-species-ecs','value'),
+    Output('select-graph-ahle-ecs-title','style'),
+    Output('select-graph-ahle-ecs','style'),
+    Input("AHLE-charts-tabs", "value"),
     )
-def update_longitudinal_options_ecs(species):
-    options = [
-        {'label': "Components", 'value': "Bar", 'disabled': False},
-        {'label': "Cumulative", 'value': "Cumulative", 'disabled': False},
-        {'label': "Over Time", 'value': "Over Time", 'disabled': False}
-        ]
-    value='Bar'
+def hide_ahle_display_options(tab):
+    if tab == 'tab-1':
+        title_display_style = abbr_heading_style
+        dropdown_display_style = Radio_input_style
 
-    # Disable option if species doesn't support it
-    # if species.upper() != 'CATTLE':
-    #     for d in options:
-    #         d['disabled']=True
-    return options, value
+    elif tab == 'tab-2':
+        title_display_style = {'display': 'none'}
+        dropdown_display_style = {'display': 'none'}
+
+    return title_display_style, dropdown_display_style
 
 # Year selector
 @gbadsDash.callback(
@@ -2155,23 +1991,29 @@ def update_longitudinal_options_ecs(species):
     Output('select-year-ecs','value'),
     Input('select-graph-ahle-ecs','value'),
     Input('select-species-ecs','value'),
+    Input("AHLE-charts-tabs", "value"),
     )
-def update_year_select_ecs(graph, species):
+def update_year_select_ecs(graph, species, tab):
     year_options = ecs_ahle_summary['year'].unique()
     year_options_str = []
     for i in np.sort(year_options):
         str(year_options_str.append({'label':i,'value':(i)}))
 
-    if graph == 'Over Time':
-        dropdown_title = 'Start year'
-        value = year_options.min()
-    # Other years only available for Cattle
-    # UPDATE: Have placeholder values for all species and years
-    elif graph == 'Bar' or graph == 'Cumulative':
+    if tab == 'tab-1':
+        if graph == 'Over Time':
+            dropdown_title = 'Start year'
+            value = year_options.min()
+        # Other years only available for Cattle
+        # UPDATE: Have placeholder values for all species and years
+        elif graph == 'Bar' or graph == 'Cumulative':
+            dropdown_title = 'Year'
+            value = year_options.max()
+
+    elif tab =='tab-2':
+        for d in year_options_str:
+            d['disabled']=True
         dropdown_title = 'Year'
         value = year_options.max()
-    else:
-        None
 
     return dropdown_title, year_options_str, value
 
@@ -2247,8 +2089,9 @@ def update_end_year_select2_ecs(attr_viz, species):
     Input('select-year-ecs','value'),
     Input('select-graph-ahle-ecs','value'),
     Input('select-species-ecs','value'),
+    Input("AHLE-charts-tabs", "value"),
     )
-def update_end_year_select_ecs(start_year, graph, species):
+def update_end_year_select_ecs(start_year, graph, species, tab):
     # Must be greater than or equal to start_year
     year_options = ecs_ahle_summary.query(f'year >= {start_year}')['year'].unique()
 
@@ -2256,23 +2099,31 @@ def update_end_year_select_ecs(start_year, graph, species):
     for i in np.sort(year_options):
         str(year_options_str.append({'label':i,'value':(i)}))
 
-    if graph == 'Over Time':
-        dropdown_title = 'End year'
-        value = year_options.max()
-        title_display_style = {'display': 'block',
-                               "font-weight": "bold",
-                               "color": "#555555",}
-        dropdown_display_style = {'display': 'block'}
-    # Hide controls if Single Year selected
-    elif graph == 'Bar' or graph == 'Cumulative':
+    if tab == 'tab-1':
+        if graph == 'Over Time':
+            dropdown_title = 'End year'
+            value = year_options.max()
+            title_display_style = {'display': 'block',
+                                   "font-weight": "bold",
+                                   "color": "#555555",}
+            dropdown_display_style = {'display': 'block'}
+        # Hide controls if Single Year selected
+        elif graph == 'Bar' or graph == 'Cumulative':
+            dropdown_title = ''
+            value = None
+            for d in year_options_str:
+                d['disabled']=True
+            title_display_style = {'display': 'none'}
+            dropdown_display_style = {'display': 'none'}
+
+    elif tab == 'tab-2':
         dropdown_title = ''
         value = None
         for d in year_options_str:
             d['disabled']=True
         title_display_style = {'display': 'none'}
         dropdown_display_style = {'display': 'none'}
-    else:
-        None
+
 
     return dropdown_title, title_display_style, year_options_str, value, dropdown_display_style
 
@@ -2600,8 +2451,9 @@ def update_ahle_graph_controls(graph, geo_view):
     Output('select-item-ecs-title','style'),
     Input('select-graph-ahle-ecs','value'),
     Input('select-species-ecs','value'),
+    Input("AHLE-charts-tabs", "value"),
     )
-def update_item_dropdown_ecs(graph, species):
+def update_item_dropdown_ecs(graph, species, tab):
     # Filters Items to display based on species selected
     if species.upper() == "CATTLE":     # Cattle have draught
         item_options = grossmargin_components_cattle
@@ -2622,7 +2474,7 @@ def update_item_dropdown_ecs(graph, species):
                            "color": "#555555",}
 
     # Hide controls if Bar selected
-    if graph == 'Bar' or graph == 'Cumulative':
+    if graph == 'Bar' or graph == 'Cumulative' or tab == 'tab-2':
         for d in options:
             d['disabled']=True
         display_style = {'display': 'none'}
