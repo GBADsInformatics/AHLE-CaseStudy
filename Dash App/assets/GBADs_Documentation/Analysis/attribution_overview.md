@@ -1,7 +1,7 @@
 # Attribution
 
-Attribution to infectious, non-infectious, and external causes is based on proportions from expert elicitation. See the Expert Opinion Attribution Proportions table for the results of expert elicitation.
+Attribution to infectious, non-infectious, and external causes is based on proportions from expert elicitation. See the Expert Opinion Attribution Proportions table for the estimates provided by individual experts.
 
-Experts were asked to estimate the proportions of mortality and production losses attributable to each cause. They were not asked to estimate the health expenditure associated with each cause because many health-related expenditures are beneficial to all causes. Therefore, health cost attribution is only approximate. In Ethiopia, health expenditures are very small compared to mortality and production losses, so these generally do not appear in the treemap.
+Experts were asked to estimate the proportions of mortality and production losses attributable to each cause. These proportions were also applied to health costs. Health cost attribution is only approximate because many health-related expenditures are not cause-specific. In Ethiopia, health expenditures are very small compared to mortality and production losses.
 
-Attribution to specific diseases such as Brucellosis is estimated by running the compartmental herd model with disease-specific scenarios, using parameters that reflect the impact of that disease on the population (such as increased mortality, decreased growth rate, or decreased lactation).
+The impact of each specific disease, such as Brucellosis, is estimated by modifying the parameters from the ideal scenario with the expected impact of that disease on the base population parameters (such as increased mortality, decreased growth rate, or decreased lactation) and running it through the compartmental herd model.

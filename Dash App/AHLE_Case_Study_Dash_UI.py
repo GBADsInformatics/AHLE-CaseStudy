@@ -1012,11 +1012,11 @@ gbadsDash.layout = html.Div([
                            "font-weight": "bold"}
                     ),
             # Dashboard description
-            # html.P(['This interactive dashboard uses publicly available data and expert elicitation \
+            # html.P(["This interactive dashboard uses publicly available data and expert elicitation \
             #         to create models that provide a country-specific estimate of the \
             #         animal health loss envelope (AHLE). The tool will guide you through the calculations, \
             #         the outputs, and the scenarios that allow us to aid decision makers with regard to \
-            #         animal health and production.'],
+            #         animal health and production."],
             #        style={'textAlign': 'center'}
             #        ),
             # html.Label(id='population-dashboard-heading',

@@ -339,9 +339,72 @@ document.write(`
                   
   <div class="tex2jax_ignore mathjax_ignore section" id="compartmental-herd-model">
 <h1>Compartmental herd model<a class="headerlink" href="#compartmental-herd-model" title="Permalink to this heading">#</a></h1>
-<p>The herd dynamics model is a compartmental model in which the herd (livestock population) are divided by sex and age classes. Each sex class (male and female) is classified into three age groups (neonate, juvenile and adult) resulting in six sex-age groups. The model simulates the herd dynamics based on demographic (birth and death rates) and offtake rates in a monthly time step for one year.</p>
+<p>The herd dynamics model is a compartmental model in which herds (livestock populations) are divided by sex and age classes. Each sex class (male and female) is classified into three age groups (neonate, juvenile and adult) resulting in six sex-age groups. The model simulates the herd dynamics based on demographic (birth and death rates) and offtake rates in a monthly time step for one year.</p>
 <p>The simulation of the model produces annual production offtakes (live animal, milk, draft power, hides, manure etc.) and their respective monetary values (revenue) based on prices for these production outputs. It also estimates the change in total expenditure on production inputs: feed, labor and animal health care. The revenue and costs from the herd model enable the calculation of gross margins for the simulated populations.</p>
 <p>The gross margin is calculated for different scenarios formed by combination of sex-age groups, production systems and incremental improvement in health statuses.</p>
+<p>The parameters of the herd dynamics model include:</p>
+<p><strong>Population dynamics</strong></p>
+<ul class="simple">
+<li><p>Initial population (number of head) for each of the 6 sex-age groups</p></li>
+<li><p>Growth rate from neonate to juvenile and from juvenile to adult</p></li>
+<li><p>Fertility rate</p></li>
+<li><p>Mortality rates for neonates, juveniles, adult females, and adult males</p></li>
+<li><p>Cull rates for adult males and females</p></li>
+</ul>
+<p><strong>Production Values</strong></p>
+<ul class="simple">
+<li><p>Liveweight conversion for each of the 6 sex-age groups</p></li>
+<li><p>Offtake rates for adult males and adult females</p></li>
+<li><p>Carcass yield as % of liveweight</p></li>
+<li><p>Lactation</p>
+<ul>
+<li><p>Proportion of adult females lactating</p></li>
+<li><p>Lactation duration (days)</p></li>
+<li><p>Average daily milk yield (liters)</p></li>
+<li><p>Monetary value of milk</p></li>
+</ul>
+</li>
+<li><p>Draught (cattle only)</p>
+<ul>
+<li><p>Castration rate of adult males</p></li>
+<li><p>Draught usage rate</p></li>
+<li><p>Monetary value of draught per head per day</p></li>
+</ul>
+</li>
+<li><p>Monetary value of live animals for each of the 6 sex-age groups</p></li>
+<li><p>Hide production rate</p></li>
+<li><p>Monetary value of hides</p></li>
+<li><p>Manure production rate for each age group (kg per day)</p></li>
+<li><p>Monetary value of manure</p></li>
+</ul>
+<p><strong>Costs</strong></p>
+<ul class="simple">
+<li><p>Feed requirements and costs</p>
+<ul>
+<li><p>Dry matter feed requirements for each of the 6 sex-age groups (proportion of liveweight)</p></li>
+<li><p>Proportion of livestock keepers that purchase feed</p></li>
+<li><p>Dry matter in feed as proportion of weight</p></li>
+<li><p>Feed cost per kg dry matter</p></li>
+</ul>
+</li>
+<li><p>Cost of labor for livestock keepers per head per month</p>
+<ul>
+<li><p>Separate for Cattle, Oxen, and Dairy (cattle only)</p></li>
+</ul>
+</li>
+<li><p>Health expenditure per head per month</p>
+<ul>
+<li><p>Preventative care</p></li>
+<li><p>Treatment</p></li>
+</ul>
+</li>
+<li><p>Capital costs</p>
+<ul>
+<li><p>Interest rate</p></li>
+<li><p>Infrastructure cost per head</p></li>
+</ul>
+</li>
+</ul>
 </div>
 
     <script type="text/x-thebe-config">
