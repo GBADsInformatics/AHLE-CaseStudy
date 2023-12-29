@@ -14,7 +14,7 @@ Built upon the AHLE Dashboard framework.
 <h2>Key Features</h2>
 
 <ul>
-	<li>Country-specific case studies: Generates AHLE estimates for individual countries. </li>
-	<li>Built-in Guide: User guide, references, and data views are all built-it and easily accessible within the dashboard. </li>
-	<li>Template structure: Adaptable to new countries with data following a similar structure to Ethiopia's. </li>
+	<li><em>Country-specific case studies:</em> Generates AHLE estimates for individual countries. </li>
+	<li><em>Built-in Guide:</em> User guide, references, and data views are all built-it and easily accessible within the dashboard. </li>
+	<li><em>Template structure:</em> Adaptable to new countries with data following a similar structure to Ethiopia's. </li>
 </ul>
