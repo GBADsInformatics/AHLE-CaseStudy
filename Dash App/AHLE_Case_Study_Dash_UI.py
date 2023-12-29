@@ -692,8 +692,8 @@ def create_map_display_ecs(input_df, geojson, location, featurekey, color_by, co
                                        mapbox_style="carto-positron",
                                        zoom=5,
                                        center = {"lat": 9.1450, "lon": 40.4897},
-                                       labels={'region': 'State',
-                                               'mean_current': 'Current',
+                                       custom_data=['item', 'mean_current', 'mean_ideal', 'mean_diff_ideal'],
+                                       labels={'mean_current': 'Current',
                                                'mean_ideal': 'Ideal',
                                                'mean_diff_ideal': 'AHLE'}
                                        )
@@ -4762,17 +4762,33 @@ def update_map_display_ecs(
         ecs_map_fig.update_layout(dragmode=False)
 
         # TODO: Refine tooltip
-        # # Update tooltip
-        # if currency == 'Birr':
-        #     ecs_map_fig.update_traces(hovertemplate='subnational state: %{location}'+
-        #                                     '<br>%{featurekey}: %{y} Birr <extra></extra>',
-        #                                     )
-        #     # Tried x, color, item, color_by, text, featurekey, y
-        # elif currency == 'USD':
-        #     ecs_map_fig.update_traces(hovertemplate='subnational state: %{location}'+
-        #                                     '<br>%{item}: %{color:,.0f} USD <extra></extra>'+
-        #                                     ''
-        #                                     )
+        # Update tooltip
+        if currency == 'Birr':
+            if item == 'Ideal Gross Margin':
+                ecs_map_fig.update_traces(hovertemplate='<b>%{location}</b><br>'+
+                                          '<br>Ideal Gross Margin: %{customdata[2]:,.2f} Birr <extra></extra>',
+                                          )
+            elif item == 'Animal Health Loss Envelope':
+                ecs_map_fig.update_traces(hovertemplate='<b>%{location}</b><br>'+
+                                          '<br>AHLE: %{customdata[3]:,.2f} Birr <extra></extra>',
+                                          )
+            else:
+                ecs_map_fig.update_traces(hovertemplate='<b>%{location}</b><br>'+
+                                          '<br>%{customdata[0]}: %{customdata[1]:,.2f} Birr <extra></extra>',
+                                          )
+        elif currency == 'USD':
+            if item == 'Ideal Gross Margin':
+                ecs_map_fig.update_traces(hovertemplate='<b>%{location}</b><br>'+
+                                          '<br>Ideal Gross Margin: %{customdata[2]:,.2f} USD <extra></extra>',
+                                          )
+            elif item == 'Animal Health Loss Envelope':
+                ecs_map_fig.update_traces(hovertemplate='<b>%{location}</b><br>'+
+                                          '<br>AHLE: %{customdata[3]:,.2f} USD <extra></extra>',
+                                          )
+            else:
+                ecs_map_fig.update_traces(hovertemplate='<b>%{location}</b><br>'+
+                                          '<br>%{customdata[0]}: %{customdata[1]:,.2f} USD <extra></extra>',
+                                          )
 
     return ecs_map_fig
 
