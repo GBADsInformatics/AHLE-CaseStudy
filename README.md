@@ -1,6 +1,6 @@
 # GBADs AHLE Case Study Dashboard
 
-<h3>Estimate the animal health loss envelope for country-specific case studies<h3>
+<h3>Estimate the animal health loss envelope for country-specific case studies.<h3>
 
 <h2>Overview</h2>
 
@@ -13,6 +13,8 @@ Built upon the AHLE Dashboard framework.
 
 <h2>Key Features</h2>
 
-*Country-specific case studies: Generates AHLE estimates for individual countries.
-*Built-in Guide: User guide, references, and data views are all built-it and easily accessible within the dashboard.
-*Template structure: Adaptable to new countries with data following a similar structure to Ethiopia's.
+<ul>
+	<li>Country-specific case studies: Generates AHLE estimates for individual countries. </li>
+	<li>Built-in Guide: User guide, references, and data views are all built-it and easily accessible within the dashboard. </li>
+	<li>Template structure: Adaptable to new countries with data following a similar structure to Ethiopia's. </li>
+</ul>
