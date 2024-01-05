@@ -10,7 +10,7 @@ The AHLE for Ethiopia was calculated using gross margin as a measure of income, 
 ---
 name: fig_sankey_ethiopia_1
 alt: AHLE Sankey Diagram
-max-width: 120%
+width: 120%
 ---
 Conceptual flow of inputs, outputs, and production losses
 ```
