@@ -6,9 +6,11 @@ The flow of inputs and outputs under the current state of health and the ideal i
 
 The AHLE for Ethiopia was calculated using gross margin as a measure of income, which was simulated using a herd dynamics model. This was attributed to infectious, non-infectious, and external causes based on expert elicitation. See the following pages for an overview of the compartmental herd model and the attribution methodology.
 
-```{figure} ../Images/ECS_Sanky_diagram_from_Gemma.png
+```{figure} ../Images/Sankey_diagram_update_01042024.png
 ---
 name: fig_sankey_ethiopia_1
+alt: AHLE Sankey Diagram
+max-width: 120%
 ---
 Conceptual flow of inputs, outputs, and production losses
 ```

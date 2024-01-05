@@ -4638,6 +4638,7 @@ def update_map_display_ecs(
         item,
         currency,
         denominator):
+
     if species.upper() != 'CATTLE':
         ecs_map_fig = go.Figure()
         ecs_map_fig.update_layout(

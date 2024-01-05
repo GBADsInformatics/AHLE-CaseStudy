@@ -1,0 +1,119 @@
+// Code for the Sankey diagram found in the user guide
+// NUMBERS ARE MEANT TO BE PLACEHOLDERS, 
+// NOT REPRESENTATIVE OF ACTUAL VALUES
+
+// Enter Flows between Nodes, like this:
+//         Source [AMOUNT] Target
+
+// Starting Node
+Number of Livestock [100] Ideal Output
+Labour [31] Ideal Output
+Feed [23] Ideal Output
+Capital [23] Ideal Output
+Health Expenditure [23] Ideal Output
+
+// Node 1 - Ideal Output
+// Defined with color flows
+Ideal Output [80] Realised Output #4E79A7
+Ideal Output [120] Animal Health Loss Envelope #F28E2C
+
+// Node 2a - Realised Output
+Realised Output [20] Herd Growth #76B7B2
+Realised Output [4] Milk #AF7AA1
+Realised Output [8] Hides #59A14F
+Realised Output [8] Dung #EDC949
+Realised Output [40] Off Take #E7298A
+
+// Node 2b - Animal Health Loss Envelope
+Animal Health Loss Envelope [11] Production Loss Neonates #FF9DA7
+Animal Health Loss Envelope [17] Mortality Neonates #9C755F
+Animal Health Loss Envelope [9] Production Loss Juveniles #FF9DA7
+Animal Health Loss Envelope [14] Mortality Juveniles #9C755F
+Animal Health Loss Envelope [26] Production Loss Adult Female #FF9DA7
+Animal Health Loss Envelope [9] Mortality Adult Female #9C755F
+Animal Health Loss Envelope [9] Production Loss Adult Male #FF9DA7
+Animal Health Loss Envelope [5] Mortality Adult Male #9C755F
+Animal Health Loss Envelope [20] Health expenditure #BAB0AB
+
+// Node 3a - Production Loss
+// Neonates
+Production Loss Neonates [6] Infectious 
+Production Loss Neonates [2] Non-infectious 
+Production Loss Neonates [3] External
+// Juveniles
+Production Loss Juveniles  [4] Infectious
+Production Loss Juveniles [2] Non-infectious
+Production Loss Juveniles [3] External
+// Adult Female
+Production Loss Adult Female [12] Infectious
+Production Loss Adult Female [8] Non-infectious
+Production Loss Adult Female [6] External
+//Adult Male
+Production Loss Adult Male [4] Infectious
+Production Loss Adult Male [2] Non-infectious
+Production Loss Adult Male [3] External
+
+// Node 3b - Mortality
+// Neonates
+Mortality Neonates [9] Infectious
+Mortality Neonates [4] Non-infectious
+Mortality Neonates [4] External
+// Juveniles
+Mortality Juveniles  [9] Infectious
+Mortality Juveniles [3] Non-infectious
+Mortality Juveniles [2] External
+// Adult Female
+Mortality Adult Female [4] Infectious
+Mortality Adult Female [3] Non-infectious
+Mortality Adult Female [2] External
+//Adult Male
+Mortality Adult Male [2] Infectious
+Mortality Adult Male [1] Non-infectious
+Mortality Adult Male [1] External
+
+// Node 3c - Health expenditure
+Health expenditure [6] Healthcare Time
+Health expenditure [6] Treatments
+Health expenditure [4] Prevention
+Health expenditure [4] other
+
+// Node 4a - Infectious
+Infectious [6.25] Anthrax
+Infectious [6.25] Brucellosis
+Infectious [12.5] PPRV
+Infectious [6.25] FMD
+Infectious [6.25] S&G Pox
+Infectious [12.5] Other
+
+// Node 4b - Non-infectious
+Non-infectious [7] Gross-Malnutrition
+Non-infectious [4.5] Hypocalcaemia/hypomag
+Non-infectious [6.75] Selenium deficiency 
+Non-infectious [6.75] Dystocia
+
+// Node 4c - External
+External [8.33] Predation
+External [8.33] Accident
+External [8.33] Injury
+
+// Set node color
+:Ideal Output #000000
+:Realised Output #4E79A7
+:Animal Health Loss Envelope #F28E2C
+:Herd Growth #76B7B2
+:Milk #AF7AA1
+:Hides #59A14F
+:Dung #EDC949
+:Off Take #E7298A
+:Production Loss Neonates #FF9DA7
+:Mortality Neonates #9C755F
+:Production Loss Juveniles #FF9DA7
+:Mortality Juveniles #9C755F
+:Production Loss Adult Female #FF9DA7
+:Mortality Adult Female #9C755F
+:Production Loss Adult Male #FF9DA7
+:Mortality Adult Male #9C755F
+:Health expenditure #BAB0AB
+:Infectious #68000D
+:Non-infectious #08316C
+:External #00441B
