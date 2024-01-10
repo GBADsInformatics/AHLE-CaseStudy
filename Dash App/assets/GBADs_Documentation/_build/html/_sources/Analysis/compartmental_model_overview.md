@@ -4,7 +4,13 @@ The herd dynamics model is a compartmental model in which herds (livestock popul
 
 The simulation of the model produces annual production offtakes (live animal, milk, draft power, hides, manure etc.) and their respective monetary values (revenue) based on prices for these production outputs. It also estimates the change in total expenditure on production inputs: feed, labor and animal health care. The revenue and costs from the herd model enable the calculation of gross margins for the simulated populations.
 
-The gross margin is calculated for different scenarios formed by combination of sex-age groups, production systems and incremental improvement in health statuses.
+The herd dynamics model is run separately for each species, year, and production system, as these all have different population dynamics. These differences are captured by using different values for the model parameters, listed below. Furthermore, we vary the parameters to reflect different disease states in the population, which we refer to as scenarios. 
+
+The scenarios we use are:
+- *Current:* The current scenario for a given species, year, and production system uses parameters informed by available data.
+- *Ideal:* The ideal scenario adjusts these parameters to reflect a hypothetical ideal if there were no disease pressure. The ideal scenario includes, among other things, improved growth and fertility rates, zero mortality, and zero health expenditure. The results from this scenario are compared to the current scenario to calculate the overall impact of disease.
+- *Zero Mortality:* The zero mortality scenario sets mortality rate to zero while keeping other population dynamics, such as growth and fertility rates, at their current values.
+- *Disease-specific:* The impact of an individual disease is estimated by adjusting the ideal parameters to reflect the impact of the disease of interest if it were the only disease in the population. One disease may impact fertility while another impacts growth rate; each of these is run as a separate scenario. The results from these scenarios are compared to the ideal to calculate the impact of each disease of interest.
 
 The parameters of the herd dynamics model include:
 
