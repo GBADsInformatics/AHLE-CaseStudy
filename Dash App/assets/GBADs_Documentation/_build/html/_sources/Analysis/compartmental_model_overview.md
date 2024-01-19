@@ -4,13 +4,17 @@ The dynamic population model is a compartmental model in which herds (livestock 
 
 The simulation of the model produces annual production outputs (live animals, meat, milk, draft power, hides, manure etc.) and their respective monetary values (revenue) based on prices for these production outputs. It also estimates the total expenditure on production inputs, including feed, labour and animal health care, according to the population size and structureThe revenue and costs from the herd model enable the calculation of gross margins for the simulated populations.
 
-The model is run separately for each species, year, and production system, as these all have different population dynamics. These differences are captured by using different values for the model parameters, listed below. Furthermore, we vary the parameters to reflect different disease states in the population, which we refer to as scenarios. 
+The model is run separately for each species, year, and production system, as these all result in different population dynamics. Differences are captured through the input of values for the model parameters, listed below. For each species, year and production system, we also vary the parameters to reflect different disease states in these populations, which we refer to as scenarios.
 
 The scenarios we use are:
+
 - *Current:* The current scenario for a given species, year, and production system uses parameters informed by available data.
-- *Ideal:* The ideal scenario adjusts these parameters to reflect a hypothetical ideal if there were no disease pressure. The ideal scenario includes, among other things, improved growth and fertility rates, zero mortality, and zero health expenditure. The results from this scenario are compared to the current scenario to calculate the overall impact of disease.
-- *Zero Mortality:* The zero mortality scenario sets mortality rate to zero while keeping other population dynamics, such as growth and fertility rates, at their current values.
-- *Disease-specific:* The impact of an individual disease is estimated by adjusting the ideal parameters to reflect the impact of the disease of interest if it were the only disease in the population. One disease may impact fertility while another impacts growth rate; each of these is run as a separate scenario. The results from these scenarios are compared to the ideal to calculate the impact of each disease of interest.
+
+- *Ideal:* The ideal scenario adjusts these parameters to reflect a hypothetical ideal state where there is no disease pressure but other characteristics of the system, such as breed and genetics, remain the same. For the ideal scenario, we assume mortality and animal health costs are zero. Other parameter values, such as liveweight, and those relating to fertility and milk yield, improve under the ideal health scenario. The results from this scenario are compared to those from the current scenario to calculate the animal health loss envelope (AHLE), the maximum loss of performance due to animal health losses.
+
+- *Zero Mortality:* The zero mortality scenario sets the mortality rate to zero while keeping other parameters, such as growth and fertility rates, at their current values.
+
+- *Disease-specific:* The impact of an individual disease is estimated by adjusting the ideal parameters to reflect the impact of the disease of interest if it were the only disease in the population. For example, one disease may impact fertility while another impacts growth rate; each of these is run as a separate scenario. The results from these scenarios are compared to the ideal to calculate the impact of each disease of interest.
 
 The parameters of the herd dynamics model include:
 
