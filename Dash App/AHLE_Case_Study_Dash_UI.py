@@ -181,11 +181,11 @@ for DF in [ecs_expertattr_smallrum, ecs_expertattr_cattle, ecs_expertattr_poultr
 # -----------------------------------------------------------------------------
 wei_ethiopia_raw = pd.DataFrame({
     'species':'Cattle and Small Ruminants'
-    ,'scenario':['Current' ,'Zero Mortality' ,'Ideal']
-    ,'scenario_numeric':[0 ,0.5 ,1]
-    ,'production_change_pct':[0 ,.402 ,1.8048]
-    ,'gdp_change_pct':[0 ,.0251 ,.0357]
-    ,'economic_surplus_mlnusd':[0 ,1760.050 ,2452.180]
+    ,'scenario':['Current' ,'Zero Mortality' ,'Ideal', 'PPR']
+    ,'scenario_numeric':[0 ,0.5 ,1, 1.5]
+    ,'production_change_pct':[0 ,.402 ,1.8048, .0159]
+    ,'gdp_change_pct':[0 ,.0251 ,.0357, .0006]
+    ,'economic_surplus_mlnusd':[0 ,1760.050 ,2452.180, 37.59]
 })
 
 # =============================================================================
@@ -738,19 +738,24 @@ def create_wei_chart(
 
     # Plot data
     fig = px.scatter(
-        input_df
-        ,x=plot_xvar
-        ,y=plot_yvar
-        ,text='scenario'
-        ,hover_name='scenario'
-        ,hover_data={
+        input_df,
+        x=plot_xvar,
+        y=plot_yvar,
+        text='scenario',
+        # textposition=['top center', 'top center', 'top center', 'top right'],
+        symbol = 'scenario',
+        symbol_sequence= ['circle', 'circle', 'circle', 'triangle-up'],
+        color = 'scenario',
+        # Matching PPR color to color in Sankey in User Guide
+        color_discrete_sequence = [plot_color, plot_color, plot_color, 'black'],
+        hover_name='scenario',
+        hover_data={
             'scenario':False    # Used for hover name, remove from hover data
-            }
+            },
         )
     fig.update_traces(
-        marker_size=20
-        ,marker_color=plot_color
-        ,textposition='top center'
+        marker_size=8,
+        textposition='top center'
         )
 
     # Plot fit line
@@ -767,7 +772,10 @@ def create_wei_chart(
     fig.add_trace(fig_interp.data[0])
 
     # Draw
-    fig.update_layout(xaxis_title=plot_xvar ,yaxis_title=plot_yvar)
+    fig.update_layout(
+        xaxis_title=plot_xvar,
+        yaxis_title=plot_yvar,
+        showlegend=False)
     fig.update_xaxes(dtick=0.2)
     return fig
 
@@ -4762,7 +4770,6 @@ def update_map_display_ecs(
         #!!! Unknown why this does not work.
         ecs_map_fig.update_layout(dragmode=False)
 
-        # TODO: Refine tooltip
         # Update tooltip
         if currency == 'Birr':
             if item == 'Ideal Gross Margin':
