@@ -742,20 +742,19 @@ def create_wei_chart(
         x=plot_xvar,
         y=plot_yvar,
         text='scenario',
-        # textposition=['top center', 'top center', 'top center', 'top right'],
         symbol = 'scenario',
-        symbol_sequence= ['circle', 'circle', 'circle', 'triangle-up'],
+        symbol_map={"Current":"circle", "Zero Mortality":"circle", "Ideal":"circle", "PPR":"triangle-up"},
         color = 'scenario',
         # Matching PPR color to color in Sankey in User Guide
-        color_discrete_sequence = [plot_color, plot_color, plot_color, 'black'],
+        color_discrete_map={"Current":plot_color, "Zero Mortality":plot_color, "Ideal":plot_color, "PPR":"red"},
         hover_name='scenario',
         hover_data={
-            'scenario':False    # Used for hover name, remove from hover data
+            'scenario':False    # Used for hover name instead of hover data
             },
         )
     fig.update_traces(
         marker_size=8,
-        textposition='top center'
+        textposition='middle right'
         )
 
     # Plot fit line
@@ -775,7 +774,8 @@ def create_wei_chart(
     fig.update_layout(
         xaxis_title=plot_xvar,
         yaxis_title=plot_yvar,
-        showlegend=False)
+        showlegend=False
+        )
     fig.update_xaxes(dtick=0.2)
     return fig
 
