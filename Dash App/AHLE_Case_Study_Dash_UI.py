@@ -714,9 +714,9 @@ def create_wei_chart(
     step_size = 0.01
     gen_num = int(input_df[plot_xvar].max() / step_size)
     gen_x = np.linspace(
-    	start=0 				# Start value. Can be integer or float.
-    	,stop=gen_end 				# Stop value. Can be integer or float.
-    	,num=gen_num 				# Number of elements to generate. Will be evenly spaced from START to STOP.
+        start=0                 # Start value. Can be integer or float.
+        ,stop=gen_end                 # Stop value. Can be integer or float.
+        ,num=gen_num                 # Number of elements to generate. Will be evenly spaced from START to STOP.
         )
     # Create dataframe and name generated data for predictor variable
     gen_x_df = pd.DataFrame({
@@ -733,7 +733,7 @@ def create_wei_chart(
         ,input_df[plot_yvar]
         ,kind=interpolation_kind
         )
-    interp_y = interpolator(gen_x)		# Calculate y-axis values on fit line
+    interp_y = interpolator(gen_x)        # Calculate y-axis values on fit line
     gen_x_df[plot_yvar] = interp_y
 
     # Plot data
@@ -926,59 +926,59 @@ gbadsDash.layout = html.Div([
         ], justify='center'),
 
     #### PAGE CONTROL OPTIONS
-    dbc.Collapse(
-        dbc.Card([
-        dbc.CardBody([
-            dbc.Row([
-                dbc.Col([
-                    html.H5("Species", style=control_heading_style),
-                    dcc.Dropdown(id='select-species-ecs',
-                                options=ecs_species_options,
-                                value='All',
-                                clearable = False,
-                                ),
-                    ]),
-                dbc.Col([
-                    html.H5("Production System", style=control_heading_style),
-                    dcc.Dropdown(id='select-prodsys-ecs',
-                                # Options and value are now defined in a callback based on selected species
-                                clearable = False,
-                                ),
-                    ]),
-                dbc.Col([
-                    html.H5("Currency", style=control_heading_style),
-                    dcc.Dropdown(id='select-currency-ecs',
-                                options=ecs_currency_options,
-                                value='Birr',
-                                clearable = False,
-                                ),
-                    ]),
+    # dbc.Collapse(
+    #     dbc.Card([
+    #     dbc.CardBody([
+    #         dbc.Row([
+    #             dbc.Col([
+    #                 html.H5("Species", style=control_heading_style),
+    #                 dcc.Dropdown(id='select-species-ecs',
+    #                             options=ecs_species_options,
+    #                             value='All',
+    #                             clearable = False,
+    #                             ),
+    #                 ]),
+    #             dbc.Col([
+    #                 html.H5("Production System", style=control_heading_style),
+    #                 dcc.Dropdown(id='select-prodsys-ecs',
+    #                             # Options and value are now defined in a callback based on selected species
+    #                             clearable = False,
+    #                             ),
+    #                 ]),
+    #             dbc.Col([
+    #                 html.H5("Currency", style=control_heading_style),
+    #                 dcc.Dropdown(id='select-currency-ecs',
+    #                             options=ecs_currency_options,
+    #                             value='Birr',
+    #                             clearable = False,
+    #                             ),
+    #                 ]),
 
-                # END OF FIRST CONTROL ROW
-                ]),
+    #             # END OF FIRST CONTROL ROW
+    #             ]),
 
-        ]),    # END OF CARD BODY
-        ], color='#F2F2F2'),    # END OF CARD
+    #     ]),    # END OF CARD BODY
+    #     ], color='#F2F2F2'),    # END OF CARD
 
-    id="collapse-top-controls",
-    is_open=False,
-    ), # END OF COLLAPSE
+    # id="collapse-top-controls",
+    # is_open=False,
+    # ), # END OF COLLAPSE
 
-    dbc.Row([  # Row with collapse button
-        # Collapse Button
-        html.Div(
-            dbc.Button(
-                    id="tbl-btn-open-collapse-top-ctrls",
-                    className="bi bi-chevron-up",
-                    color="primary",
-                    n_clicks=0,
-                    style={"margin-bottom": "0rem!important",
-                           "width":"99%",
-                           "margin-left":"10px"}
-                ),
-            id='table-collapse-top-ctrls-button',
-            ),
-    ]), #END OF COLLASPE BUTTON ROW
+    # dbc.Row([  # Row with collapse button
+    #     # Collapse Button
+    #     html.Div(
+    #         dbc.Button(
+    #                 id="tbl-btn-open-collapse-top-ctrls",
+    #                 className="bi bi-chevron-up",
+    #                 color="primary",
+    #                 n_clicks=0,
+    #                 style={"margin-bottom": "0rem!important",
+    #                        "width":"99%",
+    #                        "margin-left":"10px"}
+    #             ),
+    #         id='table-collapse-top-ctrls-button',
+    #         ),
+    # ]), #END OF COLLASPE BUTTON ROW
 
     html.Br(),
 
@@ -1010,6 +1010,31 @@ gbadsDash.layout = html.Div([
                             current and ideal scenario estimated by a compartmental herd dynamics model."]),
 
                 #### -- AHLE PAGE CONTROLS
+                dbc.Row([   # Species / Production System / Currency selection
+                    dbc.Col([
+                        html.H5("Species", style=control_heading_style),
+                        dcc.Dropdown(id='select-species-ecs',
+                                     options=ecs_species_options,
+                                     value='All',
+                                     clearable = False,
+                                     ),
+                        ]),
+                    dbc.Col([
+                        html.H5("Production System", style=control_heading_style),
+                        dcc.Dropdown(id='select-prodsys-ecs',
+                                     # Options and value are now defined in a callback based on selected species
+                                     clearable = False,
+                                     ),
+                        ]),
+                    dbc.Col([
+                        html.H5("Currency", style=control_heading_style),
+                        dcc.Dropdown(id='select-currency-ecs',
+                                     options=ecs_currency_options,
+                                     value='Birr',
+                                     clearable = False,
+                                     ),
+                        ]),
+                    ],style={"margin-bottom":"30px"}),  # END OF Species / Production System / Currency selection
                 dbc.Card([
                     dbc.CardBody([
                 dbc.Row([
@@ -1289,9 +1314,8 @@ gbadsDash.layout = html.Div([
             #### ATTRIBUTION
             dbc.Tab(label="Attribution",
                     tabClassName="flex-grow-1 text-center",
-                        tab_style = tab_style,
-                        style = {"height":"100vh",
-                            },
+                    tab_style = tab_style,
+                    style = {"height":"100vh"},
                     children =[
                         html.Label(["Showing how each component contributes to the total animal health loss envelope, \
                                     including attribution to infectious, non-infectious, and external causes. \
@@ -1299,43 +1323,40 @@ gbadsDash.layout = html.Div([
                                     species groups rather (cattle, all small ruminants, or all poultry) than for \
                                     individual species."]),
 
-                     html.Br(),
-                     html.Hr(style={'margin-right':'10px',
-                                   'margin-top':'0px',
-                                   'margin-bottom':'5px'}),
+                         html.Br(),
+                         html.Hr(style={'margin-right':'10px',
+                                       'margin-top':'0px',
+                                       'margin-bottom':'5px'}),
 
-                        #### -- DROPDOWNS CONTROLS
-                        # dbc.Row([
-                        #     dbc.Col([
-                        #         html.Abbr("Species",
-                        #                 className="Species_attr_title",
-                        #                 title="NOTE: Attribution is shown for species groups rather than for individual species.",
-                        #                 style=abbr_heading_style),
-                        #         dcc.Dropdown(id='select-species-ecs2',
-                        #                     options=ecs_species_options2,
-                        #                     value='All',
-                        #                     clearable = False,
-                        #                     ),
-                        #         # html.Label(["NOTE: this is shown for species groups (cattle, all small ruminants, or all poultry) rather than for individual species."] ,style={"font-style":"italic"}),
-                        #         ]),
-                        #     dbc.Col([
-                        #         html.H5("Production System", style=control_heading_style),
-                        #         dcc.Dropdown(id='select-prodsys-ecs2',
-                        #                     # Options and value are now defined in a callback based on selected species
-                        #                     clearable = False,
-                        #                     ),
-                        #         ]),
-                        #     dbc.Col([
-                        #         html.H5("Currency", style=control_heading_style),
-                        #         dcc.Dropdown(id='select-currency-ecs2',
-                        #                     options=ecs_currency_options,
-                        #                     value='Birr',
-                        #                     clearable = False,
-                        #                     ),
-                        #         ]),
-
-                        #     # END OF FIRST CONTROL ROW
-                        #     ],style={"margin-bottom":"30px"}),
+                         #### -- DROPDOWNS CONTROLS
+                         dbc.Row([  # Species / Production System / Currency selection
+                             dbc.Col([
+                                 html.Abbr("Species",
+                                            className="Species_attr_title",
+                                            title="NOTE: Attribution is shown for species groups rather than for individual species.",
+                                            style=abbr_heading_style),
+                                    dcc.Dropdown(id='select-species-ecs2',
+                                                options=ecs_species_options2,
+                                                value='All',
+                                                clearable = False,
+                                                ),
+                                    ]),
+                                dbc.Col([
+                                    html.H5("Production System", style=control_heading_style),
+                                    dcc.Dropdown(id='select-prodsys-ecs2',
+                                                # Options and value are now defined in a callback based on selected species
+                                                clearable = False,
+                                                ),
+                                    ]),
+                                dbc.Col([
+                                    html.H5("Currency", style=control_heading_style),
+                                    dcc.Dropdown(id='select-currency-ecs2',
+                                                options=ecs_currency_options,
+                                                value='Birr',
+                                                clearable = False,
+                                                ),
+                                    ]),
+                                ],style={"margin-bottom":"30px"}),  # END OF Species / Production System / Currency selection
 
                         # SECOND CONTROL ROW
                         dbc.Card([
@@ -1880,35 +1901,33 @@ def toggle_AHLE_maps_ctrls(tab):
 
     return ahle_ctrls_card_title, ahle_ctrls_card_title_label, select_display_switch_title, select_display_switch, select_compare_ecs_title, select_compare_ecs, footnote_1, footnote_2
 
+# Collapse top controls
+# @app.callback(
+#     Output("collapse-top-controls", "is_open"),
+#     Output('tbl-btn-open-collapse-top-ctrls','children'),
+#     Output('tbl-btn-open-collapse-top-ctrls','style'),
+#     Input("tbl-btn-open-collapse-top-ctrls", "n_clicks"),
+#     State("collapse-top-controls", "is_open"),
+# )
+# def toggle_top_ctrls_collapse(n, is_open):
+#     open_collapse = '^'
+#     chevronstyle = {'transform': 'rotate3d(1, 0, 0, 180deg)',
+#                     "margin-bottom": "0rem!important",
+#                     "width":"99%",
+#                     "margin-left":"10px",
+#                     "--bs-btn-line-height": ".5"}
 
-# Collapse AHLE graph controls
-@app.callback(
-    Output("collapse-top-controls", "is_open"),
-    Output('tbl-btn-open-collapse-top-ctrls','children'),
-    Output('tbl-btn-open-collapse-top-ctrls','style'),
-    Input("tbl-btn-open-collapse-top-ctrls", "n_clicks"),
-    State("collapse-top-controls", "is_open"),
-)
-def toggle_top_ctrls_collapse(n, is_open):
-    open_collapse = '^'
-    chevronstyle = {'transform': 'rotate3d(1, 0, 0, 180deg)',
-                    "margin-bottom": "0rem!important",
-                    "width":"99%",
-                    "margin-left":"10px",
-                    "--bs-btn-line-height": ".5"}
+#     if n is None:
+#         return is_open, open_collapse, chevronstyle
 
-    if n is None:
-        return is_open, open_collapse, chevronstyle
+#     if not is_open:
+#         # open_collapse ='Collapse'
+#         chevronstyle = {"margin-bottom": "0rem!important",
+#                         "width":"99%",
+#                         "margin-left":"10px",
+#                         "--bs-btn-line-height": ".5"}
 
-    if not is_open:
-        # open_collapse ='Collapse'
-        chevronstyle = {"margin-bottom": "0rem!important",
-                        "width":"99%",
-                        "margin-left":"10px",
-                        "--bs-btn-line-height": ".5"}
-
-    return not is_open, open_collapse, chevronstyle
-
+#     return not is_open, open_collapse, chevronstyle
 
 # Collapse AHLE graph controls
 @app.callback(
@@ -3581,7 +3600,7 @@ def update_ahle_chart_ecs(
             x = x.reset_index(drop=True)
             y = y.reset_index(drop=True)
 
-			# Set hover template for error bars based on currency
+            # Set hover template for error bars based on currency
             if currency == 'Birr':
                 hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} Birr <extra></extra>'
             elif currency == 'USD':
@@ -3612,9 +3631,9 @@ def update_ahle_chart_ecs(
                         array=scaled_stdev
                         ),
                      mode="markers",
-					 hoverinfo='none',
+                     hoverinfo='none',
                      name='95% Confidence',
-					 hovertemplate=hovertemplate_error
+                     hovertemplate=hovertemplate_error
                 ),
             )
             # Add title
@@ -3640,7 +3659,7 @@ def update_ahle_chart_ecs(
                 x = x.reset_index(drop=True)
                 y = y.reset_index(drop=True)
 
-				# Set hover template for error bars based on currency
+                # Set hover template for error bars based on currency
                 if currency == 'Birr':
                     hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} Birr <extra></extra>'
                 elif currency == 'USD':
@@ -3672,13 +3691,13 @@ def update_ahle_chart_ecs(
                             ),
                          mode="markers",
                          showlegend=False,
-						 hovertemplate=hovertemplate_error
+                         hovertemplate=hovertemplate_error
                     ),
                 )
 
                 # Add current with lag
                 y = prep_df['mean_current']
-				# Set hover template for bars based on currency
+                # Set hover template for bars based on currency
                 if currency == 'Birr':
                     hovertemplate_bar=('%{customdata[1]}' +
                                       '<br>%{customdata[0]:,.0f} Birr<extra></extra>')
@@ -3699,7 +3718,7 @@ def update_ahle_chart_ecs(
                     totals = {"marker":{"color":"white", "line":{"color":"#F7931D", "width":3}}},
                     connector = {"line":{"dash":"dot"}},
                     customdata=np.stack((y, prep_df['item']), axis=-1),
-					hovertemplate=hovertemplate_bar
+                    hovertemplate=hovertemplate_bar
                     ))
                 # Add error bars
                 # Reset indicies
@@ -3731,7 +3750,7 @@ def update_ahle_chart_ecs(
                              ),
                          mode="markers",
                          name='95% Confidence',
-						 hovertemplate=hovertemplate_error
+                         hovertemplate=hovertemplate_error
                     ),
                 )
                 ecs_waterfall_fig.update_layout(
@@ -3871,7 +3890,7 @@ def update_ahle_chart_ecs(
                 x = x.reset_index(drop=True)
                 y = y.reset_index(drop=True)
 
-				# Set hover template for error bars based on currency
+                # Set hover template for error bars based on currency
                 if currency == 'Birr':
                     hovertemplate_error='95% CI: +- %{customdata[2]:,.0f} Birr <extra></extra>'
                 elif currency == 'USD':
@@ -3903,7 +3922,7 @@ def update_ahle_chart_ecs(
                             ),
                          mode="markers",
                          showlegend=False,
-						 hovertemplate=hovertemplate_error
+                         hovertemplate=hovertemplate_error
                     ),
                 )
 
@@ -3949,7 +3968,7 @@ def update_ahle_chart_ecs(
                             ),
                          mode="markers",
                          name='95% Confidence',
-						 hovertemplate=hovertemplate_error
+                         hovertemplate=hovertemplate_error
                     ),
                 )
 
@@ -4598,10 +4617,10 @@ def update_wei_display_ecs(species):
         title_text='GDP change due to productivity change by scenario <br><sup>Cattle and small ruminants combined</sup>'
         ,font_size=15
 
-    	,xaxis_title='% Change in Production'
+        ,xaxis_title='% Change in Production'
         ,xaxis_tickformat='.0%'
 
-    	,yaxis_title='% GDP Change'
+        ,yaxis_title='% GDP Change'
         ,yaxis_tickformat='.1%'
 
         ,plot_bgcolor="#ededed"
@@ -4619,10 +4638,10 @@ def update_wei_display_ecs(species):
         title_text='Economic surplus due to productivity change by scenario <br><sup>Cattle and small ruminants combined</sup>'
         ,font_size=15
 
-    	,xaxis_title='% Change in Production'
+        ,xaxis_title='% Change in Production'
         ,xaxis_tickformat='.0%'
 
-    	,yaxis_title='Economic Surplus (Million USD)'
+        ,yaxis_title='Economic Surplus (Million USD)'
         ,yaxis_tickformat='$,.1f'
 
         ,plot_bgcolor="#ededed"
