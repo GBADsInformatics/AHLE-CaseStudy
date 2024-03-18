@@ -743,13 +743,22 @@ def create_wei_chart(
         y=plot_yvar,
         text='scenario',
         symbol = 'scenario',
-        symbol_map={"Current":"circle", "Zero Mortality":"circle", "Ideal":"circle", "PPR":"triangle-up"},
+        symbol_map={
+            "Current":"circle",
+            "Zero Mortality":"circle",
+            "Ideal":"circle",
+            "PPR":"triangle-up"
+            },
         color = 'scenario',
-        # Matching PPR color to color in Sankey in User Guide
-        color_discrete_map={"Current":plot_color, "Zero Mortality":plot_color, "Ideal":plot_color, "PPR":"red"},
+        color_discrete_map={
+            "Current":plot_color,
+            "Zero Mortality":plot_color,
+            "Ideal":plot_color,
+            "PPR":"red"     # No longer matching PPR color to color in Sankey in User Guide
+            },
         hover_name='scenario',
         hover_data={
-            'scenario':False    # Used for hover name instead of hover data
+            'scenario':False    # Used for hover name. Remove from hover data.
             },
         )
     fig.update_traces(
