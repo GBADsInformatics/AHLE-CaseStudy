@@ -1123,7 +1123,7 @@ gbadsDash.layout = html.Div([
                         ),
                 ]), #END OF COLLASPE BUTTON ROW
 
-                #### -- AHLE CONTROLS
+                #### -- AHLE GRAPHICS
                 dbc.Row([  # Row with GRAPHICS
                     # CONTROLS
                       dbc.Col([
@@ -1991,8 +1991,8 @@ def update_popln_dashboard_title(country):
 @gbadsDash.callback(
     Output('select-prodsys-ecs', 'options'),
     Output('select-prodsys-ecs', 'value'),
-    # Output('select-prodsys-ecs2', 'options'), # duplicating for options on attribution tab
-    # Output('select-prodsys-ecs2', 'value'), # duplicating for options on attribution tab
+    Output('select-prodsys-ecs2', 'options'), # duplicating for options on attribution tab
+    Output('select-prodsys-ecs2', 'value'), # duplicating for options on attribution tab
     Input('select-species-ecs', 'value'),
     )
 def update_prodsys_options_ecs(species):
@@ -2000,8 +2000,7 @@ def update_prodsys_options_ecs(species):
     unique_prodsys = np.sort(ecs_ahle_summary.loc[ecs_ahle_summary['species'] == species ,'production_system'].unique())
     options = [{'label': i, 'value': i} for i in unique_prodsys]
     value = options[0]['value']  # Default is first one
-    # return options, value, options, value
-    return options, value
+    return options, value, options, value
 
 # hide display options when map is being shown
 @gbadsDash.callback(
@@ -4004,9 +4003,9 @@ def update_ahle_chart_ecs(
 # Attribution Treemap
 @gbadsDash.callback(
     Output('ecs-attr-treemap','figure'),
-    Input('select-prodsys-ecs','value'),
-    Input('select-species-ecs','value'),
-    Input('select-currency-ecs','value'),
+    Input('select-prodsys-ecs2','value'),
+    Input('select-species-ecs2','value'),
+    Input('select-currency-ecs2','value'),
     Input('select-top-lvl-attr-ecs','value'),
     Input('select-dd-1-attr-ecs','value'),
     Input('select-dd-2-attr-ecs','value'),
