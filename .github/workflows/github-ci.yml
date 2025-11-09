@@ -20,16 +20,16 @@ jobs:
     secrets: inherit
     with:
       IMAGE_NAME: ahle-casestudy-dash
-      CONTEXT: "./Dash App"
-      DOCKERFILE: "./Dash App/Dockerfile"
+      CONTEXT: "./Dash\\ App"
+      DOCKERFILE: "./Dash\\ App/Dockerfile"
 
   aws:
     needs: [commit-hash, docker]
     uses: GBADsInformatics/DevopsWorkflows/.github/workflows/aws.yml@v2.0
     secrets:
       template-input: >-
-        ApplicationName=ahle-casestudy,
-        DockerURI=gbadsinformatics/ahle-casestudy:${{ needs.commit-hash.outputs.sha7 }},
+        ApplicationName=ahle-casestudy-dash,
+        DockerURI=gbadsinformatics/ahle-casestudy-dash:${{ needs.commit-hash.outputs.sha7 }},
         BaseURL=/dashboards/ahle-casestudy,
         ListenerRulePriority=5
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
